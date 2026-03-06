@@ -18,6 +18,7 @@ import FAQ from "@/pages/faq";
 import CorporateTraining from "@/pages/corporate-training";
 import Partnership from "@/pages/partnership";
 import Grants from "@/pages/grants";
+import Achievements from "@/pages/achievements";
 
 import AccaPage from "@/pages/courses/acca";
 import AppliedKnowledgePage from "@/pages/courses/applied-knowledge";
@@ -56,6 +57,7 @@ function Router() {
       <Route path="/corporate" component={CorporateTraining} />
       <Route path="/partnership" component={Partnership} />
       <Route path="/grants" component={Grants} />
+      <Route path="/achievements" component={Achievements} />
       <Route component={NotFound} />
     </Switch>
   );

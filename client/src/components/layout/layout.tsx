@@ -1,5 +1,6 @@
 import Header from "./header";
 import Footer from "./footer";
+import GamificationWidget from "@/components/gamification/widget";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ export default function Layout({ children }: LayoutProps) {
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      <GamificationWidget />
     </div>
   );
 }

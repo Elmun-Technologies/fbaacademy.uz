@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Send } from "lucide-react";
 import { insertLeadSchema } from "@shared/schema";
+import { loadState, saveState, processEvent } from "@/lib/gamification";
 
 const leadFormSchema = insertLeadSchema.pick({ name: true, phone: true }).extend({
   name: z.string().min(2, "Ism kamida 2 ta belgidan iborat bo'lishi kerak"),
@@ -43,6 +44,10 @@ export default function LeadForm({ source = "website", buttonText = "Konsultatsi
         description: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz.",
       });
       form.reset();
+      const result = processEvent(loadState(), "form_submit");
+      if (result.pointsGained > 0) {
+        saveState(result.newState);
+      }
       onSuccess?.();
     },
     onError: () => {

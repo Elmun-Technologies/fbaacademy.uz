@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
+import { loadState, saveState, processEvent } from "@/lib/gamification";
 
 interface YouTubeEmbedProps {
   videoId: string;
@@ -36,11 +37,21 @@ export default function YouTubeEmbed({
     <div
       className={`group relative cursor-pointer overflow-hidden rounded-2xl ${className}`}
       style={{ paddingBottom: "56.25%" }}
-      onClick={() => setIsLoaded(true)}
+      onClick={() => {
+        setIsLoaded(true);
+        const result = processEvent(loadState(), "video_watch");
+        if (result.pointsGained > 0) saveState(result.newState);
+      }}
       role="button"
       aria-label={`${title} videosini ko'rish`}
       tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && setIsLoaded(true)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          setIsLoaded(true);
+          const result = processEvent(loadState(), "video_watch");
+          if (result.pointsGained > 0) saveState(result.newState);
+        }
+      }}
     >
       <img
         src={thumbnail}
