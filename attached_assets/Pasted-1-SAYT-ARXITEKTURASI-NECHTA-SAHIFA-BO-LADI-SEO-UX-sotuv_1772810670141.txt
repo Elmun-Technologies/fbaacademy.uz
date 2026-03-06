@@ -1,0 +1,147 @@
+1️⃣ SAYT ARXITEKTURASI (NECHTA SAHIFA BO‘LADI?) SEO + UX + sotuv uchun ideal struktura: 🔹 Asosiy (Core Pages)
+
+Bosh sahifa (Home)
+
+Barcha kurslar (Catalog)
+
+Kurs ichki sahifa (Dynamic template)
+
+O‘qituvchilar
+
+Biz haqimizda
+
+Blog
+
+Blog ichki sahifa
+
+Kontaktlar
+
+Ishga joylashish markazi
+
+Bitiruvchilar natijalari (Case studies)
+
+Savol-javob (FAQ)
+
+Korporativ treninglar
+
+Hamkorlik sahifasi
+
+Grant / Aksiya sahifasi 👉 Jami statik sahifalar: 14 ta 👉 Kurs sahifalari: har bir kurs alohida landing (SEO uchun juda muhim) 2️⃣ STRUKTURA (BOSH SAHIFA) GeekBrains uslubida:
+
+Hero blok
+
+Katta sarlavha
+
+3-4 kategoriya tugmalari
+
+O‘ng tomonda forma
+
+Minimal animatsiya
+
+Yo‘nalishlar blok (gradient kartalar)
+
+Dasturlash
+
+Marketing
+
+Dizayn
+
+Biznes
+
+Eng mashhur kurslar
+
+Nima uchun biz?
+
+Natijalar (ish topganlar)
+
+O‘qituvchilar
+
+O‘quv jarayoni
+
+Fikrlar (testimonial)
+
+CTA blok
+
+Footer 3️⃣ GOOGLE STITCH UCHUN MASTER PROMPT Quyidagi promptni to‘liq copy-paste qilasan 👇 🎨 GOOGLE STITCH PROMPT Create a modern educational platform website prototype for “FBA Academy” (Uzbekistan market). Style inspiration: Use GeekBrains style layout:
+
+Large clean typography
+
+Big rounded gradient cards
+
+Minimalistic but premium
+
+Soft pastel gradients (purple, green, yellow, blue)
+
+White background with smooth spacing
+
+Modern SaaS UI look Main goals:
+
+Look premium and trustworthy
+
+Increase lead conversion
+
+Education + career focus Pages to generate:
+
+Home Page Hero section:
+
+Large headline: “Zamonaviy kasblarni 0 dan o‘rganing”
+
+Subtext: “Marketing, IT va dizayn yo‘nalishlari bo‘yicha amaliy kurslar”
+
+Category buttons: Dasturlash Marketing Dizayn Biznes
+
+Right side lead form (Name, Phone, CTA button “Konsultatsiya olish”) Second section: “Yo‘nalishlar” Create 4 large gradient cards:
+
+Programming (purple gradient)
+
+Marketing (green gradient)
+
+Design (yellow gradient)
+
+Business (blue gradient) Each card has list of sub courses and button “Batafsil” Third section: Popular courses grid (3-column) Fourth section: Why choose us:
+
+Ishga joylashish yordami
+
+Real loyihalar
+
+Tajribali mentorlar
+
+Sertifikat Fifth section: Graduate results (salary increase stats + photos) Sixth section: Teachers block (cards) Seventh: Testimonials slider Final: Large CTA section with gradient background Button: “Bepul konsultatsiya” Footer:
+
+Courses
+
+Company
+
+Blog
+
+Contacts
+
+Social icons Design requirements:
+
+Rounded corners 20px+
+
+Soft shadows
+
+Modern font (Inter / Manrope)
+
+Spacious layout
+
+Mobile responsive
+
+Clean SaaS look
+
+Uzbek language content Make it look like a premium EdTech platform in 2026. 4️⃣ KURS SAHIFA TEMPLATE PROMPT Agar Stitch’da alohida kurs sahifa qilmoqchi bo‘lsang: Create a Course Detail Page for FBA Academy. Structure: Hero: Course name (example: “SMM Mutaxassis Kursi”) Duration Price Enrollment button Sections:
+
+Kurs kimlar uchun
+
+Nimalarni o‘rganasiz
+
+Modul ro‘yxati
+
+Mentor haqida
+
+Bitiruvchilar natijalari
+
+FAQ
+
+CTA block Design: Clean, modern, gradient accents, professional.
