@@ -52,7 +52,7 @@ export default function Header() {
     lang === "ru" ? item.descRu : lang === "en" ? item.descEn : item.descUz;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-md shadow-sm" data-testid="header">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0d0d0d]/95 backdrop-blur-md" data-testid="header">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
 
         {/* Logo */}
@@ -61,7 +61,7 @@ export default function Header() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 shadow-md">
               <span className="text-sm font-extrabold text-white">F</span>
             </div>
-            <span className="text-lg font-extrabold tracking-tight text-slate-900">FBA Academy</span>
+            <span className="text-lg font-extrabold tracking-tight text-white">FBA Academy</span>
           </a>
 
           {/* Desktop nav */}
@@ -70,7 +70,7 @@ export default function Header() {
             <a
               href="/about"
               className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
-                location === "/about" ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                location === "/about" ? "text-purple-400 bg-purple-600/20" : "text-zinc-300 hover:text-white hover:bg-zinc-800"
               }`}
               data-testid="link-nav-about"
             >
@@ -82,7 +82,7 @@ export default function Header() {
               <button
                 onClick={() => setCoursesOpen((v) => !v)}
                 className={`flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
-                  isCoursesActive ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                  isCoursesActive ? "text-purple-400 bg-purple-600/20" : "text-zinc-300 hover:text-white hover:bg-zinc-800"
                 }`}
                 data-testid="button-nav-courses"
                 aria-expanded={coursesOpen}
@@ -94,48 +94,44 @@ export default function Header() {
 
               {coursesOpen && (
                 <div
-                  className="absolute left-0 top-full mt-1 w-[480px] rounded-xl border bg-white shadow-xl z-50 overflow-hidden"
+                  className="absolute left-0 top-full mt-1 w-[480px] rounded-xl border border-white/10 bg-zinc-900 shadow-2xl z-50 overflow-hidden"
                   data-testid="dropdown-courses"
                   role="menu"
                 >
-                  <div className="grid grid-cols-2 divide-x">
-                    {/* ACCA — single course with nested sub-items */}
+                  <div className="grid grid-cols-2 divide-x divide-white/10">
+                    {/* ACCA column */}
                     <div>
-                      <div className="px-4 py-2 border-b bg-slate-50">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">ACCA</span>
+                      <div className="px-4 py-2 border-b border-white/10 bg-zinc-800">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">ACCA</span>
                       </div>
-
-                      {/* ACCA main link */}
                       <a
                         href="/course/acca"
-                        className={`flex items-center justify-between px-4 py-2.5 transition-colors hover:bg-purple-50 ${location === "/course/acca" ? "bg-purple-50" : ""}`}
+                        className={`flex items-center justify-between px-4 py-2.5 transition-colors hover:bg-purple-600/20 ${location === "/course/acca" ? "bg-purple-600/20" : ""}`}
                         data-testid="link-nav-acca"
                         role="menuitem"
                       >
                         <div>
-                          <div className="text-sm font-bold text-purple-700">ACCA</div>
-                          <div className="text-xs text-slate-400">
+                          <div className="text-sm font-bold text-purple-400">ACCA</div>
+                          <div className="text-xs text-zinc-500">
                             {lang === "ru" ? "Полная программа" : lang === "en" ? "Full program" : "To'liq dastur"}
                           </div>
                         </div>
-                        <ArrowRight className="h-3.5 w-3.5 text-purple-300 shrink-0" />
+                        <ArrowRight className="h-3.5 w-3.5 text-purple-500 shrink-0" />
                       </a>
-
-                      {/* ACCA sub-items — nested/indented */}
-                      <div className="border-l-2 border-purple-100 ml-4 mb-1">
+                      <div className="border-l-2 border-purple-500/30 ml-4 mb-1">
                         {ACCA_SUBS.map((item) => (
                           <a
                             key={item.path}
                             href={item.path}
-                            className={`flex items-center justify-between px-3 py-2 transition-colors hover:bg-purple-50 ${location === item.path ? "bg-purple-50" : ""}`}
+                            className={`flex items-center justify-between px-3 py-2 transition-colors hover:bg-purple-600/20 ${location === item.path ? "bg-purple-600/20" : ""}`}
                             data-testid={`link-nav-${item.path.split("/").pop()}`}
                             role="menuitem"
                           >
                             <div>
-                              <div className="text-sm font-medium text-slate-700">{gl(item)}</div>
-                              <div className="text-xs text-slate-400">{gd(item)}</div>
+                              <div className="text-sm font-medium text-zinc-300">{gl(item)}</div>
+                              <div className="text-xs text-zinc-500">{gd(item)}</div>
                             </div>
-                            <ChevronRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+                            <ChevronRight className="h-3.5 w-3.5 text-zinc-600 shrink-0" />
                           </a>
                         ))}
                       </div>
@@ -143,8 +139,8 @@ export default function Header() {
 
                     {/* Other courses column */}
                     <div>
-                      <div className="px-4 py-2 border-b bg-slate-50">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                      <div className="px-4 py-2 border-b border-white/10 bg-zinc-800">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">
                           {t.nav.otherCourses}
                         </span>
                       </div>
@@ -152,26 +148,25 @@ export default function Header() {
                         <a
                           key={item.path}
                           href={item.path}
-                          className={`flex items-center justify-between px-4 py-2.5 transition-colors hover:bg-purple-50 ${location === item.path ? "bg-purple-50" : ""}`}
+                          className={`flex items-center justify-between px-4 py-2.5 transition-colors hover:bg-purple-600/20 ${location === item.path ? "bg-purple-600/20" : ""}`}
                           data-testid={`link-nav-${item.path.split("/").pop()}`}
                           role="menuitem"
                         >
                           <div>
-                            <div className="text-sm font-semibold text-slate-800">{gl(item)}</div>
-                            <div className="text-xs text-slate-400">{gd(item)}</div>
+                            <div className="text-sm font-semibold text-zinc-200">{gl(item)}</div>
+                            <div className="text-xs text-zinc-500">{gd(item)}</div>
                           </div>
-                          <ArrowRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+                          <ArrowRight className="h-3.5 w-3.5 text-zinc-600 shrink-0" />
                         </a>
                       ))}
-                      {/* All courses */}
                       <a
                         href="/courses"
-                        className="border-t flex items-center gap-2 px-4 py-2.5 hover:bg-slate-50 transition-colors"
+                        className="border-t border-white/10 flex items-center gap-2 px-4 py-2.5 hover:bg-zinc-800 transition-colors"
                         data-testid="link-nav-all-courses"
                         role="menuitem"
                       >
-                        <span className="text-sm font-bold text-purple-600">{t.footer.allCourses}</span>
-                        <ArrowRight className="h-3.5 w-3.5 text-purple-400" />
+                        <span className="text-sm font-bold text-purple-400">{t.footer.allCourses}</span>
+                        <ArrowRight className="h-3.5 w-3.5 text-purple-500" />
                       </a>
                     </div>
                   </div>
@@ -183,7 +178,7 @@ export default function Header() {
             <a
               href="/achievements"
               className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
-                location === "/achievements" ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                location === "/achievements" ? "text-purple-400 bg-purple-600/20" : "text-zinc-300 hover:text-white hover:bg-zinc-800"
               }`}
               data-testid="link-nav-results"
             >
@@ -198,21 +193,21 @@ export default function Header() {
           <div className="relative" ref={langDropRef}>
             <button
               onClick={() => setLangOpen((v) => !v)}
-              className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-700 hover:border-purple-300 hover:bg-purple-50 transition-colors"
+              className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-zinc-800 px-2.5 py-1.5 text-xs font-bold text-zinc-300 hover:border-purple-500/50 hover:text-white transition-colors"
               data-testid="button-lang-switcher"
               aria-label="Tilni o'zgartirish"
             >
               <span>{currentLangObj.flag}</span>
               <span>{currentLangObj.label}</span>
-              <ChevronDown className={`h-3 w-3 text-slate-400 transition-transform ${langOpen ? "rotate-180" : ""}`} />
+              <ChevronDown className={`h-3 w-3 text-zinc-500 transition-transform ${langOpen ? "rotate-180" : ""}`} />
             </button>
             {langOpen && (
-              <div className="absolute right-0 top-full mt-1 w-32 rounded-xl border bg-white shadow-xl z-50 overflow-hidden" data-testid="dropdown-lang">
+              <div className="absolute right-0 top-full mt-1 w-32 rounded-xl border border-white/10 bg-zinc-900 shadow-2xl z-50 overflow-hidden" data-testid="dropdown-lang">
                 {LANGS.map((l) => (
                   <button
                     key={l.code}
                     onClick={() => { setLang(l.code); setLangOpen(false); }}
-                    className={`flex w-full items-center gap-2 px-3 py-2.5 text-xs font-semibold transition-colors hover:bg-purple-50 ${lang === l.code ? "bg-purple-50 text-purple-700" : "text-slate-700"}`}
+                    className={`flex w-full items-center gap-2 px-3 py-2.5 text-xs font-semibold transition-colors hover:bg-purple-600/20 ${lang === l.code ? "bg-purple-600/20 text-purple-400" : "text-zinc-300"}`}
                     data-testid={`button-lang-${l.code}`}
                   >
                     <span>{l.flag}</span> {l.label}
@@ -232,11 +227,11 @@ export default function Header() {
           {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button size="icon" variant="ghost" data-testid="button-mobile-menu" aria-label="Menyuni ochish">
+              <Button size="icon" variant="ghost" className="text-zinc-300 hover:text-white hover:bg-zinc-800" data-testid="button-mobile-menu" aria-label="Menyuni ochish">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80 overflow-y-auto">
+            <SheetContent side="right" className="w-80 overflow-y-auto border-white/10 bg-[#0d0d0d]">
               <SheetTitle className="sr-only">Navigatsiya menyusi</SheetTitle>
               <SheetDescription className="sr-only">Sayt bo'limlari va kurslar ro'yxati</SheetDescription>
               <div className="flex flex-col gap-4 pt-6">
@@ -245,14 +240,14 @@ export default function Header() {
                     <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-purple-600 to-pink-600">
                       <span className="text-xs font-extrabold text-white">F</span>
                     </div>
-                    <span className="text-base font-extrabold">FBA Academy</span>
+                    <span className="text-base font-extrabold text-white">FBA Academy</span>
                   </div>
                   <div className="flex items-center gap-1">
                     {LANGS.map((l) => (
                       <button
                         key={l.code}
                         onClick={() => setLang(l.code)}
-                        className={`rounded px-1.5 py-0.5 text-xs font-bold transition-colors ${lang === l.code ? "bg-purple-100 text-purple-700" : "text-slate-500 hover:bg-slate-100"}`}
+                        className={`rounded px-1.5 py-0.5 text-xs font-bold transition-colors ${lang === l.code ? "bg-purple-600/30 text-purple-400" : "text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300"}`}
                         data-testid={`button-mobile-lang-${l.code}`}
                         aria-label={l.label}
                       >
@@ -263,55 +258,52 @@ export default function Header() {
                 </div>
 
                 <nav className="flex flex-col gap-1">
-                  <a href="/" className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${location === "/" ? "bg-purple-50 text-purple-700" : "text-slate-600 hover:bg-slate-50"}`} data-testid="link-mobile-nav-home">
+                  <a href="/" className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${location === "/" ? "bg-purple-600/20 text-purple-400" : "text-zinc-300 hover:bg-zinc-800"}`} data-testid="link-mobile-nav-home">
                     {t.nav.home}
                   </a>
 
-                  {/* ACCA as one course with sub-items */}
                   <div className="mt-1">
-                    <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">ACCA</div>
+                    <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-zinc-600">ACCA</div>
                     <a
                       href="/course/acca"
-                      className={`block rounded-lg px-3 py-2.5 text-sm font-bold transition-colors ${location === "/course/acca" ? "bg-purple-50 text-purple-700" : "text-purple-600 hover:bg-slate-50"}`}
+                      className={`block rounded-lg px-3 py-2.5 text-sm font-bold transition-colors ${location === "/course/acca" ? "bg-purple-600/20 text-purple-400" : "text-purple-400 hover:bg-zinc-800"}`}
                       data-testid="link-mobile-nav-acca"
                     >
                       ACCA — {lang === "ru" ? "Полная программа" : lang === "en" ? "Full Program" : "To'liq dastur"}
                     </a>
-                    <div className="ml-3 border-l-2 border-purple-100 pl-1">
+                    <div className="ml-3 border-l-2 border-purple-500/30 pl-1">
                       {ACCA_SUBS.map((item) => (
                         <a
                           key={item.path}
                           href={item.path}
-                          className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-600 hover:bg-slate-50"}`}
+                          className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${location === item.path ? "bg-purple-600/20 text-purple-400" : "text-zinc-300 hover:bg-zinc-800"}`}
                           data-testid={`link-mobile-nav-${item.path.split("/").pop()}`}
                         >
                           {gl(item)}
-                          <span className="text-xs text-slate-400">{gd(item)}</span>
+                          <span className="text-xs text-zinc-600">{gd(item)}</span>
                         </a>
                       ))}
                     </div>
                   </div>
 
-                  {/* Other courses */}
                   <div className="mt-1">
-                    <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">{t.nav.otherCourses}</div>
+                    <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-zinc-600">{t.nav.otherCourses}</div>
                     {OTHER_COURSES.map((item) => (
                       <a
                         key={item.path}
                         href={item.path}
-                        className={`block rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-700 hover:bg-slate-50"}`}
+                        className={`block rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${location === item.path ? "bg-purple-600/20 text-purple-400" : "text-zinc-300 hover:bg-zinc-800"}`}
                         data-testid={`link-mobile-nav-${item.path.split("/").pop()}`}
                       >
                         {gl(item)}
                       </a>
                     ))}
-                    <a href="/courses" className="block rounded-lg px-3 py-2.5 text-sm font-bold text-purple-600 hover:bg-purple-50 transition-colors" data-testid="link-mobile-nav-all-courses">
+                    <a href="/courses" className="block rounded-lg px-3 py-2.5 text-sm font-bold text-purple-400 hover:bg-zinc-800 transition-colors" data-testid="link-mobile-nav-all-courses">
                       {t.footer.allCourses} →
                     </a>
                   </div>
 
-                  {/* Main pages */}
-                  <div className="mt-1 border-t pt-2">
+                  <div className="mt-1 border-t border-white/10 pt-2">
                     {[
                       { label: t.nav.about, path: "/about" },
                       { label: t.nav.results, path: "/achievements" },
@@ -323,7 +315,7 @@ export default function Header() {
                       <a
                         key={item.path}
                         href={item.path}
-                        className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-600 hover:bg-slate-50"}`}
+                        className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${location === item.path ? "bg-purple-600/20 text-purple-400" : "text-zinc-300 hover:bg-zinc-800"}`}
                         data-testid={`link-mobile-nav-${item.path.replace("/", "")}`}
                       >
                         {item.label}

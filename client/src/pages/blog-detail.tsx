@@ -15,12 +15,12 @@ import { SiTelegram, SiFacebook } from "react-icons/si";
 import { SiX } from "react-icons/si";
 
 const CATEGORY_COLORS: Record<string, string> = {
-  "ACCA": "bg-purple-100 text-purple-700",
-  "DipIFR": "bg-indigo-100 text-indigo-700",
-  "Financial Modeling": "bg-emerald-100 text-emerald-700",
-  "1C Buxgalteriya": "bg-blue-100 text-blue-700",
-  "Huquqshunoslik": "bg-amber-100 text-amber-700",
-  "Karyera": "bg-pink-100 text-pink-700",
+  "ACCA": "bg-purple-600/30 text-purple-300",
+  "DipIFR": "bg-indigo-600/30 text-indigo-300",
+  "Financial Modeling": "bg-emerald-600/30 text-emerald-300",
+  "1C Buxgalteriya": "bg-blue-600/30 text-blue-300",
+  "Huquqshunoslik": "bg-amber-600/30 text-amber-300",
+  "Karyera": "bg-pink-600/30 text-pink-300",
 };
 
 function fakeViews(id: string): number {
@@ -42,7 +42,7 @@ function ReadingProgress() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <div className="fixed left-0 right-0 top-0 z-[60] h-1 bg-slate-200">
+    <div className="fixed left-0 right-0 top-0 z-[60] h-1 bg-zinc-900">
       <div
         className="h-full bg-gradient-to-r from-purple-600 to-pink-500 transition-all duration-150"
         style={{ width: `${progress}%` }}
@@ -63,14 +63,14 @@ function TableOfContents({ content }: { content: string }) {
   }
   if (headings.length < 2) return null;
   return (
-    <div className="mb-8 rounded-2xl border border-purple-100 bg-purple-50 p-5" data-testid="table-of-contents">
-      <div className="mb-3 flex items-center gap-2 text-sm font-extrabold text-purple-800">
+    <div className="mb-8 rounded-2xl border border-purple-500/30 bg-purple-900/20 p-5" data-testid="table-of-contents">
+      <div className="mb-3 flex items-center gap-2 text-sm font-extrabold text-purple-300">
         <BookOpen className="h-4 w-4" /> Maqola tarkibi
       </div>
       <ol className="space-y-1.5">
         {headings.map((h, i) => (
           <li key={i}>
-            <a href={`#${h.id}`} className="text-sm text-purple-700 hover:text-purple-900 hover:underline transition-colors">
+            <a href={`#${h.id}`} className="text-sm text-purple-400 hover:text-purple-200 hover:underline transition-colors">
               {i + 1}. {h.text}
             </a>
           </li>
@@ -106,7 +106,7 @@ function ShareRow({ title, url }: { title: string; url: string }) {
         className={`flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
           liked
             ? "border-purple-500 bg-purple-50 text-purple-700"
-            : "border-slate-200 bg-white text-slate-700 hover:border-purple-300 hover:text-purple-700"
+            : "border-slate-200 bg-zinc-900 text-zinc-300 hover:border-purple-300 hover:text-purple-700"
         }`}
         data-testid="share-like"
       >
@@ -117,7 +117,7 @@ function ShareRow({ title, url }: { title: string; url: string }) {
         href={`https://t.me/share/url?url=${encoded}&text=${encodedTitle}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-[#0088cc] hover:text-[#0088cc] transition-colors"
+        className="flex items-center gap-1.5 rounded-full border border-white/20 bg-zinc-800 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-[#0088cc] hover:text-[#0088cc] transition-colors"
         data-testid="share-telegram"
       >
         <SiTelegram className="h-4 w-4 text-[#0088cc]" />
@@ -127,7 +127,7 @@ function ShareRow({ title, url }: { title: string; url: string }) {
         href={`https://www.facebook.com/sharer/sharer.php?u=${encoded}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-[#1877f2] hover:text-[#1877f2] transition-colors"
+        className="flex items-center gap-1.5 rounded-full border border-white/20 bg-zinc-800 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-[#1877f2] hover:text-[#1877f2] transition-colors"
         data-testid="share-facebook"
       >
         <SiFacebook className="h-4 w-4 text-[#1877f2]" />
@@ -137,7 +137,7 @@ function ShareRow({ title, url }: { title: string; url: string }) {
         href={`https://twitter.com/intent/tweet?url=${encoded}&text=${encodedTitle}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors"
+        className="flex items-center gap-1.5 rounded-full border border-white/20 bg-zinc-800 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-slate-900 hover:text-white transition-colors"
         data-testid="share-twitter"
       >
         <SiX className="h-4 w-4" />
@@ -145,7 +145,7 @@ function ShareRow({ title, url }: { title: string; url: string }) {
       </a>
       <button
         onClick={copy}
-        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400 transition-colors"
+        className="flex items-center gap-1.5 rounded-full border border-white/20 bg-zinc-800 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-slate-400 transition-colors"
         data-testid="share-copy"
       >
         {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
@@ -210,16 +210,16 @@ export default function BlogDetail() {
   }
 
   const processedContent = processContent(post.content);
-  const catColor = CATEGORY_COLORS[post.category] || "bg-slate-100 text-slate-600";
+  const catColor = CATEGORY_COLORS[post.category] || "bg-[#0d0d0d] text-zinc-400";
 
   return (
     <Layout>
       <ReadingProgress />
 
       {/* Breadcrumb nav */}
-      <div className="border-b bg-white py-3">
+      <div className="border-b border-white/10 bg-[#0d0d0d] py-3">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-sm text-slate-500" aria-label="Breadcrumb">
+          <nav className="flex items-center gap-2 text-sm text-zinc-500" aria-label="Breadcrumb">
             <Link href="/">
               <span className="cursor-pointer hover:text-purple-700 transition-colors">Bosh sahifa</span>
             </Link>
@@ -228,7 +228,7 @@ export default function BlogDetail() {
               <span className="cursor-pointer hover:text-purple-700 transition-colors">Blog</span>
             </Link>
             <span>/</span>
-            <span className="line-clamp-1 text-slate-900 font-medium">{post.title}</span>
+            <span className="line-clamp-1 text-white font-medium">{post.title}</span>
           </nav>
         </div>
       </div>
@@ -242,24 +242,24 @@ export default function BlogDetail() {
             {/* Meta row */}
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <Link href="/blog">
-                <span className="inline-flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-purple-700 transition-colors" data-testid="link-back-blog">
+                <span className="inline-flex cursor-pointer items-center gap-1 text-sm text-zinc-500 hover:text-purple-700 transition-colors" data-testid="link-back-blog">
                   <ArrowLeft className="h-4 w-4" /> Blog
                 </span>
               </Link>
               <span className={`rounded-md px-2.5 py-0.5 text-xs font-bold ${catColor}`}>{post.category}</span>
-              <span className="flex items-center gap-1 text-xs text-slate-400"><Calendar className="h-3.5 w-3.5" /> {post.date}</span>
-              <span className="flex items-center gap-1 text-xs text-slate-400"><Clock className="h-3.5 w-3.5" /> {post.readTime}</span>
-              <span className="flex items-center gap-1 text-xs text-slate-400"><Eye className="h-3.5 w-3.5" /> {fakeViews(post.id).toLocaleString()}</span>
-              <span className="flex items-center gap-1 text-xs text-slate-400"><User className="h-3.5 w-3.5" /> {post.author}</span>
+              <span className="flex items-center gap-1 text-xs text-zinc-500"><Calendar className="h-3.5 w-3.5" /> {post.date}</span>
+              <span className="flex items-center gap-1 text-xs text-zinc-500"><Clock className="h-3.5 w-3.5" /> {post.readTime}</span>
+              <span className="flex items-center gap-1 text-xs text-zinc-500"><Eye className="h-3.5 w-3.5" /> {fakeViews(post.id).toLocaleString()}</span>
+              <span className="flex items-center gap-1 text-xs text-zinc-500"><User className="h-3.5 w-3.5" /> {post.author}</span>
             </div>
 
             {/* Title */}
-            <h1 className="mb-4 text-2xl font-extrabold leading-tight text-slate-900 sm:text-3xl" data-testid="text-blog-detail-title">
+            <h1 className="mb-4 text-2xl font-extrabold leading-tight text-white sm:text-3xl" data-testid="text-blog-detail-title">
               {post.title}
             </h1>
 
             {/* Lead paragraph */}
-            <p className="mb-6 text-base text-slate-600 leading-relaxed border-l-4 border-purple-400 pl-4 italic">
+            <p className="mb-6 text-base text-zinc-400 leading-relaxed border-l-4 border-purple-400 pl-4 italic">
               {post.excerpt}
             </p>
 
@@ -283,26 +283,26 @@ export default function BlogDetail() {
             {/* Article body */}
             <div
               className="prose prose-slate prose-base max-w-none
-                prose-headings:font-extrabold prose-headings:text-slate-900
+                prose-headings:font-extrabold prose-headings:text-white
                 prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-3 prose-h2:scroll-mt-24
-                prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-4
-                prose-strong:text-slate-900
-                prose-ul:space-y-2 prose-li:text-slate-700
+                prose-p:text-zinc-300 prose-p:leading-relaxed prose-p:mb-4
+                prose-strong:text-white
+                prose-ul:space-y-2 prose-li:text-zinc-300
                 prose-ol:space-y-2
-                prose-table:text-sm prose-th:bg-slate-50 prose-th:font-bold prose-td:text-slate-600"
+                prose-table:text-sm prose-th:bg-zinc-800 prose-th:font-bold prose-td:text-zinc-400"
               dangerouslySetInnerHTML={{ __html: processedContent }}
               data-testid="text-blog-content"
             />
 
             {/* Author card */}
-            <div className="mt-10 flex items-start gap-4 rounded-2xl border bg-slate-50 p-5" data-testid="author-card">
+            <div className="mt-10 flex items-start gap-4 rounded-2xl border border-white/10 bg-zinc-800 p-5" data-testid="author-card">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-pink-600 text-sm font-extrabold text-white">
                 {post.author.split(" ").map((n) => n[0]).join("")}
               </div>
               <div>
-                <div className="text-sm font-extrabold text-slate-900">{post.author}</div>
-                <div className="text-xs text-slate-500">FBA Academy mutaxassisi</div>
-                <p className="mt-1.5 text-sm text-slate-600">
+                <div className="text-sm font-extrabold text-white">{post.author}</div>
+                <div className="text-xs text-zinc-500">FBA Academy mutaxassisi</div>
+                <p className="mt-1.5 text-sm text-zinc-400">
                   ACCA va xalqaro moliya sertifikatlari bo'yicha mutaxassis. FBA Academy da mentor va o'qituvchi.
                 </p>
               </div>
@@ -330,14 +330,14 @@ export default function BlogDetail() {
               </div>
 
               {/* Related in sidebar */}
-              <div className="rounded-2xl border bg-white shadow-sm overflow-hidden">
+              <div className="rounded-2xl border border-white/10 bg-zinc-900 overflow-hidden">
                 <div className="border-b px-4 py-3">
-                  <span className="text-sm font-extrabold text-slate-900">O'qing ham</span>
+                  <span className="text-sm font-extrabold text-white">O'qing ham</span>
                 </div>
                 <div className="divide-y">
                   {blogPosts.filter((p) => p.id !== post.id).slice(0, 3).map((p) => (
                     <Link key={p.id} href={`/blog/${p.id}`}>
-                      <div className="group flex items-start gap-3 p-3 hover:bg-slate-50 transition-colors cursor-pointer">
+                      <div className="group flex items-start gap-3 p-3 hover:bg-zinc-800 transition-colors cursor-pointer">
                         {p.image && (
                           <div className="h-14 w-20 shrink-0 overflow-hidden rounded-lg">
                             <img
@@ -351,13 +351,13 @@ export default function BlogDetail() {
                           </div>
                         )}
                         <div className="min-w-0 flex-1">
-                          <span className={`mb-0.5 inline-block rounded px-1.5 py-0.5 text-[10px] font-bold ${CATEGORY_COLORS[p.category] || "bg-slate-100 text-slate-600"}`}>
+                          <span className={`mb-0.5 inline-block rounded px-1.5 py-0.5 text-[10px] font-bold ${CATEGORY_COLORS[p.category] || "bg-[#0d0d0d] text-zinc-400"}`}>
                             {p.category}
                           </span>
-                          <p className="text-xs font-bold leading-snug text-slate-800 line-clamp-2 group-hover:text-purple-700 transition-colors">
+                          <p className="text-xs font-bold leading-snug text-zinc-200 line-clamp-2 group-hover:text-purple-700 transition-colors">
                             {p.title}
                           </p>
-                          <span className="mt-1 flex items-center gap-1 text-[10px] text-slate-400">
+                          <span className="mt-1 flex items-center gap-1 text-[10px] text-zinc-500">
                             <Clock className="h-3 w-3" /> {p.readTime}
                           </span>
                         </div>
@@ -373,15 +373,15 @@ export default function BlogDetail() {
 
       {/* "O'qing ham" — full width 3-card section */}
       {relatedPosts.length > 0 && (
-        <section className="border-t bg-white py-12" data-testid="section-related-articles">
+        <section className="border-t bg-zinc-900 py-12" data-testid="section-related-articles">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-6 text-xl font-extrabold text-slate-900 sm:text-2xl" data-testid="text-related-title">
+            <h2 className="mb-6 text-xl font-extrabold text-white sm:text-2xl" data-testid="text-related-title">
               O'qing ham
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relatedPosts.map((p) => (
                 <Link key={p.id} href={`/blog/${p.id}`}>
-                  <div className="group cursor-pointer overflow-hidden rounded-2xl border bg-white shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5" data-testid={`link-related-blog-${p.id}`}>
+                  <div className="group cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 transition-all duration-300 hover:-translate-y-0.5 hover:ring-1 hover:ring-purple-500/30" data-testid={`link-related-blog-${p.id}`}>
                     {p.image && (
                       <div className="relative h-44 overflow-hidden">
                         <img
@@ -393,23 +393,23 @@ export default function BlogDetail() {
                           height={176}
                         />
                         <div className="absolute left-3 bottom-3">
-                          <span className={`rounded-md px-2 py-0.5 text-xs font-bold ${CATEGORY_COLORS[p.category] || "bg-slate-100 text-slate-600"}`}>
+                          <span className={`rounded-md px-2 py-0.5 text-xs font-bold ${CATEGORY_COLORS[p.category] || "bg-[#0d0d0d] text-zinc-400"}`}>
                             {p.category}
                           </span>
                         </div>
                       </div>
                     )}
                     <div className="p-4">
-                      <h3 className="mb-2 text-sm font-extrabold leading-snug text-slate-900 line-clamp-2 group-hover:text-purple-700 transition-colors">
+                      <h3 className="mb-2 text-sm font-extrabold leading-snug text-white line-clamp-2 group-hover:text-purple-700 transition-colors">
                         {p.title}
                       </h3>
-                      <p className="mb-3 text-xs text-slate-500 line-clamp-2">{p.excerpt}</p>
+                      <p className="mb-3 text-xs text-zinc-500 line-clamp-2">{p.excerpt}</p>
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3 text-xs text-slate-400">
+                        <div className="flex items-center gap-3 text-xs text-zinc-500">
                           <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {p.date}</span>
                           <span className="flex items-center gap-1"><Eye className="h-3 w-3" /> {fakeViews(p.id).toLocaleString()}</span>
                         </div>
-                        <Badge className="shrink-0 rounded-full bg-purple-50 px-2 py-0 text-[10px] font-bold text-purple-600">
+                        <Badge className="shrink-0 rounded-full bg-purple-600/30 px-2 py-0 text-[10px] font-bold text-purple-300">
                           Yangi
                         </Badge>
                       </div>

@@ -71,7 +71,7 @@ export default function Catalog() {
                   onClick={() => setSelectedCategory(cat.slug)}
                   className={`rounded-full border-2 font-semibold ${
                     selectedCategory === cat.slug
-                      ? "bg-white text-slate-900 border-white hover:bg-slate-100"
+                      ? "bg-amber-400 text-black border-amber-400 hover:bg-amber-300"
                       : "border-white/30 text-white hover:bg-white/10"
                   }`}
                   data-testid={`button-filter-${cat.slug}`}

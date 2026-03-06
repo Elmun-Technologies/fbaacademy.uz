@@ -18,10 +18,10 @@ export default function NotFound() {
           <div className="mb-6 text-8xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent" data-testid="text-404-number">
             404
           </div>
-          <h1 className="mb-3 text-2xl font-extrabold text-slate-900 sm:text-3xl" data-testid="text-404-title">
+          <h1 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-404-title">
             Sahifa topilmadi
           </h1>
-          <p className="mb-8 text-slate-500">
+          <p className="mb-8 text-zinc-500">
             Siz qidirgan sahifa mavjud emas yoki ko'chirilgan. Bosh sahifaga qaytib, kerakli ma'lumotni topishingiz mumkin.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
@@ -36,7 +36,7 @@ export default function NotFound() {
               </Button>
             </Link>
             <Link href="/contacts">
-              <Button variant="ghost" className="gap-2 rounded-full px-6 font-semibold text-slate-600" data-testid="button-404-contact">
+              <Button variant="ghost" className="gap-2 rounded-full px-6 font-semibold text-zinc-400" data-testid="button-404-contact">
                 <Phone className="h-4 w-4" /> Bog'lanish
               </Button>
             </Link>
@@ -48,7 +48,7 @@ export default function NotFound() {
               { href: "/blog", label: "Blog", icon: "📝" },
             ].map((item) => (
               <Link key={item.href} href={item.href}>
-                <div className="flex items-center gap-2 rounded-xl border bg-white p-3 text-sm font-semibold text-slate-700 shadow-sm hover:border-purple-200 hover:bg-purple-50 hover:text-purple-700 transition-colors cursor-pointer" data-testid={`link-404-${item.label}`}>
+                <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-zinc-900 p-3 text-sm font-semibold text-zinc-300 shadow-sm hover:border-purple-200 hover:bg-zinc-800 hover:text-purple-700 transition-colors cursor-pointer" data-testid={`link-404-${item.label}`}>
                   <span>{item.icon}</span>
                   {item.label}
                   <ArrowRight className="ml-auto h-4 w-4" />

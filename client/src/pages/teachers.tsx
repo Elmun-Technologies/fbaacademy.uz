@@ -190,7 +190,7 @@ export default function Teachers() {
               <p className="mt-2 text-purple-100">Bepul konsultatsiya oling va o'qishni boshlang</p>
             </div>
             <a href="/contacts">
-              <Button size="lg" className="gap-2 rounded-full bg-white px-8 font-bold text-purple-700 hover:bg-slate-100" data-testid="button-teachers-cta">
+              <Button size="lg" className="gap-2 rounded-full bg-amber-400 px-8 font-bold text-black hover:bg-amber-300" data-testid="button-teachers-cta">
                 Bepul konsultatsiya <ArrowRight className="h-4 w-4" />
               </Button>
             </a>

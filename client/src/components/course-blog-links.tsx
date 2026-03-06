@@ -1,4 +1,3 @@
-import { Link } from "wouter";
 import { ArrowRight, BookOpen } from "lucide-react";
 
 interface BlogLink {
@@ -13,33 +12,33 @@ interface CourseBlogLinksProps {
 }
 
 export default function CourseBlogLinks({ links, color = "purple" }: CourseBlogLinksProps) {
-  const colorClasses: Record<string, { bg: string; text: string; hover: string; icon: string }> = {
-    purple: { bg: "bg-purple-50 dark:bg-purple-950/20", text: "text-purple-700 dark:text-purple-300", hover: "hover:bg-purple-100 dark:hover:bg-purple-900/40", icon: "text-purple-500" },
-    indigo: { bg: "bg-indigo-50 dark:bg-indigo-950/20", text: "text-indigo-700 dark:text-indigo-300", hover: "hover:bg-indigo-100 dark:hover:bg-indigo-900/40", icon: "text-indigo-500" },
-    green: { bg: "bg-emerald-50 dark:bg-emerald-950/20", text: "text-emerald-700 dark:text-emerald-300", hover: "hover:bg-emerald-100 dark:hover:bg-emerald-900/40", icon: "text-emerald-500" },
-    blue: { bg: "bg-blue-50 dark:bg-blue-950/20", text: "text-blue-700 dark:text-blue-300", hover: "hover:bg-blue-100 dark:hover:bg-blue-900/40", icon: "text-blue-500" },
-    amber: { bg: "bg-amber-50 dark:bg-amber-950/20", text: "text-amber-700 dark:text-amber-300", hover: "hover:bg-amber-100 dark:hover:bg-amber-900/40", icon: "text-amber-500" },
+  const iconColors: Record<string, string> = {
+    purple: "text-purple-400",
+    indigo: "text-indigo-400",
+    green: "text-emerald-400",
+    blue: "text-blue-400",
+    amber: "text-amber-400",
   };
-  const c = colorClasses[color] || colorClasses.purple;
+  const iconColor = iconColors[color] || iconColors.purple;
 
   return (
-    <section className={`${c.bg} py-10 sm:py-14`} data-testid="section-blog-links">
+    <section className="bg-[#111] py-10 sm:py-14" data-testid="section-blog-links">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2 mb-6">
-          <BookOpen className={`h-5 w-5 ${c.icon}`} />
-          <h2 className="text-xl font-extrabold">Foydali maqolalar</h2>
+        <div className="mb-6 flex items-center gap-2">
+          <BookOpen className={`h-5 w-5 ${iconColor}`} />
+          <h2 className="text-2xl font-extrabold text-white">Foydali maqolalar</h2>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {links.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <div className={`flex items-center justify-between gap-3 rounded-xl border bg-white dark:bg-card p-4 shadow-sm transition-all ${c.hover} cursor-pointer group`} data-testid={`link-blog-${link.href}`}>
+            <a key={link.href} href={link.href}>
+              <div className="group flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-white/10 bg-zinc-900 p-4 transition-all hover:border-purple-500/30 hover:bg-zinc-800" data-testid={`link-blog-${link.href}`}>
                 <div className="min-w-0">
-                  <p className={`text-sm font-semibold ${c.text} leading-snug`}>{link.title}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{link.readTime} o'qish</p>
+                  <p className={`text-sm font-semibold leading-snug text-zinc-200 group-hover:text-purple-300 transition-colors`}>{link.title}</p>
+                  <p className="mt-0.5 text-xs text-zinc-500">{link.readTime} o'qish</p>
                 </div>
-                <ArrowRight className={`h-4 w-4 shrink-0 ${c.icon} transition-transform group-hover:translate-x-0.5`} />
+                <ArrowRight className={`h-4 w-4 shrink-0 ${iconColor} transition-transform group-hover:translate-x-0.5`} />
               </div>
-            </Link>
+            </a>
           ))}
         </div>
       </div>

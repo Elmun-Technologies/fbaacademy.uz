@@ -73,7 +73,7 @@ export default function AppliedKnowledgePage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-sky-400/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link href="/course/acca">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-slate-400 cursor-pointer hover:text-white transition-colors">← ACCA To'liq dastur</span>
+            <span className="mb-6 inline-flex items-center gap-1 text-sm text-zinc-500 cursor-pointer hover:text-white transition-colors">← ACCA To'liq dastur</span>
           </Link>
           <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
             <div className="lg:col-span-3">
@@ -91,7 +91,7 @@ export default function AppliedKnowledgePage() {
                   {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
                   <span className="text-sm font-bold text-white ml-1">{course.rating}</span>
                 </div>
-                <span className="text-sm text-slate-400">{course.studentsCount} talaba</span>
+                <span className="text-sm text-zinc-500">{course.studentsCount} talaba</span>
               </div>
               <div className="mt-8 grid grid-cols-3 gap-3">
                 {[
@@ -102,13 +102,13 @@ export default function AppliedKnowledgePage() {
                   <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 backdrop-blur-sm" data-testid={`feature-ak-${i}`}>
                     <item.icon className="mb-2 h-5 w-5 text-sky-300" />
                     <div className="text-xs font-bold text-white sm:text-sm">{item.label}</div>
-                    <div className="text-xs text-slate-400">{item.sub}</div>
+                    <div className="text-xs text-zinc-500">{item.sub}</div>
                   </div>
                 ))}
               </div>
             </div>
             <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-ak-enroll">
+              <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl" data-testid="card-ak-enroll">
                 <div className="mb-2 flex items-center justify-between">
                   <h3 className="text-lg font-bold">So'rov qoldiring</h3>
                   <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
@@ -118,7 +118,7 @@ export default function AppliedKnowledgePage() {
                 </div>
                 <div className="mb-4 flex items-baseline gap-2">
                   <span className="text-3xl font-extrabold" data-testid="text-ak-price">{course.price} UZS</span>
-                  <span className="text-sm text-muted-foreground line-through">{course.oldPrice} UZS</span>
+                  <span className="text-sm text-zinc-400 line-through">{course.oldPrice} UZS</span>
                 </div>
                 <LeadForm source="course-applied-knowledge" buttonText="Chegirma bilan yozilish" />
               </div>
@@ -135,8 +135,8 @@ export default function AppliedKnowledgePage() {
             <div className="absolute left-0 right-0 top-5 h-0.5 bg-gradient-to-r from-sky-400 via-slate-300 to-slate-200 sm:mx-[8%]" />
             {JOURNEY.map((step, i) => (
               <div key={i} className="relative flex flex-1 flex-col items-center text-center" data-testid={`journey-step-${i}`}>
-                <div className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full text-sm font-extrabold shadow-md ${step.active ? "bg-sky-500 text-white ring-4 ring-sky-200" : "bg-white text-slate-400 border-2 border-slate-200"}`}>{step.step}</div>
-                <div className={`mt-2 text-xs font-bold sm:text-sm ${step.active ? "text-sky-700" : "text-slate-400"}`}>{step.label}</div>
+                <div className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full text-sm font-extrabold shadow-md ${step.active ? "bg-sky-500 text-white ring-4 ring-sky-200" : "bg-zinc-900 text-zinc-500 border-2 border-slate-200"}`}>{step.step}</div>
+                <div className={`mt-2 text-xs font-bold sm:text-sm ${step.active ? "text-sky-700" : "text-zinc-500"}`}>{step.label}</div>
                 <div className={`mt-0.5 text-xs ${step.active ? "text-sky-600" : "text-slate-300"}`}>{step.desc}</div>
               </div>
             ))}
@@ -147,17 +147,17 @@ export default function AppliedKnowledgePage() {
       {/* 3 Paper Cards */}
       <section className="py-14 sm:py-20" data-testid="section-papers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-papers-title">3 ta ACCA imtihon qog'ozi</h2>
-          <p className="mb-10 text-muted-foreground">Har birini ketma-ket yoki bir vaqtda topshirishingiz mumkin</p>
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-papers-title">3 ta ACCA imtihon qog'ozi</h2>
+          <p className="mb-10 text-zinc-400">Har birini ketma-ket yoki bir vaqtda topshirishingiz mumkin</p>
           <div className="grid gap-6 sm:grid-cols-3">
             {PAPERS.map((paper, i) => (
-              <div key={i} className="group rounded-2xl border bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-card" data-testid={`paper-card-${i}`}>
+              <div key={i} className="group rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" data-testid={`paper-card-${i}`}>
                 <div className={`mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br ${paper.color} px-4 py-2 text-lg font-extrabold text-white shadow-md`}>{paper.code}</div>
                 <h3 className="mb-2 text-lg font-extrabold">{paper.name}</h3>
-                <p className="mb-4 text-sm text-muted-foreground leading-relaxed">{paper.desc}</p>
+                <p className="mb-4 text-sm text-zinc-400 leading-relaxed">{paper.desc}</p>
                 <div className="flex items-center justify-between">
                   <Badge variant="outline" className="rounded-full text-xs">{paper.difficulty}</Badge>
-                  <span className="text-xs text-muted-foreground">{paper.topics} asosiy mavzu</span>
+                  <span className="text-xs text-zinc-400">{paper.topics} asosiy mavzu</span>
                 </div>
               </div>
             ))}
@@ -166,11 +166,11 @@ export default function AppliedKnowledgePage() {
       </section>
 
       {/* YouTube */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-ak-video">
+      <section className="bg-[#111] py-14" data-testid="section-ak-video">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
-            <h2 className="mb-4 text-2xl font-extrabold sm:text-3xl">Applied Knowledge haqida ko'proq</h2>
-            <p className="mb-6 text-muted-foreground">ACCA Applied Knowledge bosqichida nima o'rganasiz va qanday imtihon topshirasiz?</p>
+            <h2 className="mb-4 text-4xl font-extrabold uppercase tracking-tight text-white">Applied Knowledge haqida ko'proq</h2>
+            <p className="mb-6 text-zinc-400">ACCA Applied Knowledge bosqichida nima o'rganasiz va qanday imtihon topshirasiz?</p>
             <YouTubeEmbed videoId={course.videoId!} title="ACCA Applied Knowledge — kurs haqida" />
           </div>
         </div>
@@ -184,8 +184,8 @@ export default function AppliedKnowledgePage() {
             <div className="space-y-4">
               {course.salaryLevels.map((level, i) => (
                 <div key={i} className="rounded-2xl bg-[#c8ff00] p-4 sm:p-5" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "200px" }} data-testid={`ak-salary-${i}`}>
-                  <div className="text-lg font-extrabold text-slate-900 sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm font-medium text-slate-700">{level.level} — {level.description}</div>
+                  <div className="text-lg font-extrabold text-white sm:text-xl">{level.salary} so'm dan</div>
+                  <div className="text-sm font-medium text-zinc-300">{level.level} — {level.description}</div>
                 </div>
               ))}
             </div>
@@ -194,9 +194,9 @@ export default function AppliedKnowledgePage() {
       </section>
 
       {/* Tools */}
-      <section className="bg-slate-50 py-12 dark:bg-slate-900/50" data-testid="section-ak-tools">
+      <section className="bg-[#111] py-12" data-testid="section-ak-tools">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold">Instrumentlar va dasturlar</h2>
+          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Instrumentlar va dasturlar</h2>
           <div className="flex flex-wrap gap-3">
             {course.tools.map((tool, i) => (
               <div key={i} className="rounded-full border-2 border-sky-200 bg-sky-50 px-5 py-2.5 text-sm font-semibold text-sky-800 shadow-sm dark:border-sky-800 dark:bg-sky-900/20 dark:text-sky-300" data-testid={`tool-ak-${i}`}>
@@ -210,10 +210,10 @@ export default function AppliedKnowledgePage() {
       {/* Skills */}
       <section className="py-14" data-testid="section-ak-skills">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold sm:text-3xl">Siz o'rganasiz</h2>
+          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Siz o'rganasiz</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {course.skills.map((skill, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`ak-skill-${i}`}>
+              <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 p-4" data-testid={`ak-skill-${i}`}>
                 <CheckCircle2 className="h-5 w-5 shrink-0 text-sky-500" />
                 <span className="font-medium text-sm">{skill}</span>
               </div>
@@ -223,9 +223,9 @@ export default function AppliedKnowledgePage() {
       </section>
 
       {/* Modules */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-ak-modules">
+      <section className="bg-[#111] py-14" data-testid="section-ak-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">Kurs dasturi</h2>
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">Kurs dasturi</h2>
           <div className="mb-6 flex flex-wrap gap-2">
             {[{ icon: Calendar, text: course.duration }, { icon: BookOpen, text: `${course.projects} loyiha` }, { icon: Clock, text: `${course.theoryHours} soat nazariya` }, { icon: Wrench, text: `${course.practiceHours} soat amaliyot` }].map((item, i) => (
               <Badge key={i} variant="outline" className="rounded-full gap-1.5 border-2 px-3 py-1.5 text-xs font-semibold">
@@ -236,20 +236,20 @@ export default function AppliedKnowledgePage() {
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
-                <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border bg-white px-5 shadow-sm dark:bg-card" data-testid={`ak-module-${i}`}>
+                <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`ak-module-${i}`}>
                   <AccordionTrigger className="text-left py-4">
                     <div className="flex items-center gap-3">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 text-sm font-bold text-white shadow-md">{i + 1}</span>
                       <div>
                         <span className="text-sm font-bold sm:text-base">{mod.title}</span>
-                        <div className="text-xs text-muted-foreground">{mod.topics.length} mavzu</div>
+                        <div className="text-xs text-zinc-400">{mod.topics.length} mavzu</div>
                       </div>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="ml-12 space-y-2.5 pb-3">
                       {mod.topics.map((topic, j) => (
-                        <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <li key={j} className="flex items-center gap-2 text-sm text-zinc-400">
                           <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> {topic}
                         </li>
                       ))}
@@ -265,10 +265,10 @@ export default function AppliedKnowledgePage() {
       {/* Who it's for */}
       <section className="py-14" data-testid="section-ak-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold sm:text-3xl">Kurs kimlar uchun?</h2>
+          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Kurs kimlar uchun?</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {course.forWhom.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-xl border bg-white p-5 shadow-sm dark:bg-card" data-testid={`ak-for-whom-${i}`}>
+              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5" data-testid={`ak-for-whom-${i}`}>
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-100">
                   <GraduationCap className="h-4 w-4 text-sky-600" />
                 </div>
@@ -280,9 +280,9 @@ export default function AppliedKnowledgePage() {
       </section>
 
       {/* Support team */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-ak-support">
+      <section className="bg-[#111] py-14" data-testid="section-ak-support">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">O'quv jarayonida siz bilan birga</h2>
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">O'quv jarayonida siz bilan birga</h2>
           <div className="grid gap-6 sm:grid-cols-3">
             {course.supportTeam.map((person, i) => (
               <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`ak-support-${i}`}>
@@ -291,7 +291,7 @@ export default function AppliedKnowledgePage() {
                 </div>
                 <div className="p-5">
                   <h3 className="text-base font-bold">{person.role}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{person.description}</p>
+                  <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{person.description}</p>
                 </div>
               </Card>
             ))}
@@ -307,7 +307,7 @@ export default function AppliedKnowledgePage() {
               <div>
                 <Badge className="mb-3 rounded-full bg-sky-500/20 text-sky-700 border-sky-300 text-xs font-bold">Keyingi qadam</Badge>
                 <h3 className="text-xl font-extrabold">Applied Knowledge'dan so'ng</h3>
-                <p className="mt-2 text-muted-foreground text-sm">Applied Knowledge'ni muvaffaqiyatli tugatgach, ACCA Applied Skills bosqichiga o'ting va 6 ta yangi imtihon topshiring.</p>
+                <p className="mt-2 text-zinc-400 text-sm">Applied Knowledge'ni muvaffaqiyatli tugatgach, ACCA Applied Skills bosqichiga o'ting va 6 ta yangi imtihon topshiring.</p>
               </div>
               <div className="flex gap-3">
                 <Link href="/course/applied-skills" className="flex-1">
@@ -329,7 +329,7 @@ export default function AppliedKnowledgePage() {
               <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Bepul konsultatsiya olish</h2>
               <p className="mt-3 text-sky-100">Applied Knowledge haqida barcha savollaringizga 10 daqiqada javob oling</p>
               <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-white px-8 font-bold text-sky-700 hover:bg-slate-100" data-testid="button-ak-cta">
+                <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-sky-700 hover:bg-zinc-800" data-testid="button-ak-cta">
                   Konsultatsiya olish <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
@@ -349,13 +349,13 @@ export default function AppliedKnowledgePage() {
       {/* FAQ */}
       <section className="py-14" data-testid="section-ak-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">Ko'p beriladigan savollar</h2>
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">Ko'p beriladigan savollar</h2>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {faqs.map((faq) => (
-                <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border bg-white px-6 shadow-sm dark:bg-card" data-testid={`ak-faq-${faq.id}`}>
+                <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`ak-faq-${faq.id}`}>
                   <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
+                  <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

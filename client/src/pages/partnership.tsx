@@ -98,7 +98,7 @@ export default function Partnership() {
             ].map((s, i) => (
               <div key={i} className="rounded-xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-sm" data-testid={`stat-partner-${i}`}>
                 <div className="text-2xl font-extrabold text-white">{s.value}</div>
-                <div className="text-sm text-slate-400">{s.label}</div>
+                <div className="text-sm text-zinc-500">{s.label}</div>
               </div>
             ))}
           </div>
@@ -108,17 +108,17 @@ export default function Partnership() {
       {/* ── PARTNERSHIP TYPES ─────────────────────────────────── */}
       <section className="py-14 sm:py-20" data-testid="section-partnership-types">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-types-title">
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-types-title">
             Hamkorlik turlari
           </h2>
-          <p className="mb-10 max-w-xl text-muted-foreground">
+          <p className="mb-10 max-w-xl text-zinc-400">
             Biznesingiz ehtiyojlariga mos hamkorlik shaklini tanlang.
           </p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {PARTNERSHIP_TYPES.map((item, i) => (
               <div
                 key={i}
-                className="overflow-hidden rounded-xl border bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:bg-card"
+                className="overflow-hidden rounded-xl border border-white/10 bg-zinc-900 transition-all hover:-translate-y-1 hover:shadow-md"
                 data-testid={`card-partnership-${i}`}
               >
                 <div className={`h-1.5 w-full bg-gradient-to-r ${item.color}`} />
@@ -127,12 +127,12 @@ export default function Partnership() {
                     <item.icon className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="mb-2 font-bold">{item.title}</h3>
-                  <p className="mb-4 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  <p className="mb-4 text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
                   <ul className="space-y-2">
                     {item.benefits.map((b, j) => (
                       <li key={j} className="flex items-center gap-2 text-sm">
                         <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
-                        <span className="text-muted-foreground">{b}</span>
+                        <span className="text-zinc-400">{b}</span>
                       </li>
                     ))}
                   </ul>
@@ -144,12 +144,12 @@ export default function Partnership() {
       </section>
 
       {/* ── PROCESS ───────────────────────────────────────────── */}
-      <section className="bg-slate-50 py-14 sm:py-20 dark:bg-slate-900/50" data-testid="section-process">
+      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-process">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-process-title">
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-process-title">
             Hamkorlik jarayoni
           </h2>
-          <p className="mb-10 text-muted-foreground">4 qadamda hamkorlikni boshlang</p>
+          <p className="mb-10 text-zinc-400">4 qadamda hamkorlikni boshlang</p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PROCESS_STEPS.map((step, i) => (
               <div key={i} className="relative" data-testid={`step-partner-${i}`}>
@@ -161,7 +161,7 @@ export default function Partnership() {
                     {step.num}
                   </div>
                   <h3 className="font-bold">{step.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{step.desc}</p>
+                  <p className="mt-1 text-sm text-zinc-400">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -172,13 +172,13 @@ export default function Partnership() {
       {/* ── PARTNERS ──────────────────────────────────────────── */}
       <section className="py-14 sm:py-20" data-testid="section-current-partners">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-current-partners-title">
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-current-partners-title">
             Mavjud hamkorlar
           </h2>
-          <p className="mb-8 text-muted-foreground">Bu kompaniyalar bizning bitiruvchilarimizga ishonishadi</p>
+          <p className="mb-8 text-zinc-400">Bu kompaniyalar bizning bitiruvchilarimizga ishonishadi</p>
           <div className="flex flex-wrap gap-3">
             {partnerCompanies.map((c) => (
-              <div key={c} className="rounded-full border bg-white px-5 py-2.5 text-sm font-semibold shadow-sm dark:bg-card" data-testid={`partner-pill-${c}`}>
+              <div key={c} className="rounded-full border border-white/10 bg-zinc-800 px-5 py-2.5 text-sm font-semibold text-zinc-300" data-testid={`partner-pill-${c}`}>
                 {c}
               </div>
             ))}
@@ -187,14 +187,14 @@ export default function Partnership() {
       </section>
 
       {/* ── FORM ──────────────────────────────────────────────── */}
-      <section className="bg-slate-50 py-14 sm:py-20 dark:bg-slate-900/50" data-testid="section-partnership-form">
+      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-partnership-form">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-form-title">
+              <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-form-title">
                 Hamkorlik so'rovi
               </h2>
-              <p className="mt-3 text-muted-foreground leading-relaxed">
+              <p className="mt-3 text-zinc-400 leading-relaxed">
                 So'rovingizni qoldiring, mutaxassislarimiz 24 soat ichida bog'lanadi va qulay hamkorlik shaklini taklif qiladi.
               </p>
               <ul className="mt-6 space-y-3">
@@ -211,12 +211,12 @@ export default function Partnership() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-xl border bg-white p-8 shadow-sm dark:bg-card">
+            <div className="rounded-xl border border-white/10 bg-zinc-900 p-8">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-md">
                 <Handshake className="h-7 w-7 text-white" />
               </div>
               <h3 className="mb-1 text-lg font-extrabold">So'rov yuborish</h3>
-              <p className="mb-6 text-sm text-muted-foreground">Barcha maydonlarni to'ldiring</p>
+              <p className="mb-6 text-sm text-zinc-400">Barcha maydonlarni to'ldiring</p>
               <LeadForm source="partnership" buttonText="So'rov yuborish" />
             </div>
           </div>

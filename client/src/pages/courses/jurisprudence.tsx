@@ -274,15 +274,15 @@ export default function JurisprudencePage() {
   return (
     <Layout>
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="bg-white py-10 sm:py-14" data-testid="section-law-hero">
+      <section className="bg-zinc-900 py-10 sm:py-14" data-testid="section-law-hero">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-1.5 text-xs text-muted-foreground">
-            <Link href="/" className="hover:text-foreground" data-testid="breadcrumb-home">Bosh sahifa</Link>
+          <nav className="mb-6 flex items-center gap-1.5 text-xs text-zinc-400">
+            <Link href="/" className="hover:text-white" data-testid="breadcrumb-home">Bosh sahifa</Link>
             <ChevronRight className="h-3 w-3" />
-            <Link href="/courses" className="hover:text-foreground" data-testid="breadcrumb-courses">Kurslar</Link>
+            <Link href="/courses" className="hover:text-white" data-testid="breadcrumb-courses">Kurslar</Link>
             <ChevronRight className="h-3 w-3" />
-            <span className="font-semibold text-foreground">Huquqshunoslik</span>
+            <span className="font-semibold text-white">Huquqshunoslik</span>
           </nav>
 
           <div className="grid gap-10 lg:grid-cols-[1fr_380px] lg:gap-14 lg:items-start">
@@ -290,21 +290,21 @@ export default function JurisprudencePage() {
             <div>
               <div className="mb-2 flex flex-wrap gap-2">
                 <Badge className="rounded-full border-amber-200 bg-amber-50 text-amber-700">⚖️ Kurs</Badge>
-                <Badge className="rounded-full border-slate-200 bg-slate-50 text-slate-600">Masofaviy format</Badge>
+                <Badge className="rounded-full border-slate-200 bg-[#111] text-zinc-400">Masofaviy format</Badge>
               </div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-tight" data-testid="text-law-title">
+              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-law-title">
                 Huquqshunoslik
               </h1>
-              <p className="mt-4 max-w-xl text-slate-600 leading-relaxed">
+              <p className="mt-4 max-w-xl text-zinc-400 leading-relaxed">
                 Huquqshunoslik kursi ushbu bilim sohasining asosiy tushunchalarini o'zlashtirishni istaydigan tinglovchilar uchun foydali bo'ladi. O'quv dasturiga davlat va huquq nazariyasi, shuningdek konstitutsiyaviy, fuqarolik, oila, mehnat, jinoyat va ma'muriy huquqning alohida muhim tarmoqlari bo'yicha asoslar kiradi.
               </p>
 
               {/* Course info table */}
               <div className="mt-6 overflow-hidden rounded-2xl border" data-testid="course-info-table">
                 {COURSE_INFO.map((item, i) => (
-                  <div key={i} className={`flex items-center justify-between px-5 py-3.5 ${i % 2 === 0 ? "bg-slate-50" : "bg-white"}`}>
-                    <span className="text-sm text-slate-500">{item.label}</span>
-                    <span className="text-sm font-bold text-slate-900">{item.value}</span>
+                  <div key={i} className={`flex items-center justify-between px-5 py-3.5 ${i % 2 === 0 ? "bg-[#111]" : "bg-zinc-900"}`}>
+                    <span className="text-sm text-zinc-500">{item.label}</span>
+                    <span className="text-sm font-bold text-white">{item.value}</span>
                   </div>
                 ))}
               </div>
@@ -324,7 +324,7 @@ export default function JurisprudencePage() {
             </div>
 
             {/* Right — form */}
-            <div className="rounded-2xl border bg-white p-6 shadow-xl" data-testid="card-law-form">
+            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-xl" data-testid="card-law-form">
               <div className="mb-3 flex items-center justify-between">
                 <h3 className="text-lg font-extrabold">Konsultatsiya olish</h3>
                 <Badge className="rounded-full border-green-200 bg-green-50 text-green-700 font-semibold text-xs">Bepul</Badge>
@@ -334,27 +334,27 @@ export default function JurisprudencePage() {
                 <div className="text-base font-extrabold text-amber-900 mt-0.5">10-mart, 2026</div>
               </div>
               <LeadForm source="course-jurisprudence" buttonText="Ariza topshirish" />
-              <p className="mt-3 text-center text-xs text-muted-foreground">Ariza topshirish bilan siz shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz</p>
+              <p className="mt-3 text-center text-xs text-zinc-400">Ariza topshirish bilan siz shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── FOR WHOM ─────────────────────────────────────────── */}
-      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-law-for-whom">
+      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-law-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-for-whom-title">
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-for-whom-title">
             Bu dastur kimlar uchun?
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {FOR_WHOM.map((item, i) => (
-              <div key={i} className="flex items-start gap-4 rounded-2xl border bg-white p-6 shadow-sm hover:shadow-md transition-shadow" data-testid={`for-whom-card-${i}`}>
+              <div key={i} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-zinc-900 p-6 hover:shadow-md transition-shadow" data-testid={`for-whom-card-${i}`}>
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-50 text-2xl border border-amber-100">
                   {item.emoji}
                 </div>
                 <div>
-                  <h3 className="text-sm font-extrabold text-slate-900 leading-snug">{item.title}</h3>
-                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-sm font-extrabold text-white leading-snug">{item.title}</h3>
+                  <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -367,14 +367,14 @@ export default function JurisprudencePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-skills-title">
+              <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-skills-title">
                 Nimalarga o'rganasiz?
               </h2>
               <div className="space-y-3">
                 {SKILLS.map((skill, i) => (
-                  <div key={i} className="flex items-center gap-3 rounded-xl border bg-white px-5 py-4 shadow-sm" data-testid={`skill-item-${i}`}>
+                  <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 px-5 py-4 shadow-sm" data-testid={`skill-item-${i}`}>
                     <span className="text-2xl">{skill.emoji}</span>
-                    <span className="text-sm font-semibold text-slate-800">{skill.text}</span>
+                    <span className="text-sm font-semibold text-zinc-200">{skill.text}</span>
                   </div>
                 ))}
               </div>
@@ -389,17 +389,17 @@ export default function JurisprudencePage() {
       {/* ── ABOUT TRAINING ───────────────────────────────────── */}
       <section className="bg-stone-50 py-14 sm:py-20" data-testid="section-law-about">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-about-title">
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-about-title">
             O'qish haqida
           </h2>
           <div className="grid gap-6 lg:grid-cols-3">
             {ABOUT_FEATURES.map((f, i) => (
-              <div key={i} className="overflow-hidden rounded-2xl border bg-white shadow-sm" data-testid={`about-feature-${i}`}>
+              <div key={i} className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-900" data-testid={`about-feature-${i}`}>
                 <div className="h-1.5 w-full bg-gradient-to-r from-amber-500 to-yellow-500" />
                 <div className="p-6">
                   <div className="mb-3 text-3xl">{f.emoji}</div>
-                  <h3 className="text-base font-extrabold text-slate-900">{f.title}</h3>
-                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{f.desc}</p>
+                  <h3 className="text-base font-extrabold text-white">{f.title}</h3>
+                  <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{f.desc}</p>
                   {i === 2 && (
                     <a href="#pricing" className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-700 hover:text-amber-800">
                       Batafsil ma'lumot <ArrowRight className="h-3 w-3" />
@@ -415,19 +415,19 @@ export default function JurisprudencePage() {
       {/* ── CURRICULUM ───────────────────────────────────────── */}
       <section id="curriculum" className="py-14 sm:py-20" data-testid="section-law-curriculum">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-curriculum-title">
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-curriculum-title">
             Kursning qisqa dasturi
           </h2>
-          <p className="mb-8 text-slate-500 text-sm max-w-2xl">
+          <p className="mb-8 text-zinc-500 text-sm max-w-2xl">
             O'qitadigan amaliyotlar va kurs quriladigan metodologiya nafaqat o'qituvchilarning amaliy tajribasi, balki ilmiy tadqiqotlar bilan ham sinovdan o'tgan.
           </p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 max-w-3xl">
             {CURRICULUM_SUBJECTS.map((subject, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-xl border bg-white px-5 py-4 shadow-sm hover:border-amber-200 hover:shadow-md transition-all" data-testid={`curriculum-subject-${i}`}>
+              <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 px-5 py-4 shadow-sm hover:border-amber-200 hover:shadow-md transition-all" data-testid={`curriculum-subject-${i}`}>
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-sm font-extrabold text-amber-700">
                   {i + 1}
                 </div>
-                <span className="text-sm font-semibold text-slate-800">{subject}</span>
+                <span className="text-sm font-semibold text-zinc-200">{subject}</span>
               </div>
             ))}
           </div>
@@ -441,23 +441,23 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── TRAINING ORDER ───────────────────────────────────── */}
-      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-law-training-order">
+      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-law-training-order">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-order-title">
+          <h2 className="mb-2 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-order-title">
             O'qish tartibi
           </h2>
-          <p className="mb-8 text-slate-500 text-sm">Kursga kirgan paytdan diplom olguncha</p>
+          <p className="mb-8 text-zinc-500 text-sm">Kursga kirgan paytdan diplom olguncha</p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {TRAINING_STEPS.map((step, i) => (
-              <div key={i} className="relative rounded-2xl border bg-white p-6 shadow-sm" data-testid={`training-step-${i}`}>
+              <div key={i} className="relative rounded-2xl border border-white/10 bg-zinc-900 p-6" data-testid={`training-step-${i}`}>
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100">
                   <step.icon className="h-6 w-6 text-amber-600" />
                 </div>
                 <div className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-amber-600 text-xs font-extrabold text-white">
                   {i + 1}
                 </div>
-                <h3 className="text-sm font-extrabold text-slate-900">{step.title}</h3>
-                <p className="mt-2 text-xs text-slate-600 leading-relaxed">{step.desc}</p>
+                <h3 className="text-sm font-extrabold text-white">{step.title}</h3>
+                <p className="mt-2 text-xs text-zinc-400 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -467,18 +467,18 @@ export default function JurisprudencePage() {
       {/* ── FBA BENEFITS ─────────────────────────────────────── */}
       <section className="py-14 sm:py-20" data-testid="section-law-fba-benefits">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-fba-benefits-title">
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-fba-benefits-title">
             FBA Academy da o'qish — bu:
           </h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {FBA_BENEFITS.map((b, i) => (
-              <div key={i} className="flex flex-col items-start gap-3 rounded-2xl border bg-white p-6 shadow-sm hover:shadow-md transition-shadow" data-testid={`fba-benefit-${i}`}>
+              <div key={i} className="flex flex-col items-start gap-3 rounded-2xl border border-white/10 bg-zinc-900 p-6 hover:shadow-md transition-shadow" data-testid={`fba-benefit-${i}`}>
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 border border-amber-100">
                   <b.icon className="h-6 w-6 text-amber-600" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-extrabold text-slate-900">{b.title}</h3>
-                  <p className="mt-1 text-xs text-slate-500">{b.desc}</p>
+                  <h3 className="text-sm font-extrabold text-white">{b.title}</h3>
+                  <p className="mt-1 text-xs text-zinc-500">{b.desc}</p>
                 </div>
               </div>
             ))}
@@ -487,24 +487,24 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── TEACHERS ─────────────────────────────────────────── */}
-      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-law-teachers">
+      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-law-teachers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-teachers-title">
+          <h2 className="mb-2 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-teachers-title">
             O'qituvchilar
           </h2>
-          <p className="mb-8 text-slate-500 text-sm">7 yildan 25 yilgacha tajribaga ega yetakchi o'zbek va xalqaro ekspertlar o'qitadi</p>
+          <p className="mb-8 text-zinc-500 text-sm">7 yildan 25 yilgacha tajribaga ega yetakchi o'zbek va xalqaro ekspertlar o'qitadi</p>
           <div className="grid gap-6 sm:grid-cols-3">
             {TEACHERS.map((t, i) => (
-              <div key={i} className="overflow-hidden rounded-2xl border bg-white shadow-md" data-testid={`teacher-card-${i}`}>
+              <div key={i} className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-900" data-testid={`teacher-card-${i}`}>
                 <div className={`flex h-44 items-center justify-center bg-gradient-to-br ${t.color}`}>
                   <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/20 text-2xl font-extrabold text-white ring-4 ring-white/30">
                     {t.initials}
                   </div>
                 </div>
                 <div className="p-5">
-                  <h3 className="text-base font-extrabold text-slate-900">{t.name}</h3>
+                  <h3 className="text-base font-extrabold text-white">{t.name}</h3>
                   <div className="mt-0.5 text-xs font-semibold text-amber-600">{t.role}</div>
-                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">{t.desc}</p>
+                  <p className="mt-3 text-sm text-zinc-400 leading-relaxed">{t.desc}</p>
                 </div>
               </div>
             ))}
@@ -523,29 +523,29 @@ export default function JurisprudencePage() {
                   <Shield className="h-6 w-6 text-amber-600" />
                 </div>
                 <div>
-                  <h3 className="text-base font-extrabold text-slate-900">Ta'lim litsenziyasi</h3>
+                  <h3 className="text-base font-extrabold text-white">Ta'lim litsenziyasi</h3>
                   <div className="text-xs text-amber-700 font-medium">Davlat tomonidan berilgan</div>
                 </div>
               </div>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-zinc-400 leading-relaxed">
                 FBA Academy ta'lim faoliyatini olib borish uchun rasmiy litsenziyaga ega. Litsenziyani Ta'lim nazorati xizmatining rasmiy saytida tekshirishingiz mumkin.
               </p>
             </div>
             {/* Diploma */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-testid="diploma-card">
+            <div className="rounded-2xl border border-slate-200 bg-zinc-900 p-6 shadow-sm" data-testid="diploma-card">
               <div className="mb-3 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100">
-                  <Award className="h-6 w-6 text-slate-600" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0d0d0d]">
+                  <Award className="h-6 w-6 text-zinc-400" />
                 </div>
                 <div>
-                  <h3 className="text-base font-extrabold text-slate-900">O'qish yakunidagi hujjatlar</h3>
-                  <div className="text-xs text-slate-500 font-medium">Belgilangan namunadagi diplom</div>
+                  <h3 className="text-base font-extrabold text-white">O'qish yakunidagi hujjatlar</h3>
+                  <div className="text-xs text-zinc-500 font-medium">Belgilangan namunadagi diplom</div>
                 </div>
               </div>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-zinc-400 leading-relaxed">
                 Bitiruv testlarini muvaffaqiyatli topshirgandan so'ng talabalar o'z kompetensiya darajasini tasdiqlovchi hujjat oladilar — professional qayta tayyorlash diplomi.
               </p>
-              <div className="mt-3 flex items-center gap-2 text-sm font-bold text-slate-900">
+              <div className="mt-3 flex items-center gap-2 text-sm font-bold text-white">
                 <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0" />
                 Rezyumega ko'rsatishingiz mumkin
               </div>
@@ -573,13 +573,13 @@ export default function JurisprudencePage() {
       {/* ── PRICING ──────────────────────────────────────────── */}
       <section id="pricing" className="py-14 sm:py-20" data-testid="section-law-pricing">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-pricing-title">
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-pricing-title">
             O'qish narxi
           </h2>
           <div className="grid gap-6 lg:grid-cols-[1fr_400px]">
             {/* Pricing info */}
             <div className="space-y-4">
-              <div className="overflow-hidden rounded-2xl border bg-white shadow-md">
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-900">
                 <div className="bg-amber-600 px-6 py-4 text-white">
                   <div className="text-xs font-bold uppercase tracking-wide opacity-80">12 oyga bo'lib to'lashda</div>
                   <div className="mt-1 flex items-baseline gap-2">
@@ -588,13 +588,13 @@ export default function JurisprudencePage() {
                   </div>
                 </div>
                 <div className="p-5">
-                  <div className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3 mb-4">
-                    <span className="text-sm text-slate-600">Bir to'lovda to'lashda</span>
+                  <div className="flex items-center justify-between rounded-xl bg-[#111] px-4 py-3 mb-4">
+                    <span className="text-sm text-zinc-400">Bir to'lovda to'lashda</span>
                     <span className="text-sm font-extrabold text-green-600">10% chegirma</span>
                   </div>
                   <div className="grid gap-3">
                     {PRICING_FEATURES.map((f, i) => (
-                      <div key={i} className="flex items-center gap-2.5 text-sm text-slate-700">
+                      <div key={i} className="flex items-center gap-2.5 text-sm text-zinc-300">
                         <f.icon className="h-4 w-4 shrink-0 text-amber-500" /> {f.text}
                       </div>
                     ))}
@@ -612,7 +612,7 @@ export default function JurisprudencePage() {
             </div>
 
             {/* Form */}
-            <div className="rounded-2xl border bg-white p-6 shadow-xl" data-testid="card-law-pricing-form">
+            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-xl" data-testid="card-law-pricing-form">
               <h3 className="mb-4 text-lg font-extrabold">Kursga yozilish yoki bepul konsultatsiya</h3>
               <LeadForm source="course-jurisprudence-pricing" buttonText="Ariza topshirish" />
             </div>
@@ -625,10 +625,10 @@ export default function JurisprudencePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-6 lg:grid-cols-[1fr_auto]">
             <div>
-              <h2 className="text-lg font-extrabold text-slate-900 sm:text-xl" data-testid="text-law-corporate-title">
+              <h2 className="text-lg font-extrabold text-white sm:text-xl" data-testid="text-law-corporate-title">
                 Xodimlar uchun dastur kerakmi?
               </h2>
-              <p className="mt-1 text-sm text-slate-600">
+              <p className="mt-1 text-sm text-zinc-400">
                 Agar o'z xodimlaringizni o'qitishni tashkil qilish kerak bo'lsa — ariza qoldiring. Biz siz uchun individual taklif tayyorladik.
               </p>
             </div>
@@ -644,15 +644,15 @@ export default function JurisprudencePage() {
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="py-14 sm:py-20" data-testid="section-law-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-faq-title">
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-faq-title">
             {t.page.faqTitle}
           </h2>
           <div className="max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {FAQ_ITEMS.map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="rounded-2xl border bg-white px-6 shadow-sm" data-testid={`law-faq-${i}`}>
+                <AccordionItem key={i} value={`faq-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`law-faq-${i}`}>
                   <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base hover:no-underline">{faq.q}</AccordionTrigger>
-                  <AccordionContent className="text-slate-600 pb-5 text-sm leading-relaxed">{faq.a}</AccordionContent>
+                  <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.a}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

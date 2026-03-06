@@ -13,8 +13,8 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items, light = false }: BreadcrumbProps) {
   const all = [{ label: "Bosh sahifa", href: "/" }, ...items];
-  const textColor = light ? "text-slate-400 hover:text-white" : "text-muted-foreground hover:text-foreground";
-  const sepColor = light ? "text-slate-600" : "text-muted-foreground/50";
+  const textColor = light ? "text-zinc-400 hover:text-white" : "text-zinc-500 hover:text-zinc-300";
+  const sepColor = light ? "text-zinc-600" : "text-zinc-600";
   const currentColor = light ? "text-slate-200" : "text-foreground";
 
   return (

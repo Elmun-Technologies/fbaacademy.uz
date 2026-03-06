@@ -49,7 +49,7 @@ function TimePopup({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="relative w-full max-w-lg mx-4">
-      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-lg text-slate-500 hover:text-slate-900 transition-colors" data-testid="button-popup-close-time">
+      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 shadow-lg text-zinc-400 hover:text-white transition-colors" data-testid="button-popup-close-time">
         <X className="h-4 w-4" />
       </button>
       <div className="rounded-2xl overflow-hidden shadow-2xl">
@@ -67,13 +67,13 @@ function TimePopup({ onClose }: { onClose: () => void }) {
           <p className="text-sm opacity-90">{text.sub}</p>
         </div>
         {/* Form */}
-        <div className="bg-white px-8 py-6">
+        <div className="bg-zinc-900 px-8 py-6">
           {sent ? (
             <div className="flex flex-col items-center justify-center py-6 gap-3">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
                 <ArrowRight className="h-7 w-7 text-green-600" />
               </div>
-              <p className="text-lg font-bold text-slate-900">{text.success}</p>
+              <p className="text-lg font-bold text-white">{text.success}</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -155,7 +155,7 @@ function ScrollPopup({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="relative w-full max-w-md mx-4">
-      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-lg text-slate-500 hover:text-slate-900" data-testid="button-popup-close-scroll">
+      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 shadow-lg text-zinc-400 hover:text-white" data-testid="button-popup-close-scroll">
         <X className="h-4 w-4" />
       </button>
       <div className="rounded-2xl overflow-hidden shadow-2xl bg-[#0f0a2e]">
@@ -236,7 +236,7 @@ function ExitPopup({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="relative w-full max-w-lg mx-4">
-      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-lg text-slate-500 hover:text-slate-900" data-testid="button-popup-close-exit">
+      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 shadow-lg text-zinc-400 hover:text-white" data-testid="button-popup-close-exit">
         <X className="h-4 w-4" />
       </button>
       <div className="rounded-2xl overflow-hidden shadow-2xl">
@@ -252,11 +252,11 @@ function ExitPopup({ onClose }: { onClose: () => void }) {
             <p className="text-xs text-slate-400 mt-3">{text.sub}</p>
           </div>
           {/* Right — form */}
-          <div className="bg-white p-8 flex flex-col justify-center">
+          <div className="bg-zinc-900 p-8 flex flex-col justify-center">
             {sent ? (
               <div className="flex flex-col items-center py-4 gap-3">
                 <div className="text-4xl">🎉</div>
-                <p className="font-bold text-slate-900 text-center">{text.success}</p>
+                <p className="font-bold text-white text-center">{text.success}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">

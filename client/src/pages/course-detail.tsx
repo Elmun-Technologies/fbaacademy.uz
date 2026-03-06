@@ -44,7 +44,7 @@ export default function CourseDetail() {
         <div className="flex min-h-[60vh] items-center justify-center">
           <div className="text-center">
             <h2 className="text-2xl font-bold" data-testid="text-course-not-found">Kurs topilmadi</h2>
-            <p className="mt-2 text-muted-foreground">Bu kurs mavjud emas yoki olib tashlangan</p>
+            <p className="mt-2 text-zinc-400">Bu kurs mavjud emas yoki olib tashlangan</p>
             <Link href="/courses">
               <Button variant="outline" className="mt-4 rounded-full" data-testid="button-back-to-courses">Kurslarga qaytish</Button>
             </Link>
@@ -66,7 +66,7 @@ export default function CourseDetail() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-purple-500/15 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link href="/courses">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-slate-400 cursor-pointer hover:text-white transition-colors" data-testid="link-back-courses">
+            <span className="mb-6 inline-flex items-center gap-1 text-sm text-zinc-500 cursor-pointer hover:text-white transition-colors" data-testid="link-back-courses">
               <ArrowLeft className="h-4 w-4" /> Barcha kurslar
             </span>
           </Link>
@@ -82,7 +82,7 @@ export default function CourseDetail() {
                   <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
                   <span className="text-sm font-bold text-white">{course.rating}</span>
                 </div>
-                <span className="text-sm text-slate-400">{course.studentsCount} talaba</span>
+                <span className="text-sm text-zinc-500">{course.studentsCount} talaba</span>
               </div>
 
               <div className="mt-8 grid grid-cols-3 gap-3">
@@ -94,16 +94,16 @@ export default function CourseDetail() {
                   <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 backdrop-blur-sm" data-testid={`card-hero-feature-${i}`}>
                     <item.icon className="mb-2 h-5 w-5 text-purple-300" />
                     <div className="text-xs font-bold text-white sm:text-sm">{item.label}</div>
-                    <div className="text-xs text-slate-400">{item.sub}</div>
+                    <div className="text-xs text-zinc-500">{item.sub}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-course-enroll">
+              <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl" data-testid="card-course-enroll">
                 <div className="mb-3 flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-foreground">So'rov qoldiring</h3>
+                  <h3 className="text-lg font-bold text-white">So'rov qoldiring</h3>
                   {course.discount && (
                     <Badge className="rounded-full bg-rose-500 text-white font-bold px-3 shadow-md">-{course.discount}</Badge>
                   )}
@@ -113,9 +113,9 @@ export default function CourseDetail() {
                   <span>Joylar soni cheklangan</span>
                 </div>
                 <div className="mb-4 flex items-baseline gap-2">
-                  <span className="text-3xl font-extrabold text-foreground" data-testid="text-course-detail-price">{course.price} UZS</span>
+                  <span className="text-3xl font-extrabold text-white" data-testid="text-course-detail-price">{course.price} UZS</span>
                   {course.oldPrice && (
-                    <span className="text-sm text-muted-foreground line-through">{course.oldPrice} UZS</span>
+                    <span className="text-sm text-zinc-400 line-through">{course.oldPrice} UZS</span>
                   )}
                 </div>
                 <LeadForm source={`course-${course.id}`} buttonText="Chegirma bilan yozilish" />
@@ -130,7 +130,7 @@ export default function CourseDetail() {
         <section className="py-12 sm:py-16" data-testid="section-course-video">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl">
-              <h2 className="mb-6 text-2xl font-extrabold sm:text-3xl" data-testid="text-video-preview-title">
+              <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-video-preview-title">
                 Kurs haqida ko'proq bilib oling
               </h2>
               <YouTubeEmbed videoId={course.videoId} title={`${course.title} — kurs haqida`} />
@@ -142,8 +142,8 @@ export default function CourseDetail() {
       {/* Salary Growth */}
       <section className="py-12 sm:py-16" data-testid="section-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-slate-900 p-6 sm:p-10 shadow-2xl dark:bg-card dark:border">
-            <h2 className="mb-8 text-2xl font-extrabold text-white dark:text-foreground sm:text-3xl" data-testid="text-salary-title">Maoshingiz tajriba bilan o'sadi</h2>
+          <div className="rounded-3xl bg-zinc-900 border border-white/10 p-6 sm:p-10 dark:border">
+            <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-salary-title">Maoshingiz tajriba bilan o'sadi</h2>
             <div className="space-y-4">
               {course.salaryLevels.map((level, i) => (
                 <div
@@ -152,12 +152,12 @@ export default function CourseDetail() {
                   style={{ maxWidth: `${55 + i * 22}%`, minWidth: "220px" }}
                   data-testid={`card-salary-${i}`}
                 >
-                  <div className="text-lg font-extrabold text-slate-900 sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm font-medium text-slate-700">{level.level} — {level.description}</div>
+                  <div className="text-lg font-extrabold text-white sm:text-xl">{level.salary} so'm dan</div>
+                  <div className="text-sm font-medium text-zinc-300">{level.level} — {level.description}</div>
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-xs text-slate-500 dark:text-muted-foreground">*Manba: hh.uz, HeadHunter</p>
+            <p className="mt-6 text-xs text-zinc-500 dark:text-zinc-400">*Manba: hh.uz, HeadHunter</p>
           </div>
         </div>
       </section>
@@ -165,10 +165,10 @@ export default function CourseDetail() {
       {/* Tools */}
       <section className="py-12 sm:py-16" data-testid="section-tools">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold sm:text-3xl" data-testid="text-tools-title">Instrumentlar</h2>
+          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-tools-title">Instrumentlar</h2>
           <div className="flex flex-wrap gap-3">
             {course.tools.map((tool, i) => (
-              <div key={i} className="rounded-full border-2 border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-foreground shadow-sm dark:border-slate-700 dark:bg-card" data-testid={`badge-tool-${i}`}>
+              <div key={i} className="rounded-full border border-white/10 bg-zinc-800 px-5 py-2.5 text-sm font-semibold text-zinc-300" data-testid={`badge-tool-${i}`}>
                 {tool}
               </div>
             ))}
@@ -177,14 +177,14 @@ export default function CourseDetail() {
       </section>
 
       {/* Skills */}
-      <section className="bg-slate-50 py-12 sm:py-16 dark:bg-slate-900/50" data-testid="section-skills">
+      <section className="bg-[#111] py-12 sm:py-16" data-testid="section-skills">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold sm:text-3xl" data-testid="text-skills-title">Siz o'rganasiz</h2>
+          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-skills-title">Siz o'rganasiz</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {course.skills.map((skill, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`text-skill-${i}`}>
+              <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 p-4" data-testid={`text-skill-${i}`}>
                 <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-500" />
-                <span className="font-medium text-foreground text-sm">{skill}</span>
+                <span className="font-medium text-white text-sm">{skill}</span>
               </div>
             ))}
           </div>
@@ -194,14 +194,14 @@ export default function CourseDetail() {
       {/* For Whom */}
       <section className="py-12 sm:py-16" data-testid="section-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold sm:text-3xl" data-testid="text-for-whom-title">Kurs kimlar uchun?</h2>
+          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-for-whom-title">Kurs kimlar uchun?</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {course.forWhom.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-xl border bg-white p-5 shadow-sm dark:bg-card" data-testid={`text-for-whom-${i}`}>
+              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5" data-testid={`text-for-whom-${i}`}>
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900/30">
                   <GraduationCap className="h-4 w-4 text-purple-600" />
                 </div>
-                <span className="font-medium text-foreground text-sm leading-relaxed">{item}</span>
+                <span className="font-medium text-white text-sm leading-relaxed">{item}</span>
               </div>
             ))}
           </div>
@@ -209,9 +209,9 @@ export default function CourseDetail() {
       </section>
 
       {/* Course Program */}
-      <section className="bg-slate-50 py-12 sm:py-16 dark:bg-slate-900/50" data-testid="section-modules">
+      <section className="bg-[#111] py-12 sm:py-16" data-testid="section-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-modules-title">Kurs dasturi</h2>
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-modules-title">Kurs dasturi</h2>
           <div className="mb-6 flex flex-wrap gap-2 sm:gap-3">
             {[
               { icon: Calendar, text: `${course.duration}` },
@@ -227,7 +227,7 @@ export default function CourseDetail() {
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
-                <AccordionItem key={i} value={`module-${i}`} className="rounded-2xl border bg-white px-5 shadow-sm dark:bg-card" data-testid={`accordion-module-${i}`}>
+                <AccordionItem key={i} value={`module-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`accordion-module-${i}`}>
                   <AccordionTrigger className="text-left py-4">
                     <div className="flex items-center gap-3">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-sm font-bold text-white shadow-md">
@@ -235,14 +235,14 @@ export default function CourseDetail() {
                       </span>
                       <div>
                         <span className="text-sm font-bold sm:text-base">{mod.title}</span>
-                        <div className="text-xs text-muted-foreground">{mod.topics.length} mavzu</div>
+                        <div className="text-xs text-zinc-400">{mod.topics.length} mavzu</div>
                       </div>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="ml-12 space-y-2.5 pb-3">
                       {mod.topics.map((topic, j) => (
-                        <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <li key={j} className="flex items-center gap-2 text-sm text-zinc-400">
                           <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
                           {topic}
                         </li>
@@ -259,7 +259,7 @@ export default function CourseDetail() {
       {/* Support Team */}
       <section className="py-12 sm:py-16" data-testid="section-support">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-support-title">O'quv jarayonida siz bilan birga</h2>
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-support-title">O'quv jarayonida siz bilan birga</h2>
           <div className="grid gap-6 sm:grid-cols-3">
             {course.supportTeam.map((person, i) => (
               <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`card-support-${i}`}>
@@ -267,8 +267,8 @@ export default function CourseDetail() {
                   <img src={person.avatar} alt={person.role} className="h-full w-full object-cover object-top" loading="lazy" />
                 </div>
                 <div className="p-5">
-                  <h3 className="text-base font-bold text-foreground">{person.role}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{person.description}</p>
+                  <h3 className="text-base font-bold text-white">{person.role}</h3>
+                  <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{person.description}</p>
                 </div>
               </Card>
             ))}
@@ -277,18 +277,18 @@ export default function CourseDetail() {
       </section>
 
       {/* Live Learning — image replaced with actual course image */}
-      <section className="bg-slate-50 py-12 sm:py-16 dark:bg-slate-900/50" data-testid="section-live">
+      <section className="bg-[#111] py-12 sm:py-16" data-testid="section-live">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div>
               <Badge variant="outline" className="mb-4 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider text-purple-600 border-purple-200">O'quv formati</Badge>
               <h2 className="text-3xl font-extrabold sm:text-4xl" data-testid="text-live-title">Jonli muloqot va amaliyot ekspertlar bilan</h2>
-              <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
+              <p className="mt-5 text-lg text-zinc-400 leading-relaxed">
                 Har bir mavzuni tajribali o'qituvchilar bilan onlayn darslarda o'rganasiz. Savollaringizga tezkor javob olasiz va kursdoshlaringiz bilan fikr almashishingiz mumkin.
               </p>
               <div className="mt-6 space-y-3">
                 {["Jonli video darslar", "Amaliy loyihalar", "Mentor ko'magi", "Guruh Telegram chat"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm font-medium text-foreground">
+                  <div key={item} className="flex items-center gap-2 text-sm font-medium text-white">
                     <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" /> {item}
                   </div>
                 ))}
@@ -312,7 +312,7 @@ export default function CourseDetail() {
                   10 daqiqada dasturni tushuntiramiz, maslahat beramiz va savollaringizga javob beramiz
                 </p>
                 <Link href="/contacts">
-                  <Button size="lg" className="mt-6 gap-2 rounded-full bg-white px-8 font-bold text-purple-700 shadow-lg hover:bg-slate-100" data-testid="button-consultation-cta">
+                  <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-purple-700 shadow-lg hover:bg-zinc-800" data-testid="button-consultation-cta">
                     Konsultatsiya olish <ArrowRight className="h-5 w-5" />
                   </Button>
                 </Link>
@@ -333,9 +333,9 @@ export default function CourseDetail() {
       </section>
 
       {/* Related Courses */}
-      <section className="bg-slate-50 py-12 sm:py-16 dark:bg-slate-900/50" data-testid="section-related">
+      <section className="bg-[#111] py-12 sm:py-16" data-testid="section-related">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-related-title">Boshqa kurslar</h2>
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-related-title">Boshqa kurslar</h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {courses.filter((c) => c.id !== course.id).slice(0, 4).map((c) => (
               <Link key={c.id} href={`/course/${c.id}`}>
@@ -345,10 +345,10 @@ export default function CourseDetail() {
                   </div>
                   <div className="p-4">
                     <Badge className="mb-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">{c.category}</Badge>
-                    <h3 className="mb-1 text-sm font-bold leading-snug text-foreground">{c.title}</h3>
+                    <h3 className="mb-1 text-sm font-bold leading-snug text-white">{c.title}</h3>
                     <div className="mt-2 flex items-center justify-between text-xs">
-                      <span className="text-muted-foreground">{c.duration}</span>
-                      <span className="font-bold text-foreground">{c.price} UZS</span>
+                      <span className="text-zinc-400">{c.duration}</span>
+                      <span className="font-bold text-white">{c.price} UZS</span>
                     </div>
                   </div>
                 </Card>
@@ -361,13 +361,13 @@ export default function CourseDetail() {
       {/* FAQ */}
       <section className="py-12 sm:py-16" data-testid="section-course-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-course-faq-title">Ko'p beriladigan savollar</h2>
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-course-faq-title">Ko'p beriladigan savollar</h2>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {courseFaqs.map((faq) => (
-                <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border bg-white px-6 shadow-sm dark:bg-card" data-testid={`accordion-faq-${faq.id}`}>
+                <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`accordion-faq-${faq.id}`}>
                   <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
+                  <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

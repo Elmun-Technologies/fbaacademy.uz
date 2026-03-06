@@ -351,9 +351,9 @@ export default function OneCPage() {
   return (
     <Layout>
       {/* ===== BREADCRUMB ===== */}
-      <nav aria-label="Breadcrumb" className="border-b bg-white dark:bg-card dark:border-slate-700" data-testid="breadcrumb">
+      <nav aria-label="Breadcrumb" className="border-b bg-zinc-900" data-testid="breadcrumb">
         <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6 lg:px-8">
-          <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground" itemScope itemType="https://schema.org/BreadcrumbList">
+          <ol className="flex flex-wrap items-center gap-1.5 text-xs text-zinc-400" itemScope itemType="https://schema.org/BreadcrumbList">
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
               <Link href="/" className="hover:text-blue-600 transition-colors" itemProp="item" data-testid="breadcrumb-home">
                 <span itemProp="name">Bosh sahifa</span>
@@ -369,7 +369,7 @@ export default function OneCPage() {
             </li>
             <li aria-hidden="true" className="text-slate-300">/</li>
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <span className="font-semibold text-foreground" itemProp="name" data-testid="breadcrumb-current">1C: Buxgalteriya</span>
+              <span className="font-semibold text-white" itemProp="name" data-testid="breadcrumb-current">1C: Buxgalteriya</span>
               <meta itemProp="position" content="3" />
             </li>
           </ol>
@@ -396,7 +396,7 @@ export default function OneCPage() {
                 {HERO_BULLETS.map((bullet, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300" data-testid={`hero-bullet-${i}`}>
                     <div className="mt-0.5 h-4 w-4 shrink-0 rounded-full bg-blue-500 flex items-center justify-center">
-                      <div className="h-1.5 w-1.5 rounded-full bg-white" />
+                      <div className="h-1.5 w-1.5 rounded-full bg-zinc-900" />
                     </div>
                     {bullet}
                   </li>
@@ -419,7 +419,7 @@ export default function OneCPage() {
                   {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
                 </div>
                 <span className="text-sm font-bold text-white">{course.rating}</span>
-                <span className="text-sm text-slate-400">{course.studentsCount} talaba</span>
+                <span className="text-sm text-zinc-500">{course.studentsCount} talaba</span>
               </div>
             </div>
 
@@ -436,30 +436,30 @@ export default function OneCPage() {
                 <div className="absolute -bottom-4 -left-4 rounded-2xl bg-[#e8001c] px-5 py-3 shadow-xl">
                   <span className="text-2xl font-extrabold text-white">1C</span>
                 </div>
-                <div className="absolute -right-4 -top-4 rounded-2xl bg-white px-4 py-2.5 shadow-xl">
-                  <div className="text-xs font-bold text-slate-500 uppercase tracking-wide">Bitiruvchilar</div>
-                  <div className="text-xl font-extrabold text-slate-900">{course.studentsCount}</div>
+                <div className="absolute -right-4 -top-4 rounded-2xl bg-zinc-900 px-4 py-2.5 shadow-xl">
+                  <div className="text-xs font-bold text-zinc-500 uppercase tracking-wide">Bitiruvchilar</div>
+                  <div className="text-xl font-extrabold text-white">{course.studentsCount}</div>
                 </div>
               </div>
             </div>
 
             {/* Right — Enrollment form */}
-            <div id="enroll" className="rounded-2xl bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-1c-enroll">
+            <div id="enroll" className="rounded-2xl bg-zinc-900 p-6 shadow-2xl" data-testid="card-1c-enroll">
               <div className="mb-1 flex items-start justify-between">
                 <div>
-                  <h3 className="text-base font-bold text-foreground">O'qishni tanlashga yordam beramiz</h3>
+                  <h3 className="text-base font-bold text-white">O'qishni tanlashga yordam beramiz</h3>
                 </div>
                 <Badge className="rounded-lg bg-rose-500 px-2.5 py-1 text-xs font-extrabold text-white shadow">AKSIYA<br/>-{course.discount}</Badge>
               </div>
               <div className="my-3 flex items-baseline gap-2">
-                <span className="text-2xl font-extrabold text-foreground" data-testid="text-1c-price">{course.price} UZS</span>
-                <span className="text-sm text-muted-foreground line-through">{course.oldPrice} UZS</span>
+                <span className="text-2xl font-extrabold text-white" data-testid="text-1c-price">{course.price} UZS</span>
+                <span className="text-sm text-zinc-400 line-through">{course.oldPrice} UZS</span>
               </div>
               <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-amber-600">
                 <Flame className="h-3.5 w-3.5" /> Chegirma muddati cheklangan
               </div>
               <LeadForm source="course-1c" buttonText="Konsultatsiya olish" />
-              <p className="mt-3 text-center text-xs text-muted-foreground">Yoki menejerimiz siz bilan bog'lanadi</p>
+              <p className="mt-3 text-center text-xs text-zinc-400">Yoki menejerimiz siz bilan bog'lanadi</p>
             </div>
           </div>
 
@@ -472,7 +472,7 @@ export default function OneCPage() {
               { label: "Hujjat", value: "Diplom + Sertifikat" },
             ].map((item, i) => (
               <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-sm" data-testid={`quick-info-${i}`}>
-                <div className="text-xs text-slate-400 uppercase tracking-wide">{item.label}</div>
+                <div className="text-xs text-zinc-500 uppercase tracking-wide">{item.label}</div>
                 <div className="mt-0.5 text-sm font-bold text-white">{item.value}</div>
               </div>
             ))}
@@ -481,9 +481,9 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 2. COURSE FEATURES ===== */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-features">
+      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-features">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-10 text-2xl font-extrabold sm:text-3xl" data-testid="text-features-title">
+          <h2 className="mb-10 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-features-title">
             Kursda sizi nima kutayapti — amaliyot va trend bilimlar
           </h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -494,7 +494,7 @@ export default function OneCPage() {
                 </div>
                 <div>
                   <h3 className="text-base font-bold leading-snug">{f.title}</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+                  <p className="mt-1.5 text-sm text-zinc-400 leading-relaxed">{f.desc}</p>
                 </div>
               </div>
             ))}
@@ -516,8 +516,8 @@ export default function OneCPage() {
                   loading="lazy"
                 />
                 <div className="absolute left-6 top-6 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble">
-                  <div className="text-2xl font-extrabold text-slate-900">80%+</div>
-                  <div className="text-xs text-slate-600 leading-snug">O'zbekiston kompaniyalari<br/>1C ishlatadi</div>
+                  <div className="text-2xl font-extrabold text-white">80%+</div>
+                  <div className="text-xs text-zinc-400 leading-snug">O'zbekiston kompaniyalari<br/>1C ishlatadi</div>
                 </div>
               </div>
               <div className="flex flex-col justify-center p-8 lg:p-10">
@@ -537,7 +537,7 @@ export default function OneCPage() {
                   ].map((s, i) => (
                     <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3" data-testid={`why-stat-${i}`}>
                       <div className="text-lg font-extrabold text-white">{s.value}</div>
-                      <div className="text-xs text-slate-400">{s.label}</div>
+                      <div className="text-xs text-zinc-500">{s.label}</div>
                     </div>
                   ))}
                 </div>
@@ -550,17 +550,17 @@ export default function OneCPage() {
       {/* ===== 4. SKILLS + TOOLS ===== */}
       <section className="py-14 sm:py-20" data-testid="section-skills-tools">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">O'qishdan keyingi ko'nikmalaringiz</h2>
-          <p className="mb-10 text-muted-foreground">Ish beruvchilarning talablariga to'liq mos keladi</p>
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">O'qishdan keyingi ko'nikmalaringiz</h2>
+          <p className="mb-10 text-zinc-400">Ish beruvchilarning talablariga to'liq mos keladi</p>
 
           <div className="grid gap-10 lg:grid-cols-2">
             {/* Key Skills */}
             <div>
-              <h3 className="mb-4 text-lg font-bold text-muted-foreground uppercase tracking-wide text-sm">Asosiy ko'nikmalar</h3>
+              <h3 className="mb-4 text-lg font-bold text-zinc-400 uppercase tracking-wide text-sm">Asosiy ko'nikmalar</h3>
               <ul className="space-y-3">
                 {KEY_SKILLS.map((skill, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-sm" data-testid={`skill-${i}`}>
-                    <span className="mt-0.5 text-slate-400">·</span>
+                    <span className="mt-0.5 text-zinc-500">·</span>
                     <span className="font-medium">{skill}</span>
                   </li>
                 ))}
@@ -569,10 +569,10 @@ export default function OneCPage() {
 
             {/* Tools grid */}
             <div>
-              <h3 className="mb-4 text-sm font-bold text-muted-foreground uppercase tracking-wide">Instrumentlar</h3>
+              <h3 className="mb-4 text-sm font-bold text-zinc-400 uppercase tracking-wide">Instrumentlar</h3>
               <div className="grid grid-cols-2 gap-3">
                 {TOOLS.map((tool, i) => (
-                  <div key={i} className="flex items-center gap-3 rounded-xl border bg-white p-3.5 shadow-sm dark:bg-card" data-testid={`tool-${i}`}>
+                  <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 p-3.5 shadow-sm" data-testid={`tool-${i}`}>
                     <span className="text-xl">{tool.emoji}</span>
                     <span className="text-sm font-semibold">{tool.name}</span>
                   </div>
@@ -584,13 +584,13 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 5. CERTIFICATE ===== */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-certificate">
+      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-certificate">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl border bg-white shadow-md dark:bg-card">
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900">
             <div className="grid lg:grid-cols-2 lg:items-center">
               <div className="p-8 lg:p-12">
-                <h2 className="text-2xl font-extrabold sm:text-3xl">Diplom va 1C sertifikatini olasiz</h2>
-                <p className="mt-4 text-muted-foreground leading-relaxed">
+                <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white">Diplom va 1C sertifikatini olasiz</h2>
+                <p className="mt-4 text-zinc-400 leading-relaxed">
                   Kurs yakunida FBA Academy diplomini va 1C tomonidan tasdiqlangan sertifikatni olasiz. Sertifikat raqami 1C rasmiy bazasida saqlanadi — ish beruvchi tekshira oladi.
                 </p>
                 <ul className="mt-6 space-y-3">
@@ -608,18 +608,18 @@ export default function OneCPage() {
               </div>
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 dark:from-blue-950/20 dark:to-indigo-950/20 lg:p-12">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-slate-200/50" data-testid="img-diploma">
+                  <div className="overflow-hidden rounded-2xl bg-zinc-900 shadow-lg ring-1 ring-slate-200/50" data-testid="img-diploma">
                     <img src={`${UNSPLASH}/photo-1589829545856-d10d557cf95f?w=300&h=220&fit=crop`} alt="FBA Academy Diplomi" className="h-36 w-full object-cover" loading="lazy" />
                     <div className="p-3">
-                      <div className="text-xs font-bold text-slate-700 uppercase tracking-wide">FBA Academy</div>
-                      <div className="mt-0.5 text-xs text-muted-foreground">Professional Diplom</div>
+                      <div className="text-xs font-bold text-zinc-300 uppercase tracking-wide">FBA Academy</div>
+                      <div className="mt-0.5 text-xs text-zinc-400">Professional Diplom</div>
                     </div>
                   </div>
-                  <div className="overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-slate-200/50" data-testid="img-certificate">
+                  <div className="overflow-hidden rounded-2xl bg-zinc-900 shadow-lg ring-1 ring-slate-200/50" data-testid="img-certificate">
                     <img src={`${UNSPLASH}/photo-1554224155-6726b3ff858f?w=300&h=220&fit=crop`} alt="1C Sertifikat" className="h-36 w-full object-cover" loading="lazy" />
                     <div className="p-3">
                       <div className="text-xs font-bold text-[#e8001c] uppercase tracking-wide">1C Sertifikat</div>
-                      <div className="mt-0.5 text-xs text-muted-foreground">Rasmiy tasdiqlash</div>
+                      <div className="mt-0.5 text-xs text-zinc-400">Rasmiy tasdiqlash</div>
                     </div>
                   </div>
                 </div>
@@ -632,8 +632,8 @@ export default function OneCPage() {
       {/* ===== 6. PORTFOLIO PROJECTS ===== */}
       <section id="program" className="py-14 sm:py-20" data-testid="section-projects">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">Portfolio uchun {course.projects}+ yirik loyiha</h2>
-          <p className="mb-10 text-muted-foreground">Real kompaniya ma'lumotlari bilan ishlaysiz</p>
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">Portfolio uchun {course.projects}+ yirik loyiha</h2>
+          <p className="mb-10 text-zinc-400">Real kompaniya ma'lumotlari bilan ishlaysiz</p>
           <div className="relative">
             <div className="overflow-hidden rounded-2xl">
               <div className="relative h-64 sm:h-80">
@@ -658,10 +658,10 @@ export default function OneCPage() {
                 ))}
               </div>
               <div className="flex gap-2">
-                <button onClick={() => setActiveProjectIdx((p) => (p - 1 + PORTFOLIO_PROJECTS.length) % PORTFOLIO_PROJECTS.length)} className="flex h-9 w-9 items-center justify-center rounded-full border bg-white shadow-sm hover:bg-slate-50 dark:bg-card" data-testid="button-project-prev">
+                <button onClick={() => setActiveProjectIdx((p) => (p - 1 + PORTFOLIO_PROJECTS.length) % PORTFOLIO_PROJECTS.length)} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-zinc-900 hover:bg-zinc-800" data-testid="button-project-prev">
                   <ChevronLeft className="h-4 w-4" />
                 </button>
-                <button onClick={() => setActiveProjectIdx((p) => (p + 1) % PORTFOLIO_PROJECTS.length)} className="flex h-9 w-9 items-center justify-center rounded-full border bg-white shadow-sm hover:bg-slate-50 dark:bg-card" data-testid="button-project-next">
+                <button onClick={() => setActiveProjectIdx((p) => (p + 1) % PORTFOLIO_PROJECTS.length)} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-zinc-900 hover:bg-zinc-800" data-testid="button-project-next">
                   <ChevronRight className="h-4 w-4" />
                 </button>
               </div>
@@ -671,14 +671,14 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 7. PRACTICE TASKS ===== */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-practice">
+      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-practice">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl border bg-white shadow-sm dark:bg-card">
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900">
             <div className="grid gap-6 p-8 sm:p-10 lg:grid-cols-[auto_1fr] lg:gap-12 lg:items-center">
               <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-3xl bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 shadow-inner mx-auto lg:mx-0" data-testid="tasks-icon">
                 <div className="text-center">
-                  <div className="text-3xl font-extrabold text-slate-700 dark:text-slate-200">40+</div>
-                  <div className="text-xs font-semibold text-slate-500">topshiriq</div>
+                  <div className="text-3xl font-extrabold text-zinc-300 dark:text-slate-200">40+</div>
+                  <div className="text-xs font-semibold text-zinc-500">topshiriq</div>
                 </div>
               </div>
               <div>
@@ -687,7 +687,7 @@ export default function OneCPage() {
                   {PRACTICE_TASKS.map((task, i) => (
                     <div key={i} className="flex items-start gap-2 text-sm" data-testid={`task-${i}`}>
                       <div className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                      <span className="text-muted-foreground">{task}</span>
+                      <span className="text-zinc-400">{task}</span>
                     </div>
                   ))}
                 </div>
@@ -701,20 +701,20 @@ export default function OneCPage() {
       <section className="bg-slate-900 py-14" data-testid="section-bonus">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">6 oy bepul 1C dasturiga kirish</h2>
-          <p className="mb-10 text-slate-400">O'qish uchun zarur barcha dasturlar va resurslar tekin</p>
+          <p className="mb-10 text-zinc-500">O'qish uchun zarur barcha dasturlar va resurslar tekin</p>
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="flex items-start gap-5 rounded-2xl border border-white/10 bg-white/5 p-6" data-testid="bonus-fresh">
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#e8001c] text-2xl font-extrabold text-white shadow-lg">1C</div>
               <div>
                 <h3 className="text-lg font-bold text-white">1C: Buxgalteriya (O'quv versiya)</h3>
-                <p className="mt-2 text-sm text-slate-400 leading-relaxed">6 oy davomida o'quv kompaniya ma'lumotlari bilan 1C:Buxgalteriya ning to'liq versiyasida mustaqil mashq qilasiz.</p>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">6 oy davomida o'quv kompaniya ma'lumotlari bilan 1C:Buxgalteriya ning to'liq versiyasida mustaqil mashq qilasiz.</p>
               </div>
             </div>
             <div className="flex items-start gap-5 rounded-2xl border border-white/10 bg-white/5 p-6" data-testid="bonus-its">
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-2xl font-extrabold text-white shadow-lg">📚</div>
               <div>
                 <h3 className="text-lg font-bold text-white">FBA Academy Bilim Bazasi</h3>
-                <p className="mt-2 text-sm text-slate-400 leading-relaxed">Dars yozuvlari, qo'llanmalar, soliq qonunchiligi yangiliklari va amaliy misollarga doimiy kirish.</p>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">Dars yozuvlari, qo'llanmalar, soliq qonunchiligi yangiliklari va amaliy misollarga doimiy kirish.</p>
               </div>
             </div>
           </div>
@@ -728,13 +728,13 @@ export default function OneCPage() {
             <div className="grid gap-10 lg:grid-cols-[1fr_auto]">
               <div>
                 <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Ish topishga qadam-baqadam yordam beramiz</h2>
-                <p className="mt-3 mb-8 text-slate-400">Ish topguncha qo'llab-quvvatlaymiz</p>
+                <p className="mt-3 mb-8 text-zinc-500">Ish topguncha qo'llab-quvvatlaymiz</p>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {CAREER_STEPS.map((step, i) => (
                     <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-5" data-testid={`career-step-${i}`}>
                       <div className="mb-3 text-2xl font-extrabold text-blue-400">{step.num}</div>
                       <h3 className="text-sm font-bold text-white leading-snug">{step.title}</h3>
-                      <p className="mt-2 text-xs text-slate-400 leading-relaxed">{step.desc}</p>
+                      <p className="mt-2 text-xs text-zinc-500 leading-relaxed">{step.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -753,39 +753,39 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 10. CONFIGURATION TYPES ===== */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-configs">
+      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-configs">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">Tipik konfiguratsiyalar bilan tanishasiz</h2>
-              <p className="mb-8 text-muted-foreground leading-relaxed">
+              <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">Tipik konfiguratsiyalar bilan tanishasiz</h2>
+              <p className="mb-8 text-zinc-400 leading-relaxed">
                 Eng keng tarqalgan 1C konfiguratsiyalarini — 1C:Buxgalteriya, 1C:ZUP, 1C:Savdo, 1C:ERP — qanday tuzilganini va nima maqsadda ishlatilishini bilib olasiz.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {CONFIG_TYPES.map((cfg, i) => (
-                  <div key={i} className="flex items-start gap-3 rounded-xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`config-${i}`}>
+                  <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-4" data-testid={`config-${i}`}>
                     <span className="text-2xl">{cfg.emoji}</span>
                     <div>
                       <div className="text-sm font-bold">{cfg.name}</div>
-                      <div className="mt-0.5 text-xs text-muted-foreground">{cfg.desc}</div>
+                      <div className="mt-0.5 text-xs text-zinc-400">{cfg.desc}</div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             <div className="space-y-3">
-              <h3 className="font-bold text-muted-foreground text-sm uppercase tracking-wide mb-4">Kursda qo'shimcha o'rganasiz</h3>
+              <h3 className="font-bold text-zinc-400 text-sm uppercase tracking-wide mb-4">Kursda qo'shimcha o'rganasiz</h3>
               {[
                 { emoji: "📊", title: "Buxgalteriya hisobi asoslari", desc: "Hisob turlarini, hisobot shakllarini, buxgalteriya yozuvlarini o'rganasiz." },
                 { emoji: "🟢", title: "Excel va Google Jadvallar", desc: "1C'dan eksport qilingan ma'lumotlar bilan tizimli ishlash." },
                 { emoji: "🔐", title: "Ma'lumotlar xavfsizligi", desc: "Qonunchilik va standartlarni o'rganasiz, ma'lumotlarni himoya qilishni bilasiz." },
                 { emoji: "📈", title: "Mantiqiy operatsiyalar", desc: "Hisobot tizimlarida algoritm va mantiqiy operatsiyalarni tushunasiz." },
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3 rounded-xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`extra-${i}`}>
+                <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-4" data-testid={`extra-${i}`}>
                   <span className="text-xl">{item.emoji}</span>
                   <div>
                     <div className="text-sm font-bold">{item.title}</div>
-                    <div className="mt-0.5 text-xs text-muted-foreground">{item.desc}</div>
+                    <div className="mt-0.5 text-xs text-zinc-400">{item.desc}</div>
                   </div>
                 </div>
               ))}
@@ -797,24 +797,24 @@ export default function OneCPage() {
       {/* ===== 11. COURSE MODULES ===== */}
       <section className="py-14" data-testid="section-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl">{t.page.curriculum}</h2>
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.curriculum}</h2>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
-                <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border bg-white px-5 shadow-sm dark:bg-card" data-testid={`module-${i}`}>
+                <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`module-${i}`}>
                   <AccordionTrigger className="text-left py-4">
                     <div className="flex items-center gap-3">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-sm font-bold text-white shadow-md">{i + 1}</span>
                       <div>
                         <span className="text-sm font-bold sm:text-base">{mod.title}</span>
-                        <div className="text-xs text-muted-foreground">{mod.topics.length} mavzu</div>
+                        <div className="text-xs text-zinc-400">{mod.topics.length} mavzu</div>
                       </div>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="ml-12 space-y-2.5 pb-3">
                       {mod.topics.map((topic, j) => (
-                        <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <li key={j} className="flex items-center gap-2 text-sm text-zinc-400">
                           <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> {topic}
                         </li>
                       ))}
@@ -828,10 +828,10 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 12. TEACHER ===== */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-teacher">
+      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-teacher">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl">Sizga amaliyotchi ekspertlar dars beradi</h2>
-          <div className="overflow-hidden rounded-3xl border bg-white shadow-md dark:bg-card">
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">Sizga amaliyotchi ekspertlar dars beradi</h2>
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900">
             <div className="grid lg:grid-cols-[auto_1fr] items-center">
               <div className="h-48 overflow-hidden lg:h-56 lg:w-48">
                 <img src={mentor.avatar} alt={mentor.name} className="h-full w-full object-cover object-top" loading="lazy" />
@@ -849,7 +849,7 @@ export default function OneCPage() {
                       <div className="mt-1 h-4 w-4 shrink-0 rounded-full bg-blue-100 flex items-center justify-center">
                         <div className="h-1.5 w-1.5 rounded-full bg-blue-600" />
                       </div>
-                      <span className="text-muted-foreground">{point}</span>
+                      <span className="text-zinc-400">{point}</span>
                     </li>
                   ))}
                 </ul>
@@ -860,11 +860,11 @@ export default function OneCPage() {
           {/* Support team */}
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {course.supportTeam.map((person, i) => (
-              <div key={i} className="flex items-center gap-4 rounded-2xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`support-${i}`}>
+              <div key={i} className="flex items-center gap-4 rounded-2xl border border-white/10 bg-zinc-900 p-4" data-testid={`support-${i}`}>
                 <img src={person.avatar} alt={person.role} className="h-14 w-14 shrink-0 rounded-xl object-cover object-top" loading="lazy" />
                 <div>
                   <div className="text-sm font-bold">{person.role}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground leading-snug">{person.description}</div>
+                  <div className="mt-0.5 text-xs text-zinc-400 leading-snug">{person.description}</div>
                 </div>
               </div>
             ))}
@@ -878,17 +878,17 @@ export default function OneCPage() {
           <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:gap-12">
             {/* Pricing info */}
             <div>
-              <p className="mb-2 text-sm text-slate-400">O'qishga yozilish</p>
+              <p className="mb-2 text-sm text-zinc-500">O'qishga yozilish</p>
               <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Kursni oling yoki konsultatsiya oling</h2>
 
               <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6">
-                <p className="text-xs text-slate-400 uppercase tracking-wide mb-4">3 oy o'qish</p>
+                <p className="text-xs text-zinc-500 uppercase tracking-wide mb-4">3 oy o'qish</p>
                 <div className="mb-2 flex items-baseline gap-3">
                   <span className="text-3xl font-extrabold text-white" data-testid="text-pricing-price">{course.price} UZS</span>
-                  <span className="text-sm text-slate-400 line-through">{course.oldPrice} UZS</span>
+                  <span className="text-sm text-zinc-500 line-through">{course.oldPrice} UZS</span>
                   <Badge className="rounded-lg bg-rose-500 px-2 py-0.5 text-xs font-bold text-white">-{course.discount}</Badge>
                 </div>
-                <p className="text-xs text-slate-400 mb-6">Yoki bo'lib to'lash: oyiga 834 000 UZS dan</p>
+                <p className="text-xs text-zinc-500 mb-6">Yoki bo'lib to'lash: oyiga 834 000 UZS dan</p>
                 <ul className="space-y-2.5 mb-6">
                   {[
                     "Arzonroq topdingizmi? Chegirma qilamiz",
@@ -909,11 +909,11 @@ export default function OneCPage() {
             </div>
 
             {/* Consultation form */}
-            <div className="rounded-2xl bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-pricing-form">
-              <h3 className="mb-1 text-lg font-bold">O'qishni to'lash yoki konsultatsiya olish</h3>
-              <p className="mb-4 text-sm text-muted-foreground">Menejerimiz siz bilan bog'lanadi</p>
+            <div className="rounded-2xl bg-zinc-900 p-6 shadow-2xl" data-testid="card-pricing-form">
+              <h3 className="mb-1 text-lg font-extrabold text-white">O'qishni to'lash yoki konsultatsiya olish</h3>
+              <p className="mb-4 text-sm text-zinc-400">Menejerimiz siz bilan bog'lanadi</p>
               <LeadForm source="course-1c-pricing" buttonText="Yozilish" />
-              <p className="mt-3 text-center text-xs text-muted-foreground">Allaqachon akkauntingiz bormi? <span className="text-blue-600 cursor-pointer">Kirish</span></p>
+              <p className="mt-3 text-center text-xs text-zinc-400">Allaqachon akkauntingiz bormi? <span className="text-blue-600 cursor-pointer">Kirish</span></p>
             </div>
           </div>
         </div>
@@ -922,7 +922,7 @@ export default function OneCPage() {
       {/* ===== 14. FAQ ===== */}
       <section className="py-14 sm:py-20" data-testid="section-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold sm:text-3xl">Savollaringizga javob beramiz</h2>
+          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Savollaringizga javob beramiz</h2>
 
           {/* Tab filter */}
           <div className="mb-8 flex gap-2">
@@ -930,7 +930,7 @@ export default function OneCPage() {
               <button
                 key={cat}
                 onClick={() => setActiveFaqTab(cat)}
-                className={`rounded-full px-5 py-2 text-sm font-bold transition-all ${activeFaqTab === cat ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900" : "border border-slate-200 bg-white text-slate-700 hover:border-slate-400 dark:border-slate-700 dark:bg-card dark:text-slate-300"}`}
+                className={`rounded-full px-5 py-2 text-sm font-bold transition-all ${activeFaqTab === cat ? "bg-slate-900 text-white dark:bg-zinc-900 dark:text-white" : "border border-slate-200 bg-zinc-900 text-zinc-300 hover:border-slate-400 dark:text-slate-300"}`}
                 data-testid={`faq-tab-${cat}`}
               >
                 {cat}
@@ -945,7 +945,7 @@ export default function OneCPage() {
                   <AccordionTrigger className="text-left text-base font-semibold py-5 hover:no-underline">
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">
+                  <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">
                     {faq.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -957,7 +957,7 @@ export default function OneCPage() {
             <h3 className="text-xl font-extrabold text-white sm:text-2xl">Hali savollaringiz bormi?</h3>
             <p className="mt-2 text-blue-100">Menejerimiz barcha tafsilotlarni tushuntiradi</p>
             <Link href="#enroll">
-              <Button size="lg" className="mt-5 rounded-full bg-white px-8 font-bold text-blue-700 hover:bg-slate-100" data-testid="button-final-cta">
+              <Button size="lg" className="mt-5 rounded-full bg-zinc-900 px-8 font-bold text-blue-700 hover:bg-zinc-800" data-testid="button-final-cta">
                 Bepul konsultatsiya <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

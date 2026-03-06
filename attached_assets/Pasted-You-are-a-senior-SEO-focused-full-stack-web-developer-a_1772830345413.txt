@@ -1,0 +1,287 @@
+You are a senior SEO-focused full-stack web developer and product-minded website optimizer.
+
+I have an education/course-selling website similar to a professional academy platform. The site offers courses like:
+- ACCA
+- DipIFR
+- Financial Modeling
+- 1C Buxgalteriya
+- Huquqshunoslik
+
+Current problem:
+The website looks visually good, but I need you to fully improve it for SEO, site structure, discoverability, page indexing, conversion, and content architecture.
+
+Your task is NOT just to give advice.
+Your task is to directly update and improve the project codebase so the site becomes strongly SEO-optimized and structurally correct.
+
+Please do all of the following carefully and completely.
+
+==================================================
+1. SEO SITE ARCHITECTURE
+==================================================
+
+Restructure the website so that each course has its own dedicated indexable SEO landing page.
+
+Create separate pages/routes for:
+- /acca-kurs
+- /dipifr-kurs
+- /financial-modeling-kurs
+- /1c-buxgalteriya-kurs
+- /huquqshunoslik-kurs
+
+If routing structure is different in the project, adapt it properly but preserve clean SEO-friendly URLs.
+
+Each course page must include:
+- unique H1
+- SEO title
+- meta description
+- canonical URL
+- Open Graph tags
+- Twitter meta tags
+- structured course content blocks
+- FAQ section
+- CTA section
+- related courses section
+- internal links to blog/articles if available
+
+==================================================
+2. HOMEPAGE SEO IMPROVEMENT
+==================================================
+
+Improve the homepage so it is not just visual, but also search-engine friendly.
+
+Homepage must include:
+- one clear H1
+- meaningful H2/H3 structure
+- short intro paragraph about the academy
+- course overview section
+- why choose us section
+- student results / trust indicators
+- consultation CTA
+- internal links to major course pages
+- internal links to future blog/career pages
+
+Also ensure homepage metadata is properly set:
+- title
+- meta description
+- canonical
+- OG tags
+
+==================================================
+3. COURSES DROPDOWN + INDEXABILITY
+==================================================
+
+Currently courses appear in dropdown/navigation cards.
+That is not enough for SEO.
+
+Please make sure:
+- every course from dropdown links to a real crawlable page
+- there is also a dedicated “All Courses” page
+- the “All Courses” page contains indexable text content, not only cards
+- all course cards use semantic anchor links
+- no important course content is hidden in ways that block SEO
+
+==================================================
+4. BLOG / CONTENT HUB
+==================================================
+
+Create a blog/content section architecture for SEO growth.
+
+Add a blog listing page:
+- /blog
+
+Create sample SEO article pages for topics like:
+- /blog/acca-nima
+- /blog/dipifr-nima
+- /blog/financial-modeling-nima
+- /blog/big4-ga-qanday-ishga-kirish
+- /blog/buxgalteriya-karyera
+
+Each blog page should have:
+- title tag
+- meta description
+- H1
+- semantic content layout
+- table of contents if possible
+- related course CTA
+- internal links to relevant course pages
+- article schema markup if possible
+
+You do not need to write extremely long perfect final content, but create high-quality SEO-ready structure and realistic starter content sections so later content can be expanded easily.
+
+==================================================
+5. FAQ + SCHEMA MARKUP
+==================================================
+
+Add structured data wherever relevant.
+
+Implement JSON-LD schema for:
+- Organization
+- Course
+- FAQPage
+- BreadcrumbList
+- Article (for blog pages)
+
+Each course page should contain FAQ section with 4–6 relevant questions, for example:
+- Kurs qancha davom etadi?
+- Kimlar uchun mos?
+- Sertifikat beriladimi?
+- Darslar qaysi tilda?
+- Ishga joylashishga yordam bormi?
+
+Make schema dynamic if the project architecture supports it.
+
+==================================================
+6. TECHNICAL SEO
+==================================================
+
+Please audit and fix technical SEO items in the codebase:
+
+- Generate sitemap.xml
+- Create/update robots.txt
+- Add canonical tags
+- Ensure pages are server-rendered or SEO-renderable
+- Fix duplicate title/meta issues
+- Ensure proper semantic HTML usage
+- Fix heading hierarchy
+- Add alt text for images
+- Improve lazy loading where appropriate
+- Ensure noindex is not mistakenly blocking main pages
+- Improve crawlability of main sections
+- Add breadcrumbs to inner pages if suitable
+
+==================================================
+7. PERFORMANCE / CORE WEB VITALS
+==================================================
+
+Optimize the site for performance and Core Web Vitals.
+
+Please improve:
+- image optimization
+- font loading
+- unnecessary JS
+- layout shifts
+- large unused assets
+- lazy loading for below-the-fold sections
+- preload important assets when necessary
+
+Goal:
+- faster first load
+- better Lighthouse SEO/performance scores
+- better mobile experience
+
+Do not break design while optimizing.
+
+==================================================
+8. INTERNAL LINKING
+==================================================
+
+Implement a strong internal linking structure.
+
+Need links between:
+- homepage -> course pages
+- homepage -> blog pages
+- blog pages -> course pages
+- course pages -> related courses
+- course pages -> blog guides
+- all courses page -> each course page
+
+Anchor texts should be meaningful, not generic “click here”.
+
+==================================================
+9. UX + SEO COMBINATION
+==================================================
+
+Maintain the premium visual style, but improve UX for both users and search engines.
+
+Please ensure:
+- buttons and links are clear
+- consultation CTA is visible
+- mobile navigation is usable
+- dropdown menus do not hide important discoverable content
+- important information exists as crawlable page text, not only in visual cards
+- sections are readable and conversion-oriented
+
+==================================================
+10. CONTENT BLOCKS FOR EACH COURSE PAGE
+==================================================
+
+Each course page should include sections like:
+- Hero section
+- What is this course
+- Who is it for
+- What you will learn
+- Curriculum / modules
+- Career opportunities
+- Why choose our academy
+- FAQ
+- Related courses
+- Consultation CTA
+
+Write the page structure professionally and in a way that is easy to extend later.
+
+==================================================
+11. LOCAL SEO
+==================================================
+
+This academy is targeted at users in Uzbekistan / Tashkent.
+
+Please naturally optimize pages for local relevance where appropriate:
+- mention Tashkent / Uzbekistan where useful
+- include local-intent metadata where relevant
+- prepare structure for contact/location section
+- if there is a contact page, improve it for trust and local SEO
+
+==================================================
+12. MULTILINGUAL / LANGUAGE STRUCTURE
+==================================================
+
+The site currently appears to have Russian/Uzbek language elements.
+
+Please review current language implementation and improve it for SEO:
+- correct lang attributes
+- proper page-level metadata per language if multilingual routing exists
+- avoid duplicate pages without proper canonical/hreflang logic
+- if hreflang is possible, implement it correctly
+- preserve clean structure
+
+==================================================
+13. CONVERSION-READY SEO
+==================================================
+
+This is not only a content site; it sells courses.
+
+So optimize for both rankings and leads:
+- consultation CTA blocks
+- request form placement
+- trust elements
+- results/testimonials placeholders
+- career outcomes messaging
+- clear enrollment path
+
+==================================================
+14. CODE QUALITY
+==================================================
+
+While making all these changes:
+- keep code clean and modular
+- do not break existing design system
+- reuse components where possible
+- do not add unnecessary complexity
+- document key SEO-related code changes with short comments if needed
+
+==================================================
+15. FINAL DELIVERABLE
+==================================================
+
+After implementing changes, provide me with:
+1. A summary of what was changed
+2. Which files were created or updated
+3. SEO improvements completed
+4. Remaining recommendations for future content expansion
+
+Important:
+Do the work directly in the project.
+Do not just describe what should be done.
+Make the codebase production-ready for SEO improvement as much as possible within the current stack.
+
+If some parts depend on framework limitations, choose the best practical implementation for the current project and explain briefly.

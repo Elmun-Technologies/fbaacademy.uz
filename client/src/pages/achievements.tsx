@@ -394,10 +394,10 @@ export default function AchievementsPage() {
                       const showResult = selectedAnswer !== null;
 
                       let cls = "w-full rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition-all ";
-                      if (!showResult) cls += "border-slate-200 bg-slate-50 hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800";
+                      if (!showResult) cls += "border-white/10 bg-zinc-900 hover:border-indigo-500/50 hover:bg-zinc-800";
                       else if (isCorrect) cls += "border-green-500 bg-green-50 text-green-800 dark:bg-green-950/30 dark:text-green-400";
                       else if (isSelected) cls += "border-rose-500 bg-rose-50 text-rose-800 dark:bg-rose-950/30 dark:text-rose-400";
-                      else cls += "border-slate-200 bg-slate-50 opacity-60 dark:border-slate-700 dark:bg-slate-800";
+                      else cls += "border-white/10 bg-zinc-900 opacity-60";
 
                       return (
                         <button
@@ -453,9 +453,9 @@ export default function AchievementsPage() {
       </section>
 
       {/* Course shortcuts */}
-      <section className="bg-slate-50 py-10 dark:bg-slate-900/30" data-testid="section-course-shortcuts">
+      <section className="bg-[#111] py-10" data-testid="section-course-shortcuts">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-lg font-extrabold">Ball to'plash uchun kurslarga tashrif buyuring</h2>
+          <h2 className="mb-6 text-2xl font-extrabold uppercase tracking-tight text-white">Ball to'plash uchun kurslarga tashrif buyuring</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { href: "/course/acca", label: "ACCA", emoji: "🏅", badge: "acca_seeker" },
@@ -471,7 +471,7 @@ export default function AchievementsPage() {
               const badgeEarned = state.earnedBadges.includes(item.badge as any);
               return (
                 <Link key={i} href={item.href} data-testid={`shortcut-${i}`}>
-                  <div className={`flex items-center gap-3 rounded-xl border p-3.5 transition-all hover:-translate-y-0.5 hover:shadow-md ${visited ? "border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950/20" : "border-slate-200 bg-white dark:bg-card"}`}>
+                  <div className={`flex items-center gap-3 rounded-xl border p-3.5 transition-all hover:-translate-y-0.5 hover:shadow-md ${visited ? "border-green-500/40 bg-green-900/20" : "border-white/10 bg-zinc-900"}`}>
                     <span className="text-xl">{item.emoji}</span>
                     <div className="flex-1 min-w-0">
                       <div className="truncate text-sm font-bold">{item.label}</div>
@@ -489,7 +489,7 @@ export default function AchievementsPage() {
       {/* Reset */}
       <section className="py-8 text-center" data-testid="section-reset">
         {!showReset ? (
-          <button onClick={() => setShowReset(true)} className="text-xs text-zinc-400 underline hover:text-foreground" data-testid="button-show-reset">
+          <button onClick={() => setShowReset(true)} className="text-xs text-zinc-400 underline hover:text-white" data-testid="button-show-reset">
             Progressni tozalash
           </button>
         ) : (

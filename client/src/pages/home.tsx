@@ -67,7 +67,7 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="/courses">
-                  <Button size="lg" className="gap-2 rounded-full bg-white px-7 text-base font-bold text-slate-900 shadow-lg hover:bg-slate-100" data-testid="button-hero-courses">
+                  <Button size="lg" className="gap-2 rounded-full bg-amber-400 px-7 text-base font-bold text-black shadow-lg hover:bg-amber-300" data-testid="button-hero-courses">
                     Kurslarni ko'rish <ArrowRight className="h-4 w-4" />
                   </Button>
                 </a>
@@ -438,7 +438,7 @@ export default function Home() {
               <p className="mt-3 text-lg text-purple-200">Birinchi qadam sifatida bepul konsultatsiya oling</p>
             </div>
             <a href="/contacts" className="shrink-0">
-              <Button size="lg" className="gap-2 rounded-full bg-white px-10 text-base font-extrabold text-purple-700 shadow-2xl hover:bg-slate-100" data-testid="button-cta-consultation">
+              <Button size="lg" className="gap-2 rounded-full bg-amber-400 px-10 text-base font-extrabold text-black shadow-2xl hover:bg-amber-300" data-testid="button-cta-consultation">
                 Bepul konsultatsiya <ArrowRight className="h-5 w-5" />
               </Button>
             </a>

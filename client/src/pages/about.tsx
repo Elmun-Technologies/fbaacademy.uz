@@ -100,7 +100,7 @@ export default function About() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="/courses">
-                  <Button size="lg" className="gap-2 rounded-full bg-white px-7 font-bold text-slate-900 hover:bg-slate-100" data-testid="button-hero-courses">
+                  <Button size="lg" className="gap-2 rounded-full bg-amber-400 px-7 font-bold text-black hover:bg-amber-300" data-testid="button-hero-courses">
                     Barcha kurslar <ArrowRight className="h-4 w-4" />
                   </Button>
                 </a>

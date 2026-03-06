@@ -115,16 +115,21 @@ Each course page includes: hero with enrollment form + discount badge, YouTube v
 - Lead form submissions go to `/api/leads` endpoint (in-memory storage)
 - Content is strictly finance/accounting/law — no marketing or IT content
 
-## Design System
-- Dark gradient hero sections on every page (bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900)
-- Purple-to-pink gradient accents for CTAs, buttons, icon containers, and module numbers
-- Real CSS shadows (shadow-md, shadow-lg, shadow-xl, shadow-2xl) — not flat
-- Cards with border + shadow-md, hover:-translate-y-1 + shadow-xl on hover
-- Gradient CTA buttons (from-purple-600 to-pink-600) with shadow-md
-- Dark slate-900 footer with purple accent social icons
-- Header with gradient "F" logo badge, shadow-sm, gradient CTA button
-- Salary section: dark bg with lime (#c8ff00) progress bars
-- py-16/py-20 section spacing rhythm
-- Pill-shaped buttons (rounded-full) with border-2 for emphasis
-- Blog cards with cover image on top, hover scale effect
-- Responsive: mobile (1-col), tablet (2-col), desktop (3-4 col) for all grids
+## Design System (FULL DARK THEME — applied site-wide)
+- **Backgrounds**: `bg-[#0d0d0d]` and `bg-[#111]` alternating sections; `bg-zinc-900` for all cards
+- **Hero sections**: `bg-gradient-to-br from-[#0f0a2e] via-[#1e1060] to-slate-900` with radial glow
+- **Cards**: `rounded-2xl border border-white/10 bg-zinc-900` — NO `bg-white`, NO `dark:bg-card`
+- **Headings**: UPPERCASE + `font-extrabold` + `text-white`, sub-labels in `text-zinc-400`
+- **CTA Buttons**: `bg-amber-400 text-black hover:bg-amber-300` (amber) on dark sections
+- **Nav Buttons**: `bg-gradient-to-r from-purple-600 to-pink-600` (header consultation button)
+- **Header**: `bg-[#0d0d0d]/95 border-white/10`, nav items `text-zinc-300 hover:bg-zinc-800`; dropdown `bg-zinc-900 border-white/10`
+- **Active nav**: `text-purple-400 bg-purple-600/20`
+- **Section labels**: `text-xs font-bold uppercase tracking-[0.2em] text-purple-400`
+- **Body text**: `text-zinc-400` for secondary content (formerly `text-muted-foreground`)
+- **Category badges**: `bg-*-600/30 text-*-300` dark variants (e.g., `bg-purple-600/30 text-purple-300`)
+- **Card hover**: `hover:-translate-y-1 hover:ring-1 hover:ring-purple-500/30`
+- **Gamification widget**: `bg-zinc-900`, dark tabs, dark action items, dark badge cards
+- **Popups**: `bg-zinc-900` content panels with dark close buttons
+- **Course blog links**: `bg-[#111]` section, `bg-zinc-900` card links
+- All links use `<a href>` (native) — NOT wouter `<Link>` — for full-page SEO reload
+- py-16/py-20 section spacing rhythm, responsive: mobile(1-col)→tablet(2-col)→desktop(3-4col)
