@@ -1,17 +1,19 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
 import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
-import { courses, teachers, faqItems } from "@/lib/data";
-import { CheckCircle2, ArrowRight, Star, Flame, FileText, BookOpen, Clock, Calendar, Wrench, GraduationCap, Award } from "lucide-react";
+import { courses, teachers } from "@/lib/data";
+import { CheckCircle2, ArrowRight, Star, Flame, FileText, BookOpen, Clock, Calendar, GraduationCap, Award, Building2, Users, ChevronRight, BarChart3 } from "lucide-react";
 
 const course = courses.find((c) => c.id === "dipifr")!;
 const mentor = teachers.find((t) => t.id === "teacher-3")!;
+const BASE_URL = "https://fbaacademy.uz";
+const UNSPLASH = "https://images.unsplash.com";
 
 const IFRS_STANDARDS = [
   { code: "IAS 1", name: "Moliyaviy hisobotlar taqdimoti", type: "Asosiy" },
@@ -29,95 +31,510 @@ const IFRS_STANDARDS = [
 ];
 
 const TYPE_COLORS: Record<string, string> = {
-  "Asosiy": "bg-blue-100 text-blue-700 border-blue-200",
+  "Asosiy": "bg-indigo-100 text-indigo-700 border-indigo-200",
   "Muhim": "bg-emerald-100 text-emerald-700 border-emerald-200",
   "Murakkab": "bg-rose-100 text-rose-700 border-rose-200",
   "O'rta": "bg-amber-100 text-amber-700 border-amber-200",
 };
 
-export default function DipIFRPage() {
-  useSEO({
-    title: "DipIFR — IFRS Xalqaro Diplom Kursi | FBA Academy Toshkent",
-    description: "DipIFR (Diploma in IFRS) — ACCA tomonidan beriladigan xalqaro moliyaviy hisobot standartlari diplomi. IAS, IFRS standartlarini chuqur o'rganing. 4 oylik kurs, onlayn va offline.",
-    keywords: "DipIFR kurs O'zbekiston, IFRS diplom Toshkent, IAS standartlari, xalqaro moliyaviy hisobot, ACCA DipIFR",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "DipIFR — Diploma in International Financial Reporting Standards",
-      "description": "ACCA tomonidan beriladigan IFRS bo'yicha xalqaro diplom.",
-      "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
-      "educationalLevel": "Professional",
-      "timeRequired": "P4M",
-    },
-  });
+const HERO_BADGES = [
+  "🎓 ACCA Akkreditatsiyalangan kurs",
+  "✅ Xalqaro diplom — IFRS",
+];
 
-  const faqs = faqItems.filter((f) => f.category === "DipIFR" || f.category === "Umumiy" || f.category === "Sertifikat").slice(0, 5);
+const HERO_BULLETS = [
+  "87% bitiruvchilar DipIFR-rus imtihonini muvaffaqiyatli topshiradilar",
+  "2 yillik o'quv materiallariga kirish — istalgan vaqtda o'rganish",
+  "Xalqaro kompaniyalar va Big Four audit firmalari uchun sertifikat",
+];
+
+const COURSE_FEATURES = [
+  {
+    icon: BookOpen,
+    title: "IFRS bo'yicha fundamental bilimlar",
+    desc: "Xalqaro moliyaviy hisobot standartlarining to'liq tizimi, IASB kontseptual asoslari va amaliy qo'llanishi.",
+  },
+  {
+    icon: FileText,
+    title: "Imtihon uchun intensiv tayyorgarlik",
+    desc: "DipIFR-rus imtihon topshiriqlarini hal qilish, vaqtni boshqarish va javoblarni to'g'ri rasmiylashtirishni o'rganasiz.",
+  },
+  {
+    icon: BarChart3,
+    title: "5 ta yirik amaliy loyiha",
+    desc: "Real kompaniyalar misolida konsolidatsiya, moliyaviy hisobot va IFRS standartlarini qo'llash.",
+  },
+  {
+    icon: GraduationCap,
+    title: "ACCA tomonidan tan olingan diplom",
+    desc: "Xalqaro kompaniyalar, Big Four va moliya institutlari qabul qiladigan ACCA DipIFR diplomi.",
+  },
+  {
+    icon: Users,
+    title: "Jonli darslar va vebinarlar",
+    desc: "Haftasiga 2 marta jonli dars + yozuvlarga doimiy kirish. Savollaringizga darhol javob.",
+  },
+  {
+    icon: Award,
+    title: "Yilda 2 marta imtihon imkoniyati",
+    desc: "ACCA DipIFR-rus imtihoniga yil davomida 2 marta (iyun va dekabr) yozilish imkoniyati.",
+  },
+];
+
+const FOR_WHOM = [
+  {
+    emoji: "📊",
+    title: "Buxgalterlar va bosh buxgalterlar",
+    desc: "Milliy standartlarda ishlaydigan, IFRS ga o'tmoqchi bo'lgan yoki allaqachon o'tganlar. MFHS bo'yicha mutaxassis bo'lmoqchi.",
+  },
+  {
+    emoji: "🔍",
+    title: "Auditorlar va iqtisodchilar",
+    desc: "O'z kasbiy qiymatini oshirmoqchi, karyera imkoniyatlarini kengaytirmoqchi va ACCA DipIFR(rus) xalqaro diplomini olmoqchi.",
+  },
+  {
+    emoji: "🏢",
+    title: "Moliya va soliq xizmati xodimlari",
+    desc: "Moliyaviy hisobot tayyorlash sohasida xalqaro standartlar nazariyasi va amaliyotini puxta o'rganmoqchi.",
+  },
+  {
+    emoji: "🌍",
+    title: "Xalqaro karyera uchun",
+    desc: "Multinatsional kompaniyalar, investitsiya banklari va xalqaro audit firmalarida ishlashni rejalashtiradiganlar.",
+  },
+];
+
+const COMPETENCIES = [
+  {
+    num: "01",
+    title: "IFRS tamoyillari va tarkibini tushunish",
+    desc: "MFHS terminologiyasida erkin muloqot qilish, moliyaviy hisobot tuzilishi va tarkibini tushunish. Moliyaviy instrumentlarni tan olish, tasniflash, o'lchash, taqdim etish bo'yicha bilim.",
+    points: [
+      "IASB va standartlar ishlab chiqish jarayoni",
+      "Kontseptual asos — elementlar va tan olish mezonlari",
+      "IAS 1 — moliyaviy hisobotlar taqdimoti",
+      "Moliyaviy instrumentlar: IFRS 9, IAS 32",
+    ],
+  },
+  {
+    num: "02",
+    title: "IFRS qo'llanishini tushuntira olish",
+    desc: "Xalqaro moliyaviy hisobotni tartibga solishning asosiy tamoyillarini tushunish va tushuntira olish. Moliyaviy hisobot elementlarining ta'riflari va alohida moddalarni taqdim etish xususiyatlarini bilish.",
+    points: [
+      "IFRS talablarini amaliy holatlarga qo'llash",
+      "Korporativ auditorlarga tushuntirish qobiliyati",
+      "Boshqaruv uchun IFRS asosidagi tahlil",
+      "Xalqaro standartlarga o'tish masalalari (IFRS 1)",
+    ],
+  },
+  {
+    num: "03",
+    title: "IFRS ni amaliyotda erkin qo'llash",
+    desc: "Deyarli barcha moliyaviy hisobot elementlari bo'yicha operatsiyalarni hisobga olish va hisobot berishda IFRS ni mustaqil qo'llash. Asosiy MFHS hisob-kitoblarini amalga oshirish.",
+    points: [
+      "Konsolidatsiya: IFRS 10, IFRS 3 asosida",
+      "Lizing hisobi: IFRS 16 to'liq qo'llanishi",
+      "Qiymatning pasayishi: IAS 36 testlari",
+      "Moliyaviy natijalar hisoboti va tahlili",
+    ],
+  },
+  {
+    num: "04",
+    title: "DipIFR imtihon topshiriqlarini yechish",
+    desc: "Intensiv treningda MFHS nazariyasi va amaliyoti bo'yicha barcha bilim va ko'nikmalar tartibga tushadi. Imtihon topshiriqlarini hal qilish, javoblarni to'g'ri rasmiylashtirish va vaqtni samarali boshqarish.",
+    points: [
+      "Imtihon vaqtini boshqarish strategiyasi",
+      "Topshiriqlarni to'g'ri rasmiylashtirish",
+      "Onlayn imtihon simulyatori bilan mashq",
+      "O'tgan yillar imtihon topshiriqlari tahlili",
+    ],
+  },
+];
+
+const COURSE_COMPONENTS = [
+  {
+    num: "1",
+    title: "«MFHS» — Fundamental bilimlar",
+    desc: "Xalqaro moliyaviy hisobot standartlari bo'yicha fundamental bilimlar. IFRS tizimini asosidan professional darajagacha.",
+    color: "from-indigo-600 to-blue-700",
+  },
+  {
+    num: "2",
+    title: "«DipIFR. Intensiv» — Imtihon tayyorgarligi",
+    desc: "MFHS bo'yicha bilimlarni tizimlashtirish, DipIFR-rus sessiyasida topshiriqlarni tez hal qilish va javoblarni to'g'ri taqdim etish ko'nikmalarini shakllantirish.",
+    color: "from-blue-700 to-slate-800",
+  },
+  {
+    num: "3",
+    title: "Online imtihon simulyatori",
+    desc: "ACCA DipIFR onlayn imtihon muhitining funksionalini o'zlashtirish va onlayn imtihonga tayyorlikni tekshirish uchun trenajer.",
+    color: "from-slate-700 to-indigo-900",
+  },
+];
+
+const FAQ_CATEGORIES = ["O'qish", "Imtihon", "To'lov"];
+
+const FAQS: Record<string, { q: string; a: string }[]> = {
+  "O'qish": [
+    { q: "Bu kurs menga mos ekanligini qanday bilaman?", a: "Ro'yxatdan o'ting va birinchi darsni bepul o'ting — format va mazmunga mos kelishini bilib olasiz. Keyin to'liq kursga yozilasiz. Mos kelmasa, menejerimiz boshqa dastur tavsiya qiladi." },
+    { q: "Kurs qanday formatda o'tiladi?", a: "Onlayn jonli darslar + yozuvlar. 2 yil davomida materiallariga kirish. Telegram guruhida kurator bilan doimiy aloqa." },
+    { q: "O'quv materiallarini yuklab olish mumkinmi?", a: "Ha, ma'ruza konspektlari, amaliy misollar va test materiallari yuklab olinadi. Vebinar yozuvlari platformada saqlanadiganlar." },
+    { q: "Qanday qilib men siz talabangizligimni isbotlashim mumkin?", a: "O'qishdan oldin barcha talabalarga shartnoma tuziladi. Kurs yakunida yuridik shaxslar uchun bajarish dalolatnomasi, jismoniy shaxslar uchun — diplom va sertifikat beriladi." },
+  ],
+  "Imtihon": [
+    { q: "DipIFR imtihoni yiliga necha marta bo'ladi?", a: "Yiliga 2 marta: iyun va dekabr oylarida. Ro'yxatdan o'tish ACCA rasmiy sayti orqali amalga oshiriladi." },
+    { q: "DipIFR imtihonini topshira olmasam nima qilaman?", a: "Imtihon muvaffaqiyatsiz yakunlanganida, keyingi sessiyaga tayyorgarlik uchun qo'shimcha materiallar va individual konsultatsiya beriladi. Siz qayta tayyorgarlik ko'rib imtihonni topshirasiz." },
+    { q: "Imtihon qaysi tilda o'tkaziladi?", a: "DipIFR-rus — rus tilida. FBA Academy da kurs o'zbek tilida o'tkaziladi, rus tilidagi terminologiya ham parallel o'rgatiladi." },
+    { q: "Imtihon yakunida qanday hujjat beriladi?", a: "ACCA DipIFR (rus) diplomini ACCA rasmiy beradi — bu dunyo bo'yicha tan olingan xalqaro diplom. Bundan tashqari FBA Academy o'z sertifikatini ham beradi." },
+  ],
+  "To'lov": [
+    { q: "Bo'lib to'lash imkoniyati bormi?", a: "Ha, bir necha variantda: to'lovni bo'lish, bank-hamkor orqali kreditga olish. Tafsilot va shartlar uchun menejerimizga murojaat qiling." },
+    { q: "Kurs mos kelmasa, pulni qaytarib berasizlarmi?", a: "Ha, birinchi 7 kun ichida kurs mos kelmasa, to'liq qaytarib beramiz — hech qanday savol-javovsiz." },
+    { q: "O'qish jarayonida to'lovni to'xtatish mumkinmi?", a: "Ha, sababli holatlarda o'qishni vaqtincha to'xtatish mumkin. Menejerimiz individual yechim taklif qiladi." },
+  ],
+};
+
+const ALL_FAQS_FLAT = Object.values(FAQS).flat();
+
+const SEO_SCHEMAS = [
+  {
+    "@type": "Course",
+    "@id": `${BASE_URL}/course/dipifr#course`,
+    "name": "DipIFR — ACCA Diploma in IFRS | FBA Academy Toshkent",
+    "description": "ACCA DipIFR — Xalqaro Moliyaviy Hisobot Standartlari (IFRS) bo'yicha xalqaro diplom. O'zbekistonda 4 oylik kurs: IAS, IFRS standartlari, konsolidatsiya, moliyaviy hisobot. 87% o'tish darajasi.",
+    "url": `${BASE_URL}/course/dipifr`,
+    "thumbnailUrl": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=700&h=450&fit=crop",
+    "provider": {
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      "name": "FBA Academy",
+      "url": BASE_URL,
+    },
+    "educationalLevel": "Professional",
+    "teaches": [
+      "IFRS (MFHS) standartlari: IAS 1, IAS 16, IFRS 9, IFRS 15, IFRS 16",
+      "Moliyaviy hisobotlar konsolidatsiyasi",
+      "Moliyaviy instrumentlar hisobi",
+      "DipIFR-rus imtihon topshiriqlari",
+      "Biznes birlashmalari va IFRS 3",
+      "Xalqaro moliyaviy hisobot tayyorlash",
+    ],
+    "coursePrerequisites": "Buxgalteriya yoki moliya sohasidagi asosiy bilim. ACCA Applied Knowledge yoki o'xshash daraja tavsiya etiladi.",
+    "timeRequired": "P4M",
+    "inLanguage": "uz",
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "duration": "P4M",
+      "startDate": "2026-04-01",
+      "instructor": {
+        "@type": "Person",
+        "name": "Murod Yusupov",
+        "jobTitle": "ACCA Fellow, DipIFR ekspert",
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "4000000",
+        "priceCurrency": "UZS",
+        "availability": "https://schema.org/InStock",
+      },
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "412",
+      "bestRating": "5",
+      "worstRating": "1",
+    },
+    "totalHistoricalEnrollment": 950,
+    "courseCode": "DIPIFR-001",
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${BASE_URL}/course/dipifr#faq`,
+    "mainEntity": ALL_FAQS_FLAT.map(({ q, a }) => ({
+      "@type": "Question",
+      "name": q,
+      "acceptedAnswer": { "@type": "Answer", "text": a },
+    })),
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${BASE_URL}/course/dipifr#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Bosh sahifa", "item": BASE_URL },
+      { "@type": "ListItem", "position": 2, "name": "Kurslar", "item": `${BASE_URL}/courses` },
+      { "@type": "ListItem", "position": 3, "name": "DipIFR", "item": `${BASE_URL}/course/dipifr` },
+    ],
+  },
+];
+
+export default function DipIFRPage() {
+  const [activeFaqTab, setActiveFaqTab] = useState("O'qish");
+
+  useSEO({
+    title: "DipIFR Kursi Toshkent — ACCA IFRS Xalqaro Diplom | FBA Academy",
+    description: "DipIFR (ACCA) kursi O'zbekistonda. IFRS standartlari, konsolidatsiya, moliyaviy hisobot. 87% o'tish darajasi. 4 oy, 2 yil kirish, xalqaro diplom. 950+ bitiruvchi.",
+    ogTitle: "DipIFR — ACCA IFRS Diplomi | O'zbekistonda Eng Yaxshi Kurs | FBA Academy",
+    ogDescription: "ACCA DipIFR: xalqaro moliyaviy hisobot standartlari diplomi. 87% o'tish darajasi. 4 oy kurs, 2 yil materiallar kirishi, diplom + sertifikat. Big Four va xalqaro kompaniyalar uchun.",
+    ogImage: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1200&h=630&fit=crop",
+    keywords: "DipIFR kurs Toshkent, ACCA DipIFR O'zbekiston, IFRS diplom kurs, MFHS standartlari, xalqaro moliyaviy hisobot, IAS IFRS sertifikat, DipIFR-rus imtihon, FBA Academy DipIFR, ACCA Toshkent, Big Four audit malaka",
+    publishedTime: "2024-02-01T09:00:00+05:00",
+    modifiedTime: new Date().toISOString(),
+    hreflang: [
+      { lang: "uz", url: `${BASE_URL}/course/dipifr` },
+      { lang: "ru", url: `${BASE_URL}/ru/course/dipifr` },
+      { lang: "x-default", url: `${BASE_URL}/course/dipifr` },
+    ],
+    jsonLd: SEO_SCHEMAS,
+  });
 
   return (
     <Layout>
-      {/* Hero — indigo/slate corporate */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-950 via-slate-800 to-slate-900 pb-16 pt-10 sm:pb-20 sm:pt-14" data-testid="section-dipifr-hero">
+      {/* ===== BREADCRUMB ===== */}
+      <nav aria-label="Breadcrumb" className="border-b bg-white dark:bg-card dark:border-slate-700" data-testid="breadcrumb">
+        <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6 lg:px-8">
+          <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground" itemScope itemType="https://schema.org/BreadcrumbList">
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <Link href="/" className="hover:text-indigo-600 transition-colors" itemProp="item" data-testid="breadcrumb-home">
+                <span itemProp="name">Bosh sahifa</span>
+              </Link>
+              <meta itemProp="position" content="1" />
+            </li>
+            <li aria-hidden="true" className="text-slate-300">/</li>
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <Link href="/courses" className="hover:text-indigo-600 transition-colors" itemProp="item" data-testid="breadcrumb-courses">
+                <span itemProp="name">Kurslar</span>
+              </Link>
+              <meta itemProp="position" content="2" />
+            </li>
+            <li aria-hidden="true" className="text-slate-300">/</li>
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <span className="font-semibold text-foreground" itemProp="name" data-testid="breadcrumb-current">DipIFR</span>
+              <meta itemProp="position" content="3" />
+            </li>
+          </ol>
+        </div>
+      </nav>
+
+      {/* ===== 1. HERO ===== */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-950 via-slate-800 to-slate-900 pb-12 pt-8 sm:pb-16 sm:pt-12" data-testid="section-dipifr-hero">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-400/15 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link href="/courses">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-slate-400 cursor-pointer hover:text-white transition-colors">← Barcha kurslar</span>
-          </Link>
-          <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
-            <div className="lg:col-span-3">
-              <div className="mb-4 flex flex-wrap gap-2">
-                <Badge className="rounded-full bg-indigo-500/20 text-indigo-300 border-indigo-400/30 px-3">🎓 ACCA Diplomi</Badge>
-                <Badge className="rounded-full bg-slate-500/20 text-slate-300 border-slate-400/30 px-3">Xalqaro IFRS standartlari</Badge>
-              </div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-dipifr-title">
-                DipIFR — Diploma in<br />
-                <span className="bg-gradient-to-r from-indigo-300 to-blue-300 bg-clip-text text-transparent">IFRS</span>
-              </h1>
-              <p className="mt-4 max-w-xl text-slate-300 leading-relaxed text-lg">{course.description}</p>
-              <div className="mt-5 flex items-center gap-4">
-                <div className="flex items-center gap-1.5">
-                  {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
-                  <span className="text-sm font-bold text-white ml-1">{course.rating}</span>
-                </div>
-                <span className="text-sm text-slate-400">{course.studentsCount} talaba · {course.duration}</span>
-              </div>
-              <div className="mt-8 grid grid-cols-3 gap-3">
-                {[
-                  { icon: Award, label: "ACCA Diplomi", sub: "Xalqaro tan olingan" },
-                  { icon: FileText, label: "12+ standart", sub: "IAS va IFRS" },
-                  { icon: Clock, label: course.practiceHours + " soat", sub: "Amaliyot" },
-                ].map((item, i) => (
-                  <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 backdrop-blur-sm" data-testid={`dipifr-feature-${i}`}>
-                    <item.icon className="mb-2 h-5 w-5 text-indigo-300" />
-                    <div className="text-xs font-bold text-white sm:text-sm">{item.label}</div>
-                    <div className="text-xs text-slate-400">{item.sub}</div>
-                  </div>
+          <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto_340px] lg:gap-6">
+
+            {/* Left — Text */}
+            <div>
+              <div className="mb-5 flex flex-wrap gap-2">
+                {HERO_BADGES.map((b, i) => (
+                  <span key={i} className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm" data-testid={`badge-hero-${i}`}>{b}</span>
                 ))}
               </div>
+              <h1 className="text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl" data-testid="text-dipifr-title">
+                DipIFR — Diploma in<br />
+                <span className="bg-gradient-to-r from-indigo-300 to-blue-300 bg-clip-text text-transparent">International Financial Reporting</span>
+              </h1>
+              <ul className="mt-6 space-y-3">
+                {HERO_BULLETS.map((bullet, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300" data-testid={`hero-bullet-${i}`}>
+                    <div className="mt-0.5 h-4 w-4 shrink-0 rounded-full bg-indigo-500 flex items-center justify-center">
+                      <div className="h-1.5 w-1.5 rounded-full bg-white" />
+                    </div>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="#enroll">
+                  <Button size="lg" className="rounded-xl bg-indigo-600 px-8 font-bold text-white shadow-lg hover:bg-indigo-700" data-testid="button-hero-enroll">
+                    Yozilish
+                  </Button>
+                </Link>
+                <Link href="#program">
+                  <Button size="lg" variant="outline" className="rounded-xl border-white/30 bg-white/10 px-8 font-bold text-white hover:bg-white/20" data-testid="button-hero-program">
+                    Dasturni ko'rish
+                  </Button>
+                </Link>
+              </div>
+              <div className="mt-6 flex items-center gap-4">
+                <div className="flex">
+                  {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
+                </div>
+                <span className="text-sm font-bold text-white">{course.rating}</span>
+                <span className="text-sm text-slate-400">{course.studentsCount} talaba · {course.duration}</span>
+              </div>
             </div>
-            <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-dipifr-enroll">
-                <div className="mb-2 flex items-center justify-between">
-                  <h3 className="text-lg font-bold">So'rov qoldiring</h3>
-                  <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
+
+            {/* Center — image */}
+            <div className="hidden lg:flex lg:items-center lg:justify-center">
+              <div className="relative">
+                <img
+                  src={`${UNSPLASH}/photo-1590283603385-17ffb3a7f29f?w=340&h=380&fit=crop`}
+                  alt="DipIFR ACCA xalqaro diplom kursi"
+                  className="w-[260px] rounded-3xl object-cover shadow-2xl"
+                  loading="eager"
+                  data-testid="img-hero-dipifr"
+                />
+                <div className="absolute -bottom-4 -right-4 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble-hero">
+                  <div className="text-2xl font-extrabold text-indigo-700">87%</div>
+                  <div className="text-xs text-slate-600 leading-snug">bitiruvchilar<br/>imtihonni o'tadilar</div>
                 </div>
-                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-600">
-                  <Flame className="h-4 w-4" /> Joylar cheklangan
+              </div>
+            </div>
+
+            {/* Right — Form */}
+            <div id="enroll" className="rounded-2xl bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-dipifr-enroll">
+              <div className="mb-1 flex items-start justify-between">
+                <h3 className="text-base font-bold text-foreground">Bepul birinchi darsga yozing</h3>
+                <Badge className="rounded-lg bg-rose-500 px-2.5 py-1 text-xs font-extrabold text-white shadow">-{course.discount}</Badge>
+              </div>
+              <div className="my-3 flex items-baseline gap-2">
+                <span className="text-2xl font-extrabold text-foreground" data-testid="text-dipifr-price">{course.price} UZS</span>
+                <span className="text-sm text-muted-foreground line-through">{course.oldPrice} UZS</span>
+              </div>
+              <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-amber-600">
+                <Flame className="h-3.5 w-3.5" /> Joylar cheklangan — chegirma muddati tugayapti
+              </div>
+              <LeadForm source="course-dipifr" buttonText="Konsultatsiya olish" />
+              <p className="mt-3 text-center text-xs text-muted-foreground">Ro'yxatdan o'tib, bepul birinchi darsni oling</p>
+            </div>
+          </div>
+
+          {/* Quick info bar */}
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { label: "Davomiyligi", value: course.duration },
+              { label: "Kirish muddati", value: "2 yil" },
+              { label: "Format", value: "Onlayn · Jonli" },
+              { label: "Hujjat", value: "ACCA Diplom" },
+            ].map((item, i) => (
+              <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-sm" data-testid={`quick-info-${i}`}>
+                <div className="text-xs text-slate-400 uppercase tracking-wide">{item.label}</div>
+                <div className="mt-0.5 text-sm font-bold text-white">{item.value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 2. COURSE FEATURES ===== */}
+      <section className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-features">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">Kursda sizni nima kutmoqda — amaliyot va kafolatli natija</h2>
+          <p className="mb-10 text-muted-foreground">DipIFR.Kafolat — kompleks tayyorgarlik dasturi</p>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {COURSE_FEATURES.map((f, i) => (
+              <div key={i} className="flex gap-4" data-testid={`feature-${i}`}>
+                <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-indigo-500 bg-indigo-50">
+                  <CheckCircle2 className="h-4 w-4 text-indigo-500" />
                 </div>
-                <div className="mb-4 flex items-baseline gap-2">
-                  <span className="text-3xl font-extrabold" data-testid="text-dipifr-price">{course.price} UZS</span>
-                  <span className="text-sm text-muted-foreground line-through">{course.oldPrice} UZS</span>
+                <div>
+                  <h3 className="text-base font-bold leading-snug">{f.title}</h3>
+                  <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
                 </div>
-                <LeadForm source="course-dipifr" buttonText="Chegirma bilan yozilish" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 3. WHY DIPIFR — dark + stat ===== */}
+      <section className="bg-slate-900 py-14" data-testid="section-why-dipifr">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">DipIFR — O'rta Osiyo va MDHning asosiy IFRS malakasi</h2>
+          <div className="overflow-hidden rounded-3xl bg-slate-800">
+            <div className="grid lg:grid-cols-2">
+              <div className="relative min-h-[280px] overflow-hidden">
+                <img
+                  src={`${UNSPLASH}/photo-1554224154-26032ffc0d07?w=700&h=500&fit=crop`}
+                  alt="IFRS moliyaviy hisobot mutaxassisi"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute left-6 top-6 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble">
+                  <div className="text-2xl font-extrabold text-indigo-700">87%</div>
+                  <div className="text-xs text-slate-600 leading-snug">FBA Academy<br/>bitiruvchilari imtihonni o'tadilar</div>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center p-8 lg:p-10">
+                <h3 className="text-xl font-extrabold text-white sm:text-2xl">DipIFR diplomini olish uchun oldindan IT yoki ingliz tili bilimi shart emas</h3>
+                <p className="mt-4 text-slate-300 leading-relaxed text-sm">
+                  DipIFR-rus imtihoni rus tilida o'tkaziladi. FBA Academy da kurs o'zbek tilida, parallel ravishda rus tili terminologiyasi o'rgatiladi.
+                </p>
+                <p className="mt-3 text-slate-300 leading-relaxed text-sm">
+                  Buxgalteriya yoki moliya sohasidagi boshlang'ich bilim kifoya. Big Four audit firmalari va xalqaro kompaniyalar DipIFR ni majburiy talab sifatida belgilaydi.
+                </p>
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                  {[
+                    { value: course.studentsCount, label: "Bitiruvchi" },
+                    { value: course.rating + "/5", label: "Kurs reytingi" },
+                    { value: course.practiceHours + " soat", label: "Amaliyot" },
+                    { value: course.projects + " loyiha", label: "Portfolio" },
+                  ].map((s, i) => (
+                    <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3" data-testid={`why-stat-${i}`}>
+                      <div className="text-lg font-extrabold text-white">{s.value}</div>
+                      <div className="text-xs text-slate-400">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* IFRS Standards Table */}
-      <section className="py-14 sm:py-20" data-testid="section-ifrs-standards">
+      {/* ===== 4. FOR WHOM ===== */}
+      <section className="py-14 sm:py-20" data-testid="section-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-standards-title">O'rganiladigan IFRS/IAS standartlari</h2>
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">DipIFR kursi kimlar uchun?</h2>
+          <p className="mb-10 text-muted-foreground">Xalqaro moliyaviy hisobot standartlarini o'rganmoqchi bo'lganlar uchun</p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {FOR_WHOM.map((item, i) => (
+              <div key={i} className="rounded-2xl border bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:bg-card" data-testid={`for-whom-${i}`}>
+                <div className="mb-4 text-3xl">{item.emoji}</div>
+                <h3 className="mb-2 text-base font-extrabold">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 5. WHAT YOU LEARN — 4 Competencies ===== */}
+      <section className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-competencies">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">DipIFR kursida nima o'rganasiz?</h2>
+          <p className="mb-10 text-muted-foreground">4 ta asosiy kompetensiya — fundamental bilimdan imtihon kafolatigacha</p>
+          <div className="grid gap-6 lg:grid-cols-2">
+            {COMPETENCIES.map((comp, i) => (
+              <div key={i} className="overflow-hidden rounded-2xl border bg-white shadow-sm dark:bg-card" data-testid={`competency-${i}`}>
+                <div className="flex items-center gap-4 border-b p-5 dark:border-slate-700">
+                  <span className="text-3xl font-extrabold text-indigo-200">{comp.num}</span>
+                  <div>
+                    <h3 className="text-base font-extrabold">{comp.title}</h3>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="mb-4 text-sm text-muted-foreground leading-relaxed">{comp.desc}</p>
+                  <ul className="space-y-2">
+                    {comp.points.map((point, j) => (
+                      <li key={j} className="flex items-start gap-2 text-sm">
+                        <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
+                        <span className="font-medium">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 6. IFRS STANDARDS TABLE ===== */}
+      <section className="py-14" data-testid="section-ifrs-standards">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">O'rganiladigan IFRS/IAS standartlari</h2>
           <p className="mb-6 text-muted-foreground">Kursda quyidagi asosiy standartlarni amaliyotda qo'llashni o'rganasiz</p>
           <div className="mb-4 flex flex-wrap gap-2">
             {Object.entries(TYPE_COLORS).map(([type, color]) => (
@@ -149,19 +566,46 @@ export default function DipIFRPage() {
         </div>
       </section>
 
-      {/* YouTube + Benefits */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-dipifr-video">
+      {/* ===== 7. COURSE COMPONENTS ===== */}
+      <section className="bg-slate-900 py-14" data-testid="section-components">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">DipIFR.Kafolat — kompleks dastur tarkibi</h2>
+          <p className="mb-10 text-slate-400">Uchta komponent birgalikda kafolatlangan natija beradi</p>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {COURSE_COMPONENTS.map((comp, i) => (
+              <div key={i} className="overflow-hidden rounded-2xl border border-white/10" data-testid={`component-${i}`}>
+                <div className={`bg-gradient-to-br ${comp.color} p-5`}>
+                  <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 text-xl font-extrabold text-white">{comp.num}</div>
+                  <h3 className="text-base font-extrabold text-white">{comp.title}</h3>
+                </div>
+                <div className="bg-slate-800 p-5">
+                  <p className="text-sm text-slate-300 leading-relaxed">{comp.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 8. VIDEO + WHY ===== */}
+      <section className="py-14 sm:py-20" data-testid="section-dipifr-video">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <YouTubeEmbed videoId={course.videoId!} title="DipIFR — IFRS diplomi haqida" />
+              <YouTubeEmbed videoId={course.videoId!} title="DipIFR — IFRS diplomi haqida FBA Academy" />
             </div>
             <div>
               <h2 className="text-2xl font-extrabold sm:text-3xl">Nima uchun DipIFR?</h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">DipIFR diplomi xalqaro kompaniyalarda ishlash uchun zarur bo'lgan IFRS bilimlarini rasman tasdiqlaydi.</p>
+              <p className="mt-4 text-muted-foreground leading-relaxed">DipIFR diplomi xalqaro kompaniyalarda ishlash uchun zarur bo'lgan IFRS bilimlarini rasman tasdiqlaydi. Bu karyerangizdagi eng muhim investitsiya.</p>
               <div className="mt-6 space-y-3">
-                {["ACCA tomonidan tan olingan xalqaro diplom", "Xalqaro kompaniyalar uchun majburiy malaka", "Big Four audit firmalariga kirish", "ACCA sertifikatiga keyingi qadam", "Yilda 2 marta imtihon imkoniyati"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm font-medium">
+                {[
+                  "ACCA tomonidan xalqaro miqyosda tan olingan diplom",
+                  "Big Four: Deloitte, PwC, EY, KPMG ga kirish",
+                  "O'zbekistondagi multinatsional kompaniyalar talabi",
+                  "ACCA to'liq sertifikatiga keyingi qadam",
+                  "Maosh 2–3 baravargacha o'sish imkoniyati",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm font-medium" data-testid={`benefit-${i}`}>
                     <CheckCircle2 className="h-4 w-4 shrink-0 text-indigo-500" /> {item}
                   </div>
                 ))}
@@ -171,16 +615,63 @@ export default function DipIFRPage() {
         </div>
       </section>
 
-      {/* Salary */}
+      {/* ===== 9. CERTIFICATE ===== */}
+      <section className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-certificate">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="overflow-hidden rounded-3xl border bg-white shadow-md dark:bg-card">
+            <div className="grid lg:grid-cols-2 lg:items-center">
+              <div className="p-8 lg:p-12">
+                <h2 className="text-2xl font-extrabold sm:text-3xl">ACCA DipIFR Diplomini olasiz</h2>
+                <p className="mt-4 text-muted-foreground leading-relaxed">
+                  Imtihonni muvaffaqiyatli topshirganingizdan so'ng ACCA tomonidan beriladigan DipIFR — Diploma in International Financial Reporting diplomini olasiz. Bu dunyo bo'yicha tan olingan sertifikat.
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {[
+                    "ACCA DipIFR xalqaro diplom (global tan olingan)",
+                    "FBA Academy sertifikati (O'zbekistonda)",
+                    "Raqamli format — LinkedIn'ga qo'shish mumkin",
+                    "Imtihon 6 oyda bir marta: iyun va dekabr",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-2.5 text-sm font-medium" data-testid={`cert-item-${i}`}>
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-indigo-500" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-gradient-to-br from-indigo-50 to-slate-50 p-8 dark:from-indigo-950/20 dark:to-slate-950/20 lg:p-12">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-slate-200/50">
+                    <img src={`${UNSPLASH}/photo-1589829545856-d10d557cf95f?w=300&h=220&fit=crop`} alt="ACCA DipIFR Diplomi" className="h-36 w-full object-cover" loading="lazy" />
+                    <div className="p-3">
+                      <div className="text-xs font-bold text-indigo-700 uppercase tracking-wide">ACCA</div>
+                      <div className="mt-0.5 text-xs text-muted-foreground">DipIFR Diplom</div>
+                    </div>
+                  </div>
+                  <div className="overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-slate-200/50">
+                    <img src={`${UNSPLASH}/photo-1554224155-6726b3ff858f?w=300&h=220&fit=crop`} alt="FBA Academy Sertifikati" className="h-36 w-full object-cover" loading="lazy" />
+                    <div className="p-3">
+                      <div className="text-xs font-bold text-indigo-700 uppercase tracking-wide">FBA Academy</div>
+                      <div className="mt-0.5 text-xs text-muted-foreground">Sertifikat</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 10. SALARY ===== */}
       <section className="py-14" data-testid="section-dipifr-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl bg-slate-900 p-6 shadow-2xl sm:p-10">
-            <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">DipIFR bilan maosh darajasi</h2>
+            <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">DipIFR bilan maosh darajasi</h2>
+            <p className="mb-8 text-slate-400">O'zbekistondagi moliya va buxgalteriya sohasidagi taxminiy maosh</p>
             <div className="space-y-4">
               {course.salaryLevels.map((level, i) => (
-                <div key={i} className="rounded-2xl bg-[#c8ff00] p-4 sm:p-5" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "200px" }} data-testid={`dipifr-salary-${i}`}>
-                  <div className="text-lg font-extrabold text-slate-900 sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm font-medium text-slate-700">{level.level} — {level.description}</div>
+                <div key={i} className="rounded-2xl bg-indigo-400 p-4 sm:p-5 transition-all" style={{ maxWidth: `${45 + i * 27}%`, minWidth: "240px" }} data-testid={`dipifr-salary-${i}`}>
+                  <div className="text-lg font-extrabold text-white sm:text-xl">{level.salary} so'm dan</div>
+                  <div className="text-sm font-medium text-indigo-100">{level.level} — {level.description}</div>
                 </div>
               ))}
             </div>
@@ -188,44 +679,17 @@ export default function DipIFRPage() {
         </div>
       </section>
 
-      {/* Skills */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-dipifr-skills">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold">Siz o'rganasiz</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {course.skills.map((skill, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`dipifr-skill-${i}`}>
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-indigo-500" />
-                <span className="font-medium text-sm">{skill}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* For Whom */}
-      <section className="py-14" data-testid="section-dipifr-for-whom">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold">Kurs kimlar uchun?</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {course.forWhom.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-xl border bg-white p-5 shadow-sm dark:bg-card" data-testid={`dipifr-for-whom-${i}`}>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-100">
-                  <GraduationCap className="h-4 w-4 text-indigo-600" />
-                </div>
-                <span className="font-medium text-sm leading-relaxed">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Modules */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-dipifr-modules">
+      {/* ===== 11. PROGRAM MODULES ===== */}
+      <section id="program" className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-dipifr-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">Kurs dasturi</h2>
           <div className="mb-6 flex flex-wrap gap-2">
-            {[{ icon: Calendar, text: course.duration }, { icon: BookOpen, text: `${course.projects} loyiha` }, { icon: Clock, text: `${course.theoryHours} soat nazariya` }, { icon: Wrench, text: `${course.practiceHours} soat amaliyot` }].map((item, i) => (
+            {[
+              { icon: Calendar, text: course.duration },
+              { icon: BookOpen, text: `${course.projects} loyiha` },
+              { icon: Clock, text: `${course.theoryHours} soat nazariya` },
+              { icon: Clock, text: `${course.practiceHours} soat amaliyot` },
+            ].map((item, i) => (
               <Badge key={i} variant="outline" className="rounded-full gap-1.5 border-2 px-3 py-1.5 text-xs font-semibold">
                 <item.icon className="h-3.5 w-3.5" /> {item.text}
               </Badge>
@@ -260,64 +724,196 @@ export default function DipIFRPage() {
         </div>
       </section>
 
-      {/* Support */}
-      <section className="py-14" data-testid="section-dipifr-support">
+      {/* ===== 12. CORPORATE TRAINING ===== */}
+      <section className="py-14" data-testid="section-corporate">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">O'quv jarayonida siz bilan birga</h2>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {course.supportTeam.map((person, i) => (
-              <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`dipifr-support-${i}`}>
-                <div className="h-48 overflow-hidden">
-                  <img src={person.avatar} alt={person.role} className="h-full w-full object-cover object-top" loading="lazy" />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold">{person.role}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{person.description}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-gradient-to-r from-indigo-700 to-blue-800 py-12" data-testid="section-dipifr-cta">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h2 className="text-2xl font-extrabold text-white sm:text-3xl">DipIFR diplomi olish uchun hozir boshlang</h2>
-              <p className="mt-3 text-indigo-100">Bepul konsultatsiyada kurs tafsilotlari va imtihon haqida ma'lumot oling</p>
-              <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-white px-8 font-bold text-indigo-700 hover:bg-slate-100" data-testid="button-dipifr-cta">
-                  Konsultatsiya olish <ArrowRight className="h-5 w-5" />
-                </Button>
-              </Link>
-            </div>
-            <div className="flex items-center gap-5">
-              <img src={mentor.avatar} alt={mentor.name} className="h-20 w-20 shrink-0 rounded-2xl object-cover object-top ring-4 ring-white/20 shadow-xl" loading="lazy" />
+          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-800 to-slate-900">
+            <div className="grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_360px] lg:gap-12">
               <div>
-                <h3 className="text-xl font-bold text-white">{mentor.name}</h3>
-                <p className="text-sm text-indigo-200">{mentor.role}</p>
-                <p className="text-sm text-indigo-200">{mentor.experience}</p>
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-indigo-400/10 px-3 py-1.5 text-xs font-semibold text-indigo-300">
+                  <Building2 className="h-3.5 w-3.5" /> Korporativ o'qitish
+                </div>
+                <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Buxgalteriya bo'limi xodimlaringiz malakasini oshiring</h2>
+                <p className="mt-4 text-slate-300 leading-relaxed">Maxsus shartlarda korporativ o'qitish o'tkazamiz:</p>
+                <ul className="mt-5 space-y-3">
+                  {[
+                    "Tayyor va individual dasturlar (kompaniyangizning so'rovi va faoliyat spetsifikasiga ko'ra)",
+                    "Onlayn, oflayn va aralash (blended-learning) formatlarda",
+                    "O'qishdan oldin va keyin mutaxassislar bilimini chuqur tekshirish bilan",
+                    "Guruh chegirmalari va moslashuvchan to'lov shartlari",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300" data-testid={`corporate-item-${i}`}>
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-indigo-400" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm" data-testid="card-corporate-form">
+                <h3 className="mb-1 text-base font-bold text-white">Korporativ o'qitish haqida bilish</h3>
+                <p className="mb-4 text-sm text-slate-400">Menejerimiz siz bilan bog'lanadi va eng mos dasturni taklif qiladi</p>
+                <LeadForm source="dipifr-corporate" buttonText="Konsultatsiyaga yozilish" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-14" data-testid="section-dipifr-faq">
+      {/* ===== 13. SUPPORT TEAM + TEACHER ===== */}
+      <section className="bg-slate-50 py-14 dark:bg-slate-900/30" data-testid="section-support">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">Ko'p beriladigan savollar</h2>
+          <h2 className="mb-8 text-2xl font-extrabold">O'quv jarayonida siz bilan birga</h2>
+
+          {/* Teacher */}
+          <div className="mb-8 overflow-hidden rounded-3xl border bg-white shadow-md dark:bg-card">
+            <div className="grid lg:grid-cols-[auto_1fr] items-center">
+              <div className="h-48 overflow-hidden lg:h-56 lg:w-48">
+                <img src={mentor.avatar} alt={mentor.name} className="h-full w-full object-cover object-top" loading="lazy" />
+              </div>
+              <div className="p-6 lg:p-8">
+                <h3 className="text-xl font-extrabold" data-testid="text-teacher-name">{mentor.name}</h3>
+                <p className="text-sm font-medium text-indigo-600">{mentor.role} · {mentor.experience}</p>
+                <ul className="mt-4 space-y-2.5">
+                  {[
+                    "ACCA Fellow va DipIFR ekspert, 12 yillik tajriba",
+                    "Big Four audit firmasida senior auditor sifatida ishlagan",
+                    "O'zbekistondagi yirik xalqaro kompaniyalarda IFRS joriy etgan",
+                    "700+ talabani DipIFR imtihoniga muvaffaqiyatli tayyorlagan",
+                  ].map((point, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-sm" data-testid={`teacher-point-${i}`}>
+                      <div className="mt-1 h-4 w-4 shrink-0 rounded-full bg-indigo-100 flex items-center justify-center">
+                        <div className="h-1.5 w-1.5 rounded-full bg-indigo-600" />
+                      </div>
+                      <span className="text-muted-foreground">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Support team */}
+          <div className="grid gap-4 sm:grid-cols-3">
+            {course.supportTeam.map((person, i) => (
+              <div key={i} className="flex items-center gap-4 rounded-2xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`support-${i}`}>
+                <img src={person.avatar} alt={person.role} className="h-14 w-14 shrink-0 rounded-xl object-cover object-top" loading="lazy" />
+                <div>
+                  <div className="text-sm font-bold">{person.role}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground leading-snug">{person.description}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 14. PRICING + FORM ===== */}
+      <section className="bg-gradient-to-br from-indigo-900 via-blue-950 to-slate-900 py-16" data-testid="section-pricing">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:gap-12">
+            <div>
+              <p className="mb-2 text-sm text-slate-400">O'qishga yozilish</p>
+              <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Kursni oling yoki konsultatsiya oling</h2>
+              <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6">
+                <p className="text-xs text-slate-400 uppercase tracking-wide mb-4">4 oy o'qish · 2 yil kirish</p>
+                <div className="mb-2 flex items-baseline gap-3">
+                  <span className="text-3xl font-extrabold text-white">{course.price} UZS</span>
+                  <span className="text-sm text-slate-400 line-through">{course.oldPrice} UZS</span>
+                  <Badge className="rounded-lg bg-rose-500 px-2 py-0.5 text-xs font-bold text-white">-{course.discount}</Badge>
+                </div>
+                <p className="text-xs text-slate-400 mb-6">Yoki bo'lib to'lash: oyiga 1 100 000 UZS dan</p>
+                <ul className="space-y-2.5 mb-6">
+                  {[
+                    "Arzonroq topdingizmi? Chegirma qilamiz",
+                    "Kurs mos kelmasa, 7 kun ichida pul qaytarish",
+                    "Imtihon muvaffaqiyatsiz — qayta tayyorgarlik bepul",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm text-slate-300" data-testid={`pricing-guarantee-${i}`}>
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-indigo-400" /> {item}
+                    </li>
+                  ))}
+                </ul>
+                <Link href="#enroll">
+                  <Button size="lg" className="w-full rounded-xl bg-indigo-600 font-bold text-white hover:bg-indigo-700" data-testid="button-pricing-enroll">
+                    Yozilish <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="rounded-2xl bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-pricing-form">
+              <h3 className="mb-1 text-lg font-bold">O'qishni to'lash yoki konsultatsiya</h3>
+              <p className="mb-4 text-sm text-muted-foreground">Ro'yxatdan o'tib, bepul birinchi modulga kirish oling</p>
+              <LeadForm source="course-dipifr-pricing" buttonText="Yozilish" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 15. FAQ ===== */}
+      <section className="py-14 sm:py-20" data-testid="section-faq">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-2xl font-extrabold sm:text-3xl">Savollarga javob beramiz</h2>
+          <div className="mb-8 flex gap-2">
+            {FAQ_CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveFaqTab(cat)}
+                className={`rounded-full px-5 py-2 text-sm font-bold transition-all ${activeFaqTab === cat ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900" : "border border-slate-200 bg-white text-slate-700 hover:border-slate-400 dark:border-slate-700 dark:bg-card dark:text-slate-300"}`}
+                data-testid={`faq-tab-${cat}`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
           <div className="mx-auto max-w-3xl">
-            <Accordion type="multiple" className="space-y-3">
-              {faqs.map((faq) => (
-                <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border bg-white px-6 shadow-sm dark:bg-card" data-testid={`dipifr-faq-${faq.id}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
+            <Accordion type="multiple" className="space-y-0 divide-y">
+              {FAQS[activeFaqTab]?.map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="border-none py-1" data-testid={`faq-item-${i}`}>
+                  <AccordionTrigger className="text-left text-base font-semibold py-5 hover:no-underline">{faq.q}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">{faq.a}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
+          </div>
+
+          <div className="mt-10 rounded-3xl bg-gradient-to-r from-indigo-600 to-blue-700 p-8 text-center" data-testid="section-final-cta">
+            <h3 className="text-xl font-extrabold text-white sm:text-2xl">Hali savollaringiz bormi?</h3>
+            <p className="mt-2 text-indigo-100">Menejerimiz barcha tafsilotlarni tushuntiradi va sizga eng mos yo'nalishni tavsiya qiladi</p>
+            <Link href="#enroll">
+              <Button size="lg" className="mt-5 rounded-full bg-white px-8 font-bold text-indigo-700 hover:bg-slate-100" data-testid="button-final-cta">
+                Bepul konsultatsiya <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 16. RELATED COURSES ===== */}
+      <section className="bg-slate-50 py-12 dark:bg-slate-900/30" data-testid="section-related">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-xl font-extrabold sm:text-2xl">Boshqa moliya va buxgalteriya kurslari</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { href: "/course/acca", title: "ACCA", desc: "ACCA — moliya va buxgalteriya bo'yicha top xalqaro malaka. Applied Knowledge dan Strategic Professional gacha.", color: "from-purple-700 to-indigo-800", badge: "Top" },
+              { href: "/course/financial-modeling", title: "Financial Modeling", desc: "Excel'da DCF, LBO, 3-Statement model. Investitsiya banklari uchun.", color: "from-green-600 to-emerald-700", badge: "Mashhur" },
+              { href: "/course/1c-course", title: "1C: Buxgalteriya", desc: "1C: Buxgalteriya 8.3 kursi. Birlamchi hujjatlar, soliq hisobotlari.", color: "from-blue-600 to-indigo-700", badge: "Yangi" },
+              { href: "/course/jurisprudence", title: "Huquqshunoslik", desc: "Soliq va mehnat qonunchiligi. Buxgalterlar uchun zaruriy bilim.", color: "from-amber-600 to-orange-700", badge: "Foydali" },
+            ].map((item, i) => (
+              <Link key={i} href={item.href} data-testid={`related-course-${i}`}>
+                <article className="group h-full overflow-hidden rounded-2xl border bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:bg-card">
+                  <div className={`h-2 w-full bg-gradient-to-r ${item.color}`} />
+                  <div className="p-5">
+                    <div className="mb-2 flex items-center justify-between">
+                      <h3 className="text-sm font-extrabold group-hover:text-indigo-600 transition-colors">{item.title}</h3>
+                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-300">{item.badge}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                    <div className="mt-3 flex items-center gap-1 text-xs font-bold text-indigo-600">
+                      Batafsil <ArrowRight className="h-3 w-3" />
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
