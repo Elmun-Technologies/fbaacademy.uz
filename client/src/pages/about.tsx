@@ -1,4 +1,3 @@
-import { Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import {
@@ -86,39 +85,37 @@ export default function About() {
   return (
     <Layout>
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section className="border-b bg-white py-12 sm:py-16 dark:bg-background" data-testid="section-about-hero">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Breadcrumb items={[{ label: "Biz haqimizda" }]} />
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0f0a2e] via-[#1e1060] to-slate-900 py-16 sm:py-20" data-testid="section-about-hero">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Breadcrumb items={[{ label: "Biz haqimizda" }]} light />
           <div className="mt-6 grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
             <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-600">FBA Academy</p>
-              <h1
-                className="text-4xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-5xl dark:text-foreground"
-                data-testid="text-about-title"
-              >
+              <div className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-purple-400">FBA Academy</div>
+              <h1 className="text-5xl font-extrabold uppercase leading-tight tracking-tight text-white sm:text-6xl" data-testid="text-about-title">
                 O'zbekistonda moliya mutaxassislari tayyorlaymiz
               </h1>
-              <p className="mt-5 text-lg text-gray-600 leading-relaxed dark:text-muted-foreground">
-                2020-yildan buyon ACCA, DipIFR, Financial Modeling va boshqa xalqaro sertifikatlar bo'yicha ta'lim beramiz. Har bir bitiruvchimiz aniq natijaga erishadiganiga ishonch hosil qilamiz.
+              <p className="mt-5 text-lg leading-relaxed text-slate-300">
+                2020-yildan buyon ACCA, DipIFR, Financial Modeling va boshqa xalqaro sertifikatlar bo'yicha ta'lim beramiz.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/catalog">
-                  <Button size="lg" className="gap-2 bg-indigo-600 px-7 font-semibold text-white hover:bg-indigo-700" data-testid="button-hero-courses">
+                <a href="/courses">
+                  <Button size="lg" className="gap-2 rounded-full bg-white px-7 font-bold text-slate-900 hover:bg-slate-100" data-testid="button-hero-courses">
                     Barcha kurslar <ArrowRight className="h-4 w-4" />
                   </Button>
-                </Link>
-                <Link href="/contacts">
-                  <Button size="lg" variant="outline" className="px-7" data-testid="button-hero-contact">
+                </a>
+                <a href="/contacts">
+                  <Button size="lg" variant="outline" className="rounded-full border-white/30 px-7 text-white hover:bg-white/10" data-testid="button-hero-contact">
                     Bog'laning
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               {STATS.map((s, i) => (
-                <div key={i} className="rounded-xl border bg-gray-50 p-6 dark:bg-card" data-testid={`stat-about-${i}`}>
-                  <div className="text-4xl font-extrabold text-gray-900 dark:text-foreground">{s.value}</div>
-                  <div className="mt-2 text-sm text-gray-500 dark:text-muted-foreground">{s.label}</div>
+                <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm" data-testid={`stat-about-${i}`}>
+                  <div className="text-4xl font-extrabold text-white">{s.value}</div>
+                  <div className="mt-2 text-sm text-slate-400">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -127,16 +124,16 @@ export default function About() {
       </section>
 
       {/* ── MISSION ───────────────────────────────────────────── */}
-      <section className="py-16 sm:py-20" data-testid="section-mission">
+      <section className="bg-[#0d0d0d] py-16 sm:py-20" data-testid="section-mission">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:items-center">
             <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-600">Missiyamiz</p>
-              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-foreground" data-testid="text-mission-title">
+              <div className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-purple-400">Missiyamiz</div>
+              <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-mission-title">
                 Har bir talabaning muvaffaqiyati bizning natijamiz
               </h2>
-              <p className="mt-5 text-gray-600 leading-relaxed dark:text-muted-foreground">
-                FBA Academy — shunchaki ta'lim markazi emas, balki kasbiy karyerangizni qurishga yordam beradigan sherik. Biz xalqaro standartdagi ta'limni O'zbekistondagi har bir odamga qulay va samarali tarzda yetkazib beramiz.
+              <p className="mt-5 text-lg leading-relaxed text-zinc-400">
+                FBA Academy — shunchaki ta'lim markazi emas, balki kasbiy karyerangizni qurishga yordam beradigan sherik.
               </p>
               <ul className="mt-8 space-y-4">
                 {[
@@ -145,8 +142,8 @@ export default function About() {
                   "Real loyihalar va mock imtihonlar bilan o'qitish",
                   "Ish topishgacha va keyin ham qo'llab-quvvatlash",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-gray-700 dark:text-muted-foreground">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-indigo-600" />
+                  <li key={i} className="flex items-start gap-3 text-zinc-300">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -154,19 +151,19 @@ export default function About() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {teachers.map((t) => (
-                <div key={t.id} className="overflow-hidden rounded-xl border bg-white dark:bg-card" data-testid={`card-teacher-about-${t.id}`}>
+                <div key={t.id} className="group overflow-hidden rounded-2xl bg-zinc-900" data-testid={`card-teacher-about-${t.id}`}>
                   <img
                     src={t.avatar}
                     alt={`${t.name} — FBA Academy o'qituvchisi`}
                     width={300}
                     height={220}
                     loading="lazy"
-                    className="h-44 w-full object-cover"
+                    className="h-44 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="p-4">
-                    <p className="font-bold text-gray-900 dark:text-foreground">{t.name}</p>
-                    <p className="mt-0.5 text-xs text-indigo-600">{t.role}</p>
-                    <p className="mt-1 text-xs text-gray-500 dark:text-muted-foreground">{t.experience}</p>
+                    <p className="font-extrabold text-white">{t.name}</p>
+                    <p className="mt-0.5 text-xs font-semibold text-purple-400">{t.role}</p>
+                    <p className="mt-1 text-xs text-zinc-500">{t.experience}</p>
                   </div>
                 </div>
               ))}
@@ -176,20 +173,20 @@ export default function About() {
       </section>
 
       {/* ── WHAT WE TEACH ─────────────────────────────────────── */}
-      <section className="border-y bg-gray-50 py-16 sm:py-20 dark:bg-slate-900/30 dark:border-slate-800" data-testid="section-directions">
+      <section className="bg-[#111] py-16 sm:py-20" data-testid="section-directions">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-600">Kurslar</p>
-          <h2 className="mb-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-foreground" data-testid="text-directions-title">
+          <div className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-amber-400">Kurslar</div>
+          <h2 className="mb-10 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-directions-title">
             Nimaga o'qitamiz?
           </h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {DIRECTIONS.map((item, i) => (
-              <div key={i} className="rounded-xl border bg-white p-6 dark:bg-card" data-testid={`card-direction-${i}`}>
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-900/30">
-                  <item.icon className="h-5 w-5 text-indigo-600" />
+              <div key={i} className="rounded-2xl border border-white/10 bg-zinc-900 p-7 transition-all hover:border-purple-500/30 hover:scale-[1.02]" data-testid={`card-direction-${i}`}>
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 shadow-lg">
+                  <item.icon className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="mb-2 font-bold text-gray-900 dark:text-foreground">{item.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed dark:text-muted-foreground">{item.desc}</p>
+                <h3 className="mb-2 text-lg font-extrabold text-white">{item.title}</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -197,41 +194,41 @@ export default function About() {
       </section>
 
       {/* ── HOW IT WORKS ──────────────────────────────────────── */}
-      <section className="py-16 sm:py-20" data-testid="section-how">
+      <section className="bg-[#0d0d0d] py-16 sm:py-20" data-testid="section-how">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-600">Jarayon</p>
-          <h2 className="mb-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-foreground" data-testid="text-how-title">
+          <div className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-amber-400">Jarayon</div>
+          <h2 className="mb-10 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-how-title">
             Qanday ishlaydi?
           </h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {HOW_STEPS.map((step, i) => (
-              <div key={i} data-testid={`step-${i}`}>
-                <div className="mb-5 text-4xl font-extrabold text-indigo-100 dark:text-indigo-900/50 select-none">{step.num}</div>
-                <h3 className="mb-2 font-bold text-gray-900 dark:text-foreground">{step.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed dark:text-muted-foreground">{step.desc}</p>
+              <div key={i} className="rounded-2xl border border-white/10 bg-zinc-900 p-7" data-testid={`step-${i}`}>
+                <div className="mb-4 text-5xl font-extrabold text-purple-500/30 select-none leading-none">{step.num}</div>
+                <h3 className="mb-2 text-lg font-extrabold text-white">{step.title}</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
           <div className="mt-10">
-            <Link href="/contacts">
-              <Button size="lg" className="gap-2 bg-indigo-600 px-8 font-semibold text-white hover:bg-indigo-700" data-testid="button-how-cta">
+            <a href="/contacts">
+              <Button size="lg" className="gap-2 rounded-full bg-purple-600 px-8 font-bold text-white hover:bg-purple-500" data-testid="button-how-cta">
                 Bepul konsultatsiya <ArrowRight className="h-4 w-4" />
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
 
       {/* ── TIMELINE ──────────────────────────────────────────── */}
-      <section className="border-y bg-gray-50 py-16 sm:py-20 dark:bg-slate-900/30 dark:border-slate-800" data-testid="section-timeline">
+      <section className="bg-[#111] py-16 sm:py-20" data-testid="section-timeline">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-14 lg:grid-cols-[1fr_2fr]">
             <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-600">Tarix</p>
-              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-foreground" data-testid="text-timeline-title">
+              <div className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-amber-400">Tarix</div>
+              <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-timeline-title">
                 Bizning yo'limiz
               </h2>
-              <p className="mt-4 text-gray-600 dark:text-muted-foreground">
+              <p className="mt-4 text-zinc-400">
                 2020-yildan buyon o'sib kelmoqdamiz va hali ko'p ishlar oldinda.
               </p>
             </div>
@@ -242,24 +239,24 @@ export default function About() {
                     <div
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold ${
                         item.active
-                          ? "border-indigo-600 bg-indigo-600 text-white"
-                          : "border-gray-300 bg-white text-gray-500 dark:border-slate-600 dark:bg-slate-800"
+                          ? "border-purple-500 bg-purple-600 text-white"
+                          : "border-zinc-700 bg-zinc-800 text-zinc-400"
                       }`}
                     >
                       {i + 1}
                     </div>
                     {i < TIMELINE.length - 1 && (
-                      <div className="mt-1 h-full w-px bg-gray-200 dark:bg-slate-700" />
+                      <div className="mt-1 h-full w-px bg-zinc-800" />
                     )}
                   </div>
                   <div className="pb-8">
-                    <span className={`text-xs font-bold uppercase tracking-wider ${item.active ? "text-indigo-600" : "text-gray-400"}`}>
+                    <span className={`text-xs font-bold uppercase tracking-wider ${item.active ? "text-purple-400" : "text-zinc-600"}`}>
                       {item.year}
                     </span>
-                    <h3 className={`mt-1 font-bold ${item.active ? "text-indigo-600" : "text-gray-900 dark:text-foreground"}`}>
+                    <h3 className={`mt-1 font-extrabold ${item.active ? "text-purple-400" : "text-white"}`}>
                       {item.title}
                     </h3>
-                    <p className="mt-1 text-sm text-gray-600 leading-relaxed dark:text-muted-foreground">{item.desc}</p>
+                    <p className="mt-1 text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -269,14 +266,14 @@ export default function About() {
       </section>
 
       {/* ── PARTNERS ──────────────────────────────────────────── */}
-      <section className="py-16 sm:py-20" data-testid="section-partners">
+      <section className="bg-[#0d0d0d] py-16 sm:py-20" data-testid="section-partners">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-8 text-sm font-semibold uppercase tracking-widest text-gray-400">
+          <p className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
             Bitiruvchilarimiz ishlaydigan kompaniyalar
           </p>
           <div className="flex flex-wrap gap-3">
             {partnerCompanies.map((c) => (
-              <span key={c} className="rounded-full border bg-gray-50 px-5 py-2 text-sm font-semibold text-gray-700 dark:bg-card dark:text-foreground" data-testid={`partner-${c}`}>
+              <span key={c} className="rounded-full border border-white/10 bg-zinc-900 px-5 py-2 text-sm font-semibold text-zinc-300 transition-colors hover:border-purple-500/40 hover:text-white" data-testid={`partner-${c}`}>
                 {c}
               </span>
             ))}
@@ -285,35 +282,35 @@ export default function About() {
       </section>
 
       {/* ── FAQ ───────────────────────────────────────────────── */}
-      <section className="border-y bg-gray-50 py-16 sm:py-20 dark:bg-slate-900/30 dark:border-slate-800" data-testid="section-about-faq">
+      <section className="bg-[#111] py-16 sm:py-20" data-testid="section-about-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[5fr_7fr]">
             <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-600">FAQ</p>
-              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-foreground" data-testid="text-faq-title">
+              <div className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-amber-400">FAQ</div>
+              <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-faq-title">
                 Ko'p beriladigan savollar
               </h2>
-              <p className="mt-4 text-gray-600 dark:text-muted-foreground">
+              <p className="mt-4 text-zinc-400">
                 Qo'shimcha savollar bo'lsa biz bilan bog'laning.
               </p>
-              <Link href="/contacts">
-                <Button variant="outline" className="mt-6 gap-2 font-semibold" data-testid="button-faq-contact">
+              <a href="/contacts">
+                <Button variant="outline" className="mt-6 gap-2 rounded-full border-white/20 font-semibold text-white hover:bg-white/10" data-testid="button-faq-contact">
                   Bog'laning <ArrowRight className="h-4 w-4" />
                 </Button>
-              </Link>
+              </a>
             </div>
             <Accordion type="multiple" className="space-y-2">
               {FAQ_ITEMS.map((item, i) => (
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
-                  className="rounded-xl border bg-white px-6 dark:bg-card"
+                  className="rounded-2xl border border-white/10 bg-zinc-900 px-6"
                   data-testid={`faq-item-${i}`}
                 >
-                  <AccordionTrigger className="text-left font-bold text-gray-900 hover:no-underline dark:text-foreground">
+                  <AccordionTrigger className="text-left font-bold text-white hover:no-underline hover:text-purple-300">
                     {item.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-gray-600 leading-relaxed dark:text-muted-foreground">
+                  <AccordionContent className="text-sm text-zinc-400 leading-relaxed">
                     {item.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -324,25 +321,26 @@ export default function About() {
       </section>
 
       {/* ── CONTACT CTA ───────────────────────────────────────── */}
-      <section className="py-16 sm:py-20" data-testid="section-about-cta">
+      <section className="bg-[#0d0d0d] py-16 sm:py-20" data-testid="section-about-cta">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-10 rounded-2xl bg-indigo-600 p-10 lg:grid-cols-2 lg:items-center lg:p-14">
+          <div className="grid gap-10 overflow-hidden rounded-3xl bg-gradient-to-br from-purple-900 via-[#1e1060] to-slate-900 p-10 lg:grid-cols-2 lg:items-center lg:p-14">
             <div>
-              <h2 className="text-3xl font-extrabold text-white sm:text-4xl" data-testid="text-cta-title">
+              <div className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-purple-400">Boshlash</div>
+              <h2 className="text-4xl font-extrabold uppercase text-white sm:text-5xl" data-testid="text-cta-title">
                 Bugundan boshlang
               </h2>
-              <p className="mt-3 text-indigo-100 leading-relaxed">
+              <p className="mt-3 text-slate-300 leading-relaxed">
                 Bepul konsultatsiya oling va karyerangizni yangi bosqichga olib chiqing.
               </p>
-              <Link href="/contacts">
+              <a href="/contacts">
                 <Button
                   size="lg"
-                  className="mt-7 gap-2 bg-white px-8 font-bold text-indigo-700 hover:bg-indigo-50"
+                  className="mt-7 gap-2 rounded-full bg-amber-400 px-8 font-bold text-black hover:bg-amber-300"
                   data-testid="button-cta"
                 >
                   Bepul konsultatsiya <ArrowRight className="h-4 w-4" />
                 </Button>
-              </Link>
+              </a>
             </div>
             <div className="space-y-5">
               {[
@@ -351,13 +349,13 @@ export default function About() {
                 { icon: Mail, label: "E-pochta", value: "fbaacademyuz1@gmail.com", href: "mailto:fbaacademyuz1@gmail.com" },
               ].map(({ icon: Icon, label, value, href }, i) => (
                 <div key={i} className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/15">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm">
                     <Icon className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-indigo-200">{label}</p>
+                    <p className="text-xs font-semibold text-purple-300">{label}</p>
                     {href ? (
-                      <a href={href} className="block font-bold text-white hover:text-indigo-100 transition-colors" data-testid={`link-contact-${i}`}>
+                      <a href={href} className="block font-bold text-white transition-colors hover:text-amber-300" data-testid={`link-contact-${i}`}>
                         {value}
                       </a>
                     ) : (

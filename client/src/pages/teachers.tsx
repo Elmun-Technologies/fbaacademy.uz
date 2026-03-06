@@ -1,4 +1,3 @@
-import { Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -83,43 +82,43 @@ export default function Teachers() {
       </section>
 
       {/* ── TEACHER CARDS ─────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-teachers-grid">
+      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-teachers-grid">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-10 text-2xl font-extrabold sm:text-3xl" data-testid="text-teachers-grid-title">
+          <h2 className="mb-10 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-teachers-grid-title">
             Jamoamiz bilan tanishing
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {teachers.map((teacher) => (
               <article
                 key={teacher.id}
-                className="group overflow-hidden rounded-xl border bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:bg-card"
+                className="group overflow-hidden rounded-2xl bg-zinc-900 transition-transform duration-300 hover:-translate-y-2"
                 data-testid={`card-teacher-${teacher.id}`}
               >
-                <div className="relative h-64 overflow-hidden bg-slate-100">
+                <div className="relative h-64 overflow-hidden">
                   <img
                     src={teacher.avatar}
                     alt={`${teacher.name} — ${teacher.role}, FBA Academy`}
                     width={300}
                     height={256}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-transparent to-transparent" />
                   <div className="absolute bottom-3 left-3">
-                    <span className="rounded-full bg-white/90 px-2.5 py-1 text-xs font-bold text-slate-800">
+                    <span className="rounded-full bg-purple-600 px-3 py-1 text-xs font-bold text-white">
                       {teacher.experience}
                     </span>
                   </div>
                 </div>
                 <div className="p-5">
-                  <h2 className="text-base font-extrabold" data-testid={`text-teacher-name-${teacher.id}`}>
+                  <h2 className="text-base font-extrabold text-white" data-testid={`text-teacher-name-${teacher.id}`}>
                     {teacher.name}
                   </h2>
-                  <p className="mt-0.5 text-sm font-semibold text-purple-600 dark:text-purple-400">{teacher.role}</p>
-                  <p className="mt-3 text-xs text-muted-foreground leading-relaxed line-clamp-3">{teacher.bio}</p>
+                  <p className="mt-0.5 text-sm font-semibold text-purple-400">{teacher.role}</p>
+                  <p className="mt-3 text-xs text-zinc-400 leading-relaxed line-clamp-3">{teacher.bio}</p>
                   <div className="mt-4 flex flex-wrap gap-1.5">
                     {teacher.courses.map((c) => (
-                      <span key={c} className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold dark:bg-slate-800">
+                      <span key={c} className="rounded-full border border-white/10 bg-zinc-800 px-2 py-0.5 text-xs font-semibold text-zinc-300">
                         {c}
                       </span>
                     ))}
@@ -132,22 +131,22 @@ export default function Teachers() {
       </section>
 
       {/* ── WHY OUR TEACHERS ──────────────────────────────────── */}
-      <section className="bg-slate-50 py-14 sm:py-20 dark:bg-slate-900/50" data-testid="section-why-teachers">
+      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-why-teachers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-why-title">
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-why-title">
             Nega bizning o'qituvchilar?
           </h2>
-          <p className="mb-10 max-w-xl text-muted-foreground">
+          <p className="mb-10 max-w-xl text-zinc-400">
             Har bir mentor aniq natijaga yo'naltirilgan va talabalarning muvaffaqiyatiga shaxsan mas'ul.
           </p>
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-3">
             {WHY_TEACHERS.map((item, i) => (
-              <div key={i} className="rounded-xl border bg-white p-6 shadow-sm dark:bg-card" data-testid={`card-why-${i}`}>
-                <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} shadow-md`}>
-                  <item.icon className="h-5 w-5 text-white" />
+              <div key={i} className="rounded-2xl border border-white/10 bg-zinc-900 p-7 transition-all hover:border-purple-500/30 hover:scale-[1.02]" data-testid={`card-why-${i}`}>
+                <div className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} shadow-lg`}>
+                  <item.icon className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="mb-2 font-bold">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                <h3 className="mb-2 text-lg font-extrabold text-white">{item.title}</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -155,25 +154,25 @@ export default function Teachers() {
       </section>
 
       {/* ── STUDENT TESTIMONIALS ──────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-testimonials">
+      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-testimonials">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-10 text-2xl font-extrabold sm:text-3xl" data-testid="text-testimonials-title">
+          <h2 className="mb-10 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-testimonials-title">
             Talabalarimiz nima deydi?
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {testimonials.map((t) => (
-              <div key={t.id} className="flex flex-col rounded-xl border bg-white p-6 shadow-sm dark:bg-card" data-testid={`card-testimonial-${t.id}`}>
+              <div key={t.id} className="flex flex-col rounded-2xl border border-white/10 bg-zinc-900 p-6" data-testid={`card-testimonial-${t.id}`}>
                 <div className="mb-4 flex gap-0.5">
                   {Array.from({ length: t.rating }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="flex-1 text-sm text-muted-foreground leading-relaxed">"{t.text}"</p>
-                <div className="mt-5 flex items-center gap-3 border-t pt-4">
-                  <img src={t.avatar} alt={t.name} width={40} height={40} loading="lazy" className="h-10 w-10 rounded-full object-cover" />
+                <p className="flex-1 text-sm text-zinc-400 leading-relaxed">"{t.text}"</p>
+                <div className="mt-5 flex items-center gap-3 border-t border-white/5 pt-4">
+                  <img src={t.avatar} alt={t.name} width={40} height={40} loading="lazy" className="h-10 w-10 rounded-full object-cover ring-2 ring-purple-500/30" />
                   <div>
-                    <p className="text-sm font-bold">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.role}</p>
+                    <p className="text-sm font-bold text-white">{t.name}</p>
+                    <p className="text-xs text-zinc-500">{t.role}</p>
                   </div>
                 </div>
               </div>
@@ -190,11 +189,11 @@ export default function Teachers() {
               <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Mentorlarimiz bilan tanishing</h2>
               <p className="mt-2 text-purple-100">Bepul konsultatsiya oling va o'qishni boshlang</p>
             </div>
-            <Link href="/contacts">
+            <a href="/contacts">
               <Button size="lg" className="gap-2 rounded-full bg-white px-8 font-bold text-purple-700 hover:bg-slate-100" data-testid="button-teachers-cta">
                 Bepul konsultatsiya <ArrowRight className="h-4 w-4" />
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

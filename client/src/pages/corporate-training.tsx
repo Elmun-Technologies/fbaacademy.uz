@@ -85,22 +85,22 @@ export default function CorporateTraining() {
       {/* ── DIRECTIONS ────────────────────────────────────────── */}
       <section className="py-14 sm:py-20" data-testid="section-directions">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-directions-title">
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-directions-title">
             Trening yo'nalishlari
           </h2>
-          <p className="mb-10 max-w-xl text-muted-foreground">
+          <p className="mb-10 max-w-xl text-zinc-400">
             Kompaniyangiz ehtiyojiga ko'ra bitta yoki bir nechta yo'nalishni tanlang.
           </p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {DIRECTIONS.map((item, i) => (
-              <div key={i} className="overflow-hidden rounded-xl border bg-white shadow-sm dark:bg-card" data-testid={`card-direction-${i}`}>
+              <div key={i} className="overflow-hidden rounded-2xl bg-zinc-900" data-testid={`card-direction-${i}`}>
                 <div className={`h-1.5 w-full bg-gradient-to-r ${item.color}`} />
                 <div className="p-6">
                   <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} shadow-md`}>
                     <item.icon className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="mb-2 font-bold">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  <h3 className="mb-2 text-lg font-extrabold text-white">{item.title}</h3>
+                  <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -109,24 +109,24 @@ export default function CorporateTraining() {
       </section>
 
       {/* ── PROCESS ───────────────────────────────────────────── */}
-      <section className="bg-slate-50 py-14 sm:py-20 dark:bg-slate-900/50" data-testid="section-corp-process">
+      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-corp-process">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-process-title">
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-process-title">
             Qanday ishlaydi?
           </h2>
-          <p className="mb-10 text-muted-foreground">Jamoangiz uchun ideal dastur yaratishning 4 bosqichi</p>
+          <p className="mb-10 text-zinc-400">Jamoangiz uchun ideal dastur yaratishning 4 bosqichi</p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PROCESS.map((item, i) => (
               <div key={i} className="relative" data-testid={`step-corp-${i}`}>
                 {i < PROCESS.length - 1 && (
-                  <div className="absolute left-6 top-6 hidden h-0.5 w-full bg-slate-200 lg:block dark:bg-slate-700" />
+                  <div className="absolute left-6 top-6 hidden h-0.5 w-full bg-zinc-700 lg:block" />
                 )}
                 <div className="relative">
                   <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} text-sm font-extrabold text-white shadow-md`}>
                     {item.num}
                   </div>
-                  <h3 className="font-bold">{item.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
+                  <h3 className="font-extrabold text-white">{item.title}</h3>
+                  <p className="mt-1 text-sm text-zinc-400">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -135,22 +135,22 @@ export default function CorporateTraining() {
       </section>
 
       {/* ── WHY US ────────────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-corp-why">
+      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-corp-why">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-why-title">
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-why-title">
             Nima uchun FBA Academy?
           </h2>
-          <p className="mb-10 text-muted-foreground max-w-xl">
+          <p className="mb-10 text-zinc-400 max-w-xl">
             Korporativ treninglarimiz natijaga yo'naltirilgan va o'lchanadigan.
           </p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {WHY_US.map((item, i) => (
-              <div key={i} className="rounded-xl border bg-white p-6 shadow-sm dark:bg-card" data-testid={`card-why-corp-${i}`}>
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-purple-100 dark:bg-purple-900/30">
-                  <item.icon className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+              <div key={i} className="rounded-2xl border border-white/10 bg-zinc-900 p-7" data-testid={`card-why-corp-${i}`}>
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-purple-600/20">
+                  <item.icon className="h-5 w-5 text-purple-400" />
                 </div>
-                <h3 className="mb-2 font-bold">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
+                <h3 className="mb-2 text-lg font-extrabold text-white">{item.title}</h3>
+                <p className="text-sm text-zinc-400">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -158,12 +158,12 @@ export default function CorporateTraining() {
       </section>
 
       {/* ── CLIENTS ───────────────────────────────────────────── */}
-      <section className="bg-slate-50 py-12 sm:py-16 dark:bg-slate-900/50" data-testid="section-corp-clients">
+      <section className="bg-[#111] py-12 sm:py-16" data-testid="section-corp-clients">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-6 text-sm font-bold uppercase tracking-wider text-muted-foreground">Bizga ishonishadi</p>
+          <p className="mb-6 text-sm font-bold uppercase tracking-wider text-zinc-400">Bizga ishonishadi</p>
           <div className="flex flex-wrap gap-3">
             {partnerCompanies.map((c) => (
-              <div key={c} className="rounded-full border bg-white px-5 py-2.5 text-sm font-semibold shadow-sm dark:bg-card" data-testid={`corp-partner-${c}`}>
+              <div key={c} className="rounded-full border border-white/10 bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-zinc-300" data-testid={`corp-partner-${c}`}>
                 {c}
               </div>
             ))}
@@ -172,14 +172,14 @@ export default function CorporateTraining() {
       </section>
 
       {/* ── FORM CTA ──────────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-corp-form">
+      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-corp-form">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-form-title">
+              <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-form-title">
                 Bepul konsultatsiya oling
               </h2>
-              <p className="mt-3 text-muted-foreground leading-relaxed">
+              <p className="mt-3 text-zinc-400 leading-relaxed">
                 Jamoangiz uchun maxsus dastur tuzamiz. So'rov qoldiring — 24 soat ichida bog'lanamiz.
               </p>
               <ul className="mt-6 space-y-3">
@@ -196,9 +196,9 @@ export default function CorporateTraining() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-xl border bg-white p-8 shadow-sm dark:bg-card" data-testid="card-corp-form">
-              <h3 className="mb-1 text-lg font-extrabold">So'rov yuborish</h3>
-              <p className="mb-6 text-sm text-muted-foreground">Jamoangiz uchun maxsus dastur tuzamiz</p>
+            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-8" data-testid="card-corp-form">
+              <h3 className="mb-1 text-lg font-extrabold text-white">So'rov yuborish</h3>
+              <p className="mb-6 text-sm text-zinc-400">Jamoangiz uchun maxsus dastur tuzamiz</p>
               <LeadForm source="corporate" buttonText="So'rov yuborish" />
             </div>
           </div>

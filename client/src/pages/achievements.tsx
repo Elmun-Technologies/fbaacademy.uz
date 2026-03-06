@@ -147,38 +147,38 @@ export default function AchievementsPage() {
       </section>
 
       {/* ── GRADUATE RESULTS ──────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-graduate-results">
+      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-graduate-results">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-results-title">
+          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl" data-testid="text-results-title">
             Bitiruvchilarimiz tarixlari
           </h2>
-          <p className="mb-10 max-w-xl text-muted-foreground">
+          <p className="mb-10 max-w-xl text-zinc-400">
             Ular o'qishdi, imtihon topshirdi va hayotlarini o'zgartirdi.
           </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {graduateResults.map((g) => (
-              <div key={g.id} className="overflow-hidden rounded-xl border bg-white shadow-sm dark:bg-card" data-testid={`card-graduate-${g.id}`}>
-                <div className="relative h-48 bg-slate-100">
-                  <img src={g.avatar} alt={g.name} width={400} height={192} loading="lazy" className="h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div key={g.id} className="group overflow-hidden rounded-2xl bg-zinc-900 transition-transform duration-300 hover:-translate-y-2" data-testid={`card-graduate-${g.id}`}>
+                <div className="relative h-48">
+                  <img src={g.avatar} alt={g.name} width={400} height={192} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 to-transparent" />
                   <div className="absolute bottom-3 left-3 right-3">
-                    <span className="rounded-full bg-emerald-500/90 px-2.5 py-1 text-xs font-bold text-white">
+                    <span className="rounded-full bg-emerald-500 px-2.5 py-1 text-xs font-bold text-white">
                       {g.courseName}
                     </span>
                   </div>
                 </div>
                 <div className="p-5">
-                  <p className="font-extrabold">{g.name}</p>
-                  <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                  <p className="font-extrabold text-white">{g.name}</p>
+                  <div className="mt-2 flex items-center gap-2 text-xs text-zinc-400">
                     <span className="line-through">{g.beforeRole}</span>
                     <ArrowRight className="h-3 w-3 shrink-0" />
-                    <span className="font-bold text-purple-600 dark:text-purple-400">{g.afterRole}</span>
+                    <span className="font-bold text-purple-400">{g.afterRole}</span>
                   </div>
-                  <p className="mt-2 text-xs font-semibold text-emerald-600">{g.salaryIncrease}</p>
-                  <p className="mt-3 text-xs text-muted-foreground leading-relaxed">{g.story}</p>
+                  <p className="mt-2 text-xs font-semibold text-emerald-400">{g.salaryIncrease}</p>
+                  <p className="mt-3 text-xs text-zinc-400 leading-relaxed">{g.story}</p>
                   <div className="mt-3 flex items-center gap-1.5">
-                    <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
-                    <span className="text-xs font-semibold">{g.company}</span>
+                    <Building2 className="h-3.5 w-3.5 text-zinc-500" />
+                    <span className="text-xs font-semibold text-zinc-300">{g.company}</span>
                   </div>
                 </div>
               </div>
@@ -243,7 +243,7 @@ export default function AchievementsPage() {
       </section>
 
       {/* Stats grid */}
-      <section className="bg-slate-50 py-10 dark:bg-slate-900/30" data-testid="section-stats">
+      <section className="bg-[#111] py-10" data-testid="section-stats">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -252,12 +252,12 @@ export default function AchievementsPage() {
               { label: "Ko'rilgan kurslar", value: state.visitedCourses.length, emoji: "📚", color: "from-blue-400 to-cyan-500" },
               { label: "To'ldirilgan harakatlar", value: [state.videoWatched, state.formSubmitted, state.quizCompleted].filter(Boolean).length + state.visitedCourses.length, emoji: "⚡", color: "from-green-400 to-emerald-500" },
             ].map((stat, i) => (
-              <div key={i} className="overflow-hidden rounded-2xl border bg-white shadow-sm dark:bg-card" data-testid={`stat-card-${i}`}>
+              <div key={i} className="overflow-hidden rounded-2xl bg-zinc-900" data-testid={`stat-card-${i}`}>
                 <div className={`h-1.5 w-full bg-gradient-to-r ${stat.color}`} />
                 <div className="p-5">
                   <div className="text-2xl">{stat.emoji}</div>
-                  <div className="mt-2 text-2xl font-extrabold" data-testid={`stat-value-${i}`}>{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className="mt-2 text-2xl font-extrabold text-white" data-testid={`stat-value-${i}`}>{stat.value}</div>
+                  <div className="text-sm text-zinc-400">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -266,9 +266,9 @@ export default function AchievementsPage() {
       </section>
 
       {/* How to earn points */}
-      <section className="py-12" data-testid="section-how-to-earn">
+      <section className="bg-[#0d0d0d] py-12" data-testid="section-how-to-earn">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-xl font-extrabold sm:text-2xl">Qanday ball to'plash mumkin?</h2>
+          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl">Qanday ball to'plash mumkin?</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { emoji: "📖", action: "Kurs sahifasiga tashrif", points: "+10 ball", done: state.visitedCourses.length > 0, href: "/courses", btnText: "Kurslarga o'tish" },
@@ -276,22 +276,22 @@ export default function AchievementsPage() {
               { emoji: "📝", action: "Konsultatsiyaga yozilish", points: "+50 ball", done: state.formSubmitted, href: "/contacts", btnText: "Yozilish" },
               { emoji: "🧪", action: "Bilim testini topshirish", points: "+40 ball", done: state.quizCompleted, href: null, btnText: "Testni boshlash" },
             ].map((item, i) => (
-              <div key={i} className={`rounded-2xl border p-5 transition-shadow hover:shadow-md ${item.done ? "bg-green-50 border-green-200 dark:bg-green-950/20 dark:border-green-800" : "bg-white dark:bg-card"}`} data-testid={`earn-card-${i}`}>
+              <div key={i} className={`rounded-2xl border p-5 transition-all hover:-translate-y-1 ${item.done ? "border-green-700 bg-green-900/20" : "border-white/10 bg-zinc-900"}`} data-testid={`earn-card-${i}`}>
                 <div className="mb-3 text-3xl">{item.emoji}</div>
-                <div className="mb-1 text-sm font-bold">{item.action}</div>
-                <div className="mb-3 text-lg font-extrabold text-green-600">{item.points}</div>
+                <div className="mb-1 text-sm font-bold text-white">{item.action}</div>
+                <div className="mb-3 text-lg font-extrabold text-emerald-400">{item.points}</div>
                 {item.done ? (
-                  <div className="flex items-center gap-1.5 text-sm font-bold text-green-600" data-testid={`earn-done-${i}`}>
+                  <div className="flex items-center gap-1.5 text-sm font-bold text-emerald-400" data-testid={`earn-done-${i}`}>
                     <CheckCircle2 className="h-4 w-4" /> Bajarildi
                   </div>
                 ) : item.href ? (
-                  <Link href={item.href}>
-                    <Button size="sm" variant="outline" className="rounded-full text-xs" data-testid={`earn-btn-${i}`}>
+                  <a href={item.href}>
+                    <Button size="sm" variant="outline" className="rounded-full border-white/20 text-xs text-white hover:bg-white/10" data-testid={`earn-btn-${i}`}>
                       {item.btnText} <ArrowRight className="ml-1 h-3 w-3" />
                     </Button>
-                  </Link>
+                  </a>
                 ) : (
-                  <Button size="sm" variant="outline" className="rounded-full text-xs" onClick={() => document.getElementById("quiz-section")?.scrollIntoView({ behavior: "smooth" })} data-testid={`earn-btn-${i}`}>
+                  <Button size="sm" variant="outline" className="rounded-full border-white/20 text-xs text-white hover:bg-white/10" onClick={() => document.getElementById("quiz-section")?.scrollIntoView({ behavior: "smooth" })} data-testid={`earn-btn-${i}`}>
                     {item.btnText} <ArrowRight className="ml-1 h-3 w-3" />
                   </Button>
                 )}
@@ -302,34 +302,34 @@ export default function AchievementsPage() {
       </section>
 
       {/* Badges grid */}
-      <section className="bg-slate-50 py-12 dark:bg-slate-900/30" data-testid="section-badges">
+      <section className="bg-[#111] py-12" data-testid="section-badges">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-xl font-extrabold sm:text-2xl">Barcha Badge'lar</h2>
-          <p className="mb-8 text-muted-foreground">{earnedBadges.length} ta olinggan, {lockedBadges.length} ta qulfli</p>
+          <h2 className="mb-2 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl">Barcha Badge'lar</h2>
+          <p className="mb-8 text-zinc-400">{earnedBadges.length} ta olinggan, {lockedBadges.length} ta qulfli</p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {BADGES.map((badge) => {
               const earned = state.earnedBadges.includes(badge.id);
               return (
                 <div
                   key={badge.id}
-                  className={`overflow-hidden rounded-2xl border transition-all ${earned ? "bg-white shadow-md dark:bg-card" : "bg-slate-100 opacity-60 dark:bg-slate-800/50"}`}
+                  className={`overflow-hidden rounded-2xl border transition-all ${earned ? "border-white/10 bg-zinc-900 shadow-lg" : "border-white/5 bg-zinc-900/50 opacity-60"}`}
                   data-testid={`badge-card-${badge.id}`}
                 >
-                  <div className={`h-1.5 ${earned ? `bg-gradient-to-r ${badge.color}` : "bg-slate-300 dark:bg-slate-600"}`} />
+                  <div className={`h-1.5 ${earned ? `bg-gradient-to-r ${badge.color}` : "bg-zinc-700"}`} />
                   <div className="p-4">
                     <div className="mb-2 flex items-start justify-between">
-                      <div className={`flex h-12 w-12 items-center justify-center rounded-xl text-2xl ${earned ? `bg-gradient-to-br ${badge.color} shadow-md` : "bg-slate-200 dark:bg-slate-700"}`}>
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-xl text-2xl ${earned ? `bg-gradient-to-br ${badge.color} shadow-md` : "bg-zinc-800"}`}>
                         <span className={earned ? "" : "grayscale"}>{badge.emoji}</span>
                       </div>
                       {earned ? (
-                        <CheckCircle2 className="h-5 w-5 text-green-500" />
+                        <CheckCircle2 className="h-5 w-5 text-emerald-500" />
                       ) : (
-                        <Lock className="h-4 w-4 text-slate-400" />
+                        <Lock className="h-4 w-4 text-zinc-500" />
                       )}
                     </div>
-                    <h3 className="text-sm font-extrabold">{badge.name}</h3>
-                    <p className="mt-0.5 text-xs text-muted-foreground">{badge.description}</p>
-                    <div className={`mt-2 text-xs font-bold ${earned ? "text-green-600" : "text-muted-foreground"}`}>
+                    <h3 className="text-sm font-extrabold text-white">{badge.name}</h3>
+                    <p className="mt-0.5 text-xs text-zinc-400">{badge.description}</p>
+                    <div className={`mt-2 text-xs font-bold ${earned ? "text-emerald-400" : "text-zinc-500"}`}>
                       {earned ? `✅ +${badge.points} ball olingdi` : `🔒 +${badge.points} ball`}
                     </div>
                   </div>
@@ -341,9 +341,9 @@ export default function AchievementsPage() {
       </section>
 
       {/* Quiz section */}
-      <section id="quiz-section" className="py-12" data-testid="section-quiz">
+      <section id="quiz-section" className="bg-[#0d0d0d] py-12" data-testid="section-quiz">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl border bg-white shadow-lg dark:bg-card">
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900">
             <div className="bg-gradient-to-r from-indigo-600 to-purple-700 p-6 text-white">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20">
@@ -361,7 +361,7 @@ export default function AchievementsPage() {
                 <div className="text-center" data-testid="quiz-idle">
                   <div className="text-4xl mb-4">🧠</div>
                   <h3 className="text-xl font-extrabold mb-2">5 ta savol</h3>
-                  <p className="text-muted-foreground mb-6 text-sm">ACCA, DipIFR, 1C va Financial Modeling bo'yicha test. Muvaffaqiyatli tugatganingizda 40 ball va badge olasiz.</p>
+                  <p className="text-zinc-400 mb-6 text-sm">ACCA, DipIFR, 1C va Financial Modeling bo'yicha test. Muvaffaqiyatli tugatganingizda 40 ball va badge olasiz.</p>
                   <Button onClick={handleStartQuiz} className="rounded-full bg-gradient-to-r from-indigo-600 to-purple-700 px-8 font-bold text-white" data-testid="button-start-quiz">
                     Testni Boshlash <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -371,11 +371,11 @@ export default function AchievementsPage() {
               {quizState === "active" && (
                 <div data-testid="quiz-active">
                   <div className="mb-6">
-                    <div className="mb-2 flex justify-between text-sm text-muted-foreground">
+                    <div className="mb-2 flex justify-between text-sm text-zinc-400">
                       <span>Savol {currentQ + 1} / {QUIZ_QUESTIONS.length}</span>
                       <span>{answers.filter(Boolean).length} to'g'ri</span>
                     </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-slate-100">
+                    <div className="h-2 overflow-hidden rounded-full bg-zinc-800">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 transition-all duration-500"
                         style={{ width: `${((currentQ) / QUIZ_QUESTIONS.length) * 100}%` }}
@@ -423,7 +423,7 @@ export default function AchievementsPage() {
                   <h3 className="text-2xl font-extrabold mb-2">
                     {correctCount >= 4 ? "Ajoyib natija!" : correctCount >= 3 ? "Yaxshi!" : "Davom eting!"}
                   </h3>
-                  <p className="text-muted-foreground mb-2">
+                  <p className="text-zinc-400 mb-2">
                     {state.quizCompleted && !answers.length
                       ? "Siz allaqachon testni tugatgansiz!"
                       : `${QUIZ_QUESTIONS.length} ta savoldan ${correctCount} tasiga to'g'ri javob berdingiz`}
@@ -431,7 +431,7 @@ export default function AchievementsPage() {
                   {!state.quizCompleted || answers.length > 0 ? (
                     <p className="text-lg font-bold text-green-600 mb-4">+40 ball va 🧪 badge oldinggiz!</p>
                   ) : (
-                    <p className="text-sm text-muted-foreground mb-4">Badge va ballar avval berilgan edi.</p>
+                    <p className="text-sm text-zinc-400 mb-4">Badge va ballar avval berilgan edi.</p>
                   )}
                   <div className="flex flex-wrap justify-center gap-3">
                     <Link href="/courses">
@@ -475,7 +475,7 @@ export default function AchievementsPage() {
                     <span className="text-xl">{item.emoji}</span>
                     <div className="flex-1 min-w-0">
                       <div className="truncate text-sm font-bold">{item.label}</div>
-                      <div className="text-xs text-muted-foreground">{visited ? "✅ Tashrif" : "+10 ball"}</div>
+                      <div className="text-xs text-zinc-400">{visited ? "✅ Tashrif" : "+10 ball"}</div>
                     </div>
                     {badgeEarned && <CheckCircle2 className="h-4 w-4 shrink-0 text-green-500" />}
                   </div>
@@ -489,12 +489,12 @@ export default function AchievementsPage() {
       {/* Reset */}
       <section className="py-8 text-center" data-testid="section-reset">
         {!showReset ? (
-          <button onClick={() => setShowReset(true)} className="text-xs text-muted-foreground underline hover:text-foreground" data-testid="button-show-reset">
+          <button onClick={() => setShowReset(true)} className="text-xs text-zinc-400 underline hover:text-foreground" data-testid="button-show-reset">
             Progressni tozalash
           </button>
         ) : (
           <div className="flex flex-col items-center gap-3">
-            <p className="text-sm text-muted-foreground">Barcha ball va badge'lar o'chiriladi. Ishonchingiz komilmi?</p>
+            <p className="text-sm text-zinc-400">Barcha ball va badge'lar o'chiriladi. Ishonchingiz komilmi?</p>
             <div className="flex gap-3">
               <Button variant="destructive" size="sm" onClick={() => { resetState(); setShowReset(false); setQuizState("idle"); setAnswers([]); setCurrentQ(0); }} data-testid="button-confirm-reset">
                 <RotateCcw className="mr-1.5 h-3.5 w-3.5" /> Tasdiqlash

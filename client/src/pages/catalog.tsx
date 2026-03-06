@@ -2,9 +2,7 @@ import { useState, useMemo } from "react";
 import { Link, useSearch } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
 import Breadcrumb from "@/components/breadcrumb";
 import { courses } from "@/lib/data";
@@ -87,52 +85,53 @@ export default function Catalog() {
       </section>
 
       {/* Course grid */}
-      <section className="py-12 sm:py-16" data-testid="section-catalog-grid">
+      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-catalog-grid">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {filteredCourses.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filteredCourses.map((course) => (
-                <Link key={course.id} href={`/course/${course.id}`}>
-                  <Card className="group cursor-pointer border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full overflow-hidden" data-testid={`card-catalog-course-${course.id}`}>
-                    <div className="h-44 overflow-hidden">
+                <a key={course.id} href={`/course/${course.id}`}>
+                  <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-zinc-900 transition-transform duration-300 hover:-translate-y-2" data-testid={`card-catalog-course-${course.id}`}>
+                    <div className="relative overflow-hidden">
                       <img
                         src={course.image}
                         alt={course.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent" />
+                      <span className="absolute left-3 top-3 rounded-full bg-purple-600 px-3 py-1 text-xs font-bold text-white">{course.category}</span>
+                      {course.discount && (
+                        <span className="absolute right-3 top-3 rounded-full bg-rose-600 px-2.5 py-1 text-xs font-bold text-white">-{course.discount}</span>
+                      )}
                     </div>
-                    <div className="p-5">
-                      <div className="mb-3 flex flex-wrap items-center gap-2">
-                        <Badge className="rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">{course.category}</Badge>
-                        <Badge variant="outline" className="rounded-full text-xs font-semibold border-2">{course.level}</Badge>
-                        {course.discount && (
-                          <Badge className="rounded-full bg-rose-100 text-rose-700 text-xs font-bold">-{course.discount}</Badge>
-                        )}
-                      </div>
-                      <h3 className="mb-2 text-base font-bold leading-snug text-foreground">{course.title}</h3>
-                      <p className="mb-4 text-sm text-muted-foreground line-clamp-2">{course.shortDescription}</p>
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
+                    <div className="flex flex-1 flex-col p-5">
+                      <span className="mb-2 inline-block self-start rounded-full border border-white/15 px-2.5 py-0.5 text-xs font-medium text-zinc-400">{course.level}</span>
+                      <h3 className="mb-2 text-base font-extrabold uppercase tracking-wide text-white">{course.title}</h3>
+                      <p className="flex-1 text-sm leading-relaxed text-zinc-400 line-clamp-2">{course.shortDescription}</p>
+                      <div className="mt-3 flex items-center gap-3 text-xs text-zinc-500">
                         <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {course.duration}</span>
-                        <span className="flex items-center gap-1"><Star className="h-3.5 w-3.5 text-amber-500" /> {course.rating}</span>
+                        <span className="flex items-center gap-1"><Star className="h-3.5 w-3.5 text-amber-400" /> {course.rating}</span>
                       </div>
-                      <div className="flex items-center justify-between gap-2 flex-wrap border-t pt-3">
-                        {course.oldPrice && (
-                          <span className="text-xs text-muted-foreground line-through">{course.oldPrice}</span>
-                        )}
-                        <span className="text-base font-extrabold text-foreground">{course.price} <span className="text-xs font-normal text-muted-foreground">UZS</span></span>
-                        <ArrowRight className="h-4 w-4 text-purple-500 opacity-0 transition-opacity group-hover:opacity-100" />
+                      <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-4">
+                        <div>
+                          {course.oldPrice && <span className="text-xs text-zinc-500 line-through">{course.oldPrice}</span>}
+                          <div className="text-base font-extrabold text-white">{course.price} <span className="text-xs font-normal text-zinc-500">UZS</span></div>
+                        </div>
+                        <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/60 px-3 py-1.5 text-xs font-bold text-amber-400 transition-all group-hover:bg-amber-400 group-hover:text-black">
+                          Ko'rish <ArrowRight className="h-3 w-3" />
+                        </span>
                       </div>
                     </div>
-                  </Card>
-                </Link>
+                  </article>
+                </a>
               ))}
             </div>
           ) : (
             <div className="py-20 text-center" data-testid="text-no-courses">
-              <Filter className="mx-auto mb-4 h-12 w-12 text-muted-foreground/30" />
-              <h3 className="text-lg font-medium">Kurslar topilmadi</h3>
-              <p className="mt-2 text-sm text-muted-foreground">Boshqa filtr yoki qidiruv so'zini sinab ko'ring</p>
+              <Filter className="mx-auto mb-4 h-12 w-12 text-zinc-700" />
+              <h3 className="text-lg font-bold text-white">Kurslar topilmadi</h3>
+              <p className="mt-2 text-sm text-zinc-400">Boshqa filtr yoki qidiruv so'zini sinab ko'ring</p>
             </div>
           )}
         </div>

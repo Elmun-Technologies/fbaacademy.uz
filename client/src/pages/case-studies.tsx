@@ -1,8 +1,5 @@
-import { Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
 import Breadcrumb from "@/components/breadcrumb";
 import { graduateResults } from "@/lib/data";
@@ -18,14 +15,14 @@ export default function CaseStudies() {
 
   return (
     <Layout>
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-16 sm:py-20">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0f0a2e] via-[#1e1060] to-slate-900 py-16 sm:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-4">
+          <div className="mb-6">
             <Breadcrumb items={[{ label: "Muvaffaqiyat tarixi" }]} light />
           </div>
-          <Badge className="mb-4 rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">Natijalar</Badge>
-          <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl" data-testid="text-case-studies-title">Bitiruvchilar natijalari</h1>
+          <div className="mb-4 inline-block rounded-full border border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm font-semibold text-purple-200 backdrop-blur-sm">Natijalar</div>
+          <h1 className="mb-4 text-5xl font-extrabold uppercase tracking-tight text-white sm:text-6xl" data-testid="text-case-studies-title">Bitiruvchilar natijalari</h1>
           <p className="mb-10 max-w-2xl text-slate-300">
             Bizning bitiruvchilarimiz haqiqiy natijalarni ko'rsatmoqda. Ularning muvaffaqiyat tarixi bilan tanishing.
           </p>
@@ -45,62 +42,65 @@ export default function CaseStudies() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
+      <section className="bg-[#0d0d0d] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">Muvaffaqiyat tarixi</h2>
-          <div className="grid gap-6 sm:grid-cols-2">
+          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white sm:text-5xl">Muvaffaqiyat tarixi</h2>
+          <div className="grid gap-5 sm:grid-cols-2">
             {graduateResults.map((grad) => (
-              <Card key={grad.id} className="border shadow-lg p-6 sm:p-8" data-testid={`card-case-${grad.id}`}>
+              <div key={grad.id} className="rounded-2xl border border-white/10 bg-zinc-900 p-6 sm:p-8" data-testid={`card-case-${grad.id}`}>
                 <div className="flex items-start gap-4">
-                  <img src={grad.avatar} alt={grad.name} className="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-purple-100 dark:ring-purple-900" />
+                  <img src={grad.avatar} alt={grad.name} className="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-purple-500/30" />
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-foreground" data-testid={`text-case-name-${grad.id}`}>{grad.name}</h3>
-                    <Badge className="mt-1 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 text-xs font-semibold">{grad.courseName}</Badge>
+                    <h3 className="text-lg font-extrabold text-white" data-testid={`text-case-name-${grad.id}`}>{grad.name}</h3>
+                    <span className="mt-1 inline-block rounded-full bg-purple-600/30 px-3 py-0.5 text-xs font-semibold text-purple-300">{grad.courseName}</span>
                   </div>
                 </div>
 
-                <div className="mt-5 flex items-center gap-3 rounded-xl border bg-slate-50 p-3 dark:bg-slate-900/50">
+                <div className="mt-5 flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-800 p-3">
                   <div className="flex-1 text-center">
-                    <div className="text-xs text-muted-foreground">Oldin</div>
-                    <div className="text-sm font-semibold text-foreground">{grad.beforeRole}</div>
+                    <div className="text-xs text-zinc-500">Oldin</div>
+                    <div className="text-sm font-semibold text-zinc-300">{grad.beforeRole}</div>
                   </div>
-                  <TrendingUp className="h-5 w-5 text-emerald-500 shrink-0" />
+                  <TrendingUp className="h-5 w-5 shrink-0 text-emerald-500" />
                   <div className="flex-1 text-center">
-                    <div className="text-xs text-muted-foreground">Hozir</div>
-                    <div className="text-sm font-semibold text-purple-600 dark:text-purple-400">{grad.afterRole}</div>
+                    <div className="text-xs text-zinc-500">Hozir</div>
+                    <div className="text-sm font-semibold text-purple-400">{grad.afterRole}</div>
                   </div>
                 </div>
 
                 <div className="mt-4 flex items-center gap-2">
                   <TrendingUp className="h-4 w-4 text-emerald-500" />
-                  <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">{grad.salaryIncrease}</span>
+                  <span className="text-sm font-bold text-emerald-400">{grad.salaryIncrease}</span>
                 </div>
 
                 <div className="mt-3 flex items-start gap-2">
-                  <Quote className="h-4 w-4 shrink-0 text-purple-400 mt-0.5" />
-                  <p className="text-sm text-muted-foreground italic leading-relaxed">"{grad.story}"</p>
+                  <Quote className="mt-0.5 h-4 w-4 shrink-0 text-purple-400" />
+                  <p className="text-sm italic leading-relaxed text-zinc-400">"{grad.story}"</p>
                 </div>
 
                 {grad.company !== "Mustaqil" && (
-                  <div className="mt-3 text-xs text-muted-foreground">
-                    Hozirgi ish joyi: <span className="font-bold text-foreground">{grad.company}</span>
+                  <div className="mt-3 text-xs text-zinc-500">
+                    Hozirgi ish joyi: <span className="font-bold text-zinc-300">{grad.company}</span>
                   </div>
                 )}
-              </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-purple-600 to-pink-600 py-14 sm:py-16">
+      <section className="bg-gradient-to-br from-purple-900 via-[#1e1060] to-slate-900 py-14 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Keyingi muvaffaqiyat tarixi sizniki bo'lsin</h2>
-            <Link href="/contacts">
-              <Button size="lg" className="gap-2 rounded-full bg-white px-8 font-bold text-purple-700 shadow-lg hover:bg-slate-100" data-testid="button-case-cta">
+            <div>
+              <div className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-purple-400">Keyingi qadam</div>
+              <h2 className="text-4xl font-extrabold uppercase text-white sm:text-5xl">Muvaffaqiyat tarixi sizniki bo'lsin</h2>
+            </div>
+            <a href="/contacts">
+              <Button size="lg" className="gap-2 rounded-full bg-amber-400 px-8 font-bold text-black hover:bg-amber-300" data-testid="button-case-cta">
                 Bepul konsultatsiya <ArrowRight className="h-5 w-5" />
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
