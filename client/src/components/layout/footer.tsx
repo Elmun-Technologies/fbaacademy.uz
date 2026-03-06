@@ -12,7 +12,7 @@ export default function Footer() {
               <span className="text-lg font-bold" data-testid="text-footer-brand">FBA Academy</span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-              Zamonaviy kasblarni 0 dan o'rganing. Marketing, IT va dizayn yo'nalishlari.
+              ACCA, DipIFR, Financial Modeling, 1C va Huquqshunoslik bo'yicha professional kurslar.
             </p>
             <div className="mt-4 flex items-center gap-2">
               <a href="https://t.me/fbaacademy" target="_blank" rel="noopener noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-muted-foreground transition-colors dark:bg-slate-800" data-testid="link-telegram">
@@ -34,10 +34,11 @@ export default function Footer() {
             <h4 className="mb-4 text-sm font-semibold" data-testid="text-footer-courses-title">Kurslar</h4>
             <ul className="space-y-2.5">
               <li><Link href="/courses" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-all-courses">Barcha kurslar</Link></li>
-              <li><Link href="/course/smm-mutaxassis" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-smm">SMM kursi</Link></li>
-              <li><Link href="/course/web-dasturlash" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-web">Web dasturlash</Link></li>
-              <li><Link href="/course/grafik-dizayn" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-design">Grafik dizayn</Link></li>
-              <li><Link href="/course/biznes-boshqaruv" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-business">Biznes kursi</Link></li>
+              <li><Link href="/course/acca" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-acca">ACCA</Link></li>
+              <li><Link href="/course/dipifr" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-dipifr">DipIFR</Link></li>
+              <li><Link href="/course/financial-modeling" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-fm">Financial Modeling</Link></li>
+              <li><Link href="/course/1c-course" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-1c">1C: Buxgalteriya</Link></li>
+              <li><Link href="/course/jurisprudence" className="text-sm text-muted-foreground transition-colors" data-testid="link-footer-law">Huquqshunoslik</Link></li>
             </ul>
           </div>
 

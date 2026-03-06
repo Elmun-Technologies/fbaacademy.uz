@@ -12,7 +12,7 @@ import { Search, Clock, Filter, Users } from "lucide-react";
 export default function Catalog() {
   useSEO({
     title: "Barcha kurslar - FBA Academy",
-    description: "FBA Academy barcha kurslari. Dasturlash, Marketing, Dizayn va Biznes yo'nalishlarida professional kurslar.",
+    description: "FBA Academy barcha kurslari. ACCA, DipIFR, Financial Modeling, 1C va Huquqshunoslik yo'nalishlarida professional kurslar.",
   });
 
   const searchString = useSearch();
@@ -80,8 +80,8 @@ export default function Catalog() {
                     <div className="mb-3 flex flex-wrap items-center gap-2">
                       <Badge variant="outline" className="rounded-full text-xs">{course.category}</Badge>
                       <Badge variant="outline" className="rounded-full text-xs">{course.level}</Badge>
-                      {course.oldPrice && (
-                        <span className="text-xs font-semibold text-rose-600 dark:text-rose-400">-40%</span>
+                      {course.discount && (
+                        <span className="text-xs font-semibold text-rose-600 dark:text-rose-400">-{course.discount}</span>
                       )}
                     </div>
                     <div className="mb-3 overflow-hidden rounded-xl">
