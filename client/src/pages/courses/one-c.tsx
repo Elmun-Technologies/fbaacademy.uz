@@ -10,6 +10,8 @@ import LeadForm from "@/components/lead-form";
 import { courses, teachers } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, Settings, FileText, Users, BarChart3, DollarSign, Award, Briefcase, BookOpen, Monitor, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import CourseBlogLinks from "@/components/course-blog-links";
+import CourseRelated from "@/components/course-related";
+import { useLanguage } from "@/contexts/language-context";
 
 const course = courses.find((c) => c.id === "1c-course")!;
 const mentor = teachers.find((t) => t.id === "teacher-4")!;
@@ -269,6 +271,7 @@ const SEO_SCHEMAS = [
 ];
 
 export default function OneCPage() {
+  const { t } = useLanguage();
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
   const [activeFaqTab, setActiveFaqTab] = useState("To'lov");
 
@@ -744,7 +747,7 @@ export default function OneCPage() {
       {/* ===== 11. COURSE MODULES ===== */}
       <section className="py-14" data-testid="section-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl">Kurs dasturi</h2>
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl">{t.page.curriculum}</h2>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
@@ -920,59 +923,7 @@ export default function OneCPage() {
         { href: "/blog/moliyaviy-tahlilchi-bolish-yol-xaritasi", title: "Moliya sohasida karyera yo'l xaritasi", readTime: "9 daqiqa" },
       ]} />
 
-      <section className="bg-slate-50 py-12 dark:bg-slate-900/30" data-testid="section-related">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-xl font-extrabold sm:text-2xl">Boshqa moliya va buxgalteriya kurslari</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                href: "/course/financial-modeling",
-                title: "Financial Modeling",
-                desc: "Excel'da moliyaviy modellashtirish. DCF, LBO, 3-Statement model.",
-                color: "from-green-600 to-emerald-700",
-                badge: "Mashhur",
-              },
-              {
-                href: "/course/dipifr",
-                title: "DipIFR",
-                desc: "ACCA DipIFR — IFRS (MFHS) bo'yicha xalqaro diplom.",
-                color: "from-indigo-600 to-slate-700",
-                badge: "Xalqaro",
-              },
-              {
-                href: "/course/acca",
-                title: "ACCA",
-                desc: "ACCA — moliya va buxgalteriya bo'yicha top xalqaro malaka.",
-                color: "from-purple-700 to-indigo-800",
-                badge: "Top",
-              },
-              {
-                href: "/course/jurisprudence",
-                title: "Huquqshunoslik",
-                desc: "Soliq va mehnat qonunchiligi. Buxgalterlar uchun.",
-                color: "from-amber-600 to-orange-700",
-                badge: "Yangi",
-              },
-            ].map((item, i) => (
-              <Link key={i} href={item.href} data-testid={`related-course-${i}`}>
-                <article className="group h-full overflow-hidden rounded-2xl border bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:bg-card">
-                  <div className={`h-2 w-full bg-gradient-to-r ${item.color}`} />
-                  <div className="p-5">
-                    <div className="mb-2 flex items-center justify-between">
-                      <h3 className="text-sm font-extrabold group-hover:text-blue-600 transition-colors">{item.title}</h3>
-                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-300">{item.badge}</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-                    <div className="mt-3 flex items-center gap-1 text-xs font-bold text-blue-600">
-                      Batafsil <ArrowRight className="h-3 w-3" />
-                    </div>
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CourseRelated excludeId="1c-course" />
     </Layout>
   );
 }

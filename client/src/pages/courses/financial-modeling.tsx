@@ -10,6 +10,8 @@ import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
 import { faqItems } from "@/lib/data";
 import CourseBlogLinks from "@/components/course-blog-links";
+import CourseRelated from "@/components/course-related";
+import { useLanguage } from "@/contexts/language-context";
 import {
   CheckCircle2, ArrowRight, Star, ChevronRight, Play,
   BarChart3, Calculator, TrendingUp, BookOpen, Clock,
@@ -273,6 +275,7 @@ const RELATED = [
 ];
 
 export default function FinancialModelingPage() {
+  const { t } = useLanguage();
   useSEO({
     title: "Moliyaviy Modellashtirish Kursi — DCF, Excel, FAST | FBA Academy",
     description: "Amaliy Moliyaviy Modellashtirish kursi O'zbekistonda: DCF, FAST standartlari, plan-fakt tahlil, WACC, kompaniyani baholash. 26 dars, 4 biznes-keys, rasmiy diplom. 1-2 oyda natija.",
@@ -543,7 +546,7 @@ export default function FinancialModelingPage() {
       <section id="curriculum" className="py-14 sm:py-20" data-testid="section-fm-curriculum">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-2 flex items-center gap-2">
-            <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-curriculum-title">O'quv dasturi</h2>
+            <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-curriculum-title">{t.page.curriculum}</h2>
             <Badge className="rounded-full border-emerald-200 bg-emerald-50 text-emerald-700 font-semibold">2026 yilda yangilangan</Badge>
           </div>
           <div className="mb-2 flex flex-wrap gap-1.5 text-sm font-semibold text-slate-600">
@@ -815,33 +818,12 @@ export default function FinancialModelingPage() {
         </div>
       </section>
 
-      {/* ── RELATED COURSES ──────────────────────────────────── */}
-      <section className="py-12" data-testid="section-fm-related">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-xl font-extrabold" data-testid="text-fm-related-title">Siz uchun qiziq bo'lishi mumkin</h2>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {RELATED.map((r, i) => (
-              <Link key={i} href={r.href} data-testid={`related-course-${i}`}>
-                <div className="group relative overflow-hidden rounded-2xl border bg-white p-5 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5">
-                  <div className={`absolute left-0 top-0 h-full w-1 bg-gradient-to-b ${r.color}`} />
-                  <div className="pl-3">
-                    <div className="text-base font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors">{r.label}</div>
-                    <div className="mt-1 text-xs text-slate-500">{r.desc}</div>
-                    <div className="mt-3 flex items-center gap-1 text-xs font-bold text-emerald-600">
-                      Batafsil <ArrowRight className="h-3 w-3" />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CourseRelated excludeId="financial-modeling" />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-fm-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-faq-title">Ko'p beriladigan savollar</h2>
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-faq-title">{t.page.faqTitle}</h2>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {faqs.length > 0 ? faqs.map((faq) => (

@@ -15,6 +15,7 @@ interface SEOProps {
   modifiedTime?: string;
   hreflang?: { lang: string; url: string }[];
   breadcrumb?: { name: string; url: string }[];
+  faqItems?: { question: string; answer: string }[];
 }
 
 const BASE_URL = "https://fbaacademy.uz";
@@ -35,6 +36,7 @@ export function useSEO({
   modifiedTime,
   hreflang,
   breadcrumb,
+  faqItems,
 }: SEOProps) {
   const [location] = useLocation();
 
@@ -142,6 +144,21 @@ export function useSEO({
       });
     }
 
+    // FAQPage schema
+    if (faqItems && faqItems.length > 0) {
+      schemas.push({
+        "@type": "FAQPage",
+        "mainEntity": faqItems.map((f) => ({
+          "@type": "Question",
+          "name": f.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.answer,
+          },
+        })),
+      });
+    }
+
     // User-provided schemas
     if (jsonLd) {
       const arr = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
@@ -163,5 +180,5 @@ export function useSEO({
       }
       script.textContent = JSON.stringify(graph);
     }
-  }, [title, description, ogTitle, ogDescription, ogImage, ogType, keywords, noindex, publishedTime, modifiedTime, location]);
+  }, [title, description, ogTitle, ogDescription, ogImage, ogType, keywords, noindex, publishedTime, modifiedTime, location, faqItems]);
 }

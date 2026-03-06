@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
 import CourseBlogLinks from "@/components/course-blog-links";
+import CourseRelated from "@/components/course-related";
+import { useLanguage } from "@/contexts/language-context";
 import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
 import { faqItems } from "@/lib/data";
@@ -172,6 +174,7 @@ const FAQ_ITEMS = [
 ];
 
 export default function JurisprudencePage() {
+  const { t } = useLanguage();
   useSEO({
     title: "Huquqshunoslik Kursi — Fuqarolik, Jinoyat, Ma'muriy Huquq | FBA Academy",
     description: "Huquqshunoslik kursi O'zbekistonda: Fuqarolik, Jinoyat, Ma'muriy, Mehnat va Oila huquqi. Masofaviy o'qish, 1600 soat, rasmiy diplom. Noldan yurist bo'lish uchun.",
@@ -592,7 +595,7 @@ export default function JurisprudencePage() {
       <section className="py-14 sm:py-20" data-testid="section-law-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-faq-title">
-            Ko'p beriladigan savollar
+            {t.page.faqTitle}
           </h2>
           <div className="max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
@@ -616,32 +619,7 @@ export default function JurisprudencePage() {
         </div>
       </section>
 
-      {/* ── RELATED COURSES ──────────────────────────────────── */}
-      <section className="bg-slate-50 py-12" data-testid="section-law-related">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-lg font-extrabold" data-testid="text-law-related-title">Siz uchun qiziq bo'lishi mumkin</h2>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              { href: "/course/financial-modeling", label: "Moliyaviy Modellashtirish", desc: "DCF, FAST, Excel tahlili", color: "from-emerald-500 to-green-600" },
-              { href: "/course/1c-course", label: "1C: Buxgalteriya", desc: "Amaliy buxgalteriya dasturi", color: "from-blue-500 to-indigo-600" },
-              { href: "/course/dipifr", label: "DipIFR", desc: "IFRS xalqaro standartlari", color: "from-indigo-500 to-slate-600" },
-            ].map((r, i) => (
-              <Link key={i} href={r.href} data-testid={`related-course-${i}`}>
-                <div className="group relative overflow-hidden rounded-2xl border bg-white p-5 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5">
-                  <div className={`absolute left-0 top-0 h-full w-1 bg-gradient-to-b ${r.color}`} />
-                  <div className="pl-3">
-                    <div className="text-base font-extrabold text-slate-900 group-hover:text-amber-700 transition-colors">{r.label}</div>
-                    <div className="mt-1 text-xs text-slate-500">{r.desc}</div>
-                    <div className="mt-3 flex items-center gap-1 text-xs font-bold text-amber-600">
-                      Batafsil <ArrowRight className="h-3 w-3" />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CourseRelated excludeId="jurisprudence" />
 
       <CourseBlogLinks color="amber" links={[
         { href: "/blog/ozbekistonda-yurist-maoshi-va-karyera", title: "O'zbekistonda yurist maoshi va karyera", readTime: "9 daqiqa" },
