@@ -19,7 +19,7 @@ export default function ScrollToTop() {
       onClick={scrollTop}
       aria-label="Sahifa boshiga qaytish"
       data-testid="button-scroll-to-top"
-      className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-xl transition-all duration-200 hover:bg-indigo-500 hover:scale-110 hover:shadow-indigo-500/30 hover:shadow-2xl"
+      className="fixed bottom-24 right-4 z-40 flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-xl transition-all duration-200 hover:bg-indigo-500 hover:scale-110 hover:shadow-indigo-500/30 hover:shadow-2xl sm:right-6"
     >
       <ArrowUp className="h-5 w-5" strokeWidth={2.5} />
     </button>
