@@ -64,7 +64,7 @@ export default function LeadForm({ source = "website", buttonText = "Konsultatsi
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Ismingiz" {...field} data-testid="input-lead-name" />
+                  <Input placeholder="Ismingiz" className="rounded-full" {...field} data-testid="input-lead-name" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -76,13 +76,13 @@ export default function LeadForm({ source = "website", buttonText = "Konsultatsi
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="+998 90 123 45 67" {...field} data-testid="input-lead-phone" />
+                  <Input placeholder="+998 90 123 45 67" className="rounded-full" {...field} data-testid="input-lead-phone" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={mutation.isPending} className="w-full gap-2" data-testid="button-submit-lead">
+          <Button type="submit" variant="outline" disabled={mutation.isPending} className="w-full gap-2 rounded-full" data-testid="button-submit-lead">
             {mutation.isPending ? "Yuborilmoqda..." : buttonText}
             {!mutation.isPending && <Send className="h-4 w-4" />}
           </Button>

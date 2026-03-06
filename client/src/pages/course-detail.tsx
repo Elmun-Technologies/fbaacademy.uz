@@ -2,11 +2,12 @@ import { useParams, Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
 import LeadForm from "@/components/lead-form";
 import { courses, teachers, faqItems } from "@/lib/data";
-import { Clock, Users, BarChart3, CheckCircle2, ArrowRight, BookOpen, Award, Star } from "lucide-react";
+import { Clock, Users, BarChart3, CheckCircle2, ArrowRight, BookOpen, ArrowLeft } from "lucide-react";
 
 export default function CourseDetail() {
   const { id } = useParams<{ id: string }>();
@@ -25,7 +26,7 @@ export default function CourseDetail() {
             <h2 className="text-2xl font-bold" data-testid="text-course-not-found">Kurs topilmadi</h2>
             <p className="mt-2 text-muted-foreground">Bu kurs mavjud emas yoki olib tashlangan</p>
             <Link href="/courses">
-              <Button className="mt-4" data-testid="button-back-to-courses">Kurslarga qaytish</Button>
+              <Button variant="outline" className="mt-4 rounded-full" data-testid="button-back-to-courses">Kurslarga qaytish</Button>
             </Link>
           </div>
         </div>
@@ -37,36 +38,37 @@ export default function CourseDetail() {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="relative min-h-[480px]" data-testid="section-course-hero">
-        <div className="absolute inset-0">
-          <img src={course.image} alt={course.title} className="h-full w-full object-cover" />
-          <div className={`absolute inset-0 bg-gradient-to-r ${course.gradient} opacity-85`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-          <div className="grid gap-10 lg:grid-cols-5">
+      {/* Header */}
+      <section className="py-10 sm:py-14" data-testid="section-course-hero">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Link href="/courses">
+            <span className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground cursor-pointer" data-testid="link-back-courses">
+              <ArrowLeft className="h-4 w-4" /> Barcha kurslar
+            </span>
+          </Link>
+
+          <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
             <div className="lg:col-span-3">
               <div className="mb-4 flex flex-wrap gap-2">
-                <span className="rounded-full bg-white/20 px-3 py-1 text-sm text-white backdrop-blur-sm">{course.category}</span>
-                <span className="rounded-full bg-white/20 px-3 py-1 text-sm text-white backdrop-blur-sm">{course.level}</span>
+                <Badge variant="outline" className="rounded-full">{course.category}</Badge>
+                <Badge variant="outline" className="rounded-full">{course.level}</Badge>
               </div>
-              <h1 className="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-course-detail-title">{course.title}</h1>
-              <p className="mt-4 max-w-xl text-lg text-white/85 leading-relaxed">{course.description}</p>
-              <div className="mt-6 flex flex-wrap items-center gap-6 text-white/80">
-                <span className="flex items-center gap-2"><Clock className="h-5 w-5" /> {course.duration}</span>
-                <span className="flex items-center gap-2"><BarChart3 className="h-5 w-5" /> {course.level}</span>
-                <span className="flex items-center gap-2"><BookOpen className="h-5 w-5" /> {course.modules.length} modul</span>
+              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-[2.75rem] leading-tight" data-testid="text-course-detail-title">{course.title}</h1>
+              <p className="mt-4 max-w-xl text-muted-foreground leading-relaxed">{course.description}</p>
+              <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1.5"><Clock className="h-4 w-4" /> {course.duration}</span>
+                <span className="flex items-center gap-1.5"><BarChart3 className="h-4 w-4" /> {course.level}</span>
+                <span className="flex items-center gap-1.5"><BookOpen className="h-4 w-4" /> {course.modules.length} modul</span>
               </div>
-              <div className="mt-8 text-white">
-                <span className="text-3xl font-bold" data-testid="text-course-detail-price">{course.price} UZS</span>
+              <div className="mt-6 flex items-baseline gap-3">
+                <span className="text-3xl font-extrabold text-foreground" data-testid="text-course-detail-price">{course.price} UZS</span>
                 {course.oldPrice && (
-                  <span className="ml-3 text-lg text-white/50 line-through">{course.oldPrice} UZS</span>
+                  <span className="text-lg text-muted-foreground line-through">{course.oldPrice} UZS</span>
                 )}
               </div>
             </div>
             <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-white/10 bg-white dark:bg-card p-6 shadow-2xl backdrop-blur" data-testid="card-course-enroll">
+              <div className="rounded-2xl bg-slate-50 p-6 dark:bg-card" data-testid="card-course-enroll">
                 <h3 className="mb-1 text-lg font-semibold text-foreground">Kursga yozilish</h3>
                 <p className="mb-4 text-sm text-muted-foreground">Bepul konsultatsiya oling va kursga yoziling</p>
                 <LeadForm source={`course-${course.id}`} buttonText="Kursga yozilish" />
@@ -76,28 +78,35 @@ export default function CourseDetail() {
         </div>
       </section>
 
-      {/* For Whom + Skills */}
-      <section className="py-16 sm:py-20" data-testid="section-for-whom">
+      {/* Course Image */}
+      <section className="pb-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2">
+          <div className="overflow-hidden rounded-2xl">
+            <img src={course.image} alt={course.title} className="h-64 w-full object-cover sm:h-80" />
+          </div>
+        </div>
+      </section>
+
+      {/* For Whom + Skills */}
+      <section className="py-12 sm:py-16" data-testid="section-for-whom">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-2">
             <div>
-              <h2 className="text-2xl font-bold sm:text-3xl" data-testid="text-for-whom-title">Kurs kimlar uchun?</h2>
-              <p className="mt-3 text-muted-foreground">Bu kurs quyidagi shaxslar uchun ideal</p>
-              <div className="mt-6 space-y-4">
+              <h2 className="mb-6 text-2xl font-extrabold" data-testid="text-for-whom-title">Kurs kimlar uchun?</h2>
+              <div className="space-y-3">
                 {course.forWhom.map((item, i) => (
-                  <div key={i} className="flex items-start gap-3 rounded-xl border border-border/50 bg-card p-4" data-testid={`text-for-whom-${i}`}>
+                  <div key={i} className="flex items-start gap-3 rounded-xl bg-slate-50 p-4 dark:bg-card" data-testid={`text-for-whom-${i}`}>
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
-                    <span>{item}</span>
+                    <span className="text-sm text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <h2 className="text-2xl font-bold sm:text-3xl" data-testid="text-skills-title">Nimalarni o'rganasiz?</h2>
-              <p className="mt-3 text-muted-foreground">Kursni tugatgach quyidagi ko'nikmalarga ega bo'lasiz</p>
-              <div className="mt-6 flex flex-wrap gap-3">
+              <h2 className="mb-6 text-2xl font-extrabold" data-testid="text-skills-title">Nimalarni o'rganasiz?</h2>
+              <div className="flex flex-wrap gap-2">
                 {course.skills.map((skill, i) => (
-                  <div key={i} className="rounded-xl border border-border/50 bg-card px-4 py-3 text-sm font-medium" data-testid={`badge-skill-${i}`}>{skill}</div>
+                  <Badge key={i} variant="outline" className="rounded-full px-4 py-2 text-sm" data-testid={`badge-skill-${i}`}>{skill}</Badge>
                 ))}
               </div>
             </div>
@@ -106,23 +115,23 @@ export default function CourseDetail() {
       </section>
 
       {/* Modules */}
-      <section className="bg-gradient-to-b from-slate-50 to-white py-16 sm:py-20 dark:from-slate-900/50 dark:to-background" data-testid="section-modules">
+      <section className="py-12 sm:py-16" data-testid="section-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-bold sm:text-3xl" data-testid="text-modules-title">O'quv dasturi</h2>
+          <h2 className="mb-8 text-2xl font-extrabold" data-testid="text-modules-title">O'quv dasturi</h2>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
-                <AccordionItem key={i} value={`module-${i}`} className="rounded-xl border border-border/50 bg-card px-5" data-testid={`accordion-module-${i}`}>
+                <AccordionItem key={i} value={`module-${i}`} className="rounded-xl border-0 bg-slate-50 px-5 dark:bg-card" data-testid={`accordion-module-${i}`}>
                   <AccordionTrigger className="text-left">
-                    <div className="flex items-center gap-4">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 text-sm font-bold text-white">
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-foreground text-sm font-bold text-background">
                         {i + 1}
                       </span>
                       <span className="font-semibold">{mod.title}</span>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <ul className="ml-[3.25rem] space-y-2.5 pb-2">
+                    <ul className="ml-11 space-y-2.5 pb-2">
                       {mod.topics.map((topic, j) => (
                         <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
                           <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
@@ -140,17 +149,16 @@ export default function CourseDetail() {
 
       {/* Mentor */}
       {mentor && (
-        <section className="py-16 sm:py-20" data-testid="section-mentor">
+        <section className="py-12 sm:py-16" data-testid="section-mentor">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-2xl font-bold sm:text-3xl" data-testid="text-mentor-title">Mentor haqida</h2>
-            <div className="rounded-2xl border border-border/50 bg-card p-6 sm:p-8">
-              <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-                <img src={mentor.avatar} alt={mentor.name} className="h-24 w-24 shrink-0 rounded-2xl object-cover" />
+            <h2 className="mb-8 text-2xl font-extrabold" data-testid="text-mentor-title">Mentor</h2>
+            <div className="rounded-2xl bg-slate-50 p-6 sm:p-8 dark:bg-card">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+                <img src={mentor.avatar} alt={mentor.name} className="h-20 w-20 shrink-0 rounded-2xl object-cover" />
                 <div>
                   <h3 className="text-xl font-bold" data-testid="text-mentor-name">{mentor.name}</h3>
-                  <p className="text-muted-foreground">{mentor.role}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">{mentor.experience}</p>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{mentor.bio}</p>
+                  <p className="text-sm text-muted-foreground">{mentor.role} · {mentor.experience}</p>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{mentor.bio}</p>
                 </div>
               </div>
             </div>
@@ -159,13 +167,13 @@ export default function CourseDetail() {
       )}
 
       {/* FAQ */}
-      <section className="bg-gradient-to-b from-slate-50 to-white py-16 sm:py-20 dark:from-slate-900/50 dark:to-background" data-testid="section-course-faq">
+      <section className="py-12 sm:py-16" data-testid="section-course-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-bold sm:text-3xl" data-testid="text-course-faq-title">Ko'p beriladigan savollar</h2>
+          <h2 className="mb-8 text-2xl font-extrabold" data-testid="text-course-faq-title">Ko'p beriladigan savollar</h2>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {faqItems.slice(0, 5).map((faq) => (
-                <AccordionItem key={faq.id} value={faq.id} className="rounded-xl border border-border/50 bg-card px-5" data-testid={`accordion-faq-${faq.id}`}>
+                <AccordionItem key={faq.id} value={faq.id} className="rounded-xl border-0 bg-slate-50 px-5 dark:bg-card" data-testid={`accordion-faq-${faq.id}`}>
                   <AccordionTrigger className="text-left font-medium">{faq.question}</AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
                 </AccordionItem>
@@ -176,13 +184,12 @@ export default function CourseDetail() {
       </section>
 
       {/* CTA */}
-      <section className="bg-slate-950" data-testid="section-course-cta">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">Hoziroq boshlang!</h2>
-            <p className="mt-3 text-lg text-slate-400">Kursga yoziling va yangi kasbingizni bugundan boshlang</p>
+      <section className="border-t py-10 sm:py-12" data-testid="section-course-cta">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <h2 className="text-xl font-bold text-foreground sm:text-2xl">Hoziroq boshlang!</h2>
             <Link href="/contacts">
-              <Button size="lg" className="mt-6 gap-2" data-testid="button-course-cta">
+              <Button variant="outline" size="lg" className="gap-2 rounded-full" data-testid="button-course-cta">
                 Bepul konsultatsiya <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>

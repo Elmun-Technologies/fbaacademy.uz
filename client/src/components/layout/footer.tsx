@@ -1,34 +1,31 @@
 import { Link } from "wouter";
-import { GraduationCap, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { SiTelegram, SiInstagram, SiFacebook, SiYoutube } from "react-icons/si";
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-card" data-testid="footer">
+    <footer className="border-t bg-background" data-testid="footer">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" className="mb-4 flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-md bg-gradient-to-br from-purple-500 to-indigo-600">
-                <GraduationCap className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-bold" data-testid="text-footer-brand">FBA Academy</span>
+            <Link href="/" className="mb-4 inline-block">
+              <span className="text-lg font-bold" data-testid="text-footer-brand">FBA Academy</span>
             </Link>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Zamonaviy kasblarni 0 dan o'rganing. Marketing, IT va dizayn yo'nalishlari bo'yicha amaliy kurslar.
+            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+              Zamonaviy kasblarni 0 dan o'rganing. Marketing, IT va dizayn yo'nalishlari.
             </p>
-            <div className="mt-4 flex items-center gap-3">
-              <a href="https://t.me/fbaacademy" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-md bg-accent text-muted-foreground transition-colors hover-elevate" data-testid="link-telegram">
-                <SiTelegram className="h-4 w-4" />
+            <div className="mt-4 flex items-center gap-2">
+              <a href="https://t.me/fbaacademy" target="_blank" rel="noopener noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-muted-foreground transition-colors dark:bg-slate-800" data-testid="link-telegram">
+                <SiTelegram className="h-3.5 w-3.5" />
               </a>
-              <a href="https://instagram.com/fbaacademy" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-md bg-accent text-muted-foreground transition-colors hover-elevate" data-testid="link-instagram">
-                <SiInstagram className="h-4 w-4" />
+              <a href="https://instagram.com/fbaacademy" target="_blank" rel="noopener noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-muted-foreground transition-colors dark:bg-slate-800" data-testid="link-instagram">
+                <SiInstagram className="h-3.5 w-3.5" />
               </a>
-              <a href="https://facebook.com/fbaacademy" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-md bg-accent text-muted-foreground transition-colors hover-elevate" data-testid="link-facebook">
-                <SiFacebook className="h-4 w-4" />
+              <a href="https://facebook.com/fbaacademy" target="_blank" rel="noopener noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-muted-foreground transition-colors dark:bg-slate-800" data-testid="link-facebook">
+                <SiFacebook className="h-3.5 w-3.5" />
               </a>
-              <a href="https://youtube.com/fbaacademy" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-md bg-accent text-muted-foreground transition-colors hover-elevate" data-testid="link-youtube">
-                <SiYoutube className="h-4 w-4" />
+              <a href="https://youtube.com/fbaacademy" target="_blank" rel="noopener noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-muted-foreground transition-colors dark:bg-slate-800" data-testid="link-youtube">
+                <SiYoutube className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>
