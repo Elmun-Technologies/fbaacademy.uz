@@ -6,6 +6,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Layout from "@/components/layout/layout";
 import CourseBlogLinks from "@/components/course-blog-links";
 import CourseRelated from "@/components/course-related";
+import CourseFormatSection from "@/components/course-format-section";
+import CourseBonusesSection from "@/components/course-bonuses-section";
 import { useLanguage } from "@/contexts/language-context";
 import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
@@ -170,6 +172,54 @@ const FAQ_ITEMS = [
   {
     q: "Bo'lib to'lash imkoni bormi?",
     a: "Ha, 12 oyga 0% foiz bilan bo'lib to'lash imkoni mavjud. Butun summani bir to'lovda to'lasangiz 10% chegirma beriladi.",
+  },
+];
+
+const LAW_BONUSES = [
+  {
+    logo: "⚖️",
+    nameUz: "O'zbekiston Huquqiy Bazasi",
+    nameRu: "Правовая база Узбекистана",
+    nameEn: "Uzbekistan Legal Database",
+    descUz: "Asosiy qonunlar, kodekslar va normativ hujjatlarning to'liq to'plami",
+    descRu: "Полная подборка основных законов, кодексов и нормативных актов",
+    descEn: "Complete collection of main laws, codes and regulatory documents",
+    durationUz: "1 yillik kirish",
+    durationRu: "Доступ на 1 год",
+    durationEn: "1 year access",
+    priceUz: "350 000 so'm",
+    priceRu: "3,500 ₽",
+    priceEn: "$35",
+  },
+  {
+    logo: "📝",
+    nameUz: "Shartnoma Shablonlari To'plami",
+    nameRu: "Набор шаблонов договоров",
+    nameEn: "Contract Templates Collection",
+    descUz: "Biznes, mehnat va fuqarolik shartnomalarining 50+ tayyor shablonlari",
+    descRu: "50+ готовых шаблонов бизнес, трудовых и гражданских договоров",
+    descEn: "50+ ready business, employment and civil contract templates",
+    durationUz: "Abadiy kirish",
+    durationRu: "Пожизненный доступ",
+    durationEn: "Lifetime access",
+    priceUz: "250 000 so'm",
+    priceRu: "2,500 ₽",
+    priceEn: "$25",
+  },
+  {
+    logo: "🏢",
+    nameUz: "Soliq Va Bojxona Huquqi Qo'llanmasi",
+    nameRu: "Практическое руководство по налоговому и таможенному праву",
+    nameEn: "Tax & Customs Law Practical Guide",
+    descUz: "Soliq va bojxona qonunchiligini amalda qo'llash bo'yicha step-by-step qo'llanma",
+    descRu: "Пошаговое руководство по практическому применению налогового и таможенного законодательства",
+    descEn: "Step-by-step guide to practical application of tax and customs legislation",
+    durationUz: "6 oylik kirish",
+    durationRu: "Доступ на 6 месяцев",
+    durationEn: "6 months access",
+    priceUz: "300 000 so'm",
+    priceRu: "3,000 ₽",
+    priceEn: "$30",
   },
 ];
 
@@ -618,6 +668,14 @@ export default function JurisprudencePage() {
           </div>
         </div>
       </section>
+
+      <CourseFormatSection />
+      <CourseBonusesSection
+        bonuses={LAW_BONUSES}
+        totalUz="900 000 so'mdan ortiq"
+        totalRu="Более 9 000 ₽"
+        totalEn="Over $90"
+      />
 
       <CourseRelated excludeId="jurisprudence" />
 

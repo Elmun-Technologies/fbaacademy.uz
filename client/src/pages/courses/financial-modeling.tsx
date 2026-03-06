@@ -11,6 +11,8 @@ import YouTubeEmbed from "@/components/youtube-embed";
 import { faqItems } from "@/lib/data";
 import CourseBlogLinks from "@/components/course-blog-links";
 import CourseRelated from "@/components/course-related";
+import CourseFormatSection from "@/components/course-format-section";
+import CourseBonusesSection from "@/components/course-bonuses-section";
 import { useLanguage } from "@/contexts/language-context";
 import {
   CheckCircle2, ArrowRight, Star, ChevronRight, Play,
@@ -272,6 +274,54 @@ const RELATED = [
   { href: "/course/acca", label: "ACCA", desc: "Xalqaro moliya sertifikati", color: "from-purple-500 to-indigo-600" },
   { href: "/course/dipifr", label: "DipIFR", desc: "IFRS xalqaro standartlari", color: "from-indigo-500 to-slate-600" },
   { href: "/course/1c-course", label: "1C: Buxgalteriya", desc: "Amaliy buxgalteriya dasturi", color: "from-blue-500 to-indigo-600" },
+];
+
+const FM_BONUSES = [
+  {
+    logo: "📊",
+    nameUz: "DCF Model Shablonlar To'plami",
+    nameRu: "Набор шаблонов DCF-моделей",
+    nameEn: "DCF Model Templates Pack",
+    descUz: "Real kompaniyalar uchun tayyor DCF modellar va baholash shablonlari",
+    descRu: "Готовые DCF-модели и шаблоны оценки для реальных компаний",
+    descEn: "Ready DCF models and valuation templates for real companies",
+    durationUz: "Abadiy kirish",
+    durationRu: "Пожизненный доступ",
+    durationEn: "Lifetime access",
+    priceUz: "450 000 so'm",
+    priceRu: "4,500 ₽",
+    priceEn: "$45",
+  },
+  {
+    logo: "📈",
+    nameUz: "FAST Standart Kurs Materiallar",
+    nameRu: "Материалы курса FAST Standard",
+    nameEn: "FAST Standard Course Materials",
+    descUz: "Moliyaviy modellashtirishning FAST standartiga oid to'liq qo'llanma va shablonlar",
+    descRu: "Полное руководство и шаблоны по стандарту FAST для финансового моделирования",
+    descEn: "Complete guide and templates for FAST financial modeling standard",
+    durationUz: "1 yillik kirish",
+    durationRu: "Доступ на 1 год",
+    durationEn: "1 year access",
+    priceUz: "350 000 so'm",
+    priceRu: "3,500 ₽",
+    priceEn: "$35",
+  },
+  {
+    logo: "🏦",
+    nameUz: "Tarmoq Moliyaviy Modellari",
+    nameRu: "Отраслевые финансовые модели",
+    nameEn: "Industry Financial Models",
+    descUz: "Bank, ritel, ishlab chiqarish va boshqa tarmoqlar uchun tayyor moliyaviy modellar",
+    descRu: "Готовые финансовые модели для банков, ретейла, производства и других отраслей",
+    descEn: "Ready financial models for banking, retail, manufacturing and other sectors",
+    durationUz: "6 oylik kirish",
+    durationRu: "Доступ на 6 месяцев",
+    durationEn: "6 months access",
+    priceUz: "300 000 so'm",
+    priceRu: "3,000 ₽",
+    priceEn: "$30",
+  },
 ];
 
 export default function FinancialModelingPage() {
@@ -817,6 +867,14 @@ export default function FinancialModelingPage() {
           </div>
         </div>
       </section>
+
+      <CourseFormatSection />
+      <CourseBonusesSection
+        bonuses={FM_BONUSES}
+        totalUz="1 100 000 so'mdan ortiq"
+        totalRu="Более 11 000 ₽"
+        totalEn="Over $110"
+      />
 
       <CourseRelated excludeId="financial-modeling" />
 

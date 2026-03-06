@@ -12,6 +12,8 @@ import { courses, teachers } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, FileText, BookOpen, Clock, Calendar, GraduationCap, Award, Building2, Users, ChevronRight, BarChart3 } from "lucide-react";
 import CourseBlogLinks from "@/components/course-blog-links";
 import CourseRelated from "@/components/course-related";
+import CourseFormatSection from "@/components/course-format-section";
+import CourseBonusesSection from "@/components/course-bonuses-section";
 import { useLanguage } from "@/contexts/language-context";
 
 const course = courses.find((c) => c.id === "dipifr")!;
@@ -173,6 +175,54 @@ const COURSE_COMPONENTS = [
     title: "Online imtihon simulyatori",
     desc: "ACCA DipIFR onlayn imtihon muhitining funksionalini o'zlashtirish va onlayn imtihonga tayyorlikni tekshirish uchun trenajer.",
     color: "from-slate-700 to-indigo-900",
+  },
+];
+
+const DIPIFR_BONUSES = [
+  {
+    logo: "📚",
+    nameUz: "IFRS Standartlar Bazasi",
+    nameRu: "База стандартов МСФО",
+    nameEn: "IFRS Standards Database",
+    descUz: "Barcha asosiy MFHS standartlarining rus tilidagi to'liq matnlari",
+    descRu: "Полные тексты всех основных стандартов МСФО на русском языке",
+    descEn: "Full texts of all major IFRS standards in English",
+    durationUz: "6 oylik kirish",
+    durationRu: "Доступ на 6 месяцев",
+    durationEn: "6 months access",
+    priceUz: "250 000 so'm",
+    priceRu: "2,500 ₽",
+    priceEn: "$25",
+  },
+  {
+    logo: "📊",
+    nameUz: "Excel Shablon To'plami",
+    nameRu: "Набор Excel-шаблонов",
+    nameEn: "Excel Templates Pack",
+    descUz: "Konsolidatsiya, IFRS konversiya va DipIFR topshiriqlari uchun tayyor shablonlar",
+    descRu: "Готовые шаблоны для консолидации, конвертации МСФО и задач DipIFR",
+    descEn: "Ready templates for consolidation, IFRS conversion and DipIFR tasks",
+    durationUz: "Abadiy kirish",
+    durationRu: "Пожизненный доступ",
+    durationEn: "Lifetime access",
+    priceUz: "400 000 so'm",
+    priceRu: "4,000 ₽",
+    priceEn: "$40",
+  },
+  {
+    logo: "🎯",
+    nameUz: "Mock Imtihon Simulyatori",
+    nameRu: "Симулятор экзамена DipIFR",
+    nameEn: "DipIFR Mock Exam Simulator",
+    descUz: "O'tgan yillar imtihon topshiriqlari va ball berish mezonlari bilan to'liq simulyator",
+    descRu: "Полный симулятор с заданиями прошлых лет и критериями оценки",
+    descEn: "Full simulator with past exam questions and marking criteria",
+    durationUz: "3 oylik kirish",
+    durationRu: "Доступ на 3 месяца",
+    durationEn: "3 months access",
+    priceUz: "350 000 so'm",
+    priceRu: "3,500 ₽",
+    priceEn: "$35",
   },
 ];
 
@@ -896,6 +946,17 @@ export default function DipIFRPage() {
           </div>
         </div>
       </section>
+
+      {/* ===== FORMAT ===== */}
+      <CourseFormatSection />
+
+      {/* ===== BONUSES ===== */}
+      <CourseBonusesSection
+        bonuses={DIPIFR_BONUSES}
+        totalUz="1 000 000 so'mdan ortiq"
+        totalRu="Более 10 000 ₽"
+        totalEn="Over $100"
+      />
 
       {/* ===== 16. RELATED COURSES ===== */}
       <CourseBlogLinks color="indigo" links={[

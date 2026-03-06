@@ -11,6 +11,8 @@ import { courses, teachers } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, Settings, FileText, Users, BarChart3, DollarSign, Award, Briefcase, BookOpen, Monitor, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import CourseBlogLinks from "@/components/course-blog-links";
 import CourseRelated from "@/components/course-related";
+import CourseFormatSection from "@/components/course-format-section";
+import CourseBonusesSection from "@/components/course-bonuses-section";
 import { useLanguage } from "@/contexts/language-context";
 
 const course = courses.find((c) => c.id === "1c-course")!;
@@ -267,6 +269,54 @@ const SEO_SCHEMAS = [
       "contactType": "customer service",
       "availableLanguage": ["uz", "ru"],
     },
+  },
+];
+
+const ONE_C_BONUSES = [
+  {
+    logo: "💼",
+    nameUz: "1C: Buxgalteriya Shablon Bazasi",
+    nameRu: "База шаблонов 1С: Бухгалтерии",
+    nameEn: "1C: Accounting Templates Library",
+    descUz: "Tayyor hisobot shablonlari, soliq deklaratsiyalari va asosiy operatsiyalar uchun qo'llanmalar",
+    descRu: "Готовые шаблоны отчётов, налоговых деклараций и инструкции по основным операциям",
+    descEn: "Ready report templates, tax declarations and guides for main operations",
+    durationUz: "Abadiy kirish",
+    durationRu: "Пожизненный доступ",
+    durationEn: "Lifetime access",
+    priceUz: "280 000 so'm",
+    priceRu: "2,800 ₽",
+    priceEn: "$28",
+  },
+  {
+    logo: "📋",
+    nameUz: "Soliq.uz Integratsiya Qo'llanmasi",
+    nameRu: "Руководство по интеграции с my.soliq.uz",
+    nameEn: "my.soliq.uz Integration Guide",
+    descUz: "Soliq.uz bilan 1C integratsiyasi — step-by-step ko'rsatmalar va amaliy misollar",
+    descRu: "Пошаговые инструкции и практические примеры интеграции 1С с my.soliq.uz",
+    descEn: "Step-by-step instructions and practical examples for 1C integration with my.soliq.uz",
+    durationUz: "1 yillik kirish",
+    durationRu: "Доступ на 1 год",
+    durationEn: "1 year access",
+    priceUz: "200 000 so'm",
+    priceRu: "2,000 ₽",
+    priceEn: "$20",
+  },
+  {
+    logo: "📊",
+    nameUz: "Ish Haqi Hisoblash Avtomatizatsiya Paketi",
+    nameRu: "Пакет автоматизации расчёта зарплаты",
+    nameEn: "Payroll Automation Package",
+    descUz: "Ish haqi, bonuslar, soliqlar va nafaqalarni avtomatik hisoblash uchun tayyor yechimlar",
+    descRu: "Готовые решения для автоматического расчёта зарплат, бонусов, налогов и пособий",
+    descEn: "Ready solutions for automatic calculation of salaries, bonuses, taxes and benefits",
+    durationUz: "6 oylik kirish",
+    durationRu: "Доступ на 6 месяцев",
+    durationEn: "6 months access",
+    priceUz: "320 000 so'm",
+    priceRu: "3,200 ₽",
+    priceEn: "$32",
   },
 ];
 
@@ -916,6 +966,14 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 15. RELATED COURSES (Internal SEO links) ===== */}
+      <CourseFormatSection />
+      <CourseBonusesSection
+        bonuses={ONE_C_BONUSES}
+        totalUz="800 000 so'mdan ortiq"
+        totalRu="Более 8 000 ₽"
+        totalEn="Over $80"
+      />
+
       <CourseBlogLinks color="blue" links={[
         { href: "/blog/1c-buxgalteriya-boshlangich-qollanma", title: "1C: Buxgalteriya boshlang'ich qo'llanma", readTime: "10 daqiqa" },
         { href: "/blog/buxgalter-maoshi-ozbekiston-2026", title: "Buxgalter maoshi 2026: 1C bilan nechta?", readTime: "8 daqiqa" },
