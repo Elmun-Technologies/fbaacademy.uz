@@ -7,9 +7,13 @@ interface SEOProps {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
+  ogType?: string;
   keywords?: string;
-  jsonLd?: Record<string, unknown>;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  hreflang?: { lang: string; url: string }[];
 }
 
 const BASE_URL = "https://fbaacademy.uz";
@@ -22,9 +26,13 @@ export function useSEO({
   ogTitle,
   ogDescription,
   ogImage,
+  ogType = "website",
   keywords,
   jsonLd,
   noindex = false,
+  publishedTime,
+  modifiedTime,
+  hreflang,
 }: SEOProps) {
   const [location] = useLocation();
 
@@ -36,9 +44,9 @@ export function useSEO({
       let el = document.querySelector<HTMLMetaElement>(selector);
       if (!el) {
         el = document.createElement("meta");
-        if (selector.includes("property")) {
+        if (selector.includes("property=")) {
           el.setAttribute("property", selector.match(/property="([^"]+)"/)?.[1] || "");
-        } else if (selector.includes("name")) {
+        } else if (selector.includes("name=")) {
           el.setAttribute("name", selector.match(/name="([^"]+)"/)?.[1] || "");
         }
         document.head.appendChild(el);
@@ -46,11 +54,17 @@ export function useSEO({
       el.setAttribute(attr, value);
     };
 
-    const setLink = (rel: string, href: string) => {
-      let el = document.querySelector<HTMLLinkElement>(`link[rel="${rel}"]`);
+    const setLink = (rel: string, href: string, extraAttrs?: Record<string, string>) => {
+      const attrStr = extraAttrs
+        ? Object.entries(extraAttrs).map(([k, v]) => `[${k}="${v}"]`).join("")
+        : "";
+      let el = document.querySelector<HTMLLinkElement>(`link[rel="${rel}"]${attrStr}`);
       if (!el) {
         el = document.createElement("link");
         el.setAttribute("rel", rel);
+        if (extraAttrs) {
+          Object.entries(extraAttrs).forEach(([k, v]) => el!.setAttribute(k, v));
+        }
         document.head.appendChild(el);
       }
       el.setAttribute("href", href);
@@ -62,25 +76,53 @@ export function useSEO({
     const resolvedOgDesc = ogDescription || description;
 
     setMeta('meta[name="description"]', "content", description);
-    setMeta('meta[name="robots"]', "content", noindex ? "noindex,nofollow" : "index,follow");
+    setMeta('meta[name="robots"]', "content", noindex ? "noindex,nofollow" : "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1");
     if (keywords) setMeta('meta[name="keywords"]', "content", keywords);
 
     setMeta('meta[property="og:title"]', "content", resolvedOgTitle);
     setMeta('meta[property="og:description"]', "content", resolvedOgDesc);
     setMeta('meta[property="og:url"]', "content", canonicalUrl);
     setMeta('meta[property="og:image"]', "content", resolvedOgImage);
-    setMeta('meta[property="og:type"]', "content", "website");
+    setMeta('meta[property="og:image:width"]', "content", "1200");
+    setMeta('meta[property="og:image:height"]', "content", "630");
+    setMeta('meta[property="og:image:alt"]', "content", resolvedOgTitle);
+    setMeta('meta[property="og:type"]', "content", ogType);
     setMeta('meta[property="og:site_name"]', "content", SITE_NAME);
     setMeta('meta[property="og:locale"]', "content", "uz_UZ");
+    setMeta('meta[property="og:locale:alternate"]', "content", "ru_UZ");
+
+    if (publishedTime) setMeta('meta[property="article:published_time"]', "content", publishedTime);
+    if (modifiedTime) setMeta('meta[property="article:modified_time"]', "content", modifiedTime);
 
     setMeta('meta[name="twitter:card"]', "content", "summary_large_image");
     setMeta('meta[name="twitter:title"]', "content", resolvedOgTitle);
     setMeta('meta[name="twitter:description"]', "content", resolvedOgDesc);
     setMeta('meta[name="twitter:image"]', "content", resolvedOgImage);
+    setMeta('meta[name="twitter:image:alt"]', "content", resolvedOgTitle);
+    setMeta('meta[name="twitter:site"]', "content", "@fbaacademy_uz");
 
     setLink("canonical", canonicalUrl);
 
+    if (hreflang) {
+      hreflang.forEach(({ lang, url }) => {
+        let el = document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${lang}"]`);
+        if (!el) {
+          el = document.createElement("link");
+          el.setAttribute("rel", "alternate");
+          el.setAttribute("hreflang", lang);
+          document.head.appendChild(el);
+        }
+        el.setAttribute("href", url);
+      });
+    }
+
     if (jsonLd) {
+      const schemas = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+      const graph = {
+        "@context": "https://schema.org",
+        "@graph": schemas,
+      };
+
       const scriptId = "json-ld-schema";
       let script = document.getElementById(scriptId);
       if (!script) {
@@ -89,7 +131,7 @@ export function useSEO({
         script.setAttribute("type", "application/ld+json");
         document.head.appendChild(script);
       }
-      script.textContent = JSON.stringify(jsonLd);
+      script.textContent = JSON.stringify(graph);
     }
-  }, [title, description, ogTitle, ogDescription, ogImage, keywords, jsonLd, noindex, location]);
+  }, [title, description, ogTitle, ogDescription, ogImage, ogType, keywords, jsonLd, noindex, publishedTime, modifiedTime, location]);
 }

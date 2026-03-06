@@ -162,27 +162,160 @@ const FAQS: Record<string, { q: string; a: string }[]> = {
   ],
 };
 
+const BASE_URL = "https://fbaacademy.uz";
+
+const ALL_FAQS_FLAT = Object.values(FAQS).flat();
+
+const SEO_SCHEMAS = [
+  {
+    "@type": "Course",
+    "@id": `${BASE_URL}/course/1c-course#course`,
+    "name": "1C: Buxgalteriya 8.3 — Professional Kurs | FBA Academy",
+    "description": "1C: Buxgalteriya 8.3 dasturida birlamchi hujjatlar, ish haqi hisoblash, QQS va soliq hisobotlari, moliyaviy tahlilni o'rganadigan 3 oylik sertifikat kursi. O'zbekistondagi 80%+ kompaniyalar 1C ishlatadi.",
+    "url": `${BASE_URL}/course/1c-course`,
+    "image": `${BASE_URL}/og-1c.jpg`,
+    "thumbnailUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&h=450&fit=crop",
+    "provider": {
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      "name": "FBA Academy",
+      "url": BASE_URL,
+      "logo": { "@type": "ImageObject", "url": `${BASE_URL}/logo.png` },
+      "sameAs": ["https://t.me/fbaacademy_uz", "https://instagram.com/fbaacademy.uz"],
+    },
+    "educationalLevel": "Beginner",
+    "teaches": [
+      "1C: Buxgalteriya 8.3 dasturida ishlash",
+      "Birlamchi hujjatlar va hujjat aylanishi",
+      "Ish haqi va kadrlar hisobi",
+      "QQS va daromad solig'i hisobotlari",
+      "my.soliq.uz orqali elektron hisobot yuborish",
+      "Moliyaviy tahlil va boshqaruv hisobotlari",
+    ],
+    "coursePrerequisites": "Kompyuter va Windows bilan ishlay olish. Buxgalteriya bilimi shart emas.",
+    "numberOfCredits": 3,
+    "timeRequired": "P3M",
+    "inLanguage": "uz",
+    "availableLanguage": ["uz", "ru"],
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "duration": "P3M",
+      "startDate": "2026-04-01",
+      "endDate": "2026-07-01",
+      "instructor": {
+        "@type": "Person",
+        "name": "Bobur Toshmatov",
+        "jobTitle": "1C: Buxgalteriya bo'yicha sertifikatlangan ekspert",
+        "description": "15 yillik tajriba. CFA Level 3. Investitsiya banklarida moliyaviy modellashtirish.",
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": `${BASE_URL}/course/1c-course`,
+        "price": "2500000",
+        "priceCurrency": "UZS",
+        "priceValidUntil": "2026-06-01",
+        "availability": "https://schema.org/InStock",
+        "validFrom": "2026-01-01",
+        "category": "Education",
+      },
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "847",
+      "bestRating": "5",
+      "worstRating": "1",
+    },
+    "totalHistoricalEnrollment": 1500,
+    "courseCode": "1C-BUX-001",
+    "abstract": "O'zbekistonda eng keng tarqalgan buxgalteriya dasturi — 1C: Buxgalteriya 8.3'da 0 dan professional darajagacha intensiv kurs. Diplom + 1C sertifikati.",
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${BASE_URL}/course/1c-course#faq`,
+    "mainEntity": ALL_FAQS_FLAT.map(({ q, a }) => ({
+      "@type": "Question",
+      "name": q,
+      "acceptedAnswer": { "@type": "Answer", "text": a },
+    })),
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${BASE_URL}/course/1c-course#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Bosh sahifa", "item": BASE_URL },
+      { "@type": "ListItem", "position": 2, "name": "Kurslar", "item": `${BASE_URL}/courses` },
+      { "@type": "ListItem", "position": 3, "name": "1C: Buxgalteriya", "item": `${BASE_URL}/course/1c-course` },
+    ],
+  },
+  {
+    "@type": "Organization",
+    "@id": `${BASE_URL}/#organization`,
+    "name": "FBA Academy",
+    "url": BASE_URL,
+    "description": "O'zbekistonda ACCA, DipIFR, Financial Modeling, 1C: Buxgalteriya, Huquqshunoslik bo'yicha premium onlayn ta'lim markazi.",
+    "foundingDate": "2019",
+    "areaServed": "UZ",
+    "knowsLanguage": ["uz", "ru"],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "availableLanguage": ["uz", "ru"],
+    },
+  },
+];
+
 export default function OneCPage() {
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
   const [activeFaqTab, setActiveFaqTab] = useState("To'lov");
 
   useSEO({
-    title: "1C: Buxgalteriya Kursi — 0 dan Professional | FBA Academy",
-    description: "1C: Buxgalteriya 8.3 kursi: birlamchi hujjatlar, ish haqi hisoblash, QQS va soliq hisobotlari, moliyaviy tahlil. O'zbekistondagi 80%+ kompaniyalar 1C ishlatadi. 3 oylik intensiv kurs.",
-    keywords: "1C Buxgalteriya kurs O'zbekiston, 1C 8.3 Toshkent, buxgalteriya dasturi kursi, soliq hisoboti 1C, FBA Academy 1C",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "1C: Buxgalteriya 8.3 — Professional Kurs",
-      "description": "1C: Buxgalteriya dasturini 0 dan professional darajagacha o'rganish.",
-      "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
-      "educationalLevel": "Beginner",
-      "timeRequired": "P3M",
-    },
+    title: "1C: Buxgalteriya Kursi Toshkent — 0 dan Professional Buxgalter | FBA Academy",
+    description: "1C: Buxgalteriya 8.3 kursi O'zbekistonda. Birlamchi hujjatlar, ish haqi, QQS hisoboti, soliq.uz integratsiya. 3 oy, diplom + 1C sertifikat. 1500+ bitiruvchi.",
+    ogTitle: "1C: Buxgalteriya 8.3 Kursi — Professional Buxgalter bo'ling | FBA Academy",
+    ogDescription: "O'zbekistonda eng yaxshi 1C: Buxgalteriya kursi. 3 oy, 40+ amaliy topshiriq, 4 loyiha, diplom + 1C sertifikat. 1500+ muvaffaqiyatli bitiruvchi.",
+    ogImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    ogType: "website",
+    keywords: "1C Buxgalteriya kurs Toshkent, 1C 8.3 kursi O'zbekiston, buxgalteriya dasturi kursi onlayn, 1C sertifikat, soliq hisoboti 1C, birlamchi hujjatlar 1C, ish haqi hisoblash 1C, QQS hisoboti, my.soliq.uz, FBA Academy 1C kurs, buxgalter bo'lish, 1C: Buxgalteriya o'rganish",
+    publishedTime: "2024-01-15T09:00:00+05:00",
+    modifiedTime: new Date().toISOString(),
+    hreflang: [
+      { lang: "uz", url: `${BASE_URL}/course/1c-course` },
+      { lang: "ru", url: `${BASE_URL}/ru/course/1c-course` },
+      { lang: "x-default", url: `${BASE_URL}/course/1c-course` },
+    ],
+    jsonLd: SEO_SCHEMAS,
   });
 
   return (
     <Layout>
+      {/* ===== BREADCRUMB ===== */}
+      <nav aria-label="Breadcrumb" className="border-b bg-white dark:bg-card dark:border-slate-700" data-testid="breadcrumb">
+        <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6 lg:px-8">
+          <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground" itemScope itemType="https://schema.org/BreadcrumbList">
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <Link href="/" className="hover:text-blue-600 transition-colors" itemProp="item" data-testid="breadcrumb-home">
+                <span itemProp="name">Bosh sahifa</span>
+              </Link>
+              <meta itemProp="position" content="1" />
+            </li>
+            <li aria-hidden="true" className="text-slate-300">/</li>
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <Link href="/courses" className="hover:text-blue-600 transition-colors" itemProp="item" data-testid="breadcrumb-courses">
+                <span itemProp="name">Kurslar</span>
+              </Link>
+              <meta itemProp="position" content="2" />
+            </li>
+            <li aria-hidden="true" className="text-slate-300">/</li>
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <span className="font-semibold text-foreground" itemProp="name" data-testid="breadcrumb-current">1C: Buxgalteriya</span>
+              <meta itemProp="position" content="3" />
+            </li>
+          </ol>
+        </div>
+      </nav>
+
       {/* ===== 1. HERO ===== */}
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pb-12 pt-8 sm:pb-16 sm:pt-12" data-testid="section-1c-hero">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent" />
@@ -768,6 +901,61 @@ export default function OneCPage() {
                 Bepul konsultatsiya <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 15. RELATED COURSES (Internal SEO links) ===== */}
+      <section className="bg-slate-50 py-12 dark:bg-slate-900/30" data-testid="section-related">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-xl font-extrabold sm:text-2xl">Boshqa moliya va buxgalteriya kurslari</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                href: "/course/financial-modeling",
+                title: "Financial Modeling",
+                desc: "Excel'da moliyaviy modellashtirish. DCF, LBO, 3-Statement model.",
+                color: "from-green-600 to-emerald-700",
+                badge: "Mashhur",
+              },
+              {
+                href: "/course/dipifr",
+                title: "DipIFR",
+                desc: "ACCA DipIFR — IFRS (MFHS) bo'yicha xalqaro diplom.",
+                color: "from-indigo-600 to-slate-700",
+                badge: "Xalqaro",
+              },
+              {
+                href: "/course/acca",
+                title: "ACCA",
+                desc: "ACCA — moliya va buxgalteriya bo'yicha top xalqaro malaka.",
+                color: "from-purple-700 to-indigo-800",
+                badge: "Top",
+              },
+              {
+                href: "/course/jurisprudence",
+                title: "Huquqshunoslik",
+                desc: "Soliq va mehnat qonunchiligi. Buxgalterlar uchun.",
+                color: "from-amber-600 to-orange-700",
+                badge: "Yangi",
+              },
+            ].map((item, i) => (
+              <Link key={i} href={item.href} data-testid={`related-course-${i}`}>
+                <article className="group h-full overflow-hidden rounded-2xl border bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:bg-card">
+                  <div className={`h-2 w-full bg-gradient-to-r ${item.color}`} />
+                  <div className="p-5">
+                    <div className="mb-2 flex items-center justify-between">
+                      <h3 className="text-sm font-extrabold group-hover:text-blue-600 transition-colors">{item.title}</h3>
+                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-300">{item.badge}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                    <div className="mt-3 flex items-center gap-1 text-xs font-bold text-blue-600">
+                      Batafsil <ArrowRight className="h-3 w-3" />
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
