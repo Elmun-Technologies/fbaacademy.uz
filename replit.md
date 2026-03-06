@@ -59,11 +59,31 @@ Each course page includes: hero with enrollment form + discount badge, YouTube v
 - `R0eCSc9Efqc` → DipIFR / about page company intro
 
 ## SEO Implementation
-- `hooks/use-seo.ts` - Full SEO hook: title, description, keywords, canonical URL, OG tags (og:title/description/image/url/type/locale), Twitter card, JSON-LD structured data
-- `client/public/sitemap.xml` - Full sitemap with all 14 pages + 8 course pages
-- `client/public/robots.txt` - robots.txt allowing all crawlers
-- `client/index.html` - Organization schema (JSON-LD), og:image, twitter:card, uz lang
-- All pages have unique SEO titles with format: "Page Name — Keywords | FBA Academy"
+- `hooks/use-seo.ts` - Full SEO hook: title, description, keywords, canonical URL, OG tags, Twitter card, JSON-LD structured data, hreflang
+- `server/routes.ts` - `/sitemap.xml` (24 URLs, hreflang, lastmod) and `/robots.txt` Express routes
+- All pages have unique SEO titles, meta descriptions, JSON-LD schemas
+- Blog posts have Article + BreadcrumbList schemas
+
+## i18n (3 languages: uz / ru / en)
+- `lib/translations.ts` - Full translation dictionary for nav, footer, common UI in 3 languages
+- `contexts/language-context.tsx` - React context with localStorage persistence
+- `components/layout/header.tsx` - Language switcher (flag buttons, dropdown on desktop, pill buttons on mobile)
+- Language stored in localStorage key `fba_lang`; `<html lang="">` auto-updates
+
+## Blog (8 SEO articles)
+- Full HTML content with headings, lists, tables
+- `/blog` page: search bar, category filter, featured post, grid
+- `/blog/:id` page: reading progress bar, table of contents, social share (Telegram/Facebook/copy), related articles, newsletter CTA, author card
+- Blog posts: ACCA tayyorlanish, DipIFR, Financial Modeling karyera, 1C qo'llanma, Buxgalter maoshi, ACCA vs DipIFR vs CFA, Yurist maoshi, Moliyaviy tahlilchi yo'l xaritasi, Xalqaro sertifikatlar
+
+## User Retention Features
+- Newsletter subscription in footer (email input + submit)
+- Newsletter subscription in blog-detail page
+- Reading progress bar (fixed top bar)
+- Table of contents auto-generated from h2 tags
+- Social share buttons (Telegram, Facebook, Copy link)
+- Related articles section (3 posts)
+- Category filter and search on blog page
 
 ## Images
 - All images use real Unsplash URLs (no local placeholder files)
