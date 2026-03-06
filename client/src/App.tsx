@@ -4,13 +4,38 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
+import Home from "@/pages/home";
+import Catalog from "@/pages/catalog";
+import CourseDetail from "@/pages/course-detail";
+import Teachers from "@/pages/teachers";
+import About from "@/pages/about";
+import Blog from "@/pages/blog";
+import BlogDetail from "@/pages/blog-detail";
+import Contacts from "@/pages/contacts";
+import CareerCenter from "@/pages/career-center";
+import CaseStudies from "@/pages/case-studies";
+import FAQ from "@/pages/faq";
+import CorporateTraining from "@/pages/corporate-training";
+import Partnership from "@/pages/partnership";
+import Grants from "@/pages/grants";
 
 function Router() {
   return (
     <Switch>
-      {/* Add pages below */}
-      {/* <Route path="/" component={Home}/> */}
-      {/* Fallback to 404 */}
+      <Route path="/" component={Home} />
+      <Route path="/courses" component={Catalog} />
+      <Route path="/course/:id" component={CourseDetail} />
+      <Route path="/teachers" component={Teachers} />
+      <Route path="/about" component={About} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/blog/:id" component={BlogDetail} />
+      <Route path="/contacts" component={Contacts} />
+      <Route path="/career" component={CareerCenter} />
+      <Route path="/case-studies" component={CaseStudies} />
+      <Route path="/faq" component={FAQ} />
+      <Route path="/corporate" component={CorporateTraining} />
+      <Route path="/partnership" component={Partnership} />
+      <Route path="/grants" component={Grants} />
       <Route component={NotFound} />
     </Switch>
   );
