@@ -215,7 +215,7 @@ export default function AppliedSkillsPage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {course.forWhom.map((item, i) => (
               <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5" data-testid={`as-for-whom-${i}`}>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-100 dark:bg-emerald-900/30">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-800/40">
                   <GraduationCap className="h-4 w-4 text-emerald-600" />
                 </div>
                 <span className="font-medium text-sm leading-relaxed">{item}</span>
@@ -240,7 +240,7 @@ export default function AppliedSkillsPage() {
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
                 <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`as-module-${i}`}>
-                  <AccordionTrigger className="text-left py-4">
+                  <AccordionTrigger className="text-left py-4 text-white">
                     <div className="flex items-center gap-3">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-sm font-bold text-white shadow-md">{i + 1}</span>
                       <div>
@@ -288,7 +288,7 @@ export default function AppliedSkillsPage() {
       {/* Next step */}
       <section className="py-10" data-testid="section-as-next">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border-2 border-emerald-200 bg-emerald-50 p-8 dark:border-emerald-800 dark:bg-emerald-950/20">
+          <div className="rounded-3xl border-2 border-emerald-500/30 bg-emerald-900/20 p-8">
             <div className="grid gap-6 md:grid-cols-2 md:items-center">
               <div>
                 <Badge className="mb-3 rounded-full bg-emerald-600 text-white text-xs font-bold">Yakuniy bosqich</Badge>
@@ -313,7 +313,7 @@ export default function AppliedSkillsPage() {
               <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Bepul konsultatsiya olish</h2>
               <p className="mt-3 text-emerald-100">Applied Skills kursi haqida barcha savollaringizga javob oling</p>
               <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-emerald-700 hover:bg-zinc-800" data-testid="button-as-cta">
+                <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-emerald-400 hover:bg-zinc-800" data-testid="button-as-cta">
                   Konsultatsiya olish <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
@@ -337,7 +337,7 @@ export default function AppliedSkillsPage() {
             <Accordion type="multiple" className="space-y-3">
               {faqs.map((faq) => (
                 <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`as-faq-${faq.id}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base">{faq.question}</AccordionTrigger>
+                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base text-white hover:no-underline hover:text-purple-300">{faq.question}</AccordionTrigger>
                   <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
                 </AccordionItem>
               ))}

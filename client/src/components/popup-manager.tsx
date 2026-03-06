@@ -70,7 +70,7 @@ function TimePopup({ onClose }: { onClose: () => void }) {
         <div className="bg-zinc-900 px-8 py-6">
           {sent ? (
             <div className="flex flex-col items-center justify-center py-6 gap-3">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-800/40">
                 <ArrowRight className="h-7 w-7 text-green-600" />
               </div>
               <p className="text-lg font-bold text-white">{text.success}</p>

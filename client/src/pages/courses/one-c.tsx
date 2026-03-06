@@ -431,7 +431,7 @@ export default function OneCPage() {
                   alt="1C Buxgalteriya"
                   className="w-[300px] rounded-3xl object-cover shadow-2xl"
                   loading="eager"
-                  fetchPriority="high"
+                  fetchpriority="high"
                   data-testid="img-hero-1c"
                 />
                 <div className="absolute -bottom-4 -left-4 rounded-2xl bg-[#e8001c] px-5 py-3 shadow-xl">
@@ -490,7 +490,7 @@ export default function OneCPage() {
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f, i) => (
               <div key={i} className="flex gap-4" data-testid={`feature-${i}`}>
-                <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-blue-500 bg-blue-50">
+                <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-blue-500 bg-blue-900/30">
                   <CheckCircle2 className="h-4 w-4 text-blue-500" />
                 </div>
                 <div>
@@ -803,7 +803,7 @@ export default function OneCPage() {
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
                 <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`module-${i}`}>
-                  <AccordionTrigger className="text-left py-4">
+                  <AccordionTrigger className="text-left py-4 text-white">
                     <div className="flex items-center gap-3">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-sm font-bold text-white shadow-md">{i + 1}</span>
                       <div>
@@ -943,7 +943,7 @@ export default function OneCPage() {
             <Accordion type="multiple" className="space-y-0 divide-y">
               {FAQS[activeFaqTab]?.map((faq, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="border-none py-1" data-testid={`faq-item-${i}`}>
-                  <AccordionTrigger className="text-left text-base font-semibold py-5 hover:no-underline">
+                  <AccordionTrigger className="text-left text-base font-semibold py-5 text-white hover:no-underline hover:text-purple-300">
                     {faq.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">

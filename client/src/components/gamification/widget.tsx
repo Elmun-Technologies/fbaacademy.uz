@@ -206,7 +206,7 @@ export default function GamificationWidget() {
                     data-testid={`action-card-${action.event}`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`flex h-8 w-8 items-center justify-center rounded-xl ${done ? "bg-emerald-100" : `bg-gradient-to-br ${action.color}`} shadow-sm`}>
+                      <div className={`flex h-8 w-8 items-center justify-center rounded-xl ${done ? "bg-emerald-800/40" : `bg-gradient-to-br ${action.color}`} shadow-sm`}>
                         {done ? <span className="text-sm">✓</span> : <Icon className="h-4 w-4 text-white" />}
                       </div>
                       <div>
@@ -215,7 +215,7 @@ export default function GamificationWidget() {
                       </div>
                     </div>
                     {done ? (
-                      <span className="text-xs font-bold text-emerald-600 bg-emerald-100 rounded-full px-2 py-0.5">+{action.pts.slice(1)}</span>
+                      <span className="text-xs font-bold text-emerald-300 bg-emerald-700/40 rounded-full px-2 py-0.5">+{action.pts.slice(1)}</span>
                     ) : (
                       <span className="text-sm font-extrabold text-purple-700">{action.pts}</span>
                     )}

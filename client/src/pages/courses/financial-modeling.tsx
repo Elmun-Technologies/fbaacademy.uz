@@ -423,18 +423,18 @@ export default function FinancialModelingPage() {
             {/* Left */}
             <div>
               <div className="mb-3 flex flex-wrap gap-2">
-                <Badge className="rounded-full border-emerald-200 bg-emerald-50 text-emerald-700 font-medium">Amaliy onlayn-kurs</Badge>
-                <Badge className="rounded-full border-blue-200 bg-blue-50 text-blue-700 font-medium">📅 2026 yilda yangilangan dastur</Badge>
+                <Badge className="rounded-full border-emerald-500/30 bg-emerald-900/20 text-emerald-400 font-medium">Amaliy onlayn-kurs</Badge>
+                <Badge className="rounded-full border-blue-500/30 bg-blue-900/20 text-blue-300 font-medium">📅 2026 yilda yangilangan dastur</Badge>
               </div>
               <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-fm-title">
                 Moliyaviy<br />
-                <span className="text-emerald-600">Modellashtirish</span>
+                <span className="text-emerald-400">Modellashtirish</span>
               </h1>
               <p className="mt-4 text-base text-zinc-400 font-medium">1–2 oyda nimalarni o'rganasiz:</p>
               <ul className="mt-3 space-y-3">
                 {HERO_BULLETS.map((b, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-zinc-300" data-testid={`fm-bullet-${i}`}>
-                    <ChevronRight className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+                    <ChevronRight className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
                     <span className="text-sm sm:text-base">{b}</span>
                   </li>
                 ))}
@@ -507,7 +507,7 @@ export default function FinancialModelingPage() {
             </div>
             <div>
               <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl" data-testid="text-fm-universal-title">
-                <span className="text-emerald-600">Moliyaviy model</span> — universal vosita, u quyidagilarga imkon beradi:
+                <span className="text-emerald-400">Moliyaviy model</span> — universal vosita, u quyidagilarga imkon beradi:
               </h2>
               <ul className="mt-6 space-y-4">
                 {FM_POWERS.map((p, i) => (
@@ -530,15 +530,15 @@ export default function FinancialModelingPage() {
           </h2>
           <div className="mb-8 flex flex-wrap gap-2.5">
             {JOB_CHIPS.map((job, i) => (
-              <span key={i} className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-800" data-testid={`job-chip-${i}`}>
+              <span key={i} className="rounded-full border border-emerald-500/30 bg-emerald-900/20 px-4 py-2 text-sm font-semibold text-emerald-300" data-testid={`job-chip-${i}`}>
                 {job}
               </span>
             ))}
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {SALARY_STATS.map((s, i) => (
-              <div key={i} className={`rounded-2xl border p-6 ${s.highlight ? "border-emerald-300 bg-emerald-50" : "bg-zinc-900"}`} data-testid={`salary-stat-${i}`}>
-                <div className={`text-3xl font-extrabold ${s.highlight ? "text-emerald-700" : "text-white"} sm:text-4xl`}>{s.value}</div>
+              <div key={i} className={`rounded-2xl border p-6 ${s.highlight ? "border-emerald-500/40 bg-emerald-900/20" : "bg-zinc-900"}`} data-testid={`salary-stat-${i}`}>
+                <div className={`text-3xl font-extrabold ${s.highlight ? "text-emerald-400" : "text-white"} sm:text-4xl`}>{s.value}</div>
                 {s.sublabel && <div className="text-sm font-bold text-zinc-400">{s.sublabel}</div>}
                 <div className="mt-2 text-xs text-zinc-500 leading-snug">{s.label}</div>
               </div>
@@ -557,7 +557,7 @@ export default function FinancialModelingPage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
             {INDUSTRIES.map((ind, i) => (
               <div key={i} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-zinc-900 p-5 hover:shadow-md transition-shadow" data-testid={`industry-card-${i}`}>
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-2xl border border-emerald-100">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-900/20 text-2xl border border-emerald-700/30">
                   {ind.emoji}
                 </div>
                 <div>
@@ -597,7 +597,7 @@ export default function FinancialModelingPage() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SKILLS.map((skill, i) => (
               <div key={i} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-zinc-900 p-5" data-testid={`skill-card-${i}`}>
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-2xl border border-emerald-100">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-900/20 text-2xl border border-emerald-700/30">
                   {skill.icon}
                 </div>
                 <p className="text-sm font-semibold text-zinc-300 leading-relaxed mt-1">{skill.text}</p>
@@ -616,7 +616,7 @@ export default function FinancialModelingPage() {
               <p className="mt-2 text-emerald-100">Bepul konsultatsiya buyurtma bering — maslahatchi kurs tafsilotlarini tushuntiradi</p>
             </div>
             <a href="#pricing">
-              <Button size="lg" className="rounded-full bg-zinc-900 px-8 font-extrabold text-emerald-700 hover:bg-zinc-800 whitespace-nowrap" data-testid="button-fm-cta-mid">
+              <Button size="lg" className="rounded-full bg-zinc-900 px-8 font-extrabold text-emerald-400 hover:bg-zinc-800 whitespace-nowrap" data-testid="button-fm-cta-mid">
                 Bepul konsultatsiya olish <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </a>
@@ -629,7 +629,7 @@ export default function FinancialModelingPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-2 flex items-center gap-2">
             <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-curriculum-title">{t.page.curriculum}</h2>
-            <Badge className="rounded-full border-emerald-200 bg-emerald-50 text-emerald-700 font-semibold">2026 yilda yangilangan</Badge>
+            <Badge className="rounded-full border-emerald-500/30 bg-emerald-900/20 text-emerald-400 font-semibold">2026 yilda yangilangan</Badge>
           </div>
           <div className="mb-2 flex flex-wrap gap-1.5 text-sm font-semibold text-zinc-400">
             <span className="rounded-full bg-[#0d0d0d] px-3 py-1">📹 26 interaktiv dars</span>
@@ -637,12 +637,12 @@ export default function FinancialModelingPage() {
             <span className="rounded-full bg-[#0d0d0d] px-3 py-1">📝 4 amaliy topshiriq</span>
             <span className="rounded-full bg-[#0d0d0d] px-3 py-1">📄 2 shablon</span>
           </div>
-          <div className="mb-2 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4">
-            <div className="flex items-center gap-2 text-sm font-extrabold text-emerald-800">
+          <div className="mb-2 rounded-xl border border-emerald-500/30 bg-emerald-900/20 px-5 py-4">
+            <div className="flex items-center gap-2 text-sm font-extrabold text-emerald-300">
               <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs text-white font-bold">+5 dars</span>
               Yangi darslar qo'shildi
             </div>
-            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-emerald-700">
+            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-emerald-400">
               {["AI ni Excel da qo'llash", "Google Sheets uchun AI", "Karyera strategiyasi", "Shaxsiy samaradorlik", "Taqdimot yaratish"].map((t, i) => (
                 <span key={i} className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3" />{t}</span>
               ))}
@@ -653,7 +653,7 @@ export default function FinancialModelingPage() {
             <Accordion type="multiple" className="space-y-3">
               {CURRICULUM.map((mod, i) => (
                 <AccordionItem key={i} value={`mod-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`curriculum-module-${i}`}>
-                  <AccordionTrigger className="text-left py-4 hover:no-underline">
+                  <AccordionTrigger className="text-left py-4 text-white hover:no-underline">
                     <div className="flex items-center gap-3">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-sm font-extrabold text-white shadow">
                         {i + 1}
@@ -662,7 +662,7 @@ export default function FinancialModelingPage() {
                         <div className="text-sm font-extrabold sm:text-base pr-2">{mod.title}</div>
                         <div className="mt-1 flex flex-wrap gap-1">
                           {mod.tags.map((tag, j) => (
-                            <span key={j} className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">{tag}</span>
+                            <span key={j} className="rounded-full bg-emerald-800/30 px-2 py-0.5 text-xs font-semibold text-emerald-400">{tag}</span>
                           ))}
                         </div>
                       </div>
@@ -676,9 +676,9 @@ export default function FinancialModelingPage() {
                         </li>
                       ))}
                       {mod.isFinal && (
-                        <li className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
-                          <div className="text-sm font-bold text-emerald-800">🎓 Yakuniy ish</div>
-                          <div className="text-xs text-emerald-700 mt-0.5">Barcha darslar va amaliy keyslarni tugatganingizdan so'ng rasmiy diplom olasiz</div>
+                        <li className="mt-3 rounded-xl border border-emerald-500/30 bg-emerald-900/20 px-4 py-3">
+                          <div className="text-sm font-bold text-emerald-300">🎓 Yakuniy ish</div>
+                          <div className="text-xs text-emerald-400 mt-0.5">Barcha darslar va amaliy keyslarni tugatganingizdan so'ng rasmiy diplom olasiz</div>
                         </li>
                       )}
                     </ul>
@@ -691,12 +691,12 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── DIPLOMA ──────────────────────────────────────────── */}
-      <section className="bg-emerald-50 py-12" data-testid="section-fm-diploma">
+      <section className="bg-[#0d0d0d] py-12" data-testid="section-fm-diploma">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-[1fr_320px]">
             <div>
               <div className="mb-3 flex items-center gap-2">
-                <Award className="h-8 w-8 text-emerald-600" />
+                <Award className="h-8 w-8 text-emerald-400" />
                 <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-diploma-title">Rasmiy diplom oling</h2>
               </div>
               <p className="text-zinc-400 leading-relaxed">
@@ -714,7 +714,7 @@ export default function FinancialModelingPage() {
               <div className="text-4xl mb-3">🎓</div>
               <div className="text-lg font-extrabold text-white">Moliyaviy Modellashtirish</div>
               <div className="mt-1 text-sm text-zinc-500">FBA Academy diplomi</div>
-              <div className="mt-4 h-0.5 bg-emerald-100" />
+              <div className="mt-4 h-0.5 bg-emerald-800/30" />
               <div className="mt-4 text-xs text-zinc-500">Kurs yakunlangandan so'ng beriladi</div>
             </div>
           </div>
@@ -764,7 +764,7 @@ export default function FinancialModelingPage() {
                 </div>
                 <div className="p-5">
                   <h3 className="text-base font-extrabold text-white">{t.name}</h3>
-                  <div className="mt-0.5 text-xs font-semibold text-emerald-600">{t.role}</div>
+                  <div className="mt-0.5 text-xs font-semibold text-emerald-400">{t.role}</div>
                   <p className="mt-3 text-sm text-zinc-400 leading-relaxed">{t.desc}</p>
                 </div>
               </div>
@@ -859,7 +859,7 @@ export default function FinancialModelingPage() {
                   </div>
                   <span className="text-xs text-zinc-500 font-medium">{rev.source}</span>
                 </div>
-                <div className="mb-2 text-xs font-semibold text-emerald-600">{rev.course}</div>
+                <div className="mb-2 text-xs font-semibold text-emerald-400">{rev.course}</div>
                 <h3 className="mb-2 text-sm font-extrabold text-white">{rev.title}</h3>
                 <p className="flex-1 text-xs text-zinc-400 leading-relaxed">{rev.text}</p>
               </div>
@@ -918,7 +918,7 @@ export default function FinancialModelingPage() {
             <Accordion type="multiple" className="space-y-3">
               {faqs.length > 0 ? faqs.map((faq) => (
                 <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`fm-faq-${faq.id}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base hover:no-underline">{faq.question}</AccordionTrigger>
+                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base text-white hover:no-underline hover:text-purple-300">{faq.question}</AccordionTrigger>
                   <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
                 </AccordionItem>
               )) : [
@@ -929,7 +929,7 @@ export default function FinancialModelingPage() {
                 { q: "Kursni tugatgandan keyin ish topishda yordam bormi?", a: "Kurator karyera bo'yicha maslahat beradi va rezyume tayyorlashda yordam qiladi." },
               ].map((faq, i) => (
                 <AccordionItem key={i} value={`q-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`fm-faq-default-${i}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base hover:no-underline">{faq.q}</AccordionTrigger>
+                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base text-white hover:no-underline hover:text-purple-300">{faq.q}</AccordionTrigger>
                   <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.a}</AccordionContent>
                 </AccordionItem>
               ))}

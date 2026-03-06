@@ -269,7 +269,7 @@ export default function AppliedKnowledgePage() {
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
                 <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`ak-module-${i}`}>
-                  <AccordionTrigger className="text-left py-4">
+                  <AccordionTrigger className="text-left py-4 text-white">
                     <div className="flex items-center gap-3">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 text-sm font-bold text-white shadow-md">{i + 1}</span>
                       <div>
@@ -386,7 +386,7 @@ export default function AppliedKnowledgePage() {
             <Accordion type="multiple" className="space-y-3">
               {faqs.map((faq) => (
                 <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`ak-faq-${faq.id}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base">{faq.question}</AccordionTrigger>
+                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base text-white hover:no-underline hover:text-purple-300">{faq.question}</AccordionTrigger>
                   <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
                 </AccordionItem>
               ))}

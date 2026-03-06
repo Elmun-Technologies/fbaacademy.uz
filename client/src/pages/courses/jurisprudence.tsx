@@ -634,11 +634,11 @@ export default function JurisprudencePage() {
                 </div>
               </div>
               {/* 0% installment badge */}
-              <div className="rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4 flex items-center gap-3">
+              <div className="rounded-2xl border border-blue-500/30 bg-blue-900/20 px-5 py-4 flex items-center gap-3">
                 <div className="text-2xl">💳</div>
                 <div>
-                  <div className="text-sm font-extrabold text-blue-900">T-Bank dan bo'lib to'lash</div>
-                  <div className="text-xs text-blue-700">Foizsiz, qo'shimcha to'lovlarsiz</div>
+                  <div className="text-sm font-extrabold text-blue-200">T-Bank dan bo'lib to'lash</div>
+                  <div className="text-xs text-blue-300">Foizsiz, qo'shimcha to'lovlarsiz</div>
                 </div>
               </div>
             </div>
@@ -683,7 +683,7 @@ export default function JurisprudencePage() {
             <Accordion type="multiple" className="space-y-3">
               {FAQ_ITEMS.map((faq, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`law-faq-${i}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base hover:no-underline">{faq.q}</AccordionTrigger>
+                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base text-white hover:no-underline hover:text-purple-300">{faq.q}</AccordionTrigger>
                   <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.a}</AccordionContent>
                 </AccordionItem>
               ))}

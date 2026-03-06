@@ -107,7 +107,7 @@ export default function Blog() {
                         alt={featured.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="eager"
-                        fetchPriority="high"
+                        fetchpriority="high"
                         width={800}
                         height={400}
                       />

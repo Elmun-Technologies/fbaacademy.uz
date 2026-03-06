@@ -38,7 +38,7 @@ const IFRS_STANDARDS = [
 
 const TYPE_COLORS: Record<string, string> = {
   "Asosiy": "bg-indigo-100 text-indigo-700 border-indigo-200",
-  "Muhim": "bg-emerald-100 text-emerald-700 border-emerald-200",
+  "Muhim": "bg-emerald-800/40 text-emerald-300 border-emerald-500/30",
   "Murakkab": "bg-rose-100 text-rose-700 border-rose-200",
   "O'rta": "bg-amber-100 text-amber-700 border-amber-200",
 };
@@ -433,7 +433,7 @@ export default function DipIFRPage() {
                   alt="DipIFR ACCA xalqaro diplom kursi"
                   className="w-[260px] rounded-3xl object-cover shadow-2xl"
                   loading="eager"
-                  fetchPriority="high"
+                  fetchpriority="high"
                   data-testid="img-hero-dipifr"
                 />
                 <div className="absolute -bottom-4 -right-4 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble-hero">
@@ -760,7 +760,7 @@ export default function DipIFRPage() {
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
                 <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`dipifr-module-${i}`}>
-                  <AccordionTrigger className="text-left py-4">
+                  <AccordionTrigger className="text-left py-4 text-white">
                     <div className="flex items-center gap-3">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-blue-700 text-sm font-bold text-white shadow-md">{i + 1}</span>
                       <div>
@@ -929,7 +929,7 @@ export default function DipIFRPage() {
             <Accordion type="multiple" className="space-y-0 divide-y">
               {FAQS[activeFaqTab]?.map((faq, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="border-none py-1" data-testid={`faq-item-${i}`}>
-                  <AccordionTrigger className="text-left text-base font-semibold py-5 hover:no-underline">{faq.q}</AccordionTrigger>
+                  <AccordionTrigger className="text-left text-base font-semibold py-5 text-white hover:no-underline hover:text-purple-300">{faq.q}</AccordionTrigger>
                   <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.a}</AccordionContent>
                 </AccordionItem>
               ))}
