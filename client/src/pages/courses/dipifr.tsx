@@ -39,7 +39,7 @@ const IFRS_STANDARDS = [
 const TYPE_COLORS: Record<string, string> = {
   "Asosiy": "bg-indigo-800/40 text-indigo-300 border-indigo-500/30",
   "Muhim": "bg-emerald-800/40 text-emerald-300 border-emerald-500/30",
-  "Murakkab": "bg-rose-100 text-rose-700 border-rose-200",
+  "Murakkab": "bg-rose-900/30 text-rose-300 border-rose-500/30",
   "O'rta": "bg-amber-800/40 text-amber-300 border-amber-500/30",
 };
 
@@ -762,7 +762,7 @@ export default function DipIFRPage() {
                 <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`dipifr-module-${i}`}>
                   <AccordionTrigger className="text-left py-4 text-white">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-blue-700 text-sm font-bold text-white shadow-md">{i + 1}</span>
+                      <span className="step-badge h-9 w-9 bg-gradient-to-br from-indigo-600 to-blue-700 text-sm icon-glow-indigo">{i + 1}</span>
                       <div>
                         <span className="text-sm font-bold sm:text-base">{mod.title}</span>
                         <div className="text-xs text-zinc-400">{mod.topics.length} mavzu</div>

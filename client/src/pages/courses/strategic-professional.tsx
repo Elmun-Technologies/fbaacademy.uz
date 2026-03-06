@@ -120,7 +120,7 @@ export default function StrategicProfessionalPage() {
             <span className="mb-6 inline-flex items-center gap-1 text-sm text-zinc-500 cursor-pointer hover:text-amber-300 transition-colors">← ACCA To'liq dastur</span>
           </Link>
           <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 animate-fade-in-up">
               <div className="mb-4 flex flex-wrap gap-2">
                 <Badge className="rounded-full bg-amber-500/20 text-amber-300 border-amber-400/30 px-3">👑 ACCA 3-Bosqich — Yakuniy</Badge>
                 <Badge className="rounded-full bg-yellow-500/20 text-yellow-200 border-yellow-400/20 px-3">💼 CFO yo'li</Badge>
@@ -176,8 +176,8 @@ export default function StrategicProfessionalPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {ELITE_STATS.map((s, i) => (
-              <div key={i} className="rounded-2xl border-2 border-amber-500/30 bg-zinc-900 p-5 text-center shadow-sm dark:border-amber-900/30" data-testid={`sp-stat-${i}`}>
-                <div className="text-2xl font-extrabold text-amber-300 sm:text-3xl">{s.value}</div>
+              <div key={i} className="course-card rounded-2xl border border-amber-500/25 bg-zinc-900 p-5 text-center animate-fade-in-up" style={{ animationDelay: `${i * 100}ms` }} data-testid={`sp-stat-${i}`}>
+                <div className="text-2xl font-extrabold text-amber-300 sm:text-3xl animate-float" style={{ animationDelay: `${i * 200}ms` }}>{s.value}</div>
                 <div className="mt-1 text-xs text-zinc-400 sm:text-sm">{s.label}</div>
               </div>
             ))}
@@ -192,7 +192,7 @@ export default function StrategicProfessionalPage() {
           <p className="mb-10 text-zinc-400">2 ta majburiy + 2 ta ixtiyoriy qog'ozdan birini tanlaysiz</p>
           <div className="grid gap-6 sm:grid-cols-2">
             {PAPERS.map((paper, i) => (
-              <div key={i} className={`rounded-2xl border-2 p-6 shadow-md ${paper.type === "Majburiy" ? "border-amber-500/30 bg-amber-900/10" : "border-white/10 bg-zinc-900"}`} data-testid={`sp-paper-${i}`}>
+              <div key={i} className={`course-card rounded-2xl border-2 p-6 ${paper.type === "Majburiy" ? "border-amber-500/30 bg-amber-900/10" : "border-white/10 bg-zinc-900"} animate-fade-in-up`} style={{ animationDelay: `${i * 150}ms` }} data-testid={`sp-paper-${i}`}>
                 <div className="mb-4 flex items-center justify-between">
                   <span className={`inline-flex rounded-full px-4 py-1.5 text-sm font-extrabold text-white shadow-md ${paper.badge}`}>{paper.code}</span>
                   <Badge variant="outline" className={`rounded-full text-xs font-bold ${paper.type === "Majburiy" ? "border-amber-400 text-amber-400" : "border-slate-400 text-zinc-400"}`}>{paper.type}</Badge>
@@ -328,7 +328,7 @@ export default function StrategicProfessionalPage() {
               <h2 className="text-2xl font-extrabold text-white sm:text-3xl">ACCA yo'lingizni boshlaymizmi?</h2>
               <p className="mt-3 text-amber-100">Bepul konsultatsiyada Strategic Professional haqida barcha savollarga javob oling</p>
               <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-amber-400 hover:bg-zinc-800" data-testid="button-sp-cta">
+                <Button size="lg" className="mt-6 gap-2 rounded-full bg-amber-600 px-8 font-bold text-white hover:bg-amber-700 animate-glow-pulse" data-testid="button-sp-cta">
                   Konsultatsiya olish <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>

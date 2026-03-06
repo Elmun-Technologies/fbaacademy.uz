@@ -319,10 +319,10 @@ export default function JurisprudencePage() {
 
           <div className="grid gap-10 lg:grid-cols-[1fr_380px] lg:gap-14 lg:items-start">
             {/* Left */}
-            <div>
+            <div className="animate-fade-in-up">
               <div className="mb-2 flex flex-wrap gap-2">
                 <Badge className="rounded-full border-amber-500/30 bg-amber-900/20 text-amber-300">⚖️ Kurs</Badge>
-                <Badge className="rounded-full border-slate-200 bg-[#111] text-zinc-400">Masofaviy format</Badge>
+                <Badge className="rounded-full border-white/15 bg-white/5 text-zinc-400">Masofaviy format</Badge>
               </div>
               <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-law-title">
                 Huquqshunoslik
@@ -343,7 +343,7 @@ export default function JurisprudencePage() {
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href="#pricing">
-                  <Button className="gap-2 rounded-full bg-amber-600 px-6 font-bold text-white hover:bg-amber-700" data-testid="button-law-enroll">
+                  <Button className="gap-2 rounded-full bg-amber-600 px-6 font-bold text-white hover:bg-amber-700 animate-glow-pulse" data-testid="button-law-enroll">
                     Kursga yozilish <ArrowRight className="h-4 w-4" />
                   </Button>
                 </a>
@@ -356,10 +356,10 @@ export default function JurisprudencePage() {
             </div>
 
             {/* Right — form */}
-            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-xl" data-testid="card-law-form">
+            <div className="course-card rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-xl animate-scale-in delay-200" data-testid="card-law-form">
               <div className="mb-3 flex items-center justify-between">
                 <h3 className="text-lg font-extrabold">Konsultatsiya olish</h3>
-                <Badge className="rounded-full border-green-200 bg-green-50 text-green-700 font-semibold text-xs">Bepul</Badge>
+                <Badge className="rounded-full border-green-500/30 bg-green-900/20 text-green-400 font-semibold text-xs">Bepul</Badge>
               </div>
               <div className="mb-4 rounded-xl bg-amber-900/20 border border-amber-500/30 px-4 py-3">
                 <div className="text-xs font-bold text-amber-300 uppercase tracking-wide">📅 Yaqinroq yozilish</div>
@@ -380,8 +380,8 @@ export default function JurisprudencePage() {
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {FOR_WHOM.map((item, i) => (
-              <div key={i} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-zinc-900 p-6 hover:shadow-md transition-shadow" data-testid={`for-whom-card-${i}`}>
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-900/20 text-2xl border border-amber-500/20">
+              <div key={i} className="course-card flex items-start gap-4 rounded-2xl border border-white/10 bg-zinc-900 p-6" data-testid={`for-whom-card-${i}`}>
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-900/20 text-2xl border border-amber-500/20 animate-float icon-glow-amber" style={{ animationDelay: `${i * 200}ms` }}>
                   {item.emoji}
                 </div>
                 <div>
@@ -404,7 +404,7 @@ export default function JurisprudencePage() {
               </h2>
               <div className="space-y-3">
                 {SKILLS.map((skill, i) => (
-                  <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 px-5 py-4 shadow-sm" data-testid={`skill-item-${i}`}>
+                  <div key={i} className="course-card flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 px-5 py-4" data-testid={`skill-item-${i}`}>
                     <span className="text-2xl">{skill.emoji}</span>
                     <span className="text-sm font-semibold text-zinc-200">{skill.text}</span>
                   </div>
@@ -419,17 +419,17 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── ABOUT TRAINING ───────────────────────────────────── */}
-      <section className="bg-stone-50 py-14 sm:py-20" data-testid="section-law-about">
+      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-law-about">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-about-title">
             O'qish haqida
           </h2>
           <div className="grid gap-6 lg:grid-cols-3">
             {ABOUT_FEATURES.map((f, i) => (
-              <div key={i} className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-900" data-testid={`about-feature-${i}`}>
+              <div key={i} className="course-card overflow-hidden rounded-2xl border border-white/10 bg-zinc-900" data-testid={`about-feature-${i}`}>
                 <div className="h-1.5 w-full bg-gradient-to-r from-amber-500 to-yellow-500" />
                 <div className="p-6">
-                  <div className="mb-3 text-3xl">{f.emoji}</div>
+                  <div className="mb-3 text-4xl">{f.emoji}</div>
                   <h3 className="text-base font-extrabold text-white">{f.title}</h3>
                   <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{f.desc}</p>
                   {i === 2 && (
@@ -551,7 +551,7 @@ export default function JurisprudencePage() {
             {/* License */}
             <div className="rounded-2xl border border-amber-500/30 bg-amber-900/20 p-6" data-testid="license-card">
               <div className="mb-3 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-800/40">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-900/30 border border-amber-500/30 icon-glow-amber">
                   <Shield className="h-6 w-6 text-amber-400" />
                 </div>
                 <div>

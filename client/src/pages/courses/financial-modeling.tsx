@@ -421,7 +421,7 @@ export default function FinancialModelingPage() {
 
           <div className="grid gap-10 lg:grid-cols-[1fr_380px] lg:gap-14 lg:items-start">
             {/* Left */}
-            <div>
+            <div className="animate-fade-in-up">
               <div className="mb-3 flex flex-wrap gap-2">
                 <Badge className="rounded-full border-emerald-500/30 bg-emerald-900/20 text-emerald-400 font-medium">Amaliy onlayn-kurs</Badge>
                 <Badge className="rounded-full border-blue-500/30 bg-blue-900/20 text-blue-300 font-medium">📅 2026 yilda yangilangan dastur</Badge>
@@ -441,7 +441,7 @@ export default function FinancialModelingPage() {
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="#pricing">
-                  <Button className="gap-2 rounded-full bg-emerald-600 px-6 font-bold text-white hover:bg-emerald-700" data-testid="button-fm-enroll-hero">
+                  <Button className="gap-2 rounded-full bg-emerald-600 px-6 font-bold text-white hover:bg-emerald-700 animate-glow-pulse" data-testid="button-fm-enroll-hero">
                     Kursga yozilish <ArrowRight className="h-4 w-4" />
                   </Button>
                 </a>
@@ -454,7 +454,7 @@ export default function FinancialModelingPage() {
             </div>
 
             {/* Right — form card */}
-            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-xl" data-testid="card-fm-form">
+            <div className="course-card rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-xl animate-scale-in delay-200" data-testid="card-fm-form">
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-lg font-extrabold">Konsultatsiya olish</h3>
                 <span className="rounded-full bg-rose-500 px-3 py-1 text-xs font-extrabold text-white">-50% chegirma</span>

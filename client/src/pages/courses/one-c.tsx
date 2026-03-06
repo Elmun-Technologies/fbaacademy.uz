@@ -805,7 +805,7 @@ export default function OneCPage() {
                 <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`module-${i}`}>
                   <AccordionTrigger className="text-left py-4 text-white">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-sm font-bold text-white shadow-md">{i + 1}</span>
+                      <span className="step-badge h-9 w-9 bg-gradient-to-br from-blue-600 to-indigo-700 text-sm icon-glow-blue">{i + 1}</span>
                       <div>
                         <span className="text-sm font-bold sm:text-base">{mod.title}</span>
                         <div className="text-xs text-zinc-400">{mod.topics.length} mavzu</div>
@@ -958,7 +958,7 @@ export default function OneCPage() {
             <h3 className="text-xl font-extrabold text-white sm:text-2xl">Hali savollaringiz bormi?</h3>
             <p className="mt-2 text-blue-100">Menejerimiz barcha tafsilotlarni tushuntiradi</p>
             <Link href="#enroll">
-              <Button size="lg" className="mt-5 rounded-full bg-zinc-900 px-8 font-bold text-blue-400 hover:bg-zinc-800" data-testid="button-final-cta">
+              <Button size="lg" className="mt-5 rounded-full bg-blue-600 px-8 font-bold text-white hover:bg-blue-700 animate-glow-pulse" data-testid="button-final-cta">
                 Bepul konsultatsiya <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

@@ -93,7 +93,7 @@ export default function AppliedSkillsPage() {
             <span className="mb-6 inline-flex items-center gap-1 text-sm text-zinc-500 cursor-pointer hover:text-white transition-colors">← ACCA To'liq dastur</span>
           </Link>
           <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 animate-fade-in-up">
               <div className="mb-4 flex flex-wrap gap-2">
                 <Badge className="rounded-full bg-emerald-500/20 text-emerald-300 border-emerald-400/30 px-3">📗 ACCA 2-Bosqich</Badge>
                 <Badge className="rounded-full bg-blue-500/20 text-blue-300 border-blue-400/30 px-3">6 ta imtihon qog'ozi</Badge>
@@ -125,7 +125,7 @@ export default function AppliedSkillsPage() {
               </div>
             </div>
             <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl" data-testid="card-as-enroll">
+              <div className="course-card rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl animate-scale-in delay-200" data-testid="card-as-enroll">
                 <div className="mb-2 flex items-center justify-between">
                   <h3 className="text-lg font-bold">So'rov qoldiring</h3>
                   <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
@@ -271,7 +271,7 @@ export default function AppliedSkillsPage() {
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">O'quv jarayonida siz bilan birga</h2>
           <div className="grid gap-6 sm:grid-cols-3">
             {course.supportTeam.map((person, i) => (
-              <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`as-support-${i}`}>
+              <Card key={i} className="course-card border border-white/10 bg-zinc-900 shadow-md overflow-hidden text-center" data-testid={`as-support-${i}`}>
                 <div className="h-48 overflow-hidden">
                   <img src={person.avatar} alt={person.role} className="h-full w-full object-cover object-top" loading="lazy" />
                 </div>
@@ -313,7 +313,7 @@ export default function AppliedSkillsPage() {
               <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Bepul konsultatsiya olish</h2>
               <p className="mt-3 text-emerald-100">Applied Skills kursi haqida barcha savollaringizga javob oling</p>
               <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-emerald-400 hover:bg-zinc-800" data-testid="button-as-cta">
+                <Button size="lg" className="mt-6 gap-2 rounded-full bg-emerald-600 px-8 font-bold text-white hover:bg-emerald-700 animate-glow-pulse" data-testid="button-as-cta">
                   Konsultatsiya olish <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>

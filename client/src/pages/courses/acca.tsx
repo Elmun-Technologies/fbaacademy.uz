@@ -200,7 +200,7 @@ export default function AccaPage() {
             <Breadcrumb items={[{ label: t.page.coursesLabel, href: "/courses" }, { label: "ACCA" }]} light />
           </div>
           <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 animate-fade-in-up">
               <div className="mb-4 flex flex-wrap gap-2">
                 <Badge className="rounded-full bg-yellow-500/20 text-yellow-300 border-yellow-400/30 px-3">{tx.badge1}</Badge>
                 <Badge className="rounded-full bg-purple-500/20 text-purple-300 border-purple-400/30 px-3">{tx.badge2}</Badge>
@@ -224,7 +224,7 @@ export default function AccaPage() {
                   { icon: Award, label: tx.featLabel2, sub: tx.featSub2 },
                   { icon: Users, label: course.studentsCount, sub: t.page.graduates },
                 ].map((item, i) => (
-                  <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 backdrop-blur-sm" data-testid={`feature-${i}`}>
+                  <div key={i} className="course-card rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: `${i * 100}ms` }} data-testid={`feature-${i}`}>
                     <item.icon className="mb-2 h-5 w-5 text-purple-300" />
                     <div className="text-xs font-bold text-white sm:text-sm">{item.label}</div>
                     <div className="text-xs text-zinc-500">{item.sub}</div>
@@ -233,7 +233,7 @@ export default function AccaPage() {
               </div>
             </div>
             <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl" data-testid="card-enroll">
+              <div className="course-card rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl animate-scale-in delay-200" data-testid="card-enroll">
                 <div className="mb-2 flex items-center justify-between">
                   <h3 className="text-lg font-bold">{t.page.submitRequest}</h3>
                   <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
@@ -257,7 +257,7 @@ export default function AccaPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {GLOBAL_STATS.map((s, i) => (
-              <div key={i} className="rounded-2xl border-2 border-purple-100 bg-purple-50 p-5 text-center dark:border-purple-900/30 dark:bg-purple-900/10" data-testid={`stat-${i}`}>
+              <div key={i} className="rounded-2xl border border-purple-500/20 bg-purple-900/15 p-5 text-center" data-testid={`stat-${i}`}>
                 <div className="text-2xl font-extrabold text-purple-300 sm:text-3xl">{s.value}</div>
                 <div className="mt-1 text-xs text-zinc-400 sm:text-sm">{tx[s.labelKey as keyof typeof tx] as string}</div>
               </div>
@@ -276,8 +276,8 @@ export default function AccaPage() {
             <div className="absolute left-0 right-0 top-8 hidden h-0.5 bg-gradient-to-r from-sky-400 via-emerald-400 to-amber-400 md:block md:mx-[16.7%]" />
             {ACCA_STAGES.map((stage, i) => (
               <Link key={i} href={stage.href}>
-                <div className="group cursor-pointer rounded-2xl border border-white/10 bg-zinc-900 p-6 transition-all duration-300 hover:-translate-y-1 hover:ring-1 hover:ring-purple-500/30" data-testid={`card-stage-${i}`}>
-                  <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${stage.color} text-2xl font-extrabold text-white shadow-md`}>{i + 1}</div>
+                <div className="course-card group cursor-pointer rounded-2xl border border-white/10 bg-zinc-900 p-6" data-testid={`card-stage-${i}`}>
+                  <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${stage.color} text-2xl font-extrabold text-white shadow-md icon-glow-purple animate-float`} style={{ animationDelay: `${i * 400}ms` }}>{i + 1}</div>
                   <Badge className={`mb-3 rounded-full bg-gradient-to-r ${stage.color} text-white text-xs font-bold shadow-sm`}>{stage.duration}</Badge>
                   <h3 className="mb-3 text-lg font-extrabold">{stage.stage}</h3>
                   <ul className="space-y-1.5">
@@ -344,7 +344,7 @@ export default function AccaPage() {
           <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.youWillLearn}</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {course.skills.map((skill, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 p-4" data-testid={`skill-${i}`}>
+              <div key={i} className="course-card flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 p-4" data-testid={`skill-${i}`}>
                 <CheckCircle2 className="h-5 w-5 shrink-0 text-purple-500" />
                 <span className="font-medium text-sm">{skill}</span>
               </div>
@@ -359,8 +359,8 @@ export default function AccaPage() {
           <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.forWhom}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {course.forWhom.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5" data-testid={`for-whom-${i}`}>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900/30">
+              <div key={i} className="course-card flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5" data-testid={`for-whom-${i}`}>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-600/20 border border-purple-500/30">
                   <GraduationCap className="h-4 w-4 text-purple-400" />
                 </div>
                 <span className="font-medium text-sm leading-relaxed">{item}</span>
@@ -387,7 +387,7 @@ export default function AccaPage() {
                 <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`module-${i}`}>
                   <AccordionTrigger className="text-left py-4 text-white">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 text-sm font-bold text-white shadow-md">{i + 1}</span>
+                      <span className="step-badge h-9 w-9 bg-gradient-to-br from-purple-600 to-blue-600 text-sm icon-glow-purple">{i + 1}</span>
                       <div>
                         <span className="text-sm font-bold sm:text-base">{mod.title}</span>
                         <div className="text-xs text-zinc-400">{mod.topics.length} {t.page.topics}</div>
@@ -416,7 +416,7 @@ export default function AccaPage() {
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.supportTitle}</h2>
           <div className="grid gap-6 sm:grid-cols-3">
             {course.supportTeam.map((person, i) => (
-              <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`support-${i}`}>
+              <Card key={i} className="border border-white/10 bg-zinc-900 shadow-md overflow-hidden text-center" data-testid={`support-${i}`}>
                 <div className="h-48 overflow-hidden">
                   <img src={person.avatar} alt={person.role} width={400} height={192} className="h-full w-full object-cover object-top" loading="lazy" />
                 </div>
