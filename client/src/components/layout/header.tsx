@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Search } from "lucide-react";
+import { Menu, Search, ArrowRight } from "lucide-react";
 
 const navItems = [
   { label: "Kurslar katalogi", path: "/courses", highlight: true },
@@ -29,27 +29,30 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-sm" data-testid="header">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-md shadow-sm dark:bg-background/95 dark:border-border/40" data-testid="header">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-1.5" data-testid="link-home-logo">
-            <span className="text-lg font-bold tracking-tight text-foreground">FBA Academy</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 shadow-md">
+              <span className="text-sm font-extrabold text-white">F</span>
+            </div>
+            <span className="text-lg font-extrabold tracking-tight text-foreground">FBA Academy</span>
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" data-testid="nav-desktop">
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
                 {item.highlight ? (
-                  <Button variant="outline" size="sm" className="gap-1.5 rounded-full text-sm" data-testid={`link-nav-${item.path.replace("/", "") || "home"}`}>
+                  <Button variant="outline" size="sm" className="gap-1.5 rounded-full border-2 text-sm font-semibold shadow-sm" data-testid={`link-nav-${item.path.replace("/", "") || "home"}`}>
                     <Search className="h-3.5 w-3.5" />
                     {item.label}
                   </Button>
                 ) : (
                   <span
-                    className={`rounded-md px-3 py-2 text-sm transition-colors ${
+                    className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                       location === item.path
-                        ? "font-medium text-foreground"
-                        : "text-muted-foreground"
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                     data-testid={`link-nav-${item.path.replace("/", "") || "home"}`}
                   >
@@ -63,8 +66,8 @@ export default function Header() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <Link href="/contacts">
-            <Button variant="outline" size="sm" className="rounded-full" data-testid="button-header-consultation">
-              Kirish
+            <Button size="sm" className="gap-1.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-5 font-semibold text-white shadow-md hover:from-purple-700 hover:to-pink-700" data-testid="button-header-consultation">
+              Konsultatsiya <ArrowRight className="h-3.5 w-3.5" />
             </Button>
           </Link>
         </div>
@@ -77,15 +80,15 @@ export default function Header() {
           </SheetTrigger>
           <SheetContent side="right" className="w-80">
             <div className="flex flex-col gap-6 pt-6">
-              <span className="text-lg font-bold">FBA Academy</span>
+              <span className="text-lg font-extrabold">FBA Academy</span>
               <nav className="flex flex-col gap-1">
                 {mobileNavItems.map((item) => (
                   <Link key={item.path} href={item.path} onClick={() => setOpen(false)}>
                     <span
-                      className={`block rounded-md px-3 py-2.5 text-sm transition-colors ${
+                      className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                         location === item.path
-                          ? "bg-accent font-medium text-foreground"
-                          : "text-muted-foreground"
+                          ? "bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300"
+                          : "text-muted-foreground hover:bg-slate-50 dark:hover:bg-slate-800"
                       }`}
                       data-testid={`link-mobile-nav-${item.path.replace("/", "") || "home"}`}
                     >
@@ -95,8 +98,8 @@ export default function Header() {
                 ))}
               </nav>
               <Link href="/contacts" onClick={() => setOpen(false)}>
-                <Button variant="outline" className="w-full rounded-full" data-testid="button-mobile-consultation">
-                  Konsultatsiya olish
+                <Button className="w-full gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 font-semibold text-white shadow-md" data-testid="button-mobile-consultation">
+                  Konsultatsiya olish <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
             </div>

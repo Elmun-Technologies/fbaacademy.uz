@@ -1,14 +1,14 @@
 # FBA Academy - Educational Platform
 
 ## Overview
-FBA Academy is a premium EdTech platform for the Uzbekistan market specializing in accounting, finance, and law education. It offers ACCA certification (3 levels), DipIFR, Financial Modeling, Jurisprudence, and 1C: Buxgalteriya courses. All content is in Uzbek language. Visual design inspired by Netology.ru — clean, airy, eye-friendly with white/light backgrounds, soft pastel card colors, pill-shaped outline buttons, bold clean typography, and generous whitespace.
+FBA Academy is a premium EdTech platform for the Uzbekistan market specializing in accounting, finance, and law education. It offers ACCA certification (3 levels), DipIFR, Financial Modeling, Jurisprudence, and 1C: Buxgalteriya courses. All content is in Uzbek language. Visual design is bold and vivid — dark gradient hero sections (slate-900 → purple-950), purple-to-pink gradient accents, real CSS shadows, gradient icon containers, strong card borders with shadow-md/lg, dark slate-900 footer.
 
 ## Architecture
 - **Frontend**: React + TypeScript with Vite, Tailwind CSS, shadcn/ui components
 - **Backend**: Express.js with in-memory storage
 - **Routing**: wouter (client-side)
 - **State Management**: TanStack React Query
-- **Styling**: Tailwind CSS with Inter font, light/white theme with pastel accents
+- **Styling**: Tailwind CSS with Inter font, bold vivid theme with purple/pink gradients, real shadows
 
 ## Courses (8 total)
 1. **ACCA** (`/course/acca`) - Full ACCA certification program, 12 months
@@ -61,8 +61,13 @@ Each course page includes: hero with enrollment form + discount badge, salary gr
 - `client/public/images/`: hero-bg.png, teacher-1-4.png, student-1-4.png, course-*.png
 
 ## Design System
-- White page backgrounds, slate-50 cards, pastel accent cards
-- Pill-shaped outline buttons (rounded-full), hover-elevate cards
-- Bold extrabold headings, muted-foreground body text
+- Dark gradient hero sections on every page (bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900)
+- Purple-to-pink gradient accents for CTAs, buttons, icon containers, and module numbers
+- Real CSS shadows (shadow-md, shadow-lg, shadow-xl, shadow-2xl) — not flat
+- Cards with border + shadow-md, hover:-translate-y-1 + shadow-xl on hover
+- Gradient CTA buttons (from-purple-600 to-pink-600) with shadow-md
+- Dark slate-900 footer with purple accent social icons
+- Header with gradient "F" logo badge, shadow-sm, gradient CTA button
 - Salary section: dark bg with lime (#c8ff00) progress bars
-- py-10/py-16 section spacing rhythm
+- py-16/py-20 section spacing rhythm
+- Pill-shaped buttons (rounded-full) with border-2 for emphasis

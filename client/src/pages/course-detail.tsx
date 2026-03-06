@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Layout from "@/components/layout/layout";
 import LeadForm from "@/components/lead-form";
 import { courses, teachers, faqItems } from "@/lib/data";
-import { Clock, Users, BarChart3, CheckCircle2, ArrowRight, BookOpen, ArrowLeft, Star, Flame, Calendar, Award, TrendingUp, Wrench, Monitor } from "lucide-react";
+import { Clock, Users, BarChart3, CheckCircle2, ArrowRight, BookOpen, ArrowLeft, Star, Flame, Calendar, Award, TrendingUp, Wrench, Monitor, GraduationCap, Sparkles } from "lucide-react";
 
 export default function CourseDetail() {
   const { id } = useParams<{ id: string }>();
@@ -41,57 +41,59 @@ export default function CourseDetail() {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="py-10 sm:py-14" data-testid="section-course-hero">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Dark Hero */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 pb-16 pt-10 sm:pb-20 sm:pt-14" data-testid="section-course-hero">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-purple-500/15 via-transparent to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link href="/courses">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground cursor-pointer" data-testid="link-back-courses">
+            <span className="mb-6 inline-flex items-center gap-1 text-sm text-slate-400 cursor-pointer hover:text-white transition-colors" data-testid="link-back-courses">
               <ArrowLeft className="h-4 w-4" /> Barcha kurslar
             </span>
           </Link>
 
           <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
             <div className="lg:col-span-3">
-              <p className="mb-2 text-sm font-medium text-muted-foreground">Onlayn kurs</p>
-              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-[2.75rem] leading-tight" data-testid="text-course-detail-title">{course.title}</h1>
-              <p className="mt-4 max-w-xl text-muted-foreground leading-relaxed">{course.description}</p>
+              <p className="mb-2 text-sm font-medium text-purple-300">Onlayn kurs</p>
+              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-[2.75rem] leading-tight" data-testid="text-course-detail-title">{course.title}</h1>
+              <p className="mt-4 max-w-xl text-slate-300 leading-relaxed">{course.description}</p>
 
-              <div className="mt-6 flex items-center gap-2">
+              <div className="mt-6 flex items-center gap-3">
                 <div className="flex items-center gap-1">
                   <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  <span className="text-sm font-semibold">{course.rating}</span>
+                  <span className="text-sm font-bold text-white">{course.rating}</span>
                 </div>
-                <span className="text-sm text-muted-foreground">Reyting {course.studentsCount} talaba asosida</span>
+                <span className="text-sm text-slate-400">Reyting {course.studentsCount} talaba asosida</span>
               </div>
 
-              <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <div className="mt-8 grid grid-cols-3 gap-3">
                 {[
                   { icon: Monitor, label: "Jonli darslar", sub: "Mini-guruhlarda" },
                   { icon: Clock, label: `${course.practiceHours} soat`, sub: "Amaliyot" },
                   { icon: Award, label: "Ishga joylashish", sub: "Hamkor orqali" },
                 ].map((item, i) => (
-                  <div key={i} className="rounded-xl bg-slate-50 p-3 dark:bg-card" data-testid={`card-hero-feature-${i}`}>
-                    <item.icon className="mb-1 h-5 w-5 text-foreground" />
-                    <div className="text-sm font-semibold text-foreground">{item.label}</div>
-                    <div className="text-xs text-muted-foreground">{item.sub}</div>
+                  <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm" data-testid={`card-hero-feature-${i}`}>
+                    <item.icon className="mb-2 h-6 w-6 text-purple-300" />
+                    <div className="text-sm font-bold text-white">{item.label}</div>
+                    <div className="text-xs text-slate-400">{item.sub}</div>
                   </div>
                 ))}
               </div>
             </div>
+
             <div className="lg:col-span-2">
-              <div className="rounded-2xl bg-slate-50 p-6 dark:bg-card" data-testid="card-course-enroll">
+              <div className="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-course-enroll">
                 <div className="mb-3 flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-foreground">So'rov qoldiring</h3>
+                  <h3 className="text-lg font-bold text-foreground">So'rov qoldiring</h3>
                   {course.discount && (
-                    <Badge className="rounded-full bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-400">-{course.discount}</Badge>
+                    <Badge className="rounded-full bg-rose-500 text-white font-bold px-3 shadow-md">-{course.discount}</Badge>
                   )}
                 </div>
-                <div className="mb-2 flex items-center gap-1 text-sm text-amber-600 dark:text-amber-400">
+                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-600">
                   <Flame className="h-4 w-4" />
                   <span>Joylar soni cheklangan</span>
                 </div>
                 <div className="mb-4 flex items-baseline gap-2">
-                  <span className="text-2xl font-extrabold text-foreground" data-testid="text-course-detail-price">{course.price} UZS</span>
+                  <span className="text-3xl font-extrabold text-foreground" data-testid="text-course-detail-price">{course.price} UZS</span>
                   {course.oldPrice && (
                     <span className="text-sm text-muted-foreground line-through">{course.oldPrice} UZS</span>
                   )}
@@ -104,30 +106,30 @@ export default function CourseDetail() {
       </section>
 
       {/* Salary Growth */}
-      <section className="py-12 sm:py-16" data-testid="section-salary">
+      <section className="py-16 sm:py-20" data-testid="section-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl bg-foreground p-6 sm:p-8 text-background dark:bg-card dark:text-foreground">
-            <h2 className="mb-6 text-2xl font-extrabold" data-testid="text-salary-title">Maoshingiz tajriba bilan o'sadi</h2>
-            <div className="space-y-3">
+          <div className="rounded-3xl bg-slate-900 p-8 sm:p-10 shadow-2xl dark:bg-card dark:border">
+            <h2 className="mb-8 text-2xl font-extrabold text-white dark:text-foreground sm:text-3xl" data-testid="text-salary-title">Maoshingiz tajriba bilan o'sadi</h2>
+            <div className="space-y-4">
               {course.salaryLevels.map((level, i) => (
-                <div key={i} className="rounded-xl bg-[#c8ff00] dark:bg-emerald-600 p-4" style={{ maxWidth: `${60 + i * 20}%` }} data-testid={`card-salary-${i}`}>
-                  <div className="text-lg font-extrabold text-foreground dark:text-background sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm text-foreground/70 dark:text-background/70">{level.level}, {level.description}</div>
+                <div key={i} className="rounded-2xl bg-[#c8ff00] p-5 transition-all duration-300" style={{ maxWidth: `${55 + i * 22}%`, minWidth: "260px" }} data-testid={`card-salary-${i}`}>
+                  <div className="text-xl font-extrabold text-slate-900 sm:text-2xl">{level.salary} so'm dan</div>
+                  <div className="text-sm font-medium text-slate-700">{level.level}, {level.description}</div>
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-xs text-background/50 dark:text-muted-foreground">*Manba: hh.uz, HeadHunter</p>
+            <p className="mt-6 text-xs text-slate-500 dark:text-muted-foreground">*Manba: hh.uz, HeadHunter</p>
           </div>
         </div>
       </section>
 
       {/* Tools */}
-      <section className="py-12 sm:py-16" data-testid="section-tools">
+      <section className="py-16 sm:py-20" data-testid="section-tools">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold" data-testid="text-tools-title">Instrumentlar:</h2>
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-tools-title">Instrumentlar</h2>
           <div className="flex flex-wrap gap-3">
             {course.tools.map((tool, i) => (
-              <div key={i} className="rounded-full border px-5 py-2.5 text-sm font-medium text-foreground" data-testid={`badge-tool-${i}`}>
+              <div key={i} className="rounded-full border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-foreground shadow-sm dark:border-slate-700 dark:bg-card" data-testid={`badge-tool-${i}`}>
                 {tool}
               </div>
             ))}
@@ -136,14 +138,14 @@ export default function CourseDetail() {
       </section>
 
       {/* Skills */}
-      <section className="py-12 sm:py-16" data-testid="section-skills">
+      <section className="bg-slate-50 py-16 sm:py-20 dark:bg-slate-900/50" data-testid="section-skills">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold" data-testid="text-skills-title">Ko'nikmalar:</h2>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-skills-title">Ko'nikmalar</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
             {course.skills.map((skill, i) => (
-              <div key={i} className="flex items-center gap-3 text-sm" data-testid={`text-skill-${i}`}>
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" />
-                <span className="text-foreground">{skill}</span>
+              <div key={i} className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`text-skill-${i}`}>
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-500" />
+                <span className="font-medium text-foreground">{skill}</span>
               </div>
             ))}
           </div>
@@ -151,14 +153,16 @@ export default function CourseDetail() {
       </section>
 
       {/* For Whom */}
-      <section className="py-12 sm:py-16" data-testid="section-for-whom">
+      <section className="py-16 sm:py-20" data-testid="section-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold" data-testid="text-for-whom-title">Kurs kimlar uchun?</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-for-whom-title">Kurs kimlar uchun?</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {course.forWhom.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-xl bg-slate-50 p-4 dark:bg-card" data-testid={`text-for-whom-${i}`}>
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
-                <span className="text-sm text-foreground">{item}</span>
+              <div key={i} className="flex items-start gap-3 rounded-xl border bg-white p-5 shadow-sm dark:bg-card" data-testid={`text-for-whom-${i}`}>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900/30">
+                  <GraduationCap className="h-4 w-4 text-purple-600" />
+                </div>
+                <span className="font-medium text-foreground">{item}</span>
               </div>
             ))}
           </div>
@@ -166,43 +170,41 @@ export default function CourseDetail() {
       </section>
 
       {/* Course Program */}
-      <section className="py-12 sm:py-16" data-testid="section-modules">
+      <section className="bg-slate-50 py-16 sm:py-20 dark:bg-slate-900/50" data-testid="section-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-2 text-2xl font-extrabold sm:text-3xl" data-testid="text-modules-title">Onlayn-kurs dasturi</h2>
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-4xl" data-testid="text-modules-title">Onlayn-kurs dasturi</h2>
           <div className="mb-8 flex flex-wrap gap-3">
-            <Badge variant="outline" className="rounded-full gap-1 px-4 py-2">
-              <Calendar className="h-3.5 w-3.5" /> Davomiyligi {course.duration}
-            </Badge>
-            <Badge variant="outline" className="rounded-full gap-1 px-4 py-2">
-              <BookOpen className="h-3.5 w-3.5" /> {course.projects} loyiha
-            </Badge>
-            <Badge variant="outline" className="rounded-full gap-1 px-4 py-2">
-              <Clock className="h-3.5 w-3.5" /> {course.theoryHours} soat nazariya
-            </Badge>
-            <Badge variant="outline" className="rounded-full gap-1 px-4 py-2">
-              <Wrench className="h-3.5 w-3.5" /> {course.practiceHours} soat amaliyot
-            </Badge>
+            {[
+              { icon: Calendar, text: `Davomiyligi ${course.duration}` },
+              { icon: BookOpen, text: `${course.projects} loyiha` },
+              { icon: Clock, text: `${course.theoryHours} soat nazariya` },
+              { icon: Wrench, text: `${course.practiceHours} soat amaliyot` },
+            ].map((item, i) => (
+              <Badge key={i} variant="outline" className="rounded-full gap-1.5 border-2 px-4 py-2 text-sm font-semibold">
+                <item.icon className="h-4 w-4" /> {item.text}
+              </Badge>
+            ))}
           </div>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {course.modules.map((mod, i) => (
-                <AccordionItem key={i} value={`module-${i}`} className="rounded-xl border-0 bg-slate-50 px-5 dark:bg-card" data-testid={`accordion-module-${i}`}>
-                  <AccordionTrigger className="text-left">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-foreground text-sm font-bold text-background">
+                <AccordionItem key={i} value={`module-${i}`} className="rounded-2xl border bg-white px-6 shadow-sm dark:bg-card" data-testid={`accordion-module-${i}`}>
+                  <AccordionTrigger className="text-left py-5">
+                    <div className="flex items-center gap-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-sm font-bold text-white shadow-md">
                         {i + 1}
                       </span>
                       <div>
-                        <span className="font-semibold">{mod.title}</span>
+                        <span className="text-base font-bold">{mod.title}</span>
                         <div className="text-xs text-muted-foreground">{mod.topics.length} mavzu</div>
                       </div>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <ul className="ml-11 space-y-2.5 pb-2">
+                    <ul className="ml-14 space-y-3 pb-3">
                       {mod.topics.map((topic, j) => (
                         <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                          <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
                           {topic}
                         </li>
                       ))}
@@ -216,63 +218,66 @@ export default function CourseDetail() {
       </section>
 
       {/* Support Team */}
-      <section className="py-12 sm:py-16" data-testid="section-support">
+      <section className="py-16 sm:py-20" data-testid="section-support">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-support-title">O'quv jarayonini yakunlashga yordam beramiz</h2>
-          <div className="grid gap-5 sm:grid-cols-3">
+          <h2 className="mb-10 text-2xl font-extrabold sm:text-4xl" data-testid="text-support-title">O'quv jarayonini yakunlashga yordam beramiz</h2>
+          <div className="grid gap-6 sm:grid-cols-3">
             {course.supportTeam.map((person, i) => (
-              <div key={i} className="text-center" data-testid={`card-support-${i}`}>
-                <div className="mx-auto mb-3 h-32 w-32 overflow-hidden rounded-2xl">
+              <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`card-support-${i}`}>
+                <div className="h-48 overflow-hidden">
                   <img src={person.avatar} alt={person.role} className="h-full w-full object-cover" />
                 </div>
-                <h3 className="font-semibold text-foreground">{person.role}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{person.description}</p>
-              </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-bold text-foreground">{person.role}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{person.description}</p>
+                </div>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
       {/* Live Learning */}
-      <section className="py-12 sm:py-16" data-testid="section-live">
+      <section className="bg-slate-50 py-16 sm:py-20 dark:bg-slate-900/50" data-testid="section-live">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div>
-              <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-live-title">Jonli muloqot<br />va amaliyot<br />ekspertlar bilan</h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">
+              <Badge variant="outline" className="mb-4 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider text-purple-600 border-purple-200">O'quv formati</Badge>
+              <h2 className="text-3xl font-extrabold sm:text-4xl" data-testid="text-live-title">Jonli muloqot<br />va amaliyot<br />ekspertlar bilan</h2>
+              <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
                 Har bir mavzuni tajribali o'qituvchilar bilan onlayn darslarda o'rganasiz. Savollaringizga tezkor javob olasiz va kursdoshlaringiz bilan fikr almashishingiz mumkin.
               </p>
             </div>
-            <div className="rounded-2xl overflow-hidden">
-              <img src={course.image} alt="Live learning" className="h-64 w-full object-cover sm:h-80" />
+            <div className="rounded-3xl overflow-hidden shadow-2xl border">
+              <img src={course.image} alt="Live learning" className="h-72 w-full object-cover sm:h-80" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Consultation CTA */}
-      <section className="py-12 sm:py-16" data-testid="section-consultation">
+      <section className="py-16 sm:py-20" data-testid="section-consultation">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl bg-slate-50 p-6 sm:p-8 dark:bg-card">
-            <div className="grid gap-6 lg:grid-cols-2 lg:items-center">
+          <div className="rounded-3xl bg-gradient-to-r from-purple-600 to-pink-600 p-8 shadow-2xl sm:p-10">
+            <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
               <div>
-                <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-consultation-title">Bepul konsultatsiya<br />mutaxassis bilan</h2>
-                <p className="mt-3 text-muted-foreground">
+                <h2 className="text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-consultation-title">Bepul konsultatsiya<br />mutaxassis bilan</h2>
+                <p className="mt-3 text-purple-100">
                   10 daqiqada dasturni tushuntiramiz, maslahat beramiz va savollaringizga javob beramiz
                 </p>
                 <Link href="/contacts">
-                  <Button variant="outline" size="lg" className="mt-4 gap-2 rounded-full" data-testid="button-consultation-cta">
-                    Konsultatsiya olish
+                  <Button size="lg" className="mt-6 gap-2 rounded-full bg-white px-8 font-bold text-purple-700 shadow-lg hover:bg-slate-100" data-testid="button-consultation-cta">
+                    Konsultatsiya olish <ArrowRight className="h-5 w-5" />
                   </Button>
                 </Link>
               </div>
               {mentor && (
-                <div className="flex items-center gap-4">
-                  <img src={mentor.avatar} alt={mentor.name} className="h-20 w-20 shrink-0 rounded-2xl object-cover" />
+                <div className="flex items-center gap-5">
+                  <img src={mentor.avatar} alt={mentor.name} className="h-24 w-24 shrink-0 rounded-2xl object-cover ring-4 ring-white/20 shadow-xl" />
                   <div>
-                    <h3 className="font-semibold text-foreground" data-testid="text-mentor-name">{mentor.name}</h3>
-                    <p className="text-sm text-muted-foreground">{mentor.role}</p>
-                    <p className="text-sm text-muted-foreground">{mentor.experience}</p>
+                    <h3 className="text-xl font-bold text-white" data-testid="text-mentor-name">{mentor.name}</h3>
+                    <p className="text-sm text-purple-200">{mentor.role}</p>
+                    <p className="text-sm text-purple-200">{mentor.experience}</p>
                   </div>
                 </div>
               )}
@@ -281,23 +286,23 @@ export default function CourseDetail() {
         </div>
       </section>
 
-      {/* Graduate Stories */}
-      <section className="py-12 sm:py-16" data-testid="section-graduates">
+      {/* Related Courses */}
+      <section className="bg-slate-50 py-16 sm:py-20 dark:bg-slate-900/50" data-testid="section-graduates">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-graduates-title">Bitiruvchilarimiz imkoniyatlari cheksiz</h2>
-          <p className="mb-8 max-w-xl text-muted-foreground">
-            Oddiy insonlarning o'z hayotini o'zgartirgan haqiqiy tarixi
-          </p>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-graduates-title">Boshqa kurslar</h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {courses.filter((c) => c.id !== course.id).slice(0, 4).map((c) => (
               <Link key={c.id} href={`/course/${c.id}`}>
-                <div className="group cursor-pointer" data-testid={`card-related-${c.id}`}>
-                  <div className="mb-3 overflow-hidden rounded-2xl">
-                    <img src={c.image} alt={c.title} className="aspect-[4/3] w-full object-cover" />
+                <Card className="group cursor-pointer border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-testid={`card-related-${c.id}`}>
+                  <div className="p-5">
+                    <Badge className="mb-2 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 text-xs font-semibold">{c.category}</Badge>
+                    <h3 className="mb-1 font-bold leading-snug text-foreground">{c.title}</h3>
+                    <div className="mt-2 flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">{c.duration}</span>
+                      <span className="font-bold text-foreground">{c.price} UZS</span>
+                    </div>
                   </div>
-                  <Badge variant="outline" className="mb-1 rounded-full text-xs">{c.category}</Badge>
-                  <h3 className="text-sm font-semibold leading-snug text-foreground">{c.title}</h3>
-                </div>
+                </Card>
               </Link>
             ))}
           </div>
@@ -305,32 +310,18 @@ export default function CourseDetail() {
       </section>
 
       {/* FAQ */}
-      <section className="py-12 sm:py-16" data-testid="section-course-faq">
+      <section className="py-16 sm:py-20" data-testid="section-course-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold" data-testid="text-course-faq-title">Ko'p beriladigan savollar</h2>
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-course-faq-title">Ko'p beriladigan savollar</h2>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
               {courseFaqs.map((faq) => (
-                <AccordionItem key={faq.id} value={faq.id} className="rounded-xl border-0 bg-slate-50 px-5 dark:bg-card" data-testid={`accordion-faq-${faq.id}`}>
-                  <AccordionTrigger className="text-left font-medium">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
+                <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border bg-white px-6 shadow-sm dark:bg-card" data-testid={`accordion-faq-${faq.id}`}>
+                  <AccordionTrigger className="text-left font-semibold py-5">{faq.question}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5">{faq.answer}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="border-t py-10 sm:py-12" data-testid="section-course-cta">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <h2 className="text-xl font-bold text-foreground sm:text-2xl">Hoziroq boshlang!</h2>
-            <Link href="/contacts">
-              <Button variant="outline" size="lg" className="gap-2 rounded-full" data-testid="button-course-cta">
-                Bepul konsultatsiya <ArrowRight className="h-5 w-5" />
-              </Button>
-            </Link>
           </div>
         </div>
       </section>

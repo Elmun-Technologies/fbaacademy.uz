@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
 import { courses, categories } from "@/lib/data";
-import { Search, Clock, Filter, Users } from "lucide-react";
+import { Search, Clock, Filter, Star } from "lucide-react";
 
 export default function Catalog() {
   useSEO({
@@ -32,9 +32,10 @@ export default function Catalog() {
 
   return (
     <Layout>
-      <section className="py-10 sm:py-14">
+      <section className="bg-gradient-to-b from-slate-50 to-white py-10 sm:py-14 dark:from-slate-900/50 dark:to-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="mb-8 text-3xl font-extrabold tracking-tight sm:text-4xl" data-testid="text-catalog-title">Barcha kurslar</h1>
+          <h1 className="mb-2 text-3xl font-extrabold tracking-tight sm:text-4xl" data-testid="text-catalog-title">Barcha kurslar</h1>
+          <p className="mb-8 text-muted-foreground">ACCA, DipIFR, Financial Modeling, 1C va Huquqshunoslik bo'yicha professional kurslar</p>
 
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <div className="relative w-full max-w-sm">
@@ -43,7 +44,7 @@ export default function Catalog() {
                 placeholder="Kurs qidirish..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="rounded-full pl-9"
+                className="rounded-full border-2 pl-9 shadow-sm"
                 data-testid="input-search-courses"
               />
             </div>
@@ -52,7 +53,7 @@ export default function Catalog() {
                 variant={selectedCategory === "all" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedCategory("all")}
-                className="rounded-full"
+                className="rounded-full border-2 font-semibold"
                 data-testid="button-filter-all"
               >
                 Barchasi
@@ -63,7 +64,7 @@ export default function Catalog() {
                   variant={selectedCategory === cat.slug ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedCategory(cat.slug)}
-                  className="rounded-full"
+                  className="rounded-full border-2 font-semibold"
                   data-testid={`button-filter-${cat.slug}`}
                 >
                   {cat.name}
@@ -72,26 +73,29 @@ export default function Catalog() {
             </div>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {filteredCourses.map((course) => (
               <Link key={course.id} href={`/course/${course.id}`}>
-                <Card className="group cursor-pointer border-0 bg-slate-50 dark:bg-card transition-all duration-200 hover-elevate h-full overflow-visible" data-testid={`card-catalog-course-${course.id}`}>
-                  <div className="p-4 pb-3">
+                <Card className="group cursor-pointer border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full" data-testid={`card-catalog-course-${course.id}`}>
+                  <div className="p-5">
                     <div className="mb-3 flex flex-wrap items-center gap-2">
-                      <Badge variant="outline" className="rounded-full text-xs">{course.category}</Badge>
-                      <Badge variant="outline" className="rounded-full text-xs">{course.level}</Badge>
+                      <Badge className="rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 text-xs font-semibold">{course.category}</Badge>
+                      <Badge variant="outline" className="rounded-full text-xs font-semibold border-2">{course.level}</Badge>
                       {course.discount && (
-                        <span className="text-xs font-semibold text-rose-600 dark:text-rose-400">-{course.discount}</span>
+                        <Badge className="rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300 text-xs font-bold">-{course.discount}</Badge>
                       )}
                     </div>
-                    <div className="mb-3 overflow-hidden rounded-xl">
-                      <img src={course.image} alt={course.title} className="h-36 w-full object-cover" />
+                    <h3 className="mb-2 text-lg font-bold leading-snug text-foreground">{course.title}</h3>
+                    <p className="mb-4 text-sm text-muted-foreground line-clamp-2">{course.shortDescription}</p>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
+                      <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {course.duration}</span>
+                      <span className="flex items-center gap-1"><Star className="h-3.5 w-3.5 text-amber-500" /> {course.rating}</span>
                     </div>
-                    <h3 className="mb-2 font-semibold leading-snug text-foreground">{course.title}</h3>
-                    <p className="mb-3 text-xs text-muted-foreground line-clamp-2">{course.shortDescription}</p>
-                    <div className="flex items-center justify-between gap-2 flex-wrap pt-2 border-t border-border/30">
-                      <span className="text-xs text-muted-foreground">{course.duration}</span>
-                      <span className="text-sm font-bold text-foreground">{course.price} <span className="text-xs font-normal text-muted-foreground">UZS</span></span>
+                    <div className="flex items-center justify-between gap-2 flex-wrap border-t pt-3">
+                      {course.oldPrice && (
+                        <span className="text-xs text-muted-foreground line-through">{course.oldPrice}</span>
+                      )}
+                      <span className="text-lg font-extrabold text-foreground">{course.price} <span className="text-xs font-normal text-muted-foreground">UZS</span></span>
                     </div>
                   </div>
                 </Card>

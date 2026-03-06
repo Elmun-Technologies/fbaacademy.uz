@@ -82,7 +82,7 @@ export default function LeadForm({ source = "website", buttonText = "Konsultatsi
               </FormItem>
             )}
           />
-          <Button type="submit" variant="outline" disabled={mutation.isPending} className="w-full gap-2 rounded-full" data-testid="button-submit-lead">
+          <Button type="submit" disabled={mutation.isPending} className="w-full gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 font-semibold text-white shadow-md hover:from-purple-700 hover:to-pink-700" data-testid="button-submit-lead">
             {mutation.isPending ? "Yuborilmoqda..." : buttonText}
             {!mutation.isPending && <Send className="h-4 w-4" />}
           </Button>

@@ -1,5 +1,4 @@
 import { useSEO } from "@/hooks/use-seo";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
 import LeadForm from "@/components/lead-form";
@@ -14,12 +13,14 @@ export default function CorporateTraining() {
 
   return (
     <Layout>
-      <section className="py-10 sm:py-14">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-16 sm:py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <h1 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl" data-testid="text-corporate-title">Korporativ treninglar</h1>
-              <p className="mb-6 max-w-lg text-muted-foreground leading-relaxed">
+              <Badge className="mb-4 rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">Korporativ</Badge>
+              <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl" data-testid="text-corporate-title">Korporativ treninglar</h1>
+              <p className="mb-6 max-w-lg text-slate-300 leading-relaxed">
                 Jamoangizning malakasini oshiring. Sizning kompaniyangiz ehtiyojlariga moslashtirilgan maxsus ta'lim dasturlari.
               </p>
               <div className="space-y-3">
@@ -29,15 +30,15 @@ export default function CorporateTraining() {
                   "Amaliy loyihalar va real case-lar",
                   "Natijani o'lchaydigan KPI tizimi",
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm text-foreground">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                  <div key={i} className="flex items-center gap-2 text-sm text-slate-200">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl bg-slate-50 p-6 sm:p-8 dark:bg-card" data-testid="card-corporate-form">
-              <h3 className="mb-1 text-lg font-semibold text-foreground">Bepul konsultatsiya</h3>
+            <div className="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl sm:p-8 dark:bg-card" data-testid="card-corporate-form">
+              <h3 className="mb-1 text-lg font-bold text-foreground">Bepul konsultatsiya</h3>
               <p className="mb-4 text-sm text-muted-foreground">Jamoangiz uchun maxsus dastur tuzamiz</p>
               <LeadForm source="corporate" buttonText="So'rov yuborish" />
             </div>
@@ -45,23 +46,23 @@ export default function CorporateTraining() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16" data-testid="section-corporate-directions">
+      <section className="py-16 sm:py-20" data-testid="section-corporate-directions">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold">Yo'nalishlar</h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: BarChart3, title: "Digital Marketing", desc: "SMM, targetli reklama, SEO, analitika bo'yicha jamoaviy treninglar." },
-              { icon: Lightbulb, title: "IT & Dasturlash", desc: "Frontend, Backend, Mobile va Data Science yo'nalishlari bo'yicha." },
-              { icon: Target, title: "Sotuv va Boshqaruv", desc: "Sotuv texnikalari, jamoani boshqarish, CRM tizimlarini o'rgatish." },
-              { icon: Users, title: "Soft Skills", desc: "Muloqot, prezentatsiya, vaqtni boshqarish va jamoaviy ishlash." },
-              { icon: Shield, title: "Kiberxavfsizlik", desc: "Kompaniya ma'lumotlarini himoyalash va xavfsizlik protokollari." },
-              { icon: Building2, title: "Maxsus dasturlar", desc: "Sizning kompaniyangiz uchun individual ravishda ishlab chiqilgan dastur." },
+              { icon: BarChart3, title: "Digital Marketing", desc: "SMM, targetli reklama, SEO, analitika bo'yicha jamoaviy treninglar.", gradient: "from-blue-500 to-cyan-500" },
+              { icon: Lightbulb, title: "IT & Dasturlash", desc: "Frontend, Backend, Mobile va Data Science yo'nalishlari bo'yicha.", gradient: "from-amber-500 to-orange-500" },
+              { icon: Target, title: "Sotuv va Boshqaruv", desc: "Sotuv texnikalari, jamoani boshqarish, CRM tizimlarini o'rgatish.", gradient: "from-emerald-500 to-teal-500" },
+              { icon: Users, title: "Soft Skills", desc: "Muloqot, prezentatsiya, vaqtni boshqarish va jamoaviy ishlash.", gradient: "from-purple-500 to-pink-500" },
+              { icon: Shield, title: "Kiberxavfsizlik", desc: "Kompaniya ma'lumotlarini himoyalash va xavfsizlik protokollari.", gradient: "from-red-500 to-rose-500" },
+              { icon: Building2, title: "Maxsus dasturlar", desc: "Sizning kompaniyangiz uchun individual ravishda ishlab chiqilgan dastur.", gradient: "from-indigo-500 to-violet-500" },
             ].map((item, i) => (
-              <div key={i} className="rounded-2xl bg-slate-50 p-6 dark:bg-card" data-testid={`card-corp-direction-${i}`}>
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-white dark:bg-background">
-                  <item.icon className="h-5 w-5 text-foreground" />
+              <div key={i} className="rounded-2xl border bg-white p-6 shadow-md dark:bg-card" data-testid={`card-corp-direction-${i}`}>
+                <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} shadow-md`}>
+                  <item.icon className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="mb-2 font-semibold">{item.title}</h3>
+                <h3 className="mb-2 text-lg font-bold">{item.title}</h3>
                 <p className="text-sm text-muted-foreground">{item.desc}</p>
               </div>
             ))}
@@ -69,7 +70,7 @@ export default function CorporateTraining() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16" data-testid="section-corporate-how">
+      <section className="bg-slate-50 py-16 sm:py-20 dark:bg-slate-900/50" data-testid="section-corporate-how">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold">Qanday ishlaydi?</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -80,10 +81,10 @@ export default function CorporateTraining() {
               { step: "04", title: "Natija", desc: "KPI asosida natijani o'lchaymiz" },
             ].map((item, i) => (
               <div key={i} data-testid={`step-corp-${i}`}>
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-sm font-bold text-background">
+                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-sm font-bold text-white shadow-md">
                   {item.step}
                 </div>
-                <h3 className="font-semibold">{item.title}</h3>
+                <h3 className="text-lg font-bold">{item.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
               </div>
             ))}
@@ -91,12 +92,12 @@ export default function CorporateTraining() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16" data-testid="section-corporate-partners">
+      <section className="py-16 sm:py-20" data-testid="section-corporate-partners">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold">Bizga ishonishadi</h2>
           <div className="flex flex-wrap gap-3">
             {partnerCompanies.map((company) => (
-              <div key={company} className="rounded-full bg-slate-50 px-5 py-2.5 text-sm font-medium text-muted-foreground dark:bg-card">
+              <div key={company} className="rounded-full border-2 bg-white px-6 py-3 text-sm font-semibold text-foreground shadow-sm dark:bg-card">
                 {company}
               </div>
             ))}
