@@ -8,8 +8,9 @@ import { Briefcase, FileText, Users, Target, ArrowRight, Building2, UserCheck } 
 
 export default function CareerCenter() {
   useSEO({
-    title: "Ishga joylashish markazi - FBA Academy",
-    description: "FBA Academy bitiruvchilariga ish topishda yordam. 50+ hamkor kompaniyalar, 92% ishga joylashish ko'rsatkichi.",
+    title: "Karyera Markazi — Big Four, Moliya Kompaniyalari | FBA Academy",
+    description: "FBA Academy bitiruvchilari Deloitte, PwC, KPMG, EY va yetakchi moliya kompaniyalarida ishlashadi. 92% ishga joylashish ko'rsatkichi. Bepul karyera yordam.",
+    keywords: "ACCA ishga joylashish, Big Four O'zbekiston, DipIFR ish joyi, moliya karyera",
   });
 
   return (

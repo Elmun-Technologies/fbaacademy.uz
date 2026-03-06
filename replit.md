@@ -21,7 +21,7 @@ FBA Academy is a premium EdTech platform for the Uzbekistan market specializing 
 8. **1C: Buxgalteriya** (`/course/1c-course`) - 1C accounting software, 3 months
 
 ## Course Detail Page Sections
-Each course page includes: hero with enrollment form + discount badge, salary growth section (dark bg with lime bars), tools/instruments (pill badges), skills list, for whom section, course program (accordion with numbered modules), support team (3 persons), live learning section, consultation CTA, related courses, FAQ
+Each course page includes: hero with enrollment form + discount badge, YouTube video preview (lazy-load click-to-play), salary growth section (dark bg with lime bars), tools/instruments (pill badges), skills list, for whom section, course program (accordion with numbered modules), support team (3 persons), live learning section, consultation CTA, related courses, FAQ
 
 ## Categories
 - ACCA (acca) - blue-50
@@ -30,35 +30,54 @@ Each course page includes: hero with enrollment form + discount badge, salary gr
 - Buxgalteriya (accounting) - violet-50
 
 ## Pages (14 total)
-1. **Home** (`/`) - Category grid, popular courses, graduate stories, help section, stats, teachers, testimonials, why us, CTA
+1. **Home** (`/`) - Category grid, popular courses, YouTube video sections, graduate stories, help section, stats, teachers, testimonials, why us, CTA
 2. **Catalog** (`/courses`) - All 8 courses with category filter pills, search
-3. **Course Detail** (`/course/:id`) - Rich course page with salary, tools, modules, support team
+3. **Course Detail** (`/course/:id`) - Rich course page with YouTube preview, salary, tools, modules, support team
 4. **Teachers** (`/teachers`) - 4 teachers: ACCA expert, finance expert, IFRS expert, 1C expert
-5. **About** (`/about`) - Stats, mission/vision/values, timeline, partners (Big Four, banks)
-6. **Blog** (`/blog`) - Blog listing about ACCA, IFRS, finance topics
+5. **About** (`/about`) - Stats, mission/vision/values, YouTube intro video, timeline, partners
+6. **Blog** (`/blog`) - Blog listing with cover images for ACCA, IFRS, finance topics
 7. **Blog Detail** (`/blog/:id`) - Individual blog post with related articles
 8. **Contacts** (`/contacts`) - Contact form + info cards + social links
 9. **Career Center** (`/career`) - Big Four placement, stats, partner companies
 10. **Case Studies** (`/case-studies`) - Graduate stories (ACCA to Deloitte, etc.)
 11. **FAQ** (`/faq`) - Categorized FAQ (ACCA, DipIFR, 1C, Financial Modeling, etc.)
-12. **Corporate Training** (`/corporate`) - B2B training with lead form
+12. **Corporate Training** (`/corporate`) - B2B training (ACCA, IFRS, Financial Modeling, 1C, Law) with lead form
 13. **Partnership** (`/partnership`) - Partnership types and request form
 14. **Grants/Promotions** (`/grants`) - Active discount campaigns
 
 ## Key Components
-- `components/layout/header.tsx` - Sticky header with blur, "FBA Academy" text logo, pill nav buttons, mobile sheet menu
+- `components/layout/header.tsx` - Sticky header with ACCA dropdown (Applied Knowledge, Applied Skills, Strategic Professional), DipIFR, Financial Modeling, Huquqshunoslik, 1C nav items, mobile sheet menu
 - `components/layout/footer.tsx` - 4-column footer with course links (ACCA, DipIFR, FM, 1C, Law)
 - `components/layout/layout.tsx` - Wrapper: header + main + footer
-- `components/lead-form.tsx` - Reusable lead capture form with zod validation, rounded-full inputs and outline button
+- `components/lead-form.tsx` - Reusable lead capture form with zod validation
+- `components/youtube-embed.tsx` - Lazy YouTube embed: shows thumbnail, plays on click (no autoload)
 
-## Data Model (data.ts)
-- Course interface includes: salaryLevels[], tools[], supportTeam[], practiceHours, theoryHours, projects, rating, studentsCount
-- Teachers: 4 finance/accounting/law experts
-- Partner companies: Deloitte, PwC, KPMG, EY, BDO, Grant Thornton, etc.
-- Lead form submissions go to `/api/leads` endpoint (in-memory storage)
+## YouTube Videos
+- `PU8ZCSuHWXE` → Financial Modeling / home platform section
+- `eTriMFVGcYg` → Graduates section / home
+- `ZV1UKMREypM` → ACCA courses preview
+- `R0eCSc9Efqc` → DipIFR / about page company intro
+
+## SEO Implementation
+- `hooks/use-seo.ts` - Full SEO hook: title, description, keywords, canonical URL, OG tags (og:title/description/image/url/type/locale), Twitter card, JSON-LD structured data
+- `client/public/sitemap.xml` - Full sitemap with all 14 pages + 8 course pages
+- `client/public/robots.txt` - robots.txt allowing all crawlers
+- `client/index.html` - Organization schema (JSON-LD), og:image, twitter:card, uz lang
+- All pages have unique SEO titles with format: "Page Name — Keywords | FBA Academy"
 
 ## Images
-- `client/public/images/`: hero-bg.png, teacher-1-4.png, student-1-4.png, course-*.png
+- All images use real Unsplash URLs (no local placeholder files)
+- Teachers: professional finance/accounting photos with `?w=400&h=500&fit=crop&crop=face`
+- Courses: relevant subject photos with `?w=700&h=450&fit=crop`
+- Blog posts: category-appropriate photos with `?w=800&h=400&fit=crop`
+- Testimonials: avatar photos with `?w=120&h=120&fit=crop&crop=face`
+
+## Data Model (data.ts)
+- Course interface includes: salaryLevels[], tools[], supportTeam[], practiceHours, theoryHours, projects, rating, studentsCount, videoId (YouTube)
+- Teachers: 4 finance/accounting/law experts with Unsplash photos
+- Partner companies: Deloitte, PwC, KPMG, EY, BDO, Grant Thornton, Uzbank, Kapitalbank, etc.
+- Lead form submissions go to `/api/leads` endpoint (in-memory storage)
+- Content is strictly finance/accounting/law — no marketing or IT content
 
 ## Design System
 - Dark gradient hero sections on every page (bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900)
@@ -71,3 +90,5 @@ Each course page includes: hero with enrollment form + discount badge, salary gr
 - Salary section: dark bg with lime (#c8ff00) progress bars
 - py-16/py-20 section spacing rhythm
 - Pill-shaped buttons (rounded-full) with border-2 for emphasis
+- Blog cards with cover image on top, hover scale effect
+- Responsive: mobile (1-col), tablet (2-col), desktop (3-4 col) for all grids

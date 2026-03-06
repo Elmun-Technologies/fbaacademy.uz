@@ -9,8 +9,9 @@ import { ArrowRight, TrendingUp, Quote } from "lucide-react";
 
 export default function CaseStudies() {
   useSEO({
-    title: "Bitiruvchilar natijalari - FBA Academy",
-    description: "FBA Academy bitiruvchilarining muvaffaqiyat tarixi. Real natijalar va kasbiy o'sish ko'rsatkichlari.",
+    title: "Muvaffaqiyat Tarixi — ACCA, DipIFR Bitiruvchilar | FBA Academy",
+    description: "FBA Academy ACCA, DipIFR va Financial Modeling bitiruvchilarining real muvaffaqiyat tarixi. Big Four firmalarga kirishdan to karyera o'sishiga.",
+    keywords: "ACCA muvaffaqiyat, DipIFR bitiruvchi, FBA Academy success story, moliya karyera O'zbekiston",
   });
 
   return (

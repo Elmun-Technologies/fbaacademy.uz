@@ -6,8 +6,9 @@ import { Gift, Percent, Clock, CheckCircle2, Star, Zap, Users } from "lucide-rea
 
 export default function Grants() {
   useSEO({
-    title: "Grant va Aksiyalar - FBA Academy",
-    description: "FBA Academy maxsus chegirmalar va grant imkoniyatlari. Karyerangizni arzon narxda boshlang!",
+    title: "Grant va Chegirmalar — ACCA, DipIFR Bepul Ta'lim | FBA Academy",
+    description: "FBA Academy maxsus grant va chegirma imkoniyatlari. ACCA, DipIFR, Financial Modeling kurslarini 0% bo'lib to'lang yoki grant yutib oling.",
+    keywords: "ACCA grant O'zbekiston, DipIFR chegirma, moliya kursi grant, bepul ta'lim",
   });
 
   return (

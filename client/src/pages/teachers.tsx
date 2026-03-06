@@ -9,8 +9,9 @@ import { ArrowRight } from "lucide-react";
 
 export default function Teachers() {
   useSEO({
-    title: "O'qituvchilar - FBA Academy",
-    description: "FBA Academy tajribali mentorlar jamoasi. Sohasida 5+ yillik amaliy tajribaga ega mutaxassislar.",
+    title: "O'qituvchilar — ACCA, DipIFR, Moliya ekspertlari | FBA Academy",
+    description: "FBA Academy tajribali mentorlar jamoasi: ACCA, DipIFR, Financial Modeling va 1C bo'yicha sertifikatlangan ekspertlar. Big Four firmalarida ishlagan mutaxassislar.",
+    keywords: "ACCA o'qituvchi, DipIFR mentor, moliya ekspert, FBA Academy ustoz",
   });
 
   return (

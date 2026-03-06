@@ -9,8 +9,9 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 
 export default function FAQ() {
   useSEO({
-    title: "Savol-javob (FAQ) - FBA Academy",
-    description: "FBA Academy haqida ko'p beriladigan savollar va javoblar. Kurslar, to'lov, sertifikat va ishga joylashish.",
+    title: "Ko'p beriladigan savollar — ACCA, DipIFR, Kurslar | FBA Academy",
+    description: "FBA Academy haqida savol va javoblar: ACCA, DipIFR, Financial Modeling kurslari, to'lov tartibi, xalqaro sertifikat va ishga joylashish haqida.",
+    keywords: "ACCA savollar, DipIFR FAQ, FBA Academy kurslar narxi, moliya ta'limi savol",
   });
 
   const categories = [...new Set(faqItems.map((f) => f.category))];

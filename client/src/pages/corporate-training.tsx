@@ -3,12 +3,13 @@ import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
 import LeadForm from "@/components/lead-form";
 import { partnerCompanies } from "@/lib/data";
-import { BarChart3, Users, Target, Lightbulb, Shield, Building2, CheckCircle2 } from "lucide-react";
+import { BarChart3, Users, Target, Award, BookOpen, Building2, CheckCircle2 } from "lucide-react";
 
 export default function CorporateTraining() {
   useSEO({
-    title: "Korporativ treninglar - FBA Academy",
-    description: "Kompaniyangiz jamoasi uchun maxsus ta'lim dasturlari. Moslashuvchan jadval va individual yondashuv.",
+    title: "Korporativ treninglar — ACCA, IFRS, Moliya | FBA Academy",
+    description: "Kompaniyangiz moliya va buxgalteriya jamoasi uchun ACCA, DipIFR, IFRS va Financial Modeling bo'yicha korporativ treninglar. Moslashuvchan jadval, xalqaro sertifikatlar.",
+    keywords: "korporativ trening ACCA, IFRS trening kompaniya, moliya treningi O'zbekiston",
   });
 
   return (
@@ -51,12 +52,12 @@ export default function CorporateTraining() {
           <h2 className="mb-8 text-2xl font-extrabold">Yo'nalishlar</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: BarChart3, title: "Digital Marketing", desc: "SMM, targetli reklama, SEO, analitika bo'yicha jamoaviy treninglar.", gradient: "from-blue-500 to-cyan-500" },
-              { icon: Lightbulb, title: "IT & Dasturlash", desc: "Frontend, Backend, Mobile va Data Science yo'nalishlari bo'yicha.", gradient: "from-amber-500 to-orange-500" },
-              { icon: Target, title: "Sotuv va Boshqaruv", desc: "Sotuv texnikalari, jamoani boshqarish, CRM tizimlarini o'rgatish.", gradient: "from-emerald-500 to-teal-500" },
-              { icon: Users, title: "Soft Skills", desc: "Muloqot, prezentatsiya, vaqtni boshqarish va jamoaviy ishlash.", gradient: "from-purple-500 to-pink-500" },
-              { icon: Shield, title: "Kiberxavfsizlik", desc: "Kompaniya ma'lumotlarini himoyalash va xavfsizlik protokollari.", gradient: "from-red-500 to-rose-500" },
-              { icon: Building2, title: "Maxsus dasturlar", desc: "Sizning kompaniyangiz uchun individual ravishda ishlab chiqilgan dastur.", gradient: "from-indigo-500 to-violet-500" },
+              { icon: Award, title: "ACCA treningi", desc: "Kompaniya buxgalter va moliyachilariga ACCA Applied Knowledge, Skills, Professional darajalarida trening.", gradient: "from-blue-500 to-cyan-500" },
+              { icon: BarChart3, title: "IFRS / DipIFR", desc: "Moliyaviy hisobotlarni xalqaro IFRS standartlariga o'tkazish bo'yicha jamoaviy treninglar.", gradient: "from-emerald-500 to-teal-500" },
+              { icon: Target, title: "Financial Modeling", desc: "Moliya bo'limi jamoasi uchun DCF, kompaniya baholash va investitsiya tahlili treningi.", gradient: "from-violet-500 to-purple-600" },
+              { icon: BookOpen, title: "1C: Buxgalteriya", desc: "Kompaniyangiz uchun 1C: Buxgalteriya 8.3 ni to'liq joriy etish va xodimlarni o'qitish.", gradient: "from-amber-500 to-orange-500" },
+              { icon: Users, title: "Huquqiy savodxonlik", desc: "Moliya, mehnat va soliq huquqi bo'yicha jamoaviy treninglar.", gradient: "from-rose-500 to-pink-500" },
+              { icon: Building2, title: "Maxsus dasturlar", desc: "Sizning kompaniyangiz ehtiyojlariga individual ravishda ishlab chiqilgan maxsus ta'lim dasturi.", gradient: "from-indigo-500 to-violet-500" },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl border bg-white p-6 shadow-md dark:bg-card" data-testid={`card-corp-direction-${i}`}>
                 <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} shadow-md`}>

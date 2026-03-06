@@ -8,8 +8,9 @@ import { Clock, ArrowRight, Calendar, User } from "lucide-react";
 
 export default function Blog() {
   useSEO({
-    title: "Blog - FBA Academy",
-    description: "Kasbiy rivojlanish, texnologiyalar va ta'lim haqida foydali maqolalar.",
+    title: "Blog — ACCA, DipIFR, Moliya va Buxgalteriya maqolalari | FBA Academy",
+    description: "ACCA, DipIFR, Financial Modeling, Huquqshunoslik va 1C: Buxgalteriya bo'yicha foydali maqolalar va kasbiy maslahatlar.",
+    keywords: "ACCA blog, DipIFR maqolalar, moliya ta'limi, buxgalteriya maslahat",
   });
 
   return (
@@ -30,10 +31,15 @@ export default function Blog() {
           <div className="grid gap-6 sm:grid-cols-2">
             {blogPosts.map((post) => (
               <Link key={post.id} href={`/blog/${post.id}`}>
-                <Card className="group cursor-pointer border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full" data-testid={`card-blog-${post.id}`}>
+                <Card className="group cursor-pointer border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full overflow-hidden" data-testid={`card-blog-${post.id}`}>
+                  {post.image && (
+                    <div className="h-48 overflow-hidden">
+                      <img src={post.image} alt={post.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    </div>
+                  )}
                   <div className="p-6">
                     <div className="mb-3 flex items-center gap-3 text-xs text-muted-foreground flex-wrap">
-                      <Badge className="rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 text-xs font-semibold">{post.category}</Badge>
+                      <Badge className="rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">{post.category}</Badge>
                       <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {post.date}</span>
                       <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {post.readTime}</span>
                     </div>
@@ -43,7 +49,7 @@ export default function Blog() {
                       <span className="flex items-center gap-1 text-xs text-muted-foreground">
                         <User className="h-3 w-3" /> {post.author}
                       </span>
-                      <span className="flex items-center gap-1 text-sm font-semibold text-purple-600 dark:text-purple-400">
+                      <span className="flex items-center gap-1 text-sm font-semibold text-purple-600">
                         O'qish <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                       </span>
                     </div>

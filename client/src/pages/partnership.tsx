@@ -6,8 +6,9 @@ import { Handshake, Building2, Users, Gift, CheckCircle2, TrendingUp, Globe } fr
 
 export default function Partnership() {
   useSEO({
-    title: "Hamkorlik - FBA Academy",
-    description: "FBA Academy bilan hamkorlik imkoniyatlari. Korporativ, affiliate, ta'lim muassasalari va texnologik hamkorlik.",
+    title: "Hamkorlik — Korporativ, Affiliate, Ta'lim | FBA Academy",
+    description: "FBA Academy bilan hamkorlik qiling: korporativ treninglar, affiliate dastur, universitetlar bilan hamkorlik va sponsorlik imkoniyatlari.",
+    keywords: "FBA Academy hamkorlik, ACCA korporativ trening, ta'lim muassasa hamkorlik",
   });
 
   return (
@@ -29,7 +30,7 @@ export default function Partnership() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { icon: Building2, title: "Korporativ hamkorlik", desc: "Kompaniyalar uchun maxsus chegirmalar va korporativ ta'lim dasturlari.", benefits: ["Maxsus narxlar", "Individual dastur", "Moslashuvchan jadval"], gradient: "from-blue-500 to-cyan-500" },
-              { icon: Users, title: "Affiliate dastur", desc: "FBA Academy kurslarini tavsiya qiling va har bir talabadan komissiya oling.", benefits: ["20% komissiya", "Shaxsiy hisobot", "Marketing materiallar"], gradient: "from-purple-500 to-pink-500" },
+              { icon: Users, title: "Affiliate dastur", desc: "FBA Academy kurslarini tavsiya qiling va har bir talabadan komissiya oling.", benefits: ["20% komissiya", "Shaxsiy hisobot", "Tavsiya havolasi"], gradient: "from-purple-500 to-pink-500" },
               { icon: Globe, title: "Ta'lim muassasalari", desc: "Universitetlar va kollejlar bilan hamkorlik.", benefits: ["Akademik chegirmalar", "Birgalikdagi sertifikat", "Professor almashish"], gradient: "from-emerald-500 to-teal-500" },
               { icon: Gift, title: "Sponsorlik", desc: "FBA Academy tadbirlarini qo'llab-quvvatlash va brendingizni tanitish.", benefits: ["Brend ko'rinishi", "Networking", "CSR hisoboti"], gradient: "from-amber-500 to-orange-500" },
               { icon: TrendingUp, title: "Investitsiya", desc: "FBA Academy rivojlanishiga investitsiya qiling.", benefits: ["Daromad ulushi", "Boshqaruv kengashi", "Strategik qarorlar"], gradient: "from-indigo-500 to-violet-500" },

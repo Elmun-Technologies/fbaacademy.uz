@@ -7,8 +7,9 @@ import { SiTelegram, SiInstagram } from "react-icons/si";
 
 export default function Contacts() {
   useSEO({
-    title: "Kontaktlar - FBA Academy",
-    description: "FBA Academy bilan bog'laning. Telefon, email va manzil ma'lumotlari. Bepul konsultatsiya oling.",
+    title: "Bog'lanish — FBA Academy | Toshkent",
+    description: "FBA Academy bilan bog'laning. ACCA, DipIFR, Financial Modeling kurslari haqida bepul konsultatsiya. Toshkent, +998 90 123 45 67.",
+    keywords: "FBA Academy kontakt, ACCA konsultatsiya, moliya ta'lim Toshkent, DipIFR ro'yxatdan o'tish",
   });
 
   return (
