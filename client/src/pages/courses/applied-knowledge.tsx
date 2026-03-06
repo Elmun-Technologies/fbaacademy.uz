@@ -10,6 +10,7 @@ import YouTubeEmbed from "@/components/youtube-embed";
 import { courses, teachers, faqItems } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, BookOpen, Target, Award, Lightbulb, Clock, Calendar, Wrench, GraduationCap } from "lucide-react";
 import CourseFormatSection from "@/components/course-format-section";
+import CourseBonusesSection from "@/components/course-bonuses-section";
 
 const course = courses.find((c) => c.id === "applied-knowledge")!;
 const mentor = teachers.find((t) => t.id === "teacher-1")!;
@@ -362,6 +363,73 @@ export default function AppliedKnowledgePage() {
         </div>
       </section>
       <CourseFormatSection />
+      <CourseBonusesSection
+        totalUz="2,500,000+ so'm qiymatida"
+        totalRu="Более 9,000 RUB стоимостью"
+        totalEn="Worth $110+ — yours for free"
+        bonuses={[
+          {
+            logo: "📝",
+            nameUz: "FA Past Papers Bank 2015–2024",
+            nameRu: "База FA Past Papers 2015–2024",
+            nameEn: "FA Past Papers Bank 2015–2024",
+            descUz: "Financial Accounting bo'yicha 10 yillik imtihon savollari va rasmiy javoblari",
+            descRu: "10 лет экзаменационных вопросов по Financial Accounting с официальными ответами",
+            descEn: "10 years of Financial Accounting exam questions with official answers",
+            durationUz: "Doimiy kirish",
+            durationRu: "Постоянный доступ",
+            durationEn: "Lifetime access",
+            priceUz: "700,000 so'm",
+            priceRu: "2,500 RUB",
+            priceEn: "$30",
+          },
+          {
+            logo: "🔢",
+            nameUz: "Management Accounting Formula Pack",
+            nameRu: "Формульный пакет Management Accounting",
+            nameEn: "Management Accounting Formula Pack",
+            descUz: "MA bo'yicha barcha formulalar, graflar va misollar — chop etish uchun tayyor",
+            descRu: "Все формулы, графики и примеры по MA — готово к печати",
+            descEn: "All formulas, graphs and examples for MA — print-ready",
+            durationUz: "Doimiy kirish",
+            durationRu: "Постоянный доступ",
+            durationEn: "Lifetime access",
+            priceUz: "500,000 so'm",
+            priceRu: "1,800 RUB",
+            priceEn: "$22",
+          },
+          {
+            logo: "📖",
+            nameUz: "Business Accounting Terminologiya Lug'ati",
+            nameRu: "Глоссарий Business Accounting",
+            nameEn: "Business Accounting Terminology Guide",
+            descUz: "600+ atama, ta'rif va tarjimalar — AB fani uchun to'liq lug'at",
+            descRu: "600+ терминов, определений и переводов — полный глоссарий для AB",
+            descEn: "600+ terms, definitions and translations — complete glossary for AB",
+            durationUz: "Doimiy kirish",
+            durationRu: "Постоянный доступ",
+            durationEn: "Lifetime access",
+            priceUz: "400,000 so'm",
+            priceRu: "1,500 RUB",
+            priceEn: "$18",
+          },
+          {
+            logo: "🧪",
+            nameUz: "Knowledge Level Mock Exams × 10 to'plam",
+            nameRu: "Knowledge Level Mock Exams × 10 комплектов",
+            nameEn: "Knowledge Level Mock Exams × 10 sets",
+            descUz: "AB, MA, FA uchun 10 ta to'liq mock — vaqt hisoblagich va javoblar bilan",
+            descRu: "10 полных мок-экзаменов для AB, MA, FA с таймером и ключами ответов",
+            descEn: "10 full mock exams for AB, MA, FA with timer and answer keys",
+            durationUz: "6 oylik kirish",
+            durationRu: "Доступ на 6 месяцев",
+            durationEn: "6 months access",
+            priceUz: "900,000 so'm",
+            priceRu: "3,200 RUB",
+            priceEn: "$39",
+          },
+        ]}
+      />
     </Layout>
   );
 }

@@ -10,6 +10,7 @@ import YouTubeEmbed from "@/components/youtube-embed";
 import { courses, teachers, faqItems } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, Crown, TrendingUp, BarChart3, Shield, Clock, Calendar, Wrench, BookOpen, Trophy, GraduationCap } from "lucide-react";
 import CourseFormatSection from "@/components/course-format-section";
+import CourseBonusesSection from "@/components/course-bonuses-section";
 
 const course = courses.find((c) => c.id === "strategic-professional")!;
 const mentor = teachers.find((t) => t.id === "teacher-2")!;
@@ -329,6 +330,73 @@ export default function StrategicProfessionalPage() {
         </div>
       </section>
       <CourseFormatSection />
+      <CourseBonusesSection
+        totalUz="6,500,000+ so'm qiymatida"
+        totalRu="Более 23,000 RUB стоимостью"
+        totalEn="Worth $280+ — yours for free"
+        bonuses={[
+          {
+            logo: "🏛️",
+            nameUz: "SBL Pre-seen Case Study Arxivi (2015–2024)",
+            nameRu: "Архив SBL Pre-seen Case Studies (2015–2024)",
+            nameEn: "SBL Pre-seen Case Study Vault (2015–2024)",
+            descUz: "Strategic Business Leader uchun 10 yillik pre-seen materiallar va tahlil namunalari",
+            descRu: "10 лет pre-seen материалов и образцов анализа для Strategic Business Leader",
+            descEn: "10 years of pre-seen materials and analysis examples for Strategic Business Leader",
+            durationUz: "Doimiy kirish",
+            durationRu: "Постоянный доступ",
+            durationEn: "Lifetime access",
+            priceUz: "2,000,000 so'm",
+            priceRu: "7,200 RUB",
+            priceEn: "$88",
+          },
+          {
+            logo: "📋",
+            nameUz: "SBL Full Mock Pack × 8 to'liq variant",
+            nameRu: "SBL Full Mock Pack × 8 полных вариантов",
+            nameEn: "SBL Full Mock Pack × 8 full variants",
+            descUz: "Murakkab strategik ish vazifalari — professional daraja tayyorgarlik uchun",
+            descRu: "Сложные стратегические кейсы — для профессиональной подготовки",
+            descEn: "Complex strategic case tasks for professional-level exam preparation",
+            durationUz: "4 oylik kirish",
+            durationRu: "Доступ на 4 месяца",
+            durationEn: "4 months access",
+            priceUz: "1,500,000 so'm",
+            priceRu: "5,400 RUB",
+            priceEn: "$66",
+          },
+          {
+            logo: "💹",
+            nameUz: "AFM Financial Modeling Masterpack",
+            nameRu: "AFM Financial Modeling Masterpack",
+            nameEn: "AFM Financial Modeling Masterpack",
+            descUz: "Advanced Financial Management uchun DCF, NPV, kapital tuzilmasi modellari va Excel shablonlari",
+            descRu: "Модели DCF, NPV, структуры капитала и Excel-шаблоны для Advanced Financial Management",
+            descEn: "DCF, NPV, capital structure models and Excel templates for Advanced Financial Management",
+            durationUz: "Doimiy kirish",
+            durationRu: "Постоянный доступ",
+            durationEn: "Lifetime access",
+            priceUz: "1,800,000 so'm",
+            priceRu: "6,500 RUB",
+            priceEn: "$80",
+          },
+          {
+            logo: "🎙️",
+            nameUz: "Live Q&A Sessiyalar Arxivi (6 yillik)",
+            nameRu: "Архив Live Q&A сессий (6 лет)",
+            nameEn: "Live Q&A Session Recording Archive (6 years)",
+            descUz: "Ekspertlar bilan 6 yillik Q&A sessiyalar yozuvlari — eng qiyin savollar va javoblar",
+            descRu: "Записи Q&A-сессий с экспертами за 6 лет — самые сложные вопросы и ответы",
+            descEn: "6 years of expert Q&A session recordings — the hardest questions answered",
+            durationUz: "1 yillik kirish",
+            durationRu: "Доступ на 1 год",
+            durationEn: "1 year access",
+            priceUz: "1,200,000 so'm",
+            priceRu: "4,300 RUB",
+            priceEn: "$52",
+          },
+        ]}
+      />
     </Layout>
   );
 }

@@ -10,6 +10,7 @@ import YouTubeEmbed from "@/components/youtube-embed";
 import { courses, teachers, faqItems } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, BarChart3, Scale, FileText, TrendingUp, Shield, Banknote, Clock, Calendar, Wrench, BookOpen, GraduationCap } from "lucide-react";
 import CourseFormatSection from "@/components/course-format-section";
+import CourseBonusesSection from "@/components/course-bonuses-section";
 
 const course = courses.find((c) => c.id === "applied-skills")!;
 const mentor = teachers.find((t) => t.id === "teacher-2")!;
@@ -313,6 +314,73 @@ export default function AppliedSkillsPage() {
         </div>
       </section>
       <CourseFormatSection />
+      <CourseBonusesSection
+        totalUz="3,600,000+ so'm qiymatida"
+        totalRu="Более 13,000 RUB стоимостью"
+        totalEn="Worth $160+ — yours for free"
+        bonuses={[
+          {
+            logo: "📊",
+            nameUz: "FR Konsolidatsiya Shablonlari (Excel)",
+            nameRu: "Шаблоны консолидации FR (Excel)",
+            nameEn: "FR Consolidation Templates (Excel)",
+            descUz: "Financial Reporting uchun professional konsolidatsiya va tahlil Excel fayllari",
+            descRu: "Профессиональные Excel-шаблоны консолидации и анализа для Financial Reporting",
+            descEn: "Professional Excel consolidation and analysis templates for Financial Reporting",
+            durationUz: "Doimiy kirish",
+            durationRu: "Постоянный доступ",
+            durationEn: "Lifetime access",
+            priceUz: "1,000,000 so'm",
+            priceRu: "3,600 RUB",
+            priceEn: "$44",
+          },
+          {
+            logo: "📐",
+            nameUz: "PM & FM Variance Analysis Toolkit",
+            nameRu: "Набор инструментов PM & FM Variance Analysis",
+            nameEn: "PM & FM Variance Analysis Toolkit",
+            descUz: "Og'ishlar tahlili uchun formulalar, namunalar va Excel kalkulyatorlar to'plami",
+            descRu: "Набор формул, примеров и Excel-калькуляторов для анализа отклонений",
+            descEn: "Set of formulas, examples and Excel calculators for variance analysis",
+            durationUz: "1 yillik kirish",
+            durationRu: "Доступ на 1 год",
+            durationEn: "1 year access",
+            priceUz: "800,000 so'm",
+            priceRu: "2,900 RUB",
+            priceEn: "$35",
+          },
+          {
+            logo: "✅",
+            nameUz: "AA Audit Checklist Bundle (18 ta ro'yxat)",
+            nameRu: "AA Audit Checklist Bundle (18 чек-листов)",
+            nameEn: "AA Audit Checklist Bundle (18 checklists)",
+            descUz: "Audit jarayonining har bir bosqichi uchun professional tekshirish ro'yxatlari",
+            descRu: "Профессиональные чек-листы для каждого этапа аудиторского процесса",
+            descEn: "Professional checklists for every stage of the audit process",
+            durationUz: "Doimiy kirish",
+            durationRu: "Постоянный доступ",
+            durationEn: "Lifetime access",
+            priceUz: "600,000 so'm",
+            priceRu: "2,200 RUB",
+            priceEn: "$27",
+          },
+          {
+            logo: "🎯",
+            nameUz: "Applied Skills Full Mock Pack × 20",
+            nameRu: "Applied Skills Full Mock Pack × 20 вариантов",
+            nameEn: "Applied Skills Full Mock Pack × 20 variants",
+            descUz: "LW, PM, TX, FR, AA, FM — barcha 6 fan bo'yicha 20 ta to'liq mock imtihon",
+            descRu: "20 полных мок-экзаменов по всем 6 предметам: LW, PM, TX, FR, AA, FM",
+            descEn: "20 full mock exams across all 6 papers: LW, PM, TX, FR, AA, FM",
+            durationUz: "6 oylik kirish",
+            durationRu: "Доступ на 6 месяцев",
+            durationEn: "6 months access",
+            priceUz: "1,200,000 so'm",
+            priceRu: "4,400 RUB",
+            priceEn: "$54",
+          },
+        ]}
+      />
     </Layout>
   );
 }

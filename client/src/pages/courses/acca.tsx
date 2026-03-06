@@ -13,6 +13,7 @@ import { CheckCircle2, ArrowRight, Star, Flame, Globe, Award, Users, TrendingUp,
 import CourseBlogLinks from "@/components/course-blog-links";
 import CourseRelated from "@/components/course-related";
 import CourseFormatSection from "@/components/course-format-section";
+import CourseBonusesSection from "@/components/course-bonuses-section";
 import { useLanguage } from "@/contexts/language-context";
 import type { Language } from "@/lib/translations";
 
@@ -449,6 +450,73 @@ export default function AccaPage() {
         </div>
       </section>
       <CourseFormatSection />
+      <CourseBonusesSection
+        totalUz="4,500,000+ so'm qiymatida"
+        totalRu="Более 15,000 RUB стоимостью"
+        totalEn="Worth $190+ — yours for free"
+        bonuses={[
+          {
+            logo: "📚",
+            nameUz: "ACCA Past Papers to'plami 2010–2024",
+            nameRu: "База ACCA Past Papers 2010–2024",
+            nameEn: "ACCA Past Papers Bank 2010–2024",
+            descUz: "Barcha 13 ta fanning to'liq imtihon savollari va rasmiy javoblari",
+            descRu: "Полные экзаменационные вопросы и ответы по всем 13 предметам",
+            descEn: "Complete exam questions and official answers for all 13 papers",
+            durationUz: "Doimiy kirish",
+            durationRu: "Постоянный доступ",
+            durationEn: "Lifetime access",
+            priceUz: "1,200,000 so'm",
+            priceRu: "4,500 RUB",
+            priceEn: "$55",
+          },
+          {
+            logo: "⚡",
+            nameUz: "ACCA Flashcards & Formula Pack",
+            nameRu: "ACCA Флэшкарты и формулы",
+            nameEn: "ACCA Flashcards & Formula Pack",
+            descUz: "500+ flashcard va barcha fanlar uchun formula listlari — tezkor takrorlash",
+            descRu: "500+ флэшкарт и формульные листы по всем предметам для быстрого повторения",
+            descEn: "500+ flashcards and formula sheets for all papers — rapid revision tool",
+            durationUz: "1 yillik kirish",
+            durationRu: "Доступ на 1 год",
+            durationEn: "1 year access",
+            priceUz: "800,000 so'm",
+            priceRu: "3,000 RUB",
+            priceEn: "$36",
+          },
+          {
+            logo: "🎯",
+            nameUz: "ACCA Mock Exam Simulator — Professional",
+            nameRu: "Симулятор ACCA Mock Exams — Professional",
+            nameEn: "ACCA Mock Exam Simulator — Professional",
+            descUz: "Real imtihon sharoitida 20+ to'liq mock — vaqt hisoblagich va avtomatik baholash",
+            descRu: "20+ полных мок-экзаменов в условиях реального экзамена с таймером и автооценкой",
+            descEn: "20+ full mock exams in real exam conditions with timer and auto-grading",
+            durationUz: "6 oylik kirish",
+            durationRu: "Доступ на 6 месяцев",
+            durationEn: "6 months access",
+            priceUz: "2,000,000 so'm",
+            priceRu: "7,200 RUB",
+            priceEn: "$88",
+          },
+          {
+            logo: "📅",
+            nameUz: "ACCA Study Planner (Excel) — shaxsiy jadval",
+            nameRu: "ACCA Study Planner (Excel) — персональный график",
+            nameEn: "ACCA Study Planner (Excel) — personal schedule",
+            descUz: "Har bir fan uchun moslashuvchan o'qish jadvali — progress tracking bilan",
+            descRu: "Гибкий план обучения для каждого предмета с отслеживанием прогресса",
+            descEn: "Flexible study schedule for each paper with built-in progress tracking",
+            durationUz: "Doimiy kirish",
+            durationRu: "Постоянный доступ",
+            durationEn: "Lifetime access",
+            priceUz: "500,000 so'm",
+            priceRu: "1,800 RUB",
+            priceEn: "$22",
+          },
+        ]}
+      />
     </Layout>
   );
 }
