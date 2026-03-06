@@ -63,7 +63,7 @@ function TableOfContents({ content }: { content: string }) {
   }
   if (headings.length < 2) return null;
   return (
-    <div className="mb-8 rounded-2xl border border-purple-500/30 bg-purple-900/20 p-5" data-testid="table-of-contents">
+    <div className="mb-8 rounded-2xl border border-white/10 bg-zinc-900 p-5" data-testid="table-of-contents">
       <div className="mb-3 flex items-center gap-2 text-sm font-extrabold text-purple-300">
         <BookOpen className="h-4 w-4" /> Maqola tarkibi
       </div>
@@ -105,8 +105,8 @@ function ShareRow({ title, url }: { title: string; url: string }) {
         onClick={() => setLiked((p) => !p)}
         className={`flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
           liked
-            ? "border-purple-500 bg-purple-50 text-purple-700"
-            : "border-slate-200 bg-zinc-900 text-zinc-300 hover:border-purple-300 hover:text-purple-700"
+            ? "border-purple-500 bg-purple-600/20 text-purple-300"
+            : "border-white/20 bg-zinc-900 text-zinc-300 hover:border-purple-400 hover:text-purple-300"
         }`}
         data-testid="share-like"
       >
@@ -234,6 +234,7 @@ export default function BlogDetail() {
       </div>
 
       {/* Main two-column layout */}
+      <section className="bg-[#0d0d0d]">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-3">
 
@@ -437,6 +438,7 @@ export default function BlogDetail() {
           <p className="mb-4 text-sm text-purple-100">O'zingizga to'g'ri kursni mutaxassis bilan tanlang</p>
           <LeadForm source={`blog-mobile-${post.id}`} buttonText="Bepul konsultatsiya" />
         </div>
+      </section>
       </section>
     </Layout>
   );
