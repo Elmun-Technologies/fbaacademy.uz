@@ -1,288 +1,587 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
 import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
-import { courses, teachers, faqItems } from "@/lib/data";
-import { CheckCircle2, ArrowRight, Star, Flame, BarChart3, TrendingUp, Calculator, PieChart, Clock, Calendar, Wrench, BookOpen, GraduationCap, LineChart } from "lucide-react";
+import { faqItems } from "@/lib/data";
+import {
+  CheckCircle2, ArrowRight, Star, ChevronRight, Play,
+  BarChart3, Calculator, TrendingUp, BookOpen, Clock,
+  Award, Users, MessageSquare, Zap, Target, Shield
+} from "lucide-react";
 
-const course = courses.find((c) => c.id === "financial-modeling")!;
-const mentor = teachers.find((t) => t.id === "teacher-4")!;
+const HERO_BULLETS = [
+  "Barcha turdagi biznes uchun noldan moliyaviy modellar qurish",
+  "Plan-fakt tahlil o'tkazish va DCF usuli bilan biznes holatini bir nechta metod yordamida baholash",
+  "Kompaniyaning joriy vazifalari uchun modellardan foydalanish va moliyaviy hisobot asosida qarorlar qabul qilish",
+];
 
-const MODEL_TYPES = [
+const FEATURES = [
+  { title: "Amaliyotga fokus", desc: "Excel da moliyaviy modellar bilan 10+ soat ish", emoji: "🎯" },
+  { title: "Noldan o'rganish", desc: "Oddiy va murakkab moliyaviy modellarni bosqichma-bosqich", emoji: "📈" },
+  { title: "Amaliyotchi o'qituvchilar", desc: "Moliyaviy tahlilda 10+ yillik tajriba bilan", emoji: "👨‍🏫" },
+  { title: "Qo'llab-quvvatlash", desc: "Kurator 365 kun davomida aloqada", emoji: "💬" },
+  { title: "Rasmiy diplom", desc: "Kurs tugatgandan so'ng ishga kirish uchun", emoji: "🎓" },
+];
+
+const FM_POWERS = [
+  "Daromad, foyda va pul oqimlarini bashorat qilish",
+  "Kompaniyaning o'sish omillarini aniqlash",
+  "Zararsizlik nuqtasini hisoblash",
+  "Biznesning joriy qiymatini baholash va investitsiyalar rejasini tuzish",
+  "Ichki va tashqi omillarga qarab kompaniyaning rivojlanish stsenariylarini ishlab chiqish",
+];
+
+const JOB_CHIPS = [
+  "Moliyaviy tahlilchi", "Korporativ moliya menejeri", "Investitsiyalar tahlilchisi",
+  "Moliya maslahatchisi", "Biznes-tahlilchi", "Moliyaviy nazoratchi", "Risk-menejer",
+];
+
+const SALARY_STATS = [
+  { value: "2 500+", label: "vakansiya hh.uz da", highlight: false },
+  { value: "4 000 000", sublabel: "so'm/oy", label: "1–3 yil tajriba bilan o'rtacha maosh", highlight: false },
+  { value: "8 000 000", sublabel: "so'm/oy", label: "3–5 yil tajriba bilan o'rtacha maosh", highlight: false },
+  { value: "18 000 000+", sublabel: "so'm/oy", label: "5+ yil tajriba bilan o'rtacha maosh", highlight: true },
+];
+
+const INDUSTRIES = [
   {
-    name: "3-Statement Model",
-    icon: BarChart3,
-    color: "from-emerald-500 to-green-600",
-    desc: "P&L, Balans va Pul oqimlari — asosiy moliyaviy model. Har qanday kompaniya tahlili uchun zamin.",
-    useCase: "Korporativ moliya, budjetlashtirish",
+    emoji: "🏭",
+    title: "Sanoat korxonalari",
+    desc: "Ishlab chiqaruvchi kompaniyalarga moliyaviy modellashtirish ishlab chiqarish hajmini rejalashtirishga, uskunalarga investitsiya samaradorligini baholashga, foyda va zararni bashorat qilishga hamda cash flow'ni boshqarishga yordam beradi.",
   },
   {
-    name: "DCF (Discounted Cash Flow)",
-    icon: Calculator,
-    color: "from-blue-500 to-indigo-600",
-    desc: "Kompaniyaning ichki qiymatini hisoblash. WACC, terminal value, NPV va IRR.",
-    useCase: "Kompaniya baholash, M&A",
+    emoji: "🏦",
+    title: "Bank sektori",
+    desc: "Banklar moliyaviy modellardan qarz oluvchilarning kredit layoqatini baholash, risklarni hisoblash va pul mablag'larini bashorat qilish uchun foydalanadi. Modellar kredit berish va kredit portfelini boshqarish bo'yicha qarorlar qabul qilish uchun zarur.",
   },
   {
-    name: "Comparable Analysis",
-    icon: PieChart,
-    color: "from-violet-500 to-purple-600",
-    desc: "Raqobatchi kompaniyalar bilan solishtirish. EV/EBITDA, P/E, P/S multiplikatorlar.",
-    useCase: "IPO, investitsiya tahlili",
+    emoji: "🚀",
+    title: "Startaplar va IT kompaniyalar",
+    desc: "Startaplar va IT-biznes uchun kengayish imkoniyatlarini va prognoz ko'rsatkichlarini ko'rsatadigan moliyaviy modellar qurish juda muhim. Ishonchli moliyaviy modelsiz investorlarni jalb qilish va moliyalashtirish olish deyarli imkonsiz.",
   },
   {
-    name: "LBO (Leveraged Buyout)",
-    icon: TrendingUp,
-    color: "from-rose-500 to-pink-600",
-    desc: "Qarz orqali kompaniya sotib olish modeli. Private equity treningining asosi.",
-    useCase: "Private equity, M&A",
+    emoji: "🛒",
+    title: "Savdo va distribusiya",
+    desc: "Savdo sohasida moliyaviy modellar savdoni rejalashtirish, inventar va logistikani boshqarish, marketing kampaniyalarini baholash, tarmoqni rivojlantirish va yangi mahsulotlar chiqarish bo'yicha qarorlar qabul qilish uchun kerak.",
+  },
+  {
+    emoji: "💼",
+    title: "Investitsiya kompaniyalari va fondlar",
+    desc: "Moliyaviy modellashtirish potentsial investitsiyalarni baholash, daromadlilik prognozlarini tuzish va investitsiya qarorlarini qabul qilish uchun hal qiluvchi ahamiyatga ega. Sifatli moliyaviy modellarsiz investitsiya ob'ektlarini chuqur tahlil qilish mumkin emas.",
+  },
+  {
+    emoji: "🤝",
+    title: "Konsalting va professional xizmatlar",
+    desc: "Konsultantlar mijozlarning muammolarini diagnostika qilish, o'sish nuqtalarini topish, biznesni rivojlantirish strategiyalarini ishlab chiqish va gipotezalarni tekshirish uchun moliyaviy modellashtirdan foydalanadi.",
+  },
+  {
+    emoji: "🏗️",
+    title: "Ko'chmas mulk va qurilish",
+    desc: "Moliyaviy modellashtirish rivojlantirish loyihalarining iqtisodiyotini baholash, daromadliligini bashorat qilish, optimal qurilish parametrlarini belgilash va loyihani amalga oshirish byudjeti va jadvalini tuzishga yordam beradi.",
+  },
+  {
+    emoji: "🏢",
+    title: "Turli sohalardagi korporativ moliya",
+    desc: "Yangi bozorlarga chiqish, yangi mahsulotlar ishlab chiqish, M&A bitimlarini tuzish va moliyalashtirishni jalb qilish kabi kompaniyaning strategik rivojlanish bo'yicha qarorlar qabul qilish uchun ishonchli moliyaviy modellarga ehtiyoj mavjud.",
   },
 ];
 
-const TOOLS_TABLE = [
-  { tool: "Excel (Ilg'or)", level: 95, color: "bg-emerald-500" },
-  { tool: "Bloomberg Terminal", level: 70, color: "bg-blue-500" },
-  { tool: "Capital IQ", level: 65, color: "bg-violet-500" },
-  { tool: "Power BI", level: 75, color: "bg-amber-500" },
-  { tool: "Python (Pandas)", level: 50, color: "bg-rose-500" },
+const FOR_WHOM = [
+  {
+    icon: "💼",
+    title: "Moliya mutaxassislari",
+    desc: "Aniq va ishonchli prognozlar yaratishni o'rganing, o'z samaradorligingizni va mutaxassis sifatidagi qiymatni oshiring hamda karyera o'sishi uchun raqobat ustunligini qo'lga kiriting.",
+  },
+  {
+    icon: "📊",
+    title: "Tahlilchilar",
+    desc: "Biznesni har tomonlama baholashni, g'oyalar yaratishni va asoslangan yechimlar taklif qilishni o'rganing. Tahliliy salohiyatingizni mustahkamlang va yangi karyera istiqbollarini oching.",
+  },
+  {
+    icon: "🚀",
+    title: "Tadbirkorlar va rahbarlar",
+    desc: "Yuqori daromadli investitsiyalarni jalb qilish va loyihalar rentabelligini bashorat qilish vositalarini oling. Realistik biznes-reja tuzishni, investorlar va hamkorlar bilan raqamlar tilida gaplashishni o'rganing.",
+  },
+  {
+    icon: "🎓",
+    title: "Bitiruvchilar va talabalar",
+    desc: "Real tijorat masalalarini tahlil qilish va hal qilish uchun moliyaviy modellarni yaratish va ulardan foydalanishni o'rganing. Egallangan ko'nikmalar ishga joylashishda raqobat ustunligingiz bo'ladi.",
+  },
 ];
 
-const CAREER_ROLES = [
-  { role: "Financial Analyst", company: "Investitsiya banki", salary: "6 000 000+" },
-  { role: "Investment Banker", company: "IB / Corporate Finance", salary: "14 000 000+" },
-  { role: "Private Equity Analyst", company: "PE firma", salary: "20 000 000+" },
-  { role: "CFO / VP Finance", company: "Korporatsiya", salary: "30 000 000+" },
+const SKILLS = [
+  { icon: "📊", text: "Operatsion foydaning o'sish omillarini aniqlash" },
+  { icon: "📋", text: "FAST standartlari bo'yicha kompleks moliyaviy modellar tuzish" },
+  { icon: "📈", text: "Bozor sharoitlari o'zgarishiga foyda sezgirligini baholash" },
+  { icon: "🔍", text: "Plan-fakt tahlil o'tkazish" },
+  { icon: "💹", text: "DCF usulida kompaniyani baholash (diskontlangan pul oqimlari)" },
+  { icon: "⚠️", text: "Moliyaviy risklarni aniqlash va baholash" },
+];
+
+const CURRICULUM = [
+  {
+    title: "Moliyaviy modellashtirish asoslari va Excel sozlash",
+    topics: [
+      "Moliyaviy modellashtirish standartlari",
+      "FAST moliyaviy model qurilish standartlari",
+      "Moliyaviy modellashtirish uchun Excel asosiy funksiyalari",
+    ],
+    tags: ["1 topshiriq"],
+  },
+  {
+    title: "Kompleks moliyaviy modelni qanday tuzish",
+    topics: [
+      "Moliyaviy model tuzishdagi keng tarqalgan xatolar",
+      "Sezgirlik jadvalini qanday tuzish",
+      "Hisobotlarni yig'ish va kompleks moliyaviy model qurish",
+    ],
+    tags: ["1 topshiriq", "2 biznes-keys", "1 shablon"],
+  },
+  {
+    title: "Biznesni baholash uchun moliyaviy modelni qanday tuzish",
+    topics: [
+      "DCF, qiyosiy va xarajat usullari bilan biznesni baholash",
+      "Operatsion ko'rsatkichlar, CAPEX va kapital qiymati (WACC) prognozi",
+      "Moliyaviy hisobotlarni qurilish va tahlil tamoyillari",
+    ],
+    tags: ["2 topshiriq", "1 biznes-keys", "1 shablon"],
+  },
+  {
+    title: "AI va qo'shimcha vositalar",
+    topics: [
+      "Taqdimot yaratish",
+      "Google Sheets uchun AI dan foydalanish",
+      "Excel uchun AI dan foydalanish",
+      "Shaxsiy samaradorlikni oshirish",
+      "Karyera strategiyasini yaratish",
+    ],
+    tags: ["5 dars"],
+  },
+  {
+    title: "Moliyaviy tahlilning qo'shimcha vositalari",
+    topics: [
+      "Moliyaviy nazorat vositalari: plan-fakt tahlil",
+      "IRR, XIRR, NPV va XNPV yordamida investitsiya loyihalarini baholash",
+    ],
+    tags: ["1 biznes-keys"],
+    isFinal: true,
+  },
+];
+
+const PRACTICAL_PROJECTS = [
+  {
+    num: "1",
+    title: "Ishlab chiqarish korxonalari uchun 2 ta moliyaviy model quring",
+    items: [
+      "Daromad va xarajatlar prognozi",
+      "Aylanma kapitalini hisoblash",
+      "Balans, P&L va Cash Flow to'ldirish",
+      "Sezgirlik tahlili o'tkazish",
+      "Turli stsenariylar uchun moliyalashtirish ehtiyojini bashorat qilish",
+    ],
+  },
+  {
+    num: "2",
+    title: "O'zgaruvchan boshlang'ich ma'lumotlarni hisobga olgan holda kompaniyaning moliyaviy holatini baholash",
+    items: [
+      "Kredit ta'sirini hisobga olgan holda moliyaviy hisobotni tuzatish",
+      "WACC hisoblash",
+      "Kompaniyaning o'ziga xos xavfini baholash",
+    ],
+  },
+  {
+    num: "3",
+    title: "Avtodiler uchun DCF usulida moliyaviy model quring",
+    items: [
+      "Daromad va operatsion xarajatlar prognozi",
+      "Prognoz moliyaviy hisobotlarni tuzish",
+      "DCF usulida kompaniyani baholash",
+    ],
+  },
+];
+
+const TEACHERS = [
+  {
+    name: "Bobur Nazarov",
+    role: "Moliyaviy direktor, 12 yillik tajriba",
+    desc: "Yirik o'zbek va xalqaro kompaniyalarda moliyaviy boshqaruv jarayonlarini muvaffaqiyatli tashkil etgan. CFA sertifikatiga ega.",
+    initials: "BN",
+    color: "from-emerald-600 to-green-700",
+  },
+  {
+    name: "Jasur Toshmatov",
+    role: "Investitsiya tahlilchisi",
+    desc: "Investitsiya tahlili va loyihalarni moliyalashtirish sohasida ishlaydi. Yirik infratuzilma loyihalarida moliyaviy modellar ishlab chiqqan.",
+    initials: "JT",
+    color: "from-blue-600 to-indigo-700",
+  },
+  {
+    name: "Alisher Xoliqov",
+    role: "CFA va ACCA egasi",
+    desc: "Konsalting va auditda tajribaga ega. Katta to'rtlik kompaniyalarida ishlagan. CFA va ACCA malakasiga ega moliyaviy mutaxassis.",
+    initials: "AX",
+    color: "from-violet-600 to-purple-700",
+  },
+];
+
+const WHY_FBA = [
+  { icon: "🖥️", title: "Interaktiv darslar", desc: "Vebinarlar o'tmishda: bizda o'yin asosida ta'lim — trenajyorlar, keys va stsenariylar." },
+  { icon: "👑", title: "Eng yaxshi o'qituvchilar", desc: "Natijaga Uzbekistonning yetakchi kompaniyalari ekspertlari yo'naltiradi." },
+  { icon: "💪", title: "Amaliy ko'nikmalar", desc: "Hech qanday nazariya emas — faqat ish joyi yoki karyerangizni oshirishda kerak bo'ladigan bilimlar." },
+  { icon: "🏆", title: "Karyera istiqbollari", desc: "Bitiruvchilarimiz O'zbekistonning yetakchi kompaniyalarida ishlaydi." },
+  { icon: "🤝", title: "Korporativ sheriklik", desc: "Biz HR-menejerlar qidirayotgan narsani aniq bilamiz, chunki ular bilan hamkorlik qilamiz." },
+];
+
+const REVIEWS = [
+  {
+    name: "Nilufar T.",
+    rating: 5,
+    course: "Moliyaviy Modellashtirish",
+    title: "Moliyaning tor tematikasi, lekin juda foydali",
+    text: "Moliyaviy modellashtirish kursi — bu men uchun yangi, salqin bilimlarning bir ko'rinishi. Biznesni unchalik uzoq emas, bir yildan kam vaqt boshlaganman va yo'nalishimda rivojlanishga harakat qilyapman. Ba'zida bilim yetishmasligi seziladi. Kurs atigi bir oy, lekin hajmlar katta + 10 soat amaliyot. Olingan tajribani allaqachon o'z amaliy ishimda qo'llamoqdaman.",
+    source: "Google",
+  },
+  {
+    name: "Muhabbat K.",
+    rating: 5,
+    course: "Moliyaviy Modellashtirish",
+    title: "Mening tavsiyalarim",
+    text: "Moliyaviy analitika va modellashtirish kurslarini o'tishga qaror qildim. Ishda kerak bo'ldi. Hammasi yaxshi. Amaliy topshiriqlar real ish vazifalariga mos darajada tuzilgan.",
+    source: "Yandex",
+  },
+  {
+    name: "Sardor E.",
+    rating: 5,
+    course: "Moliyaviy tahlilchi",
+    title: "Tavsiya qilaman",
+    text: "Kurs moliya sohasini noldan o'rganishga yordam beradi. O'quv materialini taqdim etish juda oddiy va tushunarli. Amaliy topshiriqlar real ish vazifalariga mos darajada tuzilgan. Kurs moliya sohasida karyera qurmoqchi bo'lganlar va mavjud bilimlarini oshirmoqchi bo'lganlar uchun mos.",
+    source: "tutortop",
+  },
+];
+
+const RELATED = [
+  { href: "/course/acca", label: "ACCA", desc: "Xalqaro moliya sertifikati", color: "from-purple-500 to-indigo-600" },
+  { href: "/course/dipifr", label: "DipIFR", desc: "IFRS xalqaro standartlari", color: "from-indigo-500 to-slate-600" },
+  { href: "/course/1c-course", label: "1C: Buxgalteriya", desc: "Amaliy buxgalteriya dasturi", color: "from-blue-500 to-indigo-600" },
 ];
 
 export default function FinancialModelingPage() {
   useSEO({
-    title: "Financial Modeling Kursi — Excel, DCF, LBO | FBA Academy",
-    description: "Professional Financial Modeling kursi: DCF, LBO, 3-Statement Model, Comparable Analysis. Excel ilg'or daraja, Bloomberg, Capital IQ. Investitsiya banki va PE uchun tayyorgarlik.",
-    keywords: "Financial Modeling kurs, DCF model, LBO model, Excel moliya, investitsiya tahlili, kompaniya baholash kurs O'zbekiston",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "Financial Modeling — Moliyaviy Modellashtirish",
-      "description": "DCF, LBO, 3-Statement, Comparable Analysis modellar. Excel ilg'or darajada.",
-      "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
-      "educationalLevel": "Intermediate",
-      "timeRequired": "P3M",
-    },
+    title: "Moliyaviy Modellashtirish Kursi — DCF, Excel, FAST | FBA Academy",
+    description: "Amaliy Moliyaviy Modellashtirish kursi O'zbekistonda: DCF, FAST standartlari, plan-fakt tahlil, WACC, kompaniyani baholash. 26 dars, 4 biznes-keys, rasmiy diplom. 1-2 oyda natija.",
+    keywords: "moliyaviy modellashtirish kursi, financial modeling O'zbekiston, DCF model, Excel moliya kursi, FAST standart, kompaniyani baholash, FBA Academy",
+    jsonLd: [
+      {
+        "@type": "Course",
+        "name": "Moliyaviy Modellashtirish — Financial Modeling",
+        "description": "DCF, FAST standartlari, plan-fakt tahlil, WACC. 26 dars, 4 biznes-keys, rasmiy diplom.",
+        "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
+        "educationalLevel": "Intermediate",
+        "timeRequired": "P2M",
+        "inLanguage": "uz",
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Moliyaviy modellashtirish kursi qancha davom etadi?", "acceptedAnswer": { "@type": "Answer", "text": "Kurs 1-2 oy davom etadi: 26 interaktiv dars, 4 biznes-keys, 4 topshiriq va 2 shablon." } },
+          { "@type": "Question", "name": "Kursdan keyin qanday ish topish mumkin?", "acceptedAnswer": { "@type": "Answer", "text": "Moliyaviy tahlilchi, investitsiya tahlilchisi, biznes-tahlilchi, korporativ moliya menejeri lavozimlariga da'vo qilishingiz mumkin." } },
+        ],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Bosh sahifa", "item": "https://fbaacademy.uz" },
+          { "@type": "ListItem", "position": 2, "name": "Kurslar", "item": "https://fbaacademy.uz/courses" },
+          { "@type": "ListItem", "position": 3, "name": "Moliyaviy Modellashtirish", "item": "https://fbaacademy.uz/course/financial-modeling" },
+        ],
+      },
+    ],
   });
 
-  const faqs = faqItems.filter((f) => f.category === "Financial Modeling" || f.category === "Umumiy").slice(0, 5);
+  const faqs = faqItems.filter((f) => f.category === "Financial Modeling" || f.category === "Umumiy").slice(0, 6);
+  const [openModules, setOpenModules] = useState<string[]>([]);
 
   return (
     <Layout>
-      {/* Hero — dark green investment bank feel */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-green-950 via-emerald-950 to-slate-900 pb-16 pt-10 sm:pb-20 sm:pt-14" data-testid="section-fm-hero">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-emerald-400/15 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link href="/courses">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-slate-400 cursor-pointer hover:text-white transition-colors">← Barcha kurslar</span>
-          </Link>
-          <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
-            <div className="lg:col-span-3">
-              <div className="mb-4 flex flex-wrap gap-2">
-                <Badge className="rounded-full bg-emerald-500/20 text-emerald-300 border-emerald-400/30 px-3">📊 Investitsiya banki darajasi</Badge>
-                <Badge className="rounded-full bg-green-500/20 text-green-300 border-green-400/30 px-3">{course.projects}+ real loyiha</Badge>
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <section className="bg-white py-10 sm:py-14" data-testid="section-fm-hero">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Breadcrumb */}
+          <nav className="mb-6 flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Link href="/" className="hover:text-foreground" data-testid="breadcrumb-home">Bosh sahifa</Link>
+            <ChevronRight className="h-3 w-3" />
+            <Link href="/courses" className="hover:text-foreground" data-testid="breadcrumb-courses">Kurslar</Link>
+            <ChevronRight className="h-3 w-3" />
+            <span className="font-semibold text-foreground">Moliyaviy Modellashtirish</span>
+          </nav>
+
+          <div className="grid gap-10 lg:grid-cols-[1fr_380px] lg:gap-14 lg:items-start">
+            {/* Left */}
+            <div>
+              <div className="mb-3 flex flex-wrap gap-2">
+                <Badge className="rounded-full border-emerald-200 bg-emerald-50 text-emerald-700 font-medium">Amaliy onlayn-kurs</Badge>
+                <Badge className="rounded-full border-blue-200 bg-blue-50 text-blue-700 font-medium">📅 2026 yilda yangilangan dastur</Badge>
               </div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-fm-title">
-                Financial<br />
-                <span className="bg-gradient-to-r from-emerald-300 to-green-300 bg-clip-text text-transparent">Modeling</span>
+              <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-tight" data-testid="text-fm-title">
+                Moliyaviy<br />
+                <span className="text-emerald-600">Modellashtirish</span>
               </h1>
-              <p className="mt-4 max-w-xl text-slate-300 leading-relaxed text-lg">{course.description}</p>
-              <div className="mt-5 flex items-center gap-4">
-                <div className="flex items-center gap-1.5">
-                  {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
-                  <span className="text-sm font-bold text-white ml-1">{course.rating}</span>
-                </div>
-                <span className="text-sm text-slate-400">{course.studentsCount} talaba · {course.duration}</span>
-              </div>
-              <div className="mt-8 grid grid-cols-3 gap-3">
-                {[
-                  { icon: Calculator, label: "4 model turi", sub: "DCF, LBO, Comps, 3S" },
-                  { icon: BookOpen, label: course.projects + " loyiha", sub: "Real kompaniyalar" },
-                  { icon: LineChart, label: course.practiceHours + " soat", sub: "Amaliyot" },
-                ].map((item, i) => (
-                  <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 backdrop-blur-sm" data-testid={`fm-feature-${i}`}>
-                    <item.icon className="mb-2 h-5 w-5 text-emerald-300" />
-                    <div className="text-xs font-bold text-white sm:text-sm">{item.label}</div>
-                    <div className="text-xs text-slate-400">{item.sub}</div>
-                  </div>
+              <p className="mt-4 text-base text-slate-600 font-medium">1–2 oyda nimalarni o'rganasiz:</p>
+              <ul className="mt-3 space-y-3">
+                {HERO_BULLETS.map((b, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-slate-700" data-testid={`fm-bullet-${i}`}>
+                    <ChevronRight className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+                    <span className="text-sm sm:text-base">{b}</span>
+                  </li>
                 ))}
+              </ul>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#pricing">
+                  <Button className="gap-2 rounded-full bg-emerald-600 px-6 font-bold text-white hover:bg-emerald-700" data-testid="button-fm-enroll-hero">
+                    Kursga yozilish <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </a>
+                <a href="#curriculum">
+                  <Button variant="outline" className="rounded-full border-2 px-6 font-bold" data-testid="button-fm-program">
+                    Dasturni ko'rish
+                  </Button>
+                </a>
               </div>
             </div>
-            <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-fm-enroll">
-                <div className="mb-2 flex items-center justify-between">
-                  <h3 className="text-lg font-bold">So'rov qoldiring</h3>
-                  <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
-                </div>
-                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-600">
-                  <Flame className="h-4 w-4" /> Joylar cheklangan
-                </div>
-                <div className="mb-4 flex items-baseline gap-2">
-                  <span className="text-3xl font-extrabold" data-testid="text-fm-price">{course.price} UZS</span>
-                  <span className="text-sm text-muted-foreground line-through">{course.oldPrice} UZS</span>
-                </div>
-                <LeadForm source="course-financial-modeling" buttonText="Chegirma bilan yozilish" />
+
+            {/* Right — form card */}
+            <div className="rounded-2xl border bg-white p-6 shadow-xl" data-testid="card-fm-form">
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="text-lg font-extrabold">Konsultatsiya olish</h3>
+                <span className="rounded-full bg-rose-500 px-3 py-1 text-xs font-extrabold text-white">-50% chegirma</span>
               </div>
+              <div className="mb-4 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3">
+                <div className="text-xs font-bold text-amber-800 uppercase tracking-wide">⏰ Chegirma muddati</div>
+                <div className="text-sm text-amber-700 font-medium mt-0.5">8-mart gacha — maxsus narx saqlanadi</div>
+              </div>
+              <div className="mb-5">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-extrabold text-slate-900" data-testid="text-fm-price">990 000 so'm/oy</span>
+                </div>
+                <div className="text-sm text-muted-foreground line-through">1 980 000 so'm/oy</div>
+                <div className="mt-1 text-xs text-slate-500">12 oyga foizsiz bo'lib to'lash mumkin</div>
+              </div>
+              <LeadForm source="course-financial-modeling" buttonText="Konsultatsiya olish" />
+              <ul className="mt-4 space-y-1.5 text-xs text-slate-600">
+                {["Rasmiy diplom", "Kurator 1 yil davomida aloqada", "Kursga abadiy kirish. Yangilanishlar bepul!"].map((t, i) => (
+                  <li key={i} className="flex items-center gap-1.5">
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" /> {t}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4 Model Types */}
-      <section className="py-14 sm:py-20" data-testid="section-model-types">
+      {/* ── 5 FEATURES STRIP ─────────────────────────────────── */}
+      <section className="border-y bg-slate-50 py-8" data-testid="section-fm-features">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-models-title">4 ta moliyaviy model turi</h2>
-          <p className="mb-10 text-muted-foreground">Investitsiya banklaridagi kabi real kompaniyalar ustida ishlaysiz</p>
-          <div className="grid gap-6 sm:grid-cols-2">
-            {MODEL_TYPES.map((model, i) => (
-              <div key={i} className="group rounded-2xl border bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-card" data-testid={`model-type-${i}`}>
-                <div className="mb-4 flex items-center gap-4">
-                  <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${model.color} shadow-md`}>
-                    <model.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-extrabold">{model.name}</h3>
-                    <Badge variant="outline" className="mt-0.5 rounded-full border-emerald-200 text-emerald-700 text-xs">{model.useCase}</Badge>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">{model.desc}</p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {FEATURES.map((f, i) => (
+              <div key={i} className="rounded-xl bg-white border p-4 shadow-sm" data-testid={`fm-feature-${i}`}>
+                <div className="text-2xl mb-2">{f.emoji}</div>
+                <div className="text-sm font-extrabold text-slate-900">{f.title}</div>
+                <div className="mt-1 text-xs text-slate-500 leading-relaxed">{f.desc}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Tool Proficiency */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-tools-proficiency">
+      {/* ── FINANCIAL MODEL = UNIVERSAL TOOL ─────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-fm-universal">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <div className="overflow-hidden rounded-2xl shadow-2xl">
+              <YouTubeEmbed videoId="PU8ZCSuHWXE" title="Moliyaviy Modellashtirish kursi" />
+            </div>
             <div>
-              <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">Asbob-uskunalar</h2>
-              <p className="mb-8 text-muted-foreground">Kurs oxirida qaysi dasturlarda ishlashni bilasiz</p>
-              <div className="space-y-5">
-                {TOOLS_TABLE.map((tool, i) => (
-                  <div key={i} data-testid={`tool-bar-${i}`}>
-                    <div className="mb-1.5 flex items-center justify-between text-sm">
-                      <span className="font-bold">{tool.tool}</span>
-                      <span className="text-muted-foreground font-semibold">{tool.level}%</span>
-                    </div>
-                    <div className="h-3 w-full rounded-full bg-slate-200">
-                      <div className={`h-full rounded-full ${tool.color}`} style={{ width: `${tool.level}%` }} />
-                    </div>
-                  </div>
+              <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl" data-testid="text-fm-universal-title">
+                <span className="text-emerald-600">Moliyaviy model</span> — universal vosita, u quyidagilarga imkon beradi:
+              </h2>
+              <ul className="mt-6 space-y-4">
+                {FM_POWERS.map((p, i) => (
+                  <li key={i} className="flex items-start gap-3 text-slate-700" data-testid={`fm-power-${i}`}>
+                    <span className="mt-1 text-xl font-extrabold text-emerald-400 leading-none">—</span>
+                    <span className="text-sm sm:text-base leading-relaxed">{p}</span>
+                  </li>
                 ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CAREER VACANCIES ─────────────────────────────────── */}
+      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-fm-career">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-career-title">
+            Kursdan keyin quyidagi vakansiyalarga da'vo qilishingiz mumkin:
+          </h2>
+          <div className="mb-8 flex flex-wrap gap-2.5">
+            {JOB_CHIPS.map((job, i) => (
+              <span key={i} className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-800" data-testid={`job-chip-${i}`}>
+                {job}
+              </span>
+            ))}
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {SALARY_STATS.map((s, i) => (
+              <div key={i} className={`rounded-2xl border p-6 ${s.highlight ? "border-emerald-300 bg-emerald-50" : "bg-white"}`} data-testid={`salary-stat-${i}`}>
+                <div className={`text-3xl font-extrabold ${s.highlight ? "text-emerald-700" : "text-slate-900"} sm:text-4xl`}>{s.value}</div>
+                {s.sublabel && <div className="text-sm font-bold text-slate-600">{s.sublabel}</div>}
+                <div className="mt-2 text-xs text-slate-500 leading-snug">{s.label}</div>
               </div>
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <YouTubeEmbed videoId={course.videoId!} title="Financial Modeling kurs haqida" />
-            </div>
+            ))}
           </div>
+          <p className="mt-6 text-sm text-slate-500">O'quv muddati — 1−2 oy: 26 dars, 4 biznes-keys, 4 amaliy topshiriq va 2 shablon.</p>
         </div>
       </section>
 
-      {/* Career Roles Table */}
-      <section className="py-14" data-testid="section-career-roles">
+      {/* ── INDUSTRIES ──────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-fm-industries">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">Karyera imkoniyatlari</h2>
-          <p className="mb-8 text-muted-foreground">Financial Modeling bilgach qaysi lavozimlarga ega bo'lasiz</p>
-          <div className="overflow-hidden rounded-2xl border shadow-md">
-            <table className="w-full text-sm" data-testid="table-career-roles">
-              <thead>
-                <tr className="bg-emerald-950 text-white">
-                  <th className="px-5 py-4 text-left font-bold">Lavozim</th>
-                  <th className="px-5 py-4 text-left font-bold hidden sm:table-cell">Kompaniya turi</th>
-                  <th className="px-5 py-4 text-left font-bold">Maosh (UZS/oy)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {CAREER_ROLES.map((role, i) => (
-                  <tr key={i} className={`border-t transition-colors hover:bg-emerald-50 dark:hover:bg-emerald-950/20 ${i % 2 === 0 ? "bg-white dark:bg-card" : "bg-slate-50 dark:bg-slate-900/30"}`} data-testid={`career-role-${i}`}>
-                    <td className="px-5 py-4 font-bold text-emerald-700 dark:text-emerald-400">{role.role}</td>
-                    <td className="px-5 py-4 text-muted-foreground hidden sm:table-cell">{role.company}</td>
-                    <td className="px-5 py-4 font-extrabold">{role.salary}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* Salary */}
-      <section className="py-14" data-testid="section-fm-salary">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-slate-900 p-6 shadow-2xl sm:p-10">
-            <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">Maoshingiz tajriba bilan o'sadi</h2>
-            <div className="space-y-4">
-              {course.salaryLevels.map((level, i) => (
-                <div key={i} className="rounded-2xl bg-[#c8ff00] p-4 sm:p-5" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "200px" }} data-testid={`fm-salary-${i}`}>
-                  <div className="text-lg font-extrabold text-slate-900 sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm font-medium text-slate-700">{level.level} — {level.description}</div>
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-industries-title">
+            Qaysi sohalarda moliyaviy modellar kerak
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
+            {INDUSTRIES.map((ind, i) => (
+              <div key={i} className="flex items-start gap-4 rounded-2xl border bg-white p-5 shadow-sm hover:shadow-md transition-shadow" data-testid={`industry-card-${i}`}>
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-2xl border border-emerald-100">
+                  {ind.emoji}
                 </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-slate-900">{ind.title}</h3>
+                  <p className="mt-1.5 text-sm text-slate-600 leading-relaxed">{ind.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOR WHOM — dark cards ─────────────────────────────── */}
+      <section className="bg-slate-900 py-14 sm:py-20" data-testid="section-fm-for-whom">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-fm-for-whom-title">
+            Bu kurs kimlar uchun foydali
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {FOR_WHOM.map((item, i) => (
+              <div key={i} className="rounded-2xl border border-white/10 bg-gradient-to-br from-emerald-900/60 to-teal-900/40 p-6 backdrop-blur-sm" data-testid={`for-whom-card-${i}`}>
+                <div className="mb-3 text-3xl">{item.icon}</div>
+                <h3 className="text-base font-extrabold text-white">{item.title}</h3>
+                <p className="mt-2 text-sm text-slate-300 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SKILLS GRID ──────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-fm-skills">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-skills-title">
+            Nimalarga o'rganasiz
+          </h2>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {SKILLS.map((skill, i) => (
+              <div key={i} className="flex items-start gap-4 rounded-2xl border bg-white p-5 shadow-sm" data-testid={`skill-card-${i}`}>
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-2xl border border-emerald-100">
+                  {skill.icon}
+                </div>
+                <p className="text-sm font-semibold text-slate-700 leading-relaxed mt-1">{skill.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA DARK ─────────────────────────────────────────── */}
+      <section className="bg-gradient-to-r from-emerald-700 to-teal-700 py-12" data-testid="section-fm-cta-mid">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-6 lg:grid-cols-[1fr_auto]">
+            <div>
+              <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Savollaringiz bormi?</h2>
+              <p className="mt-2 text-emerald-100">Bepul konsultatsiya buyurtma bering — maslahatchi kurs tafsilotlarini tushuntiradi</p>
+            </div>
+            <a href="#pricing">
+              <Button size="lg" className="rounded-full bg-white px-8 font-extrabold text-emerald-700 hover:bg-slate-100 whitespace-nowrap" data-testid="button-fm-cta-mid">
+                Bepul konsultatsiya olish <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CURRICULUM ───────────────────────────────────────── */}
+      <section id="curriculum" className="py-14 sm:py-20" data-testid="section-fm-curriculum">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-2 flex items-center gap-2">
+            <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-curriculum-title">O'quv dasturi</h2>
+            <Badge className="rounded-full border-emerald-200 bg-emerald-50 text-emerald-700 font-semibold">2026 yilda yangilangan</Badge>
+          </div>
+          <div className="mb-2 flex flex-wrap gap-1.5 text-sm font-semibold text-slate-600">
+            <span className="rounded-full bg-slate-100 px-3 py-1">📹 26 interaktiv dars</span>
+            <span className="rounded-full bg-slate-100 px-3 py-1">📦 4 biznes-keys</span>
+            <span className="rounded-full bg-slate-100 px-3 py-1">📝 4 amaliy topshiriq</span>
+            <span className="rounded-full bg-slate-100 px-3 py-1">📄 2 shablon</span>
+          </div>
+          <div className="mb-2 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4">
+            <div className="flex items-center gap-2 text-sm font-extrabold text-emerald-800">
+              <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs text-white font-bold">+5 dars</span>
+              Yangi darslar qo'shildi
+            </div>
+            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-emerald-700">
+              {["AI ni Excel da qo'llash", "Google Sheets uchun AI", "Karyera strategiyasi", "Shaxsiy samaradorlik", "Taqdimot yaratish"].map((t, i) => (
+                <span key={i} className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3" />{t}</span>
               ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* For Whom */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-fm-for-whom">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold">Kurs kimlar uchun?</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {course.forWhom.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-xl border bg-white p-5 shadow-sm dark:bg-card" data-testid={`fm-for-whom-${i}`}>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-100">
-                  <GraduationCap className="h-4 w-4 text-emerald-600" />
-                </div>
-                <span className="font-medium text-sm leading-relaxed">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Modules */}
-      <section className="py-14" data-testid="section-fm-modules">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">Kurs dasturi</h2>
-          <div className="mb-6 flex flex-wrap gap-2">
-            {[{ icon: Calendar, text: course.duration }, { icon: BookOpen, text: `${course.projects} loyiha` }, { icon: Clock, text: `${course.theoryHours} soat nazariya` }, { icon: Wrench, text: `${course.practiceHours} soat amaliyot` }].map((item, i) => (
-              <Badge key={i} variant="outline" className="rounded-full gap-1.5 border-2 px-3 py-1.5 text-xs font-semibold">
-                <item.icon className="h-3.5 w-3.5" /> {item.text}
-              </Badge>
-            ))}
-          </div>
-          <div className="mx-auto max-w-3xl">
+          <div className="mt-6 max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
-              {course.modules.map((mod, i) => (
-                <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border bg-white px-5 shadow-sm dark:bg-card" data-testid={`fm-module-${i}`}>
-                  <AccordionTrigger className="text-left py-4">
+              {CURRICULUM.map((mod, i) => (
+                <AccordionItem key={i} value={`mod-${i}`} className="rounded-2xl border bg-white px-5 shadow-sm dark:bg-card" data-testid={`curriculum-module-${i}`}>
+                  <AccordionTrigger className="text-left py-4 hover:no-underline">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 to-green-700 text-sm font-bold text-white shadow-md">{i + 1}</span>
-                      <div>
-                        <span className="text-sm font-bold sm:text-base">{mod.title}</span>
-                        <div className="text-xs text-muted-foreground">{mod.topics.length} mavzu</div>
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-sm font-extrabold text-white shadow">
+                        {i + 1}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-extrabold sm:text-base pr-2">{mod.title}</div>
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          {mod.tags.map((tag, j) => (
+                            <span key={j} className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">{tag}</span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="ml-12 space-y-2.5 pb-3">
+                  <AccordionContent className="pb-4">
+                    <ul className="ml-12 space-y-2">
                       {mod.topics.map((topic, j) => (
-                        <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> {topic}
+                        <li key={j} className="flex items-center gap-2 text-sm text-slate-600">
+                          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" /> {topic}
                         </li>
                       ))}
+                      {mod.isFinal && (
+                        <li className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+                          <div className="text-sm font-bold text-emerald-800">🎓 Yakuniy ish</div>
+                          <div className="text-xs text-emerald-700 mt-0.5">Barcha darslar va amaliy keyslarni tugatganingizdan so'ng rasmiy diplom olasiz</div>
+                        </li>
+                      )}
                     </ul>
                   </AccordionContent>
                 </AccordionItem>
@@ -292,61 +591,260 @@ export default function FinancialModelingPage() {
         </div>
       </section>
 
-      {/* Support */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-fm-support">
+      {/* ── DIPLOMA ──────────────────────────────────────────── */}
+      <section className="bg-emerald-50 py-12" data-testid="section-fm-diploma">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">O'quv jarayonida siz bilan birga</h2>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {course.supportTeam.map((person, i) => (
-              <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`fm-support-${i}`}>
-                <div className="h-48 overflow-hidden">
-                  <img src={person.avatar} alt={person.role} className="h-full w-full object-cover object-top" loading="lazy" />
+          <div className="grid items-center gap-8 lg:grid-cols-[1fr_320px]">
+            <div>
+              <div className="mb-3 flex items-center gap-2">
+                <Award className="h-8 w-8 text-emerald-600" />
+                <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-diploma-title">Rasmiy diplom oling</h2>
+              </div>
+              <p className="text-slate-600 leading-relaxed">
+                Barcha darslar va amaliy keyslarni tugatganingizdan so'ng siz rasmiy diplom olasiz. Uni rezyumengizga ko'rsata olasiz.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <a href="#pricing">
+                  <Button className="rounded-full bg-emerald-600 font-bold text-white hover:bg-emerald-700" data-testid="button-fm-diploma-cta">
+                    Ariza qoldirish <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </Button>
+                </a>
+              </div>
+            </div>
+            <div className="rounded-2xl border-4 border-white bg-white p-6 shadow-xl text-center">
+              <div className="text-4xl mb-3">🎓</div>
+              <div className="text-lg font-extrabold text-slate-900">Moliyaviy Modellashtirish</div>
+              <div className="mt-1 text-sm text-slate-500">FBA Academy diplomi</div>
+              <div className="mt-4 h-0.5 bg-emerald-100" />
+              <div className="mt-4 text-xs text-slate-400">Kurs yakunlangandan so'ng beriladi</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PRACTICAL PROJECTS ───────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-fm-projects">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-projects-title">
+            Kursda amaliy tajriba olasiz
+          </h2>
+          <div className="grid gap-5 lg:grid-cols-3">
+            {PRACTICAL_PROJECTS.map((proj, i) => (
+              <div key={i} className="rounded-2xl border bg-white p-6 shadow-md" data-testid={`project-card-${i}`}>
+                <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600 text-lg font-extrabold text-white shadow-md">
+                  {proj.num}
                 </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold">{person.role}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{person.description}</p>
-                </div>
-              </Card>
+                <h3 className="text-sm font-extrabold text-slate-900 leading-snug">{proj.title}</h3>
+                <ul className="mt-4 space-y-2">
+                  {proj.items.map((item, j) => (
+                    <li key={j} className="flex items-start gap-2 text-xs text-slate-600">
+                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-gradient-to-r from-emerald-700 to-green-800 py-12" data-testid="section-fm-cta">
+      {/* ── TEACHERS ─────────────────────────────────────────── */}
+      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-fm-teachers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+          <h2 className="mb-2 text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-teachers-title">
+            O'qituvchilaringiz — 10 yildan ortiq tajribali amaliyotchi moliyachilar
+          </h2>
+          <p className="mb-8 text-slate-600 text-sm">Har bir o'qituvchi real kompaniyalarda ishlagan va nazariyani amaliyot bilan uyg'unlashtiradi</p>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {TEACHERS.map((t, i) => (
+              <div key={i} className="overflow-hidden rounded-2xl border bg-white shadow-md" data-testid={`teacher-card-${i}`}>
+                <div className={`flex h-40 items-center justify-center bg-gradient-to-br ${t.color}`}>
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/20 text-3xl font-extrabold text-white ring-4 ring-white/30">
+                    {t.initials}
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-base font-extrabold text-slate-900">{t.name}</h3>
+                  <div className="mt-0.5 text-xs font-semibold text-emerald-600">{t.role}</div>
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">{t.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CURATOR ──────────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-fm-curator">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Financial Modeling bo'yicha bepul konsultatsiya</h2>
-              <p className="mt-3 text-emerald-100">Kurs tafsilotlari va karyera imkoniyatlari haqida ma'lumot oling</p>
-              <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-white px-8 font-bold text-emerald-700 hover:bg-slate-100" data-testid="button-fm-cta">
-                  Konsultatsiya olish <ArrowRight className="h-5 w-5" />
-                </Button>
-              </Link>
+              <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-curator-title">
+                Shaxsiy kurator yangi bilimlarni amalda qo'llashga yordam beradi
+              </h2>
+              <p className="mt-4 text-slate-600 leading-relaxed">
+                Kuratoringiz haftaning 7 kunida aloqada bo'ladi — amaliy ishlaridagi xatolarni tuzatishga va savollaringizga javob berishga yordam beradi.
+              </p>
+              <div className="mt-6 space-y-3">
+                {["Amaliy topshiriqlarni tekshirish va izoh berish", "Kurs davomidagi savollarga javob berish", "Karyera bo'yicha maslahat berish"].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+                    <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-500" /> {item}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex items-center gap-5">
-              <img src={mentor.avatar} alt={mentor.name} className="h-20 w-20 shrink-0 rounded-2xl object-cover object-top ring-4 ring-white/20 shadow-xl" loading="lazy" />
-              <div>
-                <h3 className="text-xl font-bold text-white">{mentor.name}</h3>
-                <p className="text-sm text-emerald-200">{mentor.role}</p>
-                <p className="text-sm text-emerald-200">{mentor.experience}</p>
+            {/* Chat mockup */}
+            <div className="rounded-2xl border bg-white p-6 shadow-lg" data-testid="curator-chat-mockup">
+              <div className="mb-4 text-xs font-bold uppercase tracking-wide text-muted-foreground">💬 Kurator bilan suhbat</div>
+              <div className="space-y-3">
+                <div className="flex justify-end">
+                  <div className="max-w-xs rounded-2xl rounded-tr-sm bg-emerald-500 px-4 py-3 text-sm text-white shadow-sm">
+                    Salom! Amaliy ishni topshirdim. Iltimos, tekshiring. Hujjatda bir nechta savol qoldirdim. Javob bera olasizmi?
+                    <div className="mt-1 text-right text-xs opacity-70">Aziz ✓✓</div>
+                  </div>
+                </div>
+                <div className="flex justify-start">
+                  <div className="max-w-xs rounded-2xl rounded-tl-sm bg-slate-100 px-4 py-3 text-sm text-slate-800 shadow-sm">
+                    Albatta! Amaliy ishni tekshirdim, savollarga javob berdim. Yaxshi ishlabsiz, birozgina tuzatilsa a'lo bo'ladi 😊
+                    <div className="mt-1 text-xs text-slate-400">Kurator</div>
+                  </div>
+                </div>
+                <div className="flex justify-end">
+                  <div className="max-w-xs rounded-2xl rounded-tr-sm bg-emerald-500 px-4 py-3 text-sm text-white shadow-sm">
+                    Rahmat! Tuzataman va qayta topshiraman 🙏
+                    <div className="mt-1 text-right text-xs opacity-70">Aziz ✓</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-14" data-testid="section-fm-faq">
+      {/* ── WHY FBA ──────────────────────────────────────────── */}
+      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-fm-why-fba">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">Ko'p beriladigan savollar</h2>
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-why-fba-title">
+            Nima uchun FBA Academy?
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {WHY_FBA.map((item, i) => (
+              <div key={i} className="rounded-2xl border bg-white p-5 shadow-sm" data-testid={`why-fba-card-${i}`}>
+                <div className="mb-3 text-3xl">{item.icon}</div>
+                <div className="text-sm font-extrabold text-slate-900">{item.title}</div>
+                <p className="mt-2 text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── REVIEWS ──────────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-fm-reviews">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-2 flex items-baseline justify-between">
+            <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-reviews-title">Talabalar sharhlari</h2>
+            <span className="text-sm text-slate-500">O'rtacha reyting — ⭐ 4.8</span>
+          </div>
+          <p className="mb-8 text-slate-500 text-sm">Talabalar kursimizni yaxshi ko'radi va o'z sharhlarini yozadi</p>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {REVIEWS.map((rev, i) => (
+              <div key={i} className="flex flex-col rounded-2xl border bg-white p-6 shadow-sm" data-testid={`review-card-${i}`}>
+                <div className="mb-4 flex items-center justify-between">
+                  <div>
+                    <div className="text-sm font-extrabold text-slate-900">{rev.name}</div>
+                    <div className="flex items-center gap-0.5 mt-0.5">
+                      {[1,2,3,4,5].map((s) => <Star key={s} className="h-3 w-3 fill-amber-400 text-amber-400" />)}
+                      <span className="ml-1 text-xs font-bold text-slate-600">{rev.rating}.0</span>
+                    </div>
+                  </div>
+                  <span className="text-xs text-slate-400 font-medium">{rev.source}</span>
+                </div>
+                <div className="mb-2 text-xs font-semibold text-emerald-600">{rev.course}</div>
+                <h3 className="mb-2 text-sm font-extrabold text-slate-900">{rev.title}</h3>
+                <p className="flex-1 text-xs text-slate-600 leading-relaxed">{rev.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PRICING ──────────────────────────────────────────── */}
+      <section id="pricing" className="bg-slate-900 py-14 sm:py-20" data-testid="section-fm-pricing">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-fm-pricing-title">Kurs narxi</h2>
+          <div className="grid gap-6 lg:grid-cols-[1fr_420px]">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-bold text-white">-50% chegirma</span>
+                <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-bold text-white">📅 Boshlanish: 8-mart</span>
+              </div>
+              <p className="mb-4 text-sm text-slate-400">12 oyga foizsiz bo'lib to'lash mumkin</p>
+              <div className="mb-1">
+                <span className="text-4xl font-extrabold text-white" data-testid="text-fm-price-main">990 000</span>
+                <span className="text-lg font-bold text-white"> so'm/oy</span>
+              </div>
+              <div className="mb-6 text-base text-slate-500 line-through">Chegirmasiz: 1 980 000 so'm/oy</div>
+              <div className="grid grid-cols-2 gap-3">
+                {["Rasmiy diplom", "Kurator 1 yil", "Kursga abadiy kirish", "Bepul yangilanishlar"].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm text-slate-300">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" /> {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-2xl bg-white p-6 shadow-2xl" data-testid="card-fm-pricing-form">
+              <h3 className="mb-4 text-lg font-extrabold text-slate-900">Kursga yozilish yoki bepul konsultatsiya</h3>
+              <LeadForm source="course-financial-modeling-pricing" buttonText="Bepul konsultatsiya olish" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── RELATED COURSES ──────────────────────────────────── */}
+      <section className="py-12" data-testid="section-fm-related">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-xl font-extrabold" data-testid="text-fm-related-title">Siz uchun qiziq bo'lishi mumkin</h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {RELATED.map((r, i) => (
+              <Link key={i} href={r.href} data-testid={`related-course-${i}`}>
+                <div className="group relative overflow-hidden rounded-2xl border bg-white p-5 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5">
+                  <div className={`absolute left-0 top-0 h-full w-1 bg-gradient-to-b ${r.color}`} />
+                  <div className="pl-3">
+                    <div className="text-base font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors">{r.label}</div>
+                    <div className="mt-1 text-xs text-slate-500">{r.desc}</div>
+                    <div className="mt-3 flex items-center gap-1 text-xs font-bold text-emerald-600">
+                      Batafsil <ArrowRight className="h-3 w-3" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────────── */}
+      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-fm-faq">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-fm-faq-title">Ko'p beriladigan savollar</h2>
           <div className="mx-auto max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
-              {faqs.map((faq) => (
+              {faqs.length > 0 ? faqs.map((faq) => (
                 <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border bg-white px-6 shadow-sm dark:bg-card" data-testid={`fm-faq-${faq.id}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base">{faq.question}</AccordionTrigger>
+                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base hover:no-underline">{faq.question}</AccordionTrigger>
                   <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
+                </AccordionItem>
+              )) : [
+                { q: "Moliya bo'yicha oldindan bilim kerakmi?", a: "Yo'q, kurs noldan boshlanadi. Excel bilan ishlashning asosiy ko'nikmalari yetarli." },
+                { q: "Kurs qancha davom etadi?", a: "1-2 oy: 26 interaktiv dars, 4 biznes-keys, 4 amaliy topshiriq." },
+                { q: "Bo'lib to'lash imkoni bormi?", a: "Ha, 12 oyga foizsiz bo'lib to'lash mumkin." },
+                { q: "Diplom rasmiy hujjatmi?", a: "Ha, FBA Academy tomonidan berilgan rasmiy diplom bo'lib, uni rezyumengizga qo'shishingiz mumkin." },
+                { q: "Kursni tugatgandan keyin ish topishda yordam bormi?", a: "Kurator karyera bo'yicha maslahat beradi va rezyume tayyorlashda yordam qiladi." },
+              ].map((faq, i) => (
+                <AccordionItem key={i} value={`q-${i}`} className="rounded-2xl border bg-white px-6 shadow-sm" data-testid={`fm-faq-default-${i}`}>
+                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base hover:no-underline">{faq.q}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">{faq.a}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
