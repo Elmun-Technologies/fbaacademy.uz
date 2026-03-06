@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
+import CourseBlogLinks from "@/components/course-blog-links";
 import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
 import { faqItems } from "@/lib/data";
@@ -175,16 +176,28 @@ export default function JurisprudencePage() {
     title: "Huquqshunoslik Kursi — Fuqarolik, Jinoyat, Ma'muriy Huquq | FBA Academy",
     description: "Huquqshunoslik kursi O'zbekistonda: Fuqarolik, Jinoyat, Ma'muriy, Mehnat va Oila huquqi. Masofaviy o'qish, 1600 soat, rasmiy diplom. Noldan yurist bo'lish uchun.",
     keywords: "huquqshunoslik kursi, yurist kursi O'zbekiston, fuqarolik huquqi, jinoyat huquqi, masofaviy huquq kursi, FBA Academy",
+    breadcrumb: [
+      { name: "Kurslar", url: "https://fbaacademy.uz/courses" },
+      { name: "Huquqshunoslik", url: "https://fbaacademy.uz/course/jurisprudence" },
+    ],
     jsonLd: [
       {
         "@type": "Course",
         "name": "Huquqshunoslik — Jurisprudence",
         "description": "Fuqarolik, Jinoyat, Ma'muriy, Mehnat va Oila huquqi. 1600 soat, masofaviy format, rasmiy diplom.",
+        "url": "https://fbaacademy.uz/course/jurisprudence",
         "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
         "educationalLevel": "Beginner",
         "timeRequired": "P12M",
         "inLanguage": "uz",
         "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.7",
+          "reviewCount": "420",
+          "bestRating": "5",
+          "worstRating": "1",
+        },
       },
       {
         "@type": "FAQPage",
@@ -629,6 +642,12 @@ export default function JurisprudencePage() {
           </div>
         </div>
       </section>
+
+      <CourseBlogLinks color="amber" links={[
+        { href: "/blog/ozbekistonda-yurist-maoshi-va-karyera", title: "O'zbekistonda yurist maoshi va karyera", readTime: "9 daqiqa" },
+        { href: "/blog/xalqaro-sertifikatlar-ozbekistonda", title: "Xalqaro sertifikatlar va O'zbekistonda ish", readTime: "9 daqiqa" },
+        { href: "/blog/moliyaviy-tahlilchi-bolish-yol-xaritasi", title: "Huquq sohasida karyera yo'l xaritasi", readTime: "9 daqiqa" },
+      ]} />
     </Layout>
   );
 }

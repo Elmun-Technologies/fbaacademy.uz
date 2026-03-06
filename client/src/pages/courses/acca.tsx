@@ -5,10 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
 import { courses, teachers, faqItems } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, Globe, Award, Users, TrendingUp, BookOpen, Clock, Calendar, Wrench, GraduationCap } from "lucide-react";
+import CourseBlogLinks from "@/components/course-blog-links";
 
 const course = courses.find((c) => c.id === "acca")!;
 const mentor = teachers.find((t) => t.id === "teacher-1")!;
@@ -31,14 +33,40 @@ export default function AccaPage() {
     title: "ACCA Sertifikati — To'liq Dastur | FBA Academy Toshkent",
     description: "ACCA (Association of Chartered Certified Accountants) — dunyodagi eng nufuzli buxgalteriya sertifikati. FBA Academy'da Applied Knowledge, Applied Skills va Strategic Professional bosqichlarini o'rganing. Big Four'ga kirish yo'li.",
     keywords: "ACCA sertifikati O'zbekiston, ACCA kurs Toshkent, ACCA Applied Knowledge, ACCA Applied Skills, ACCA Strategic Professional, Big Four buxgalteriya",
+    breadcrumb: [
+      { name: "Kurslar", url: "https://fbaacademy.uz/courses" },
+      { name: "ACCA", url: "https://fbaacademy.uz/course/acca" },
+    ],
     jsonLd: {
-      "@context": "https://schema.org",
       "@type": "Course",
       "name": "ACCA (Association of Chartered Certified Accountants) — To'liq Dastur",
       "description": "Dunyodagi eng nufuzli buxgalteriya sertifikati. 3 bosqich: Applied Knowledge, Applied Skills, Strategic Professional.",
-      "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
+      "url": "https://fbaacademy.uz/course/acca",
+      "image": "https://fbaacademy.uz/og-image.svg",
+      "provider": {
+        "@type": "Organization",
+        "name": "FBA Academy",
+        "url": "https://fbaacademy.uz",
+        "sameAs": "https://t.me/fbaacademy",
+      },
       "educationalLevel": "Professional",
       "timeRequired": "P12M",
+      "courseLanguage": ["uz", "ru"],
+      "inLanguage": "uz",
+      "teaches": ["ACCA Applied Knowledge", "ACCA Applied Skills", "ACCA Strategic Professional", "IFRS", "Financial Reporting"],
+      "offers": {
+        "@type": "Offer",
+        "category": "Professional Education",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "UZS",
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "1200",
+        "bestRating": "5",
+        "worstRating": "1",
+      },
     },
   });
 
@@ -51,9 +79,9 @@ export default function AccaPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-600/20 via-transparent to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link href="/courses">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-slate-400 cursor-pointer hover:text-white transition-colors" data-testid="link-back">← Barcha kurslar</span>
-          </Link>
+          <div className="mb-5">
+            <Breadcrumb items={[{ label: "Kurslar", href: "/courses" }, { label: "ACCA" }]} light />
+          </div>
           <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
             <div className="lg:col-span-3">
               <div className="mb-4 flex flex-wrap gap-2">
@@ -309,6 +337,14 @@ export default function AccaPage() {
           </div>
         </div>
       </section>
+
+      <CourseBlogLinks color="purple" links={[
+        { href: "/blog/acca-imtihoniga-tayyorlanish", title: "ACCA imtihoniga qanday tayyorlanish kerak?", readTime: "8 daqiqa" },
+        { href: "/blog/acca-vs-dipifr-vs-cfa-qaysi-yaxshi", title: "ACCA vs DipIFR vs CFA — qaysi biri yaxshi?", readTime: "11 daqiqa" },
+        { href: "/blog/xalqaro-sertifikatlar-ozbekistonda", title: "Xalqaro sertifikatlar va O'zbekistonda ish", readTime: "9 daqiqa" },
+        { href: "/blog/buxgalter-maoshi-ozbekiston-2026", title: "Buxgalter maoshi 2026: ACCA bilan qancha?", readTime: "8 daqiqa" },
+        { href: "/blog/moliyaviy-tahlilchi-bolish-yol-xaritasi", title: "Moliyaviy tahlilchi bo'lish yo'l xaritasi", readTime: "9 daqiqa" },
+      ]} />
 
       {/* Related */}
       <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-related">

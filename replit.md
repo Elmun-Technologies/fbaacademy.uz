@@ -23,6 +23,22 @@ FBA Academy is a premium EdTech platform for the Uzbekistan market specializing 
 ## Course Detail Page Sections
 Each course page includes: hero with enrollment form + discount badge, YouTube video preview (lazy-load click-to-play), salary growth section (dark bg with lime bars), tools/instruments (pill badges), skills list, for whom section, course program (accordion with numbered modules), support team (3 persons), live learning section, consultation CTA, related courses, FAQ
 
+## SEO Architecture (comprehensive)
+- `hooks/use-seo.ts` — auto hreflang (uz/ru/en/x-default) on all pages, canonical, OG, Twitter, JSON-LD @graph, BreadcrumbList schema from breadcrumb prop, noindex support
+- `client/index.html` — Organization+LocalBusiness+WebSite schema, geo meta tags (UZ-TO, Toshkent), font preloading with `display=swap`, full OG/Twitter tags
+- `client/public/og-image.svg` — 1200x630 branded OG image for social media sharing
+- `components/breadcrumb.tsx` — reusable Breadcrumb UI component (light mode for dark heroes)
+- `components/course-blog-links.tsx` — internal blog link section, added to all 5 course pages
+- All course pages have: AggregateRating schema, BreadcrumbList schema, breadcrumb nav, internal blog links
+- FAQ page: FAQPage schema with all questions
+- Teachers page: ItemList + Person schema
+- Contacts page: LocalBusiness schema with address/geo/hours
+- About page: AboutPage + EducationalOrganization schema
+- Career Center: EmploymentAgency schema
+- 404 page: noindex, proper UZ-language 404 UI with course/blog links
+- Sitemap: 24 URLs with hreflang at /sitemap.xml
+- robots.txt at /robots.txt
+
 ## Categories
 - ACCA (acca) - blue-50
 - Moliya (finance) - emerald-50

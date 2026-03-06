@@ -14,10 +14,11 @@ interface SEOProps {
   publishedTime?: string;
   modifiedTime?: string;
   hreflang?: { lang: string; url: string }[];
+  breadcrumb?: { name: string; url: string }[];
 }
 
 const BASE_URL = "https://fbaacademy.uz";
-const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;
+const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.svg`;
 const SITE_NAME = "FBA Academy";
 
 export function useSEO({
@@ -33,6 +34,7 @@ export function useSEO({
   publishedTime,
   modifiedTime,
   hreflang,
+  breadcrumb,
 }: SEOProps) {
   const [location] = useLocation();
 
@@ -103,26 +105,54 @@ export function useSEO({
 
     setLink("canonical", canonicalUrl);
 
-    if (hreflang) {
-      hreflang.forEach(({ lang, url }) => {
-        let el = document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${lang}"]`);
-        if (!el) {
-          el = document.createElement("link");
-          el.setAttribute("rel", "alternate");
-          el.setAttribute("hreflang", lang);
-          document.head.appendChild(el);
-        }
-        el.setAttribute("href", url);
+    // Auto-generate hreflang for all pages (uz/ru/en point to same URL)
+    const hreflangEntries = hreflang || [
+      { lang: "uz", url: canonicalUrl },
+      { lang: "ru", url: canonicalUrl },
+      { lang: "en", url: canonicalUrl },
+      { lang: "x-default", url: canonicalUrl },
+    ];
+    hreflangEntries.forEach(({ lang, url }) => {
+      let el = document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${lang}"]`);
+      if (!el) {
+        el = document.createElement("link");
+        el.setAttribute("rel", "alternate");
+        el.setAttribute("hreflang", lang);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("href", url);
+    });
+
+    // Build schemas array
+    const schemas: Record<string, unknown>[] = [];
+
+    // BreadcrumbList schema (auto from breadcrumb prop)
+    if (breadcrumb && breadcrumb.length > 0) {
+      schemas.push({
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Bosh sahifa", "item": BASE_URL },
+          ...breadcrumb.map((b, i) => ({
+            "@type": "ListItem",
+            "position": i + 2,
+            "name": b.name,
+            "item": b.url,
+          })),
+        ],
       });
     }
 
+    // User-provided schemas
     if (jsonLd) {
-      const schemas = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+      const arr = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+      schemas.push(...arr);
+    }
+
+    if (schemas.length > 0) {
       const graph = {
         "@context": "https://schema.org",
         "@graph": schemas,
       };
-
       const scriptId = "json-ld-schema";
       let script = document.getElementById(scriptId);
       if (!script) {
@@ -133,5 +163,5 @@ export function useSEO({
       }
       script.textContent = JSON.stringify(graph);
     }
-  }, [title, description, ogTitle, ogDescription, ogImage, ogType, keywords, jsonLd, noindex, publishedTime, modifiedTime, location]);
+  }, [title, description, ogTitle, ogDescription, ogImage, ogType, keywords, noindex, publishedTime, modifiedTime, location]);
 }

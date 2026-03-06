@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
 import { courses, teachers } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, FileText, BookOpen, Clock, Calendar, GraduationCap, Award, Building2, Users, ChevronRight, BarChart3 } from "lucide-react";
+import CourseBlogLinks from "@/components/course-blog-links";
 
 const course = courses.find((c) => c.id === "dipifr")!;
 const mentor = teachers.find((t) => t.id === "teacher-3")!;
@@ -281,9 +283,14 @@ export default function DipIFRPage() {
     keywords: "DipIFR kurs Toshkent, ACCA DipIFR O'zbekiston, IFRS diplom kurs, MFHS standartlari, xalqaro moliyaviy hisobot, IAS IFRS sertifikat, DipIFR-rus imtihon, FBA Academy DipIFR, ACCA Toshkent, Big Four audit malaka",
     publishedTime: "2024-02-01T09:00:00+05:00",
     modifiedTime: new Date().toISOString(),
+    breadcrumb: [
+      { name: "Kurslar", url: `${BASE_URL}/courses` },
+      { name: "DipIFR", url: `${BASE_URL}/course/dipifr` },
+    ],
     hreflang: [
       { lang: "uz", url: `${BASE_URL}/course/dipifr` },
-      { lang: "ru", url: `${BASE_URL}/ru/course/dipifr` },
+      { lang: "ru", url: `${BASE_URL}/course/dipifr` },
+      { lang: "en", url: `${BASE_URL}/course/dipifr` },
       { lang: "x-default", url: `${BASE_URL}/course/dipifr` },
     ],
     jsonLd: SEO_SCHEMAS,
@@ -888,6 +895,13 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 16. RELATED COURSES ===== */}
+      <CourseBlogLinks color="indigo" links={[
+        { href: "/blog/dipifr-nima-va-nima-uchun", title: "DipIFR nima va nima uchun kerak?", readTime: "7 daqiqa" },
+        { href: "/blog/acca-vs-dipifr-vs-cfa-qaysi-yaxshi", title: "ACCA vs DipIFR vs CFA — qaysi biri yaxshi?", readTime: "11 daqiqa" },
+        { href: "/blog/xalqaro-sertifikatlar-ozbekistonda", title: "Xalqaro sertifikatlar O'zbekistonda", readTime: "9 daqiqa" },
+        { href: "/blog/buxgalter-maoshi-ozbekiston-2026", title: "Buxgalter maoshi 2026", readTime: "8 daqiqa" },
+      ]} />
+
       <section className="bg-slate-50 py-12 dark:bg-slate-900/30" data-testid="section-related">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-xl font-extrabold sm:text-2xl">Boshqa moliya va buxgalteriya kurslari</h2>

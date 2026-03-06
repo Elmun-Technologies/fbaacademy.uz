@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import LeadForm from "@/components/lead-form";
 import { courses, teachers } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, Settings, FileText, Users, BarChart3, DollarSign, Award, Briefcase, BookOpen, Monitor, ChevronLeft, ChevronRight, Play } from "lucide-react";
+import CourseBlogLinks from "@/components/course-blog-links";
 
 const course = courses.find((c) => c.id === "1c-course")!;
 const mentor = teachers.find((t) => t.id === "teacher-4")!;
@@ -280,9 +282,14 @@ export default function OneCPage() {
     keywords: "1C Buxgalteriya kurs Toshkent, 1C 8.3 kursi O'zbekiston, buxgalteriya dasturi kursi onlayn, 1C sertifikat, soliq hisoboti 1C, birlamchi hujjatlar 1C, ish haqi hisoblash 1C, QQS hisoboti, my.soliq.uz, FBA Academy 1C kurs, buxgalter bo'lish, 1C: Buxgalteriya o'rganish",
     publishedTime: "2024-01-15T09:00:00+05:00",
     modifiedTime: new Date().toISOString(),
+    breadcrumb: [
+      { name: "Kurslar", url: `${BASE_URL}/courses` },
+      { name: "1C: Buxgalteriya", url: `${BASE_URL}/course/1c-course` },
+    ],
     hreflang: [
       { lang: "uz", url: `${BASE_URL}/course/1c-course` },
-      { lang: "ru", url: `${BASE_URL}/ru/course/1c-course` },
+      { lang: "ru", url: `${BASE_URL}/course/1c-course` },
+      { lang: "en", url: `${BASE_URL}/course/1c-course` },
       { lang: "x-default", url: `${BASE_URL}/course/1c-course` },
     ],
     jsonLd: SEO_SCHEMAS,
@@ -906,6 +913,13 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 15. RELATED COURSES (Internal SEO links) ===== */}
+      <CourseBlogLinks color="blue" links={[
+        { href: "/blog/1c-buxgalteriya-boshlangich-qollanma", title: "1C: Buxgalteriya boshlang'ich qo'llanma", readTime: "10 daqiqa" },
+        { href: "/blog/buxgalter-maoshi-ozbekiston-2026", title: "Buxgalter maoshi 2026: 1C bilan nechta?", readTime: "8 daqiqa" },
+        { href: "/blog/xalqaro-sertifikatlar-ozbekistonda", title: "Sertifikat bilan ish topish", readTime: "9 daqiqa" },
+        { href: "/blog/moliyaviy-tahlilchi-bolish-yol-xaritasi", title: "Moliya sohasida karyera yo'l xaritasi", readTime: "9 daqiqa" },
+      ]} />
+
       <section className="bg-slate-50 py-12 dark:bg-slate-900/30" data-testid="section-related">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-xl font-extrabold sm:text-2xl">Boshqa moliya va buxgalteriya kurslari</h2>

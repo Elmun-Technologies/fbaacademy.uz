@@ -3,6 +3,7 @@ import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import { partnerCompanies } from "@/lib/data";
 import { Briefcase, FileText, Users, Target, ArrowRight, Building2, UserCheck } from "lucide-react";
 
@@ -11,6 +12,20 @@ export default function CareerCenter() {
     title: "Karyera Markazi — Big Four, Moliya Kompaniyalari | FBA Academy",
     description: "FBA Academy bitiruvchilari Deloitte, PwC, KPMG, EY va yetakchi moliya kompaniyalarida ishlashadi. 92% ishga joylashish ko'rsatkichi. Bepul karyera yordam.",
     keywords: "ACCA ishga joylashish, Big Four O'zbekiston, DipIFR ish joyi, moliya karyera",
+    breadcrumb: [{ name: "Karyera Markazi", url: "https://fbaacademy.uz/career-center" }],
+    jsonLd: {
+      "@type": "EmploymentAgency",
+      "name": "FBA Academy Karyera Markazi",
+      "description": "FBA Academy bitiruvchilariga Deloitte, PwC, KPMG, EY va yetakchi moliya kompaniyalarida ishga joylashishda yordam beradi.",
+      "url": "https://fbaacademy.uz/career-center",
+      "parentOrganization": { "@type": "EducationalOrganization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
+      "areaServed": { "@type": "Country", "name": "Uzbekistan" },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://fbaacademy.uz/contacts",
+        "serviceSmsNumber": "+998901234567",
+      },
+    },
   });
 
   return (
@@ -18,6 +33,9 @@ export default function CareerCenter() {
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-16 sm:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-4">
+            <Breadcrumb items={[{ label: "Karyera Markazi" }]} light />
+          </div>
           <Badge className="mb-4 rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">Karyera</Badge>
           <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl" data-testid="text-career-title">Ishga joylashish markazi</h1>
           <p className="mb-10 max-w-2xl text-slate-300">

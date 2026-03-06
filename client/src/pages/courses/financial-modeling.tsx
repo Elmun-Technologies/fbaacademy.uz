@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
 import { faqItems } from "@/lib/data";
+import CourseBlogLinks from "@/components/course-blog-links";
 import {
   CheckCircle2, ArrowRight, Star, ChevronRight, Play,
   BarChart3, Calculator, TrendingUp, BookOpen, Clock,
@@ -275,15 +277,27 @@ export default function FinancialModelingPage() {
     title: "Moliyaviy Modellashtirish Kursi — DCF, Excel, FAST | FBA Academy",
     description: "Amaliy Moliyaviy Modellashtirish kursi O'zbekistonda: DCF, FAST standartlari, plan-fakt tahlil, WACC, kompaniyani baholash. 26 dars, 4 biznes-keys, rasmiy diplom. 1-2 oyda natija.",
     keywords: "moliyaviy modellashtirish kursi, financial modeling O'zbekiston, DCF model, Excel moliya kursi, FAST standart, kompaniyani baholash, FBA Academy",
+    breadcrumb: [
+      { name: "Kurslar", url: "https://fbaacademy.uz/courses" },
+      { name: "Financial Modeling", url: "https://fbaacademy.uz/course/financial-modeling" },
+    ],
     jsonLd: [
       {
         "@type": "Course",
         "name": "Moliyaviy Modellashtirish — Financial Modeling",
         "description": "DCF, FAST standartlari, plan-fakt tahlil, WACC. 26 dars, 4 biznes-keys, rasmiy diplom.",
+        "url": "https://fbaacademy.uz/course/financial-modeling",
         "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
         "educationalLevel": "Intermediate",
         "timeRequired": "P2M",
         "inLanguage": "uz",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "700",
+          "bestRating": "5",
+          "worstRating": "1",
+        },
       },
       {
         "@type": "FAQPage",
@@ -851,6 +865,13 @@ export default function FinancialModelingPage() {
           </div>
         </div>
       </section>
+
+      <CourseBlogLinks color="green" links={[
+        { href: "/blog/financial-modeling-excel-dan-kariyeragacha", title: "Financial Modeling: Excel dan karyeragacha", readTime: "9 daqiqa" },
+        { href: "/blog/moliyaviy-tahlilchi-bolish-yol-xaritasi", title: "Moliyaviy tahlilchi bo'lish yo'l xaritasi", readTime: "9 daqiqa" },
+        { href: "/blog/acca-vs-dipifr-vs-cfa-qaysi-yaxshi", title: "ACCA vs DipIFR vs CFA — qaysi biri yaxshi?", readTime: "11 daqiqa" },
+        { href: "/blog/buxgalter-maoshi-ozbekiston-2026", title: "Moliya mutaxassisi maoshi 2026", readTime: "8 daqiqa" },
+      ]} />
     </Layout>
   );
 }

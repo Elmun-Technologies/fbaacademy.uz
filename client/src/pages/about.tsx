@@ -3,6 +3,7 @@ import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import YouTubeEmbed from "@/components/youtube-embed";
 import { stats, partnerCompanies } from "@/lib/data";
 import { Target, Eye, Heart, ArrowRight } from "lucide-react";
@@ -12,6 +13,27 @@ export default function About() {
     title: "Biz haqimizda — FBA Academy | ACCA, DipIFR, Moliya ta'limi",
     description: "FBA Academy — O'zbekistondagi yetakchi moliya va buxgalteriya ta'lim platformasi. 2020-yildan beri 5000+ talabalarga ACCA, DipIFR va boshqa xalqaro sertifikatlar bo'yicha ta'lim berib kelmoqdamiz.",
     keywords: "FBA Academy haqida, ACCA ta'lim O'zbekiston, DipIFR kurslari, moliya ta'limi",
+    breadcrumb: [{ name: "Biz haqimizda", url: "https://fbaacademy.uz/about" }],
+    jsonLd: {
+      "@type": "AboutPage",
+      "name": "FBA Academy haqida",
+      "description": "FBA Academy — O'zbekistondagi yetakchi moliya ta'lim platformasi. 2020-yildan beri 5000+ talabalarga ACCA, DipIFR va boshqa xalqaro sertifikatlar bo'yicha ta'lim berib kelmoqdamiz.",
+      "url": "https://fbaacademy.uz/about",
+      "mainEntity": {
+        "@type": "EducationalOrganization",
+        "name": "FBA Academy",
+        "foundingDate": "2020",
+        "numberOfEmployees": { "@type": "QuantitativeValue", "value": 30 },
+        "alumni": { "@type": "QuantitativeValue", "value": 5000 },
+        "award": "O'zbekistondagi yetakchi moliya ta'lim platformasi 2024",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Amir Temur ko'chasi, 108",
+          "addressLocality": "Toshkent",
+          "addressCountry": "UZ",
+        },
+      },
+    },
   });
 
   return (
@@ -20,6 +42,9 @@ export default function About() {
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-16 sm:py-24" data-testid="section-about-hero">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-4">
+            <Breadcrumb items={[{ label: "Biz haqimizda" }]} light />
+          </div>
           <Badge className="mb-4 rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">Biz haqimizda</Badge>
           <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl" data-testid="text-about-title">
             O'zbekistondagi #1<br />
