@@ -60,7 +60,7 @@ export default function Contacts() {
 
   return (
     <Layout>
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-14 sm:py-18">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-14 sm:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
@@ -74,7 +74,7 @@ export default function Contacts() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-18">
+      <section className="py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-2">
             <div className="rounded-2xl border bg-white p-6 shadow-xl sm:p-8 dark:bg-card" data-testid="card-contact-form">

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Menu, ArrowRight, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import type { Language } from "@/lib/translations";
@@ -65,7 +65,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-0.5 xl:flex" data-testid="nav-desktop">
+          <nav className="hidden items-center gap-0.5 lg:flex" data-testid="nav-desktop">
             {/* ACCA dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
@@ -150,27 +150,31 @@ export default function Header() {
             )}
           </div>
 
-          <div className="hidden items-center gap-2 xl:flex">
-            <Link href="/teachers">
+          <div className="hidden items-center gap-2 lg:flex">
+            <Link href="/teachers" className="hidden xl:block">
               <span className="rounded-md px-3 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" data-testid="link-nav-teachers">
                 {t.nav.teachers}
               </span>
             </Link>
             <Link href="/contacts">
-              <Button size="sm" className="gap-1.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-5 font-semibold text-white shadow-md hover:from-purple-700 hover:to-pink-700" data-testid="button-header-consultation">
-                {t.nav.consultation} <ArrowRight className="h-3.5 w-3.5" />
+              <Button size="sm" className="gap-1.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-4 font-semibold text-white shadow-md hover:from-purple-700 hover:to-pink-700" data-testid="button-header-consultation">
+                <span className="hidden sm:inline">{t.nav.consultation}</span>
+                <span className="sm:hidden">Konsultatsiya</span>
+                <ArrowRight className="h-3.5 w-3.5" />
               </Button>
             </Link>
           </div>
 
           {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild className="xl:hidden">
+            <SheetTrigger asChild className="lg:hidden">
               <Button size="icon" variant="ghost" data-testid="button-mobile-menu">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-80 overflow-y-auto">
+              <SheetTitle className="sr-only">Navigatsiya menyusi</SheetTitle>
+              <SheetDescription className="sr-only">Sayt bo'limlari va kurslar ro'yxati</SheetDescription>
               <div className="flex flex-col gap-4 pt-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">

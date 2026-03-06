@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import { courses } from "@/lib/data";
 import { Search, Clock, Filter, Star, ArrowRight } from "lucide-react";
 
@@ -22,6 +23,7 @@ export default function Catalog() {
     title: "Barcha kurslar — ACCA, DipIFR, Financial Modeling, 1C | FBA Academy",
     description: "FBA Academy barcha kurslari: ACCA, DipIFR, Financial Modeling, Huquqshunoslik va 1C Buxgalteriya. Professional kurslar, xalqaro sertifikatlar, Big Four darajasida bilim.",
     keywords: "ACCA kursi, DipIFR kursi, Financial Modeling, Huquqshunoslik kursi, 1C Buxgalteriya, moliya kurslari O'zbekiston",
+    breadcrumb: [{ name: "Kurslar", url: "https://fbaacademy.uz/courses" }],
   });
 
   const searchString = useSearch();
@@ -45,6 +47,9 @@ export default function Catalog() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-14 sm:py-20" data-testid="section-catalog-hero">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-4">
+            <Breadcrumb items={[{ label: "Barcha kurslar" }]} light />
+          </div>
           <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl" data-testid="text-catalog-title">Barcha kurslar</h1>
           <p className="mt-3 text-slate-300">ACCA, DipIFR, Financial Modeling, Huquqshunoslik va 1C: Buxgalteriya bo'yicha professional kurslar</p>
 

@@ -1,6 +1,7 @@
 import { useSEO } from "@/hooks/use-seo";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import LeadForm from "@/components/lead-form";
 import { partnerCompanies } from "@/lib/data";
 import { BarChart3, Users, Target, Award, BookOpen, Building2, CheckCircle2 } from "lucide-react";
@@ -10,6 +11,7 @@ export default function CorporateTraining() {
     title: "Korporativ treninglar — ACCA, IFRS, Moliya | FBA Academy",
     description: "Kompaniyangiz moliya va buxgalteriya jamoasi uchun ACCA, DipIFR, IFRS va Financial Modeling bo'yicha korporativ treninglar. Moslashuvchan jadval, xalqaro sertifikatlar.",
     keywords: "korporativ trening ACCA, IFRS trening kompaniya, moliya treningi O'zbekiston",
+    breadcrumb: [{ name: "Korporativ treninglar", url: "https://fbaacademy.uz/corporate" }],
   });
 
   return (
@@ -17,6 +19,9 @@ export default function CorporateTraining() {
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-16 sm:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-4">
+            <Breadcrumb items={[{ label: "Korporativ treninglar" }]} light />
+          </div>
           <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
               <Badge className="mb-4 rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">Korporativ</Badge>

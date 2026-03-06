@@ -1,6 +1,7 @@
 import { useSEO } from "@/hooks/use-seo";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import LeadForm from "@/components/lead-form";
 import { Gift, Percent, Clock, CheckCircle2, Star, Zap, Users } from "lucide-react";
 
@@ -9,13 +10,17 @@ export default function Grants() {
     title: "Grant va Chegirmalar — ACCA, DipIFR Bepul Ta'lim | FBA Academy",
     description: "FBA Academy maxsus grant va chegirma imkoniyatlari. ACCA, DipIFR, Financial Modeling kurslarini 0% bo'lib to'lang yoki grant yutib oling.",
     keywords: "ACCA grant O'zbekiston, DipIFR chegirma, moliya kursi grant, bepul ta'lim",
+    breadcrumb: [{ name: "Grant va Aksiyalar", url: "https://fbaacademy.uz/grants" }],
   });
 
   return (
     <Layout>
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-14 sm:py-18">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-14 sm:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-4">
+            <Breadcrumb items={[{ label: "Grant va Aksiyalar" }]} light />
+          </div>
           <Badge className="mb-4 rounded-full border-amber-400/30 bg-amber-500/20 px-4 py-1.5 text-sm text-amber-200 backdrop-blur-sm">
             <Zap className="mr-1.5 h-3.5 w-3.5" /> Cheklangan vaqt
           </Badge>

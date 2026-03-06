@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import { graduateResults } from "@/lib/data";
 import { ArrowRight, TrendingUp, Quote } from "lucide-react";
 
@@ -12,6 +13,7 @@ export default function CaseStudies() {
     title: "Muvaffaqiyat Tarixi — ACCA, DipIFR Bitiruvchilar | FBA Academy",
     description: "FBA Academy ACCA, DipIFR va Financial Modeling bitiruvchilarining real muvaffaqiyat tarixi. Big Four firmalarga kirishdan to karyera o'sishiga.",
     keywords: "ACCA muvaffaqiyat, DipIFR bitiruvchi, FBA Academy success story, moliya karyera O'zbekiston",
+    breadcrumb: [{ name: "Muvaffaqiyat tarixi", url: "https://fbaacademy.uz/case-studies" }],
   });
 
   return (
@@ -19,6 +21,9 @@ export default function CaseStudies() {
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-16 sm:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-4">
+            <Breadcrumb items={[{ label: "Muvaffaqiyat tarixi" }]} light />
+          </div>
           <Badge className="mb-4 rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">Natijalar</Badge>
           <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl" data-testid="text-case-studies-title">Bitiruvchilar natijalari</h1>
           <p className="mb-10 max-w-2xl text-slate-300">

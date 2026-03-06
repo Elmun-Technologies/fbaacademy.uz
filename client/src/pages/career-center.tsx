@@ -12,12 +12,12 @@ export default function CareerCenter() {
     title: "Karyera Markazi — Big Four, Moliya Kompaniyalari | FBA Academy",
     description: "FBA Academy bitiruvchilari Deloitte, PwC, KPMG, EY va yetakchi moliya kompaniyalarida ishlashadi. 92% ishga joylashish ko'rsatkichi. Bepul karyera yordam.",
     keywords: "ACCA ishga joylashish, Big Four O'zbekiston, DipIFR ish joyi, moliya karyera",
-    breadcrumb: [{ name: "Karyera Markazi", url: "https://fbaacademy.uz/career-center" }],
+    breadcrumb: [{ name: "Karyera Markazi", url: "https://fbaacademy.uz/career" }],
     jsonLd: {
       "@type": "EmploymentAgency",
       "name": "FBA Academy Karyera Markazi",
       "description": "FBA Academy bitiruvchilariga Deloitte, PwC, KPMG, EY va yetakchi moliya kompaniyalarida ishga joylashishda yordam beradi.",
-      "url": "https://fbaacademy.uz/career-center",
+      "url": "https://fbaacademy.uz/career",
       "parentOrganization": { "@type": "EducationalOrganization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
       "areaServed": { "@type": "Country", "name": "Uzbekistan" },
       "availableChannel": {

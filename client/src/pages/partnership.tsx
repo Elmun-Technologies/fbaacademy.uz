@@ -1,6 +1,7 @@
 import { useSEO } from "@/hooks/use-seo";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
 import LeadForm from "@/components/lead-form";
 import { Handshake, Building2, Users, Gift, CheckCircle2, TrendingUp, Globe } from "lucide-react";
 
@@ -9,13 +10,17 @@ export default function Partnership() {
     title: "Hamkorlik — Korporativ, Affiliate, Ta'lim | FBA Academy",
     description: "FBA Academy bilan hamkorlik qiling: korporativ treninglar, affiliate dastur, universitetlar bilan hamkorlik va sponsorlik imkoniyatlari.",
     keywords: "FBA Academy hamkorlik, ACCA korporativ trening, ta'lim muassasa hamkorlik",
+    breadcrumb: [{ name: "Hamkorlik", url: "https://fbaacademy.uz/partnership" }],
   });
 
   return (
     <Layout>
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-14 sm:py-18">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-14 sm:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-4">
+            <Breadcrumb items={[{ label: "Hamkorlik" }]} light />
+          </div>
           <Badge className="mb-4 rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">Hamkorlik</Badge>
           <h1 className="mb-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl" data-testid="text-partnership-title">Hamkorlik</h1>
           <p className="max-w-2xl text-slate-300">
