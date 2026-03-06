@@ -12,44 +12,45 @@ const LANGS: { code: Language; flag: string; label: string }[] = [
   { code: "en", flag: "🇬🇧", label: "En" },
 ];
 
-const accaSubItems = [
-  { labelUz: "Applied Knowledge", labelRu: "Applied Knowledge", labelEn: "Applied Knowledge", path: "/course/applied-knowledge", descUz: "ACCA 1-bosqich", descRu: "ACCA 1-й уровень", descEn: "ACCA Level 1" },
-  { labelUz: "Applied Skills", labelRu: "Applied Skills", labelEn: "Applied Skills", path: "/course/applied-skills", descUz: "ACCA 2-bosqich", descRu: "ACCA 2-й уровень", descEn: "ACCA Level 2" },
-  { labelUz: "Strategic Professional", labelRu: "Strategic Professional", labelEn: "Strategic Professional", path: "/course/strategic-professional", descUz: "ACCA 3-bosqich", descRu: "ACCA 3-й уровень", descEn: "ACCA Level 3" },
+const ACCA_ITEMS = [
+  { uz: "ACCA — To'liq dastur", ru: "ACCA — Полная программа", en: "ACCA — Full Program", path: "/course/acca", descUz: "Barcha bosqichlar", descRu: "Все уровни", descEn: "All levels", bold: true },
+  { uz: "Applied Knowledge", ru: "Applied Knowledge", en: "Applied Knowledge", path: "/course/applied-knowledge", descUz: "1-bosqich", descRu: "1-й уровень", descEn: "Level 1", bold: false },
+  { uz: "Applied Skills", ru: "Applied Skills", en: "Applied Skills", path: "/course/applied-skills", descUz: "2-bosqich", descRu: "2-й уровень", descEn: "Level 2", bold: false },
+  { uz: "Strategic Professional", ru: "Strategic Professional", en: "Strategic Professional", path: "/course/strategic-professional", descUz: "3-bosqich", descRu: "3-й уровень", descEn: "Level 3", bold: false },
+];
+
+const OTHER_COURSES = [
+  { uz: "DipIFR", ru: "DipIFR", en: "DipIFR", path: "/course/dipifr", descUz: "Xalqaro moliyaviy hisobot", descRu: "Международная отчётность", descEn: "International reporting" },
+  { uz: "Financial Modeling", ru: "Financial Modeling", en: "Financial Modeling", path: "/course/financial-modeling", descUz: "Excel, DCF, baholash", descRu: "Excel, DCF, оценка", descEn: "Excel, DCF, valuation" },
+  { uz: "1C: Buxgalteriya", ru: "1С: Бухгалтерия", en: "1C: Accounting", path: "/course/1c-course", descUz: "Versiya 8.3", descRu: "Версия 8.3", descEn: "Version 8.3" },
+  { uz: "Huquqshunoslik", ru: "Юриспруденция", en: "Law", path: "/course/jurisprudence", descUz: "Biznes va soliq huquqi", descRu: "Бизнес и налоговое право", descEn: "Business & Tax Law" },
 ];
 
 export default function Header() {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
-  const [accaOpen, setAccaOpen] = useState(false);
+  const [coursesOpen, setCoursesOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const coursesRef = useRef<HTMLDivElement>(null);
   const langDropRef = useRef<HTMLDivElement>(null);
   const { lang, setLang, t } = useLanguage();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) setAccaOpen(false);
+      if (coursesRef.current && !coursesRef.current.contains(e.target as Node)) setCoursesOpen(false);
       if (langDropRef.current && !langDropRef.current.contains(e.target as Node)) setLangOpen(false);
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const isAccaActive =
-    location.startsWith("/course/acca") ||
-    location === "/course/applied-knowledge" ||
-    location === "/course/applied-skills" ||
-    location === "/course/strategic-professional";
-
+  const isCoursesActive = location.startsWith("/course/") || location === "/courses";
   const currentLangObj = LANGS.find((l) => l.code === lang) || LANGS[0];
 
-  const mainNavItems = [
-    { label: "DipIFR", path: "/course/dipifr" },
-    { label: lang === "uz" ? "Financial Modeling" : lang === "ru" ? "Financial Modeling" : "Financial Modeling", path: "/course/financial-modeling" },
-    { label: lang === "uz" ? "Huquqshunoslik" : lang === "ru" ? "Юриспруденция" : "Law", path: "/course/jurisprudence" },
-    { label: lang === "uz" ? "1C: Buxgalteriya" : lang === "ru" ? "1С: Бухгалтерия" : "1C: Accounting", path: "/course/1c-course" },
-  ];
+  const getLabel = (item: { uz: string; ru: string; en: string }) =>
+    lang === "ru" ? item.ru : lang === "en" ? item.en : item.uz;
+  const getDesc = (item: { descUz: string; descRu: string; descEn: string }) =>
+    lang === "ru" ? item.descRu : lang === "en" ? item.descEn : item.descUz;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-md shadow-sm" data-testid="header">
@@ -66,58 +67,102 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-0.5 lg:flex" data-testid="nav-desktop">
-            {/* ACCA dropdown */}
-            <div className="relative" ref={dropdownRef}>
+            {/* Kurslar dropdown */}
+            <div className="relative" ref={coursesRef}>
               <button
-                onClick={() => setAccaOpen((v) => !v)}
+                onClick={() => setCoursesOpen((v) => !v)}
                 className={`flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
-                  isAccaActive ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                  isCoursesActive ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                 }`}
-                data-testid="button-nav-acca"
-                aria-expanded={accaOpen}
+                data-testid="button-nav-courses"
+                aria-expanded={coursesOpen}
+                aria-haspopup="true"
               >
-                ACCA
-                <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${accaOpen ? "rotate-180" : ""}`} />
+                {t.nav.courses}
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${coursesOpen ? "rotate-180" : ""}`} />
               </button>
 
-              {accaOpen && (
-                <div className="absolute left-0 top-full mt-1 w-64 rounded-xl border bg-white shadow-xl z-50 overflow-hidden" data-testid="dropdown-acca">
-                  <div className="border-b px-4 py-2.5">
-                    <Link href="/course/acca" onClick={() => setAccaOpen(false)}>
-                      <span className="text-sm font-bold text-purple-700 hover:text-purple-900" data-testid="link-acca-full">
-                        {t.nav.accaFull}
-                      </span>
-                    </Link>
-                  </div>
-                  {accaSubItems.map((item) => (
-                    <Link key={item.path} href={item.path} onClick={() => setAccaOpen(false)}>
-                      <div className="flex items-center justify-between px-4 py-3 hover:bg-purple-50 cursor-pointer transition-colors" data-testid={`link-acca-${item.labelUz.toLowerCase().replace(/\s/g, "-")}`}>
-                        <div>
-                          <div className="text-sm font-semibold text-slate-900">{item.labelUz}</div>
-                          <div className="text-xs text-slate-500">{lang === "uz" ? item.descUz : lang === "ru" ? item.descRu : item.descEn}</div>
-                        </div>
-                        <ArrowRight className="h-3.5 w-3.5 text-purple-400 shrink-0" />
+              {coursesOpen && (
+                <div
+                  className="absolute left-0 top-full mt-1 w-[520px] rounded-xl border bg-white shadow-xl z-50 overflow-hidden"
+                  data-testid="dropdown-courses"
+                  role="menu"
+                >
+                  <div className="grid grid-cols-2 divide-x">
+                    {/* ACCA column */}
+                    <div>
+                      <div className="px-4 py-2 border-b bg-slate-50">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">ACCA</span>
                       </div>
-                    </Link>
-                  ))}
+                      {ACCA_ITEMS.map((item) => (
+                        <Link key={item.path} href={item.path} onClick={() => setCoursesOpen(false)}>
+                          <div
+                            className={`flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors hover:bg-purple-50 ${
+                              location === item.path ? "bg-purple-50" : ""
+                            }`}
+                            data-testid={`link-nav-${item.path.split("/").pop()}`}
+                            role="menuitem"
+                          >
+                            <div>
+                              <div className={`text-sm ${item.bold ? "font-bold text-purple-700" : "font-semibold text-slate-800"}`}>
+                                {getLabel(item)}
+                              </div>
+                              <div className="text-xs text-slate-400">{getDesc(item)}</div>
+                            </div>
+                            <ArrowRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Other courses column */}
+                    <div>
+                      <div className="px-4 py-2 border-b bg-slate-50">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                          {t.nav.otherCourses}
+                        </span>
+                      </div>
+                      {OTHER_COURSES.map((item) => (
+                        <Link key={item.path} href={item.path} onClick={() => setCoursesOpen(false)}>
+                          <div
+                            className={`flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors hover:bg-purple-50 ${
+                              location === item.path ? "bg-purple-50" : ""
+                            }`}
+                            data-testid={`link-nav-${item.path.split("/").pop()}`}
+                            role="menuitem"
+                          >
+                            <div>
+                              <div className="text-sm font-semibold text-slate-800">{getLabel(item)}</div>
+                              <div className="text-xs text-slate-400">{getDesc(item)}</div>
+                            </div>
+                            <ArrowRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+                          </div>
+                        </Link>
+                      ))}
+                      {/* All courses link */}
+                      <Link href="/courses" onClick={() => setCoursesOpen(false)}>
+                        <div className="border-t mt-1 px-4 py-2.5 flex items-center gap-2 cursor-pointer hover:bg-slate-50 transition-colors" data-testid="link-nav-all-courses" role="menuitem">
+                          <span className="text-sm font-bold text-purple-600">{t.footer.allCourses}</span>
+                          <ArrowRight className="h-3.5 w-3.5 text-purple-400" />
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
 
-            {mainNavItems.map((item) => (
-              <Link key={item.path} href={item.path}>
-                <span
-                  className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
-                    location === item.path
-                      ? "text-purple-700 bg-purple-50"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                  }`}
-                  data-testid={`link-nav-${item.path.split("/").pop()}`}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            ))}
+            {/* Teachers link */}
+            <Link href="/teachers">
+              <span
+                className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                  location === "/teachers" ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+                data-testid="link-nav-teachers"
+              >
+                {t.nav.teachers}
+              </span>
+            </Link>
           </nav>
         </div>
 
@@ -129,13 +174,14 @@ export default function Header() {
               onClick={() => setLangOpen((v) => !v)}
               className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-700 hover:border-purple-300 hover:bg-purple-50 transition-colors"
               data-testid="button-lang-switcher"
+              aria-label="Tilni o'zgartirish"
             >
               <span>{currentLangObj.flag}</span>
               <span>{currentLangObj.label}</span>
               <ChevronDown className={`h-3 w-3 text-slate-400 transition-transform ${langOpen ? "rotate-180" : ""}`} />
             </button>
             {langOpen && (
-              <div className="absolute right-0 top-full mt-1 w-28 rounded-xl border bg-white shadow-xl z-50 overflow-hidden" data-testid="dropdown-lang">
+              <div className="absolute right-0 top-full mt-1 w-32 rounded-xl border bg-white shadow-xl z-50 overflow-hidden" data-testid="dropdown-lang">
                 {LANGS.map((l) => (
                   <button
                     key={l.code}
@@ -150,25 +196,17 @@ export default function Header() {
             )}
           </div>
 
-          <div className="hidden items-center gap-2 lg:flex">
-            <Link href="/teachers" className="hidden xl:block">
-              <span className="rounded-md px-3 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" data-testid="link-nav-teachers">
-                {t.nav.teachers}
-              </span>
-            </Link>
-            <Link href="/contacts">
-              <Button size="sm" className="gap-1.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-4 font-semibold text-white shadow-md hover:from-purple-700 hover:to-pink-700" data-testid="button-header-consultation">
-                <span className="hidden sm:inline">{t.nav.consultation}</span>
-                <span className="sm:hidden">Konsultatsiya</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            </Link>
-          </div>
+          <Link href="/contacts" className="hidden lg:block">
+            <Button size="sm" className="gap-1.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-4 font-semibold text-white shadow-md hover:from-purple-700 hover:to-pink-700" data-testid="button-header-consultation">
+              {t.nav.consultation}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Button>
+          </Link>
 
           {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button size="icon" variant="ghost" data-testid="button-mobile-menu">
+              <Button size="icon" variant="ghost" data-testid="button-mobile-menu" aria-label="Menyuni ochish">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
@@ -183,7 +221,6 @@ export default function Header() {
                     </div>
                     <span className="text-base font-extrabold">FBA Academy</span>
                   </div>
-                  {/* Mobile lang switcher */}
                   <div className="flex items-center gap-1">
                     {LANGS.map((l) => (
                       <button
@@ -191,6 +228,7 @@ export default function Header() {
                         onClick={() => setLang(l.code)}
                         className={`rounded px-1.5 py-0.5 text-xs font-bold transition-colors ${lang === l.code ? "bg-purple-100 text-purple-700" : "text-slate-500 hover:bg-slate-100"}`}
                         data-testid={`button-mobile-lang-${l.code}`}
+                        aria-label={l.label}
                       >
                         {l.flag}
                       </button>
@@ -205,40 +243,42 @@ export default function Header() {
                     </span>
                   </Link>
 
+                  {/* ACCA section */}
                   <div className="mt-1">
                     <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">ACCA</div>
-                    <Link href="/course/acca" onClick={() => setOpen(false)}>
-                      <span className={`block rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${location === "/course/acca" ? "bg-purple-50 text-purple-700" : "text-slate-700 hover:bg-slate-50"}`} data-testid="link-mobile-nav-acca">
-                        {t.nav.accaFull}
-                      </span>
-                    </Link>
-                    {accaSubItems.map((item) => (
+                    {ACCA_ITEMS.map((item) => (
                       <Link key={item.path} href={item.path} onClick={() => setOpen(false)}>
-                        <span className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ml-2 ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-600 hover:bg-slate-50"}`} data-testid={`link-mobile-nav-${item.labelUz.toLowerCase().replace(/\s/g, "-")}`}>
-                          {item.labelUz}
-                          <span className="text-xs text-slate-400">{lang === "uz" ? item.descUz : lang === "ru" ? item.descRu : item.descEn}</span>
+                        <span className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${item.bold ? "font-bold" : "ml-2"} ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-700 hover:bg-slate-50"}`} data-testid={`link-mobile-nav-${item.path.split("/").pop()}`}>
+                          {getLabel(item)}
+                          <span className="text-xs text-slate-400">{getDesc(item)}</span>
                         </span>
                       </Link>
                     ))}
                   </div>
 
+                  {/* Other courses */}
                   <div className="mt-1">
                     <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">{t.nav.otherCourses}</div>
-                    {mainNavItems.map((item) => (
+                    {OTHER_COURSES.map((item) => (
                       <Link key={item.path} href={item.path} onClick={() => setOpen(false)}>
                         <span className={`block rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-700 hover:bg-slate-50"}`} data-testid={`link-mobile-nav-${item.path.split("/").pop()}`}>
-                          {item.label}
+                          {getLabel(item)}
                         </span>
                       </Link>
                     ))}
+                    <Link href="/courses" onClick={() => setOpen(false)}>
+                      <span className="block rounded-lg px-3 py-2.5 text-sm font-bold text-purple-600 hover:bg-purple-50 transition-colors" data-testid="link-mobile-nav-all-courses">
+                        {t.footer.allCourses} →
+                      </span>
+                    </Link>
                   </div>
 
+                  {/* Other pages */}
                   <div className="mt-1 border-t pt-2">
                     {[
                       { label: t.nav.teachers, path: "/teachers" },
                       { label: t.nav.about, path: "/about" },
                       { label: t.nav.blog, path: "/blog" },
-                      { label: t.nav.results, path: "/case-studies" },
                       { label: t.nav.faq, path: "/faq" },
                       { label: t.nav.contacts, path: "/contacts" },
                     ].map((item) => (
