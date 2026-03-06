@@ -12,6 +12,7 @@ import { courses, teachers, faqItems } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, Globe, Award, Users, TrendingUp, BookOpen, Clock, Calendar, Wrench, GraduationCap } from "lucide-react";
 import CourseBlogLinks from "@/components/course-blog-links";
 import CourseRelated from "@/components/course-related";
+import CourseFormatSection from "@/components/course-format-section";
 import { useLanguage } from "@/contexts/language-context";
 import type { Language } from "@/lib/translations";
 
@@ -447,6 +448,7 @@ export default function AccaPage() {
           </div>
         </div>
       </section>
+      <CourseFormatSection />
     </Layout>
   );
 }

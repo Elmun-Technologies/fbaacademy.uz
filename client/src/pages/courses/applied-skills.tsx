@@ -9,6 +9,7 @@ import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
 import { courses, teachers, faqItems } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, BarChart3, Scale, FileText, TrendingUp, Shield, Banknote, Clock, Calendar, Wrench, BookOpen, GraduationCap } from "lucide-react";
+import CourseFormatSection from "@/components/course-format-section";
 
 const course = courses.find((c) => c.id === "applied-skills")!;
 const mentor = teachers.find((t) => t.id === "teacher-2")!;
@@ -311,6 +312,7 @@ export default function AppliedSkillsPage() {
           </div>
         </div>
       </section>
+      <CourseFormatSection />
     </Layout>
   );
 }

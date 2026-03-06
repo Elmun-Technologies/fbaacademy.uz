@@ -9,6 +9,7 @@ import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
 import { courses, teachers, faqItems } from "@/lib/data";
 import { CheckCircle2, ArrowRight, Star, Flame, Crown, TrendingUp, BarChart3, Shield, Clock, Calendar, Wrench, BookOpen, Trophy, GraduationCap } from "lucide-react";
+import CourseFormatSection from "@/components/course-format-section";
 
 const course = courses.find((c) => c.id === "strategic-professional")!;
 const mentor = teachers.find((t) => t.id === "teacher-2")!;
@@ -327,6 +328,7 @@ export default function StrategicProfessionalPage() {
           </div>
         </div>
       </section>
+      <CourseFormatSection />
     </Layout>
   );
 }
