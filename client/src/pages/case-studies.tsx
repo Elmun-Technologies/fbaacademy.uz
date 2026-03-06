@@ -5,18 +5,19 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/layout";
 import { graduateResults } from "@/lib/data";
-import { ArrowRight, TrendingUp, Users, Quote } from "lucide-react";
+import { ArrowRight, TrendingUp, Quote } from "lucide-react";
 
 export default function CaseStudies() {
   useSEO({
-      title: "Bitiruvchilar natijalari - FBA Academy",
-      description: "FBA Academy bitiruvchilarining muvaffaqiyat tarixi. Real natijalar va kasbiy o'sish ko'rsatkichlari.",
-    });
+    title: "Bitiruvchilar natijalari - FBA Academy",
+    description: "FBA Academy bitiruvchilarining muvaffaqiyat tarixi. Real natijalar va kasbiy o'sish ko'rsatkichlari.",
+  });
 
   return (
     <Layout>
-      <section className="bg-gradient-to-br from-purple-600 via-indigo-600 to-purple-700 py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative overflow-hidden py-16 sm:py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-indigo-600 to-purple-700" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl font-extrabold text-white sm:text-5xl" data-testid="text-case-studies-title">Bitiruvchilar natijalari</h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
             Bizning bitiruvchilarimiz haqiqiy natijalarni ko'rsatmoqda. Ularning muvaffaqiyat tarixi bilan tanishing.
@@ -49,18 +50,14 @@ export default function CaseStudies() {
             {graduateResults.map((grad) => (
               <Card key={grad.id} className="border-card-border bg-card p-6 sm:p-8" data-testid={`card-case-${grad.id}`}>
                 <div className="flex items-start gap-4">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900/30 dark:to-indigo-900/30">
-                    <Users className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                  </div>
+                  <img src={grad.avatar} alt={grad.name} className="h-16 w-16 shrink-0 rounded-full object-cover" />
                   <div className="flex-1">
                     <h3 className="text-lg font-bold" data-testid={`text-case-name-${grad.id}`}>{grad.name}</h3>
-                    <div className="mt-1 flex items-center gap-2 flex-wrap">
-                      <Badge variant="secondary">{grad.courseName}</Badge>
-                    </div>
+                    <Badge variant="secondary" className="mt-1">{grad.courseName}</Badge>
                   </div>
                 </div>
 
-                <div className="mt-5 flex items-center gap-3 rounded-md bg-accent/50 p-3">
+                <div className="mt-5 flex items-center gap-3 rounded-xl bg-accent/50 p-3">
                   <div className="flex-1 text-center">
                     <div className="text-xs text-muted-foreground">Oldin</div>
                     <div className="text-sm font-medium">{grad.beforeRole}</div>
