@@ -4,71 +4,152 @@ import Layout from "@/components/layout/layout";
 import Breadcrumb from "@/components/breadcrumb";
 import LeadForm from "@/components/lead-form";
 import { partnerCompanies } from "@/lib/data";
-import { BarChart3, Users, Target, Award, BookOpen, Building2, CheckCircle2 } from "lucide-react";
+import {
+  BarChart3, Users, Target, Award, BookOpen, Building2,
+  CheckCircle2, ArrowRight, Sparkles, Clock, Shield,
+} from "lucide-react";
+
+const DIRECTIONS = [
+  { icon: Award, title: "ACCA treningi", desc: "Kompaniya buxgalter va moliyachilariga ACCA Applied Knowledge, Skills, Professional darajalarida trening.", color: "from-blue-500 to-cyan-500" },
+  { icon: BarChart3, title: "IFRS / DipIFR", desc: "Moliyaviy hisobotlarni xalqaro IFRS standartlariga o'tkazish bo'yicha jamoaviy treninglar.", color: "from-emerald-500 to-teal-500" },
+  { icon: Target, title: "Financial Modeling", desc: "Moliya bo'limi jamoasi uchun DCF, kompaniya baholash va investitsiya tahlili treningi.", color: "from-violet-500 to-purple-600" },
+  { icon: BookOpen, title: "1C: Buxgalteriya", desc: "Kompaniyangiz uchun 1C: Buxgalteriya 8.3 ni to'liq joriy etish va xodimlarni o'qitish.", color: "from-amber-500 to-orange-500" },
+  { icon: Users, title: "Huquqiy savodxonlik", desc: "Moliya, mehnat va soliq huquqi bo'yicha jamoaviy treninglar.", color: "from-rose-500 to-pink-500" },
+  { icon: Building2, title: "Maxsus dasturlar", desc: "Sizning kompaniyangiz ehtiyojlariga individual ravishda ishlab chiqilgan maxsus ta'lim dasturi.", color: "from-indigo-500 to-violet-500" },
+];
+
+const PROCESS = [
+  { num: "01", title: "Tahlil", desc: "Kompaniya ehtiyojlari va xodimlar darajasini aniqlaymiz.", color: "from-blue-500 to-cyan-500" },
+  { num: "02", title: "Dastur", desc: "Maxsus o'quv dasturini tuzib, siz bilan kelishib olamiz.", color: "from-purple-500 to-pink-500" },
+  { num: "03", title: "Trening", desc: "Professional mentorlar siz tanlagan formatda o'qitadi.", color: "from-emerald-500 to-teal-500" },
+  { num: "04", title: "Natija", desc: "KPI asosida o'sish ko'rsatkichlarini o'lchaymiz.", color: "from-amber-500 to-orange-500" },
+];
+
+const WHY_US = [
+  { icon: Shield, title: "Moslashuvchan format", desc: "Online, offline yoki aralash format — siz tanlaysiz." },
+  { icon: Clock, title: "Qulay jadval", desc: "Ishchi soatlarga mos vaqtlarda darslar tashkil qilinadi." },
+  { icon: Award, title: "Xalqaro sertifikat", desc: "O'qitish yakuni o'quvchilarga xalqaro sertifikat beriladi." },
+  { icon: BarChart3, title: "KPI tizimi", desc: "Natijalarni o'lchaydigan hisobot tizimi bilan ishlashadi." },
+];
 
 export default function CorporateTraining() {
   useSEO({
-    title: "Korporativ treninglar — ACCA, IFRS, Moliya | FBA Academy",
+    title: "Korporativ Treninglar — ACCA, IFRS, Moliya | FBA Academy",
     description: "Kompaniyangiz moliya va buxgalteriya jamoasi uchun ACCA, DipIFR, IFRS va Financial Modeling bo'yicha korporativ treninglar. Moslashuvchan jadval, xalqaro sertifikatlar.",
-    keywords: "korporativ trening ACCA, IFRS trening kompaniya, moliya treningi O'zbekiston",
+    keywords: "korporativ trening ACCA, IFRS trening kompaniya, moliya treningi O'zbekiston, korporativ ta'lim",
     breadcrumb: [{ name: "Korporativ treninglar", url: "https://fbaacademy.uz/corporate" }],
   });
 
   return (
     <Layout>
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-16 sm:py-20">
+      {/* ── HERO ──────────────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden bg-gradient-to-br from-[#0f0a2e] via-[#1e1060] to-slate-900 pb-16 pt-10 sm:pb-20 sm:pt-14"
+        data-testid="section-corporate-hero"
+      >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-4">
+          <div className="mb-5">
             <Breadcrumb items={[{ label: "Korporativ treninglar" }]} light />
           </div>
-          <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-            <div>
-              <Badge className="mb-4 rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">Korporativ</Badge>
-              <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl" data-testid="text-corporate-title">Korporativ treninglar</h1>
-              <p className="mb-6 max-w-lg text-slate-300 leading-relaxed">
-                Jamoangizning malakasini oshiring. Sizning kompaniyangiz ehtiyojlariga moslashtirilgan maxsus ta'lim dasturlari.
-              </p>
-              <div className="space-y-3">
-                {[
-                  "Kompaniya ehtiyojlariga moslashtirilgan dastur",
-                  "Tajribali mentorlar tomonidan olib boriladi",
-                  "Amaliy loyihalar va real case-lar",
-                  "Natijani o'lchaydigan KPI tizimi",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm text-slate-200">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
+          <Badge className="mb-5 inline-flex rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">
+            <Sparkles className="mr-1.5 h-3.5 w-3.5" /> Korporativ
+          </Badge>
+          <h1
+            className="mb-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl"
+            data-testid="text-corporate-title"
+          >
+            Jamoangiz{" "}
+            <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+              malakasini oshiring
+            </span>
+          </h1>
+          <p className="mb-10 max-w-xl text-lg text-slate-300 leading-relaxed">
+            Kompaniyangiz ehtiyojlariga moslashtirilgan maxsus ta'lim dasturlari. Tajribali mentorlar, amaliy loyihalar, xalqaro sertifikatlar.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            {[
+              { value: "50+", label: "Hamkor kompaniya" },
+              { value: "6", label: "Ta'lim yo'nalishi" },
+              { value: "100%", label: "Moslashuvchan jadval" },
+            ].map((s, i) => (
+              <div key={i} className="rounded-xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-sm" data-testid={`stat-corp-${i}`}>
+                <div className="text-2xl font-extrabold text-white">{s.value}</div>
+                <div className="text-sm text-slate-400">{s.label}</div>
               </div>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl sm:p-8 dark:bg-card" data-testid="card-corporate-form">
-              <h3 className="mb-1 text-lg font-bold text-foreground">Bepul konsultatsiya</h3>
-              <p className="mb-4 text-sm text-muted-foreground">Jamoangiz uchun maxsus dastur tuzamiz</p>
-              <LeadForm source="corporate" buttonText="So'rov yuborish" />
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-20" data-testid="section-corporate-directions">
+      {/* ── DIRECTIONS ────────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-directions">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">Yo'nalishlar</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { icon: Award, title: "ACCA treningi", desc: "Kompaniya buxgalter va moliyachilariga ACCA Applied Knowledge, Skills, Professional darajalarida trening.", gradient: "from-blue-500 to-cyan-500" },
-              { icon: BarChart3, title: "IFRS / DipIFR", desc: "Moliyaviy hisobotlarni xalqaro IFRS standartlariga o'tkazish bo'yicha jamoaviy treninglar.", gradient: "from-emerald-500 to-teal-500" },
-              { icon: Target, title: "Financial Modeling", desc: "Moliya bo'limi jamoasi uchun DCF, kompaniya baholash va investitsiya tahlili treningi.", gradient: "from-violet-500 to-purple-600" },
-              { icon: BookOpen, title: "1C: Buxgalteriya", desc: "Kompaniyangiz uchun 1C: Buxgalteriya 8.3 ni to'liq joriy etish va xodimlarni o'qitish.", gradient: "from-amber-500 to-orange-500" },
-              { icon: Users, title: "Huquqiy savodxonlik", desc: "Moliya, mehnat va soliq huquqi bo'yicha jamoaviy treninglar.", gradient: "from-rose-500 to-pink-500" },
-              { icon: Building2, title: "Maxsus dasturlar", desc: "Sizning kompaniyangiz ehtiyojlariga individual ravishda ishlab chiqilgan maxsus ta'lim dasturi.", gradient: "from-indigo-500 to-violet-500" },
-            ].map((item, i) => (
-              <div key={i} className="rounded-2xl border bg-white p-6 shadow-md dark:bg-card" data-testid={`card-corp-direction-${i}`}>
-                <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} shadow-md`}>
-                  <item.icon className="h-5 w-5 text-white" />
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-directions-title">
+            Trening yo'nalishlari
+          </h2>
+          <p className="mb-10 max-w-xl text-muted-foreground">
+            Kompaniyangiz ehtiyojiga ko'ra bitta yoki bir nechta yo'nalishni tanlang.
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {DIRECTIONS.map((item, i) => (
+              <div key={i} className="overflow-hidden rounded-xl border bg-white shadow-sm dark:bg-card" data-testid={`card-direction-${i}`}>
+                <div className={`h-1.5 w-full bg-gradient-to-r ${item.color}`} />
+                <div className="p-6">
+                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} shadow-md`}>
+                    <item.icon className="h-5 w-5 text-white" />
+                  </div>
+                  <h3 className="mb-2 font-bold">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
-                <h3 className="mb-2 text-lg font-bold">{item.title}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROCESS ───────────────────────────────────────────── */}
+      <section className="bg-slate-50 py-14 sm:py-20 dark:bg-slate-900/50" data-testid="section-corp-process">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-process-title">
+            Qanday ishlaydi?
+          </h2>
+          <p className="mb-10 text-muted-foreground">Jamoangiz uchun ideal dastur yaratishning 4 bosqichi</p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {PROCESS.map((item, i) => (
+              <div key={i} className="relative" data-testid={`step-corp-${i}`}>
+                {i < PROCESS.length - 1 && (
+                  <div className="absolute left-6 top-6 hidden h-0.5 w-full bg-slate-200 lg:block dark:bg-slate-700" />
+                )}
+                <div className="relative">
+                  <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} text-sm font-extrabold text-white shadow-md`}>
+                    {item.num}
+                  </div>
+                  <h3 className="font-bold">{item.title}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY US ────────────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-corp-why">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-why-title">
+            Nima uchun FBA Academy?
+          </h2>
+          <p className="mb-10 text-muted-foreground max-w-xl">
+            Korporativ treninglarimiz natijaga yo'naltirilgan va o'lchanadigan.
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {WHY_US.map((item, i) => (
+              <div key={i} className="rounded-xl border bg-white p-6 shadow-sm dark:bg-card" data-testid={`card-why-corp-${i}`}>
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-purple-100 dark:bg-purple-900/30">
+                  <item.icon className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                </div>
+                <h3 className="mb-2 font-bold">{item.title}</h3>
                 <p className="text-sm text-muted-foreground">{item.desc}</p>
               </div>
             ))}
@@ -76,37 +157,50 @@ export default function CorporateTraining() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-16 sm:py-20 dark:bg-slate-900/50" data-testid="section-corporate-how">
+      {/* ── CLIENTS ───────────────────────────────────────────── */}
+      <section className="bg-slate-50 py-12 sm:py-16 dark:bg-slate-900/50" data-testid="section-corp-clients">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">Qanday ishlaydi?</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { step: "01", title: "Tahlil", desc: "Kompaniya ehtiyojlarini aniqlaymiz" },
-              { step: "02", title: "Dastur", desc: "Maxsus o'quv dasturini tuzamiz" },
-              { step: "03", title: "Trening", desc: "Professional mentorlar o'qitadi" },
-              { step: "04", title: "Natija", desc: "KPI asosida natijani o'lchaymiz" },
-            ].map((item, i) => (
-              <div key={i} data-testid={`step-corp-${i}`}>
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-sm font-bold text-white shadow-md">
-                  {item.step}
-                </div>
-                <h3 className="text-lg font-bold">{item.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
+          <p className="mb-6 text-sm font-bold uppercase tracking-wider text-muted-foreground">Bizga ishonishadi</p>
+          <div className="flex flex-wrap gap-3">
+            {partnerCompanies.map((c) => (
+              <div key={c} className="rounded-full border bg-white px-5 py-2.5 text-sm font-semibold shadow-sm dark:bg-card" data-testid={`corp-partner-${c}`}>
+                {c}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-20" data-testid="section-corporate-partners">
+      {/* ── FORM CTA ──────────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-corp-form">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">Bizga ishonishadi</h2>
-          <div className="flex flex-wrap gap-3">
-            {partnerCompanies.map((company) => (
-              <div key={company} className="rounded-full border-2 bg-white px-6 py-3 text-sm font-semibold text-foreground shadow-sm dark:bg-card">
-                {company}
-              </div>
-            ))}
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div>
+              <h2 className="text-2xl font-extrabold sm:text-3xl" data-testid="text-form-title">
+                Bepul konsultatsiya oling
+              </h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">
+                Jamoangiz uchun maxsus dastur tuzamiz. So'rov qoldiring — 24 soat ichida bog'lanamiz.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {[
+                  "Kompaniya ehtiyojlariga moslashtirilgan dastur",
+                  "Tajribali mentorlar tomonidan olib boriladi",
+                  "Amaliy loyihalar va real case'lar",
+                  "Natijani o'lchaydigan KPI tizimi",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2 text-sm">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-purple-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-xl border bg-white p-8 shadow-sm dark:bg-card" data-testid="card-corp-form">
+              <h3 className="mb-1 text-lg font-extrabold">So'rov yuborish</h3>
+              <p className="mb-6 text-sm text-muted-foreground">Jamoangiz uchun maxsus dastur tuzamiz</p>
+              <LeadForm source="corporate" buttonText="So'rov yuborish" />
+            </div>
           </div>
         </div>
       </section>

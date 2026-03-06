@@ -9,9 +9,12 @@ import {
   getNextLevel,
   getLevelProgress,
 } from "@/lib/gamification";
+import { graduateResults } from "@/lib/data";
 import Layout from "@/components/layout/layout";
+import Breadcrumb from "@/components/breadcrumb";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Trophy, CheckCircle2, Lock, ArrowRight, Star, Zap, RotateCcw } from "lucide-react";
+import { Trophy, CheckCircle2, Lock, ArrowRight, Star, Zap, RotateCcw, Sparkles, Building2 } from "lucide-react";
 
 const QUIZ_QUESTIONS = [
   {
@@ -103,19 +106,95 @@ export default function AchievementsPage() {
 
   return (
     <Layout>
-      {/* Header */}
-      <section className="bg-gradient-to-br from-amber-500 via-orange-500 to-rose-500 py-12 sm:py-16" data-testid="section-achievements-hero">
+      {/* ── HERO ──────────────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden bg-gradient-to-br from-[#0f0a2e] via-[#1e1060] to-slate-900 pb-16 pt-10 sm:pb-20 sm:pt-14"
+        data-testid="section-achievements-hero"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-5">
+            <Breadcrumb items={[{ label: "Natijalar" }]} light />
+          </div>
+          <Badge className="mb-5 inline-flex rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">
+            <Sparkles className="mr-1.5 h-3.5 w-3.5" /> Bitiruvchilar natijalari
+          </Badge>
+          <h1
+            className="mb-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl"
+            data-testid="text-achievements-title"
+          >
+            Bizning{" "}
+            <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+              natijalarimiz
+            </span>
+          </h1>
+          <p className="mb-10 max-w-xl text-lg text-slate-300 leading-relaxed">
+            Har bir bitiruvchimiz — bizning g'ururimiz. Haqiqiy odamlar, haqiqiy o'zgarishlar.
+          </p>
+          <div className="flex flex-wrap gap-5">
+            {[
+              { value: "92%", label: "Ishga joylashish" },
+              { value: "1000+", label: "Bitiruvchilar" },
+              { value: "3x", label: "Maosh o'sishi" },
+            ].map((s, i) => (
+              <div key={i} className="rounded-xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-sm" data-testid={`stat-natija-${i}`}>
+                <div className="text-2xl font-extrabold text-white">{s.value}</div>
+                <div className="text-sm text-slate-400">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── GRADUATE RESULTS ──────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-graduate-results">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <nav className="mb-6 flex items-center gap-1.5 text-xs text-white/70">
-            <Link href="/" className="hover:text-white" data-testid="breadcrumb-home">Bosh sahifa</Link>
-            <span>/</span>
-            <span className="font-semibold text-white">Yutuqlarim</span>
-          </nav>
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-results-title">
+            Bitiruvchilarimiz tarixlari
+          </h2>
+          <p className="mb-10 max-w-xl text-muted-foreground">
+            Ular o'qishdi, imtihon topshirdi va hayotlarini o'zgartirdi.
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {graduateResults.map((g) => (
+              <div key={g.id} className="overflow-hidden rounded-xl border bg-white shadow-sm dark:bg-card" data-testid={`card-graduate-${g.id}`}>
+                <div className="relative h-48 bg-slate-100">
+                  <img src={g.avatar} alt={g.name} width={400} height={192} loading="lazy" className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3">
+                    <span className="rounded-full bg-emerald-500/90 px-2.5 py-1 text-xs font-bold text-white">
+                      {g.courseName}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="font-extrabold">{g.name}</p>
+                  <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                    <span className="line-through">{g.beforeRole}</span>
+                    <ArrowRight className="h-3 w-3 shrink-0" />
+                    <span className="font-bold text-purple-600 dark:text-purple-400">{g.afterRole}</span>
+                  </div>
+                  <p className="mt-2 text-xs font-semibold text-emerald-600">{g.salaryIncrease}</p>
+                  <p className="mt-3 text-xs text-muted-foreground leading-relaxed">{g.story}</p>
+                  <div className="mt-3 flex items-center gap-1.5">
+                    <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
+                    <span className="text-xs font-semibold">{g.company}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── GAMIFICATION HERO ─────────────────────────────────── */}
+      <section className="bg-gradient-to-br from-amber-500 via-orange-500 to-rose-500 py-12 sm:py-16" data-testid="section-gamification-hero">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <h1 className="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl" data-testid="text-achievements-title">
+              <h2 className="text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-gamification-title">
                 Mening Yutuqlarim
-              </h1>
+              </h2>
               <p className="mt-3 text-white/80">FBA Academy bilan o'rganing, ball to'plang, badge'lar oching</p>
             </div>
             <div className="flex items-center gap-4 rounded-2xl border border-white/20 bg-white/10 px-6 py-4 backdrop-blur-sm">
