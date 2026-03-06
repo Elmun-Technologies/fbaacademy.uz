@@ -47,6 +47,19 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  app.use((_req, res, next) => {
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.setHeader("X-Frame-Options", "SAMEORIGIN");
+    res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+    res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+    next();
+  });
+
+  app.use("/assets", (_req, res, next) => {
+    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    next();
+  });
+
   app.post("/api/leads", async (req, res) => {
     try {
       const parsed = insertLeadSchema.safeParse(req.body);

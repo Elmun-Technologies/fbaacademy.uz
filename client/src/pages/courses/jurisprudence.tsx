@@ -241,9 +241,41 @@ export default function JurisprudencePage() {
         "url": "https://fbaacademy.uz/course/jurisprudence",
         "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
         "educationalLevel": "Beginner",
-        "timeRequired": "P12M",
+        "timeRequired": "P5M",
         "inLanguage": "uz",
         "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" },
+          "coursePrerequisites": "Oliy malumot yoki talaba bolish kifoya.",
+          "hasCourseInstance": {
+            "@type": "CourseInstance",
+            "courseMode": "blended",
+            "duration": "P5M",
+            "startDate": "2026-04-01",
+            "location": {
+              "@type": "Place",
+              "name": "FBA Academy",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Yunusabad tumani",
+                "addressLocality": "Toshkent",
+                "addressCountry": "UZ"
+              }
+            },
+            "instructor": { "@type": "Person", "name": "Nilufar Rahimova", "jobTitle": "Huquqshunos, Magistr" },
+            "offers": {
+              "@type": "Offer",
+              "price": "2000000",
+              "priceCurrency": "UZS",
+              "availability": "https://schema.org/InStock",
+            },
+          },
+          "educationalCredentialAwarded": {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "certificate",
+            "name": "Huquqshunoslik Professional Sertifikati",
+            "recognizedBy": { "@type": "Organization", "name": "FBA Academy" }
+          },
+          "totalHistoricalEnrollment": 420,
+          "courseCode": "JUR-001",
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.7",

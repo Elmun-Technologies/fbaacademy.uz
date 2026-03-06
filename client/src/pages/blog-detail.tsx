@@ -271,6 +271,7 @@ export default function BlogDetail() {
                   alt={post.title}
                   className="w-full object-cover h-56 sm:h-72"
                   loading="eager"
+                  fetchPriority="high"
                   width={800}
                   height={400}
                 />

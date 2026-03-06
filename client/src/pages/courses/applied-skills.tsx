@@ -46,6 +46,38 @@ export default function AppliedSkillsPage() {
       "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
       "educationalLevel": "Intermediate",
       "timeRequired": "P6M",
+        "coursePrerequisites": "ACCA Applied Knowledge bosqichini tugatgan yoki shu darajadagi bilim.",
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "blended",
+          "duration": "P6M",
+          "startDate": "2026-04-01",
+          "location": {
+            "@type": "Place",
+            "name": "FBA Academy",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Yunusabad tumani",
+              "addressLocality": "Toshkent",
+              "addressCountry": "UZ"
+            }
+          },
+          "instructor": { "@type": "Person", "name": "Sardor Toshmatov", "jobTitle": "ACCA Fellow" },
+          "offers": {
+            "@type": "Offer",
+            "price": "3500000",
+            "priceCurrency": "UZS",
+            "availability": "https://schema.org/InStock",
+          },
+        },
+        "educationalCredentialAwarded": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "ACCA Applied Skills Certificate",
+          "recognizedBy": { "@type": "Organization", "name": "Association of Chartered Certified Accountants (ACCA)" }
+        },
+        "totalHistoricalEnrollment": 600,
+        "courseCode": "ACCA-AS-001",
     },
   });
 

@@ -61,6 +61,38 @@ export default function AppliedKnowledgePage() {
       "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
       "educationalLevel": "Beginner",
       "timeRequired": "P4M",
+        "coursePrerequisites": "Maxsus talablar yoq. Har kim boshlashi mumkin.",
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "blended",
+          "duration": "P4M",
+          "startDate": "2026-04-01",
+          "location": {
+            "@type": "Place",
+            "name": "FBA Academy",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Yunusabad tumani",
+              "addressLocality": "Toshkent",
+              "addressCountry": "UZ"
+            }
+          },
+          "instructor": { "@type": "Person", "name": "Sardor Toshmatov", "jobTitle": "ACCA Fellow" },
+          "offers": {
+            "@type": "Offer",
+            "price": "3000000",
+            "priceCurrency": "UZS",
+            "availability": "https://schema.org/InStock",
+          },
+        },
+        "educationalCredentialAwarded": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "ACCA Applied Knowledge Certificate",
+          "recognizedBy": { "@type": "Organization", "name": "Association of Chartered Certified Accountants (ACCA)" }
+        },
+        "totalHistoricalEnrollment": 800,
+        "courseCode": "ACCA-AK-001",
     },
   });
 

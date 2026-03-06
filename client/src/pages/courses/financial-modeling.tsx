@@ -342,8 +342,40 @@ export default function FinancialModelingPage() {
         "url": "https://fbaacademy.uz/course/financial-modeling",
         "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
         "educationalLevel": "Intermediate",
-        "timeRequired": "P2M",
+        "timeRequired": "P3M",
         "inLanguage": "uz",
+          "coursePrerequisites": "Excel asosiy bilimlari. Moliya yoki iqtisodiyot sohasidagi bilim tavsiya etiladi.",
+          "hasCourseInstance": {
+            "@type": "CourseInstance",
+            "courseMode": "online",
+            "duration": "P3M",
+            "startDate": "2026-04-01",
+            "location": {
+              "@type": "Place",
+              "name": "FBA Academy",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Yunusabad tumani",
+                "addressLocality": "Toshkent",
+                "addressCountry": "UZ"
+              }
+            },
+            "instructor": { "@type": "Person", "name": "Bekzod Karimov", "jobTitle": "CFA, Moliya tahlilchisi" },
+            "offers": {
+              "@type": "Offer",
+              "price": "2500000",
+              "priceCurrency": "UZS",
+              "availability": "https://schema.org/InStock",
+            },
+          },
+          "educationalCredentialAwarded": {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "certificate",
+            "name": "Financial Modeling & Valuation Certificate",
+            "recognizedBy": { "@type": "Organization", "name": "FBA Academy" }
+          },
+          "totalHistoricalEnrollment": 700,
+          "courseCode": "FM-001",
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.9",

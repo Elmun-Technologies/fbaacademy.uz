@@ -72,6 +72,38 @@ export default function StrategicProfessionalPage() {
       "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
       "educationalLevel": "Advanced",
       "timeRequired": "P8M",
+        "coursePrerequisites": "ACCA Applied Skills bosqichini tugatgan bolish shart.",
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "blended",
+          "duration": "P8M",
+          "startDate": "2026-04-01",
+          "location": {
+            "@type": "Place",
+            "name": "FBA Academy",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Yunusabad tumani",
+              "addressLocality": "Toshkent",
+              "addressCountry": "UZ"
+            }
+          },
+          "instructor": { "@type": "Person", "name": "Sardor Toshmatov", "jobTitle": "ACCA Fellow" },
+          "offers": {
+            "@type": "Offer",
+            "price": "4000000",
+            "priceCurrency": "UZS",
+            "availability": "https://schema.org/InStock",
+          },
+        },
+        "educationalCredentialAwarded": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "ACCA Strategic Professional Certificate",
+          "recognizedBy": { "@type": "Organization", "name": "Association of Chartered Certified Accountants (ACCA)" }
+        },
+        "totalHistoricalEnrollment": 400,
+        "courseCode": "ACCA-SP-001",
     },
   });
 

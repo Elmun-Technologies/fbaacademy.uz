@@ -431,6 +431,7 @@ export default function OneCPage() {
                   alt="1C Buxgalteriya"
                   className="w-[300px] rounded-3xl object-cover shadow-2xl"
                   loading="eager"
+                  fetchPriority="high"
                   data-testid="img-hero-1c"
                 />
                 <div className="absolute -bottom-4 -left-4 rounded-2xl bg-[#e8001c] px-5 py-3 shadow-xl">

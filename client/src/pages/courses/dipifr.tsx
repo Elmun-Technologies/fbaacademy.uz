@@ -433,6 +433,7 @@ export default function DipIFRPage() {
                   alt="DipIFR ACCA xalqaro diplom kursi"
                   className="w-[260px] rounded-3xl object-cover shadow-2xl"
                   loading="eager"
+                  fetchPriority="high"
                   data-testid="img-hero-dipifr"
                 />
                 <div className="absolute -bottom-4 -right-4 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble-hero">

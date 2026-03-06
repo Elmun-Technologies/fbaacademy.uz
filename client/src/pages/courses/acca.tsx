@@ -140,6 +140,38 @@ export default function AccaPage() {
       "timeRequired": "P12M",
       "courseLanguage": ["uz", "ru"],
       "inLanguage": "uz",
+        "coursePrerequisites": "Buxgalteriya yoki moliya sohasidagi asosiy bilim tavsiya etiladi.",
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "blended",
+          "duration": "P12M",
+          "startDate": "2026-04-01",
+          "location": {
+            "@type": "Place",
+            "name": "FBA Academy",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Yunusabad tumani",
+              "addressLocality": "Toshkent",
+              "addressCountry": "UZ"
+            }
+          },
+          "instructor": { "@type": "Person", "name": "Sardor Toshmatov", "jobTitle": "ACCA Fellow, Big Four mutaxassisi" },
+          "offers": {
+            "@type": "Offer",
+            "price": "6000000",
+            "priceCurrency": "UZS",
+            "availability": "https://schema.org/InStock",
+          },
+        },
+        "educationalCredentialAwarded": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "ACCA (Association of Chartered Certified Accountants) Sertifikati",
+          "recognizedBy": { "@type": "Organization", "name": "Association of Chartered Certified Accountants (ACCA)" }
+        },
+        "totalHistoricalEnrollment": 1200,
+        "courseCode": "ACCA-001",
       "teaches": ["ACCA Applied Knowledge", "ACCA Applied Skills", "ACCA Strategic Professional", "IFRS", "Financial Reporting"],
       "offers": {
         "@type": "Offer",
