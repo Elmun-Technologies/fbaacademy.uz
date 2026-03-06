@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { Menu, ArrowRight, ChevronDown } from "lucide-react";
+import { Menu, ArrowRight, ChevronDown, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import type { Language } from "@/lib/translations";
 
@@ -12,11 +12,10 @@ const LANGS: { code: Language; flag: string; label: string }[] = [
   { code: "en", flag: "🇬🇧", label: "En" },
 ];
 
-const ACCA_ITEMS = [
-  { uz: "ACCA — To'liq dastur", ru: "ACCA — Полная программа", en: "ACCA — Full Program", path: "/course/acca", descUz: "Barcha bosqichlar", descRu: "Все уровни", descEn: "All levels", bold: true },
-  { uz: "Applied Knowledge", ru: "Applied Knowledge", en: "Applied Knowledge", path: "/course/applied-knowledge", descUz: "1-bosqich", descRu: "1-й уровень", descEn: "Level 1", bold: false },
-  { uz: "Applied Skills", ru: "Applied Skills", en: "Applied Skills", path: "/course/applied-skills", descUz: "2-bosqich", descRu: "2-й уровень", descEn: "Level 2", bold: false },
-  { uz: "Strategic Professional", ru: "Strategic Professional", en: "Strategic Professional", path: "/course/strategic-professional", descUz: "3-bosqich", descRu: "3-й уровень", descEn: "Level 3", bold: false },
+const ACCA_SUBS = [
+  { uz: "Applied Knowledge", ru: "Applied Knowledge", en: "Applied Knowledge", path: "/course/applied-knowledge", descUz: "1-bosqich", descRu: "1-й уровень", descEn: "Level 1" },
+  { uz: "Applied Skills", ru: "Applied Skills", en: "Applied Skills", path: "/course/applied-skills", descUz: "2-bosqich", descRu: "2-й уровень", descEn: "Level 2" },
+  { uz: "Strategic Professional", ru: "Strategic Professional", en: "Strategic Professional", path: "/course/strategic-professional", descUz: "3-bosqich", descRu: "3-й уровень", descEn: "Level 3" },
 ];
 
 const OTHER_COURSES = [
@@ -47,9 +46,9 @@ export default function Header() {
   const isCoursesActive = location.startsWith("/course/") || location === "/courses";
   const currentLangObj = LANGS.find((l) => l.code === lang) || LANGS[0];
 
-  const getLabel = (item: { uz: string; ru: string; en: string }) =>
+  const gl = (item: { uz: string; ru: string; en: string }) =>
     lang === "ru" ? item.ru : lang === "en" ? item.en : item.uz;
-  const getDesc = (item: { descUz: string; descRu: string; descEn: string }) =>
+  const gd = (item: { descUz: string; descRu: string; descEn: string }) =>
     lang === "ru" ? item.descRu : lang === "en" ? item.descEn : item.descUz;
 
   return (
@@ -58,12 +57,12 @@ export default function Header() {
 
         {/* Logo */}
         <div className="flex items-center gap-4">
-          <Link href="/" className="flex items-center gap-2 shrink-0" data-testid="link-home-logo">
+          <a href="/" className="flex items-center gap-2 shrink-0" data-testid="link-home-logo">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 shadow-md">
               <span className="text-sm font-extrabold text-white">F</span>
             </div>
             <span className="text-lg font-extrabold tracking-tight text-slate-900">FBA Academy</span>
-          </Link>
+          </a>
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-0.5 lg:flex" data-testid="nav-desktop">
@@ -84,35 +83,51 @@ export default function Header() {
 
               {coursesOpen && (
                 <div
-                  className="absolute left-0 top-full mt-1 w-[520px] rounded-xl border bg-white shadow-xl z-50 overflow-hidden"
+                  className="absolute left-0 top-full mt-1 w-[480px] rounded-xl border bg-white shadow-xl z-50 overflow-hidden"
                   data-testid="dropdown-courses"
                   role="menu"
                 >
                   <div className="grid grid-cols-2 divide-x">
-                    {/* ACCA column */}
+                    {/* ACCA — single course with nested sub-items */}
                     <div>
                       <div className="px-4 py-2 border-b bg-slate-50">
                         <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">ACCA</span>
                       </div>
-                      {ACCA_ITEMS.map((item) => (
-                        <Link key={item.path} href={item.path} onClick={() => setCoursesOpen(false)}>
-                          <div
-                            className={`flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors hover:bg-purple-50 ${
-                              location === item.path ? "bg-purple-50" : ""
-                            }`}
+
+                      {/* ACCA main link */}
+                      <a
+                        href="/course/acca"
+                        className={`flex items-center justify-between px-4 py-2.5 transition-colors hover:bg-purple-50 ${location === "/course/acca" ? "bg-purple-50" : ""}`}
+                        data-testid="link-nav-acca"
+                        role="menuitem"
+                      >
+                        <div>
+                          <div className="text-sm font-bold text-purple-700">ACCA</div>
+                          <div className="text-xs text-slate-400">
+                            {lang === "ru" ? "Полная программа" : lang === "en" ? "Full program" : "To'liq dastur"}
+                          </div>
+                        </div>
+                        <ArrowRight className="h-3.5 w-3.5 text-purple-300 shrink-0" />
+                      </a>
+
+                      {/* ACCA sub-items — nested/indented */}
+                      <div className="border-l-2 border-purple-100 ml-4 mb-1">
+                        {ACCA_SUBS.map((item) => (
+                          <a
+                            key={item.path}
+                            href={item.path}
+                            className={`flex items-center justify-between px-3 py-2 transition-colors hover:bg-purple-50 ${location === item.path ? "bg-purple-50" : ""}`}
                             data-testid={`link-nav-${item.path.split("/").pop()}`}
                             role="menuitem"
                           >
                             <div>
-                              <div className={`text-sm ${item.bold ? "font-bold text-purple-700" : "font-semibold text-slate-800"}`}>
-                                {getLabel(item)}
-                              </div>
-                              <div className="text-xs text-slate-400">{getDesc(item)}</div>
+                              <div className="text-sm font-medium text-slate-700">{gl(item)}</div>
+                              <div className="text-xs text-slate-400">{gd(item)}</div>
                             </div>
-                            <ArrowRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
-                          </div>
-                        </Link>
-                      ))}
+                            <ChevronRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+                          </a>
+                        ))}
+                      </div>
                     </div>
 
                     {/* Other courses column */}
@@ -123,29 +138,30 @@ export default function Header() {
                         </span>
                       </div>
                       {OTHER_COURSES.map((item) => (
-                        <Link key={item.path} href={item.path} onClick={() => setCoursesOpen(false)}>
-                          <div
-                            className={`flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors hover:bg-purple-50 ${
-                              location === item.path ? "bg-purple-50" : ""
-                            }`}
-                            data-testid={`link-nav-${item.path.split("/").pop()}`}
-                            role="menuitem"
-                          >
-                            <div>
-                              <div className="text-sm font-semibold text-slate-800">{getLabel(item)}</div>
-                              <div className="text-xs text-slate-400">{getDesc(item)}</div>
-                            </div>
-                            <ArrowRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+                        <a
+                          key={item.path}
+                          href={item.path}
+                          className={`flex items-center justify-between px-4 py-2.5 transition-colors hover:bg-purple-50 ${location === item.path ? "bg-purple-50" : ""}`}
+                          data-testid={`link-nav-${item.path.split("/").pop()}`}
+                          role="menuitem"
+                        >
+                          <div>
+                            <div className="text-sm font-semibold text-slate-800">{gl(item)}</div>
+                            <div className="text-xs text-slate-400">{gd(item)}</div>
                           </div>
-                        </Link>
+                          <ArrowRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+                        </a>
                       ))}
-                      {/* All courses link */}
-                      <Link href="/courses" onClick={() => setCoursesOpen(false)}>
-                        <div className="border-t mt-1 px-4 py-2.5 flex items-center gap-2 cursor-pointer hover:bg-slate-50 transition-colors" data-testid="link-nav-all-courses" role="menuitem">
-                          <span className="text-sm font-bold text-purple-600">{t.footer.allCourses}</span>
-                          <ArrowRight className="h-3.5 w-3.5 text-purple-400" />
-                        </div>
-                      </Link>
+                      {/* All courses */}
+                      <a
+                        href="/courses"
+                        className="border-t flex items-center gap-2 px-4 py-2.5 hover:bg-slate-50 transition-colors"
+                        data-testid="link-nav-all-courses"
+                        role="menuitem"
+                      >
+                        <span className="text-sm font-bold text-purple-600">{t.footer.allCourses}</span>
+                        <ArrowRight className="h-3.5 w-3.5 text-purple-400" />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -153,16 +169,15 @@ export default function Header() {
             </div>
 
             {/* Teachers link */}
-            <Link href="/teachers">
-              <span
-                className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
-                  location === "/teachers" ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                }`}
-                data-testid="link-nav-teachers"
-              >
-                {t.nav.teachers}
-              </span>
-            </Link>
+            <a
+              href="/teachers"
+              className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                location === "/teachers" ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+              data-testid="link-nav-teachers"
+            >
+              {t.nav.teachers}
+            </a>
           </nav>
         </div>
 
@@ -196,12 +211,12 @@ export default function Header() {
             )}
           </div>
 
-          <Link href="/contacts" className="hidden lg:block">
+          <a href="/contacts" className="hidden lg:block">
             <Button size="sm" className="gap-1.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-4 font-semibold text-white shadow-md hover:from-purple-700 hover:to-pink-700" data-testid="button-header-consultation">
               {t.nav.consultation}
               <ArrowRight className="h-3.5 w-3.5" />
             </Button>
-          </Link>
+          </a>
 
           {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
@@ -237,40 +252,51 @@ export default function Header() {
                 </div>
 
                 <nav className="flex flex-col gap-1">
-                  <Link href="/" onClick={() => setOpen(false)}>
-                    <span className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${location === "/" ? "bg-purple-50 text-purple-700" : "text-slate-600 hover:bg-slate-50"}`} data-testid="link-mobile-nav-home">
-                      {t.nav.home}
-                    </span>
-                  </Link>
+                  <a href="/" className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${location === "/" ? "bg-purple-50 text-purple-700" : "text-slate-600 hover:bg-slate-50"}`} data-testid="link-mobile-nav-home">
+                    {t.nav.home}
+                  </a>
 
-                  {/* ACCA section */}
+                  {/* ACCA as one course with sub-items */}
                   <div className="mt-1">
                     <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">ACCA</div>
-                    {ACCA_ITEMS.map((item) => (
-                      <Link key={item.path} href={item.path} onClick={() => setOpen(false)}>
-                        <span className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${item.bold ? "font-bold" : "ml-2"} ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-700 hover:bg-slate-50"}`} data-testid={`link-mobile-nav-${item.path.split("/").pop()}`}>
-                          {getLabel(item)}
-                          <span className="text-xs text-slate-400">{getDesc(item)}</span>
-                        </span>
-                      </Link>
-                    ))}
+                    <a
+                      href="/course/acca"
+                      className={`block rounded-lg px-3 py-2.5 text-sm font-bold transition-colors ${location === "/course/acca" ? "bg-purple-50 text-purple-700" : "text-purple-600 hover:bg-slate-50"}`}
+                      data-testid="link-mobile-nav-acca"
+                    >
+                      ACCA — {lang === "ru" ? "Полная программа" : lang === "en" ? "Full Program" : "To'liq dastur"}
+                    </a>
+                    <div className="ml-3 border-l-2 border-purple-100 pl-1">
+                      {ACCA_SUBS.map((item) => (
+                        <a
+                          key={item.path}
+                          href={item.path}
+                          className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-600 hover:bg-slate-50"}`}
+                          data-testid={`link-mobile-nav-${item.path.split("/").pop()}`}
+                        >
+                          {gl(item)}
+                          <span className="text-xs text-slate-400">{gd(item)}</span>
+                        </a>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Other courses */}
                   <div className="mt-1">
                     <div className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">{t.nav.otherCourses}</div>
                     {OTHER_COURSES.map((item) => (
-                      <Link key={item.path} href={item.path} onClick={() => setOpen(false)}>
-                        <span className={`block rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-700 hover:bg-slate-50"}`} data-testid={`link-mobile-nav-${item.path.split("/").pop()}`}>
-                          {getLabel(item)}
-                        </span>
-                      </Link>
+                      <a
+                        key={item.path}
+                        href={item.path}
+                        className={`block rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-700 hover:bg-slate-50"}`}
+                        data-testid={`link-mobile-nav-${item.path.split("/").pop()}`}
+                      >
+                        {gl(item)}
+                      </a>
                     ))}
-                    <Link href="/courses" onClick={() => setOpen(false)}>
-                      <span className="block rounded-lg px-3 py-2.5 text-sm font-bold text-purple-600 hover:bg-purple-50 transition-colors" data-testid="link-mobile-nav-all-courses">
-                        {t.footer.allCourses} →
-                      </span>
-                    </Link>
+                    <a href="/courses" className="block rounded-lg px-3 py-2.5 text-sm font-bold text-purple-600 hover:bg-purple-50 transition-colors" data-testid="link-mobile-nav-all-courses">
+                      {t.footer.allCourses} →
+                    </a>
                   </div>
 
                   {/* Other pages */}
@@ -282,20 +308,23 @@ export default function Header() {
                       { label: t.nav.faq, path: "/faq" },
                       { label: t.nav.contacts, path: "/contacts" },
                     ].map((item) => (
-                      <Link key={item.path} href={item.path} onClick={() => setOpen(false)}>
-                        <span className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-600 hover:bg-slate-50"}`} data-testid={`link-mobile-nav-${item.path.replace("/", "")}`}>
-                          {item.label}
-                        </span>
-                      </Link>
+                      <a
+                        key={item.path}
+                        href={item.path}
+                        className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${location === item.path ? "bg-purple-50 text-purple-700" : "text-slate-600 hover:bg-slate-50"}`}
+                        data-testid={`link-mobile-nav-${item.path.replace("/", "")}`}
+                      >
+                        {item.label}
+                      </a>
                     ))}
                   </div>
                 </nav>
 
-                <Link href="/contacts" onClick={() => setOpen(false)}>
+                <a href="/contacts">
                   <Button className="w-full gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 font-semibold text-white shadow-md" data-testid="button-mobile-consultation">
                     {t.nav.consultation} <ArrowRight className="h-4 w-4" />
                   </Button>
-                </Link>
+                </a>
               </div>
             </SheetContent>
           </Sheet>
