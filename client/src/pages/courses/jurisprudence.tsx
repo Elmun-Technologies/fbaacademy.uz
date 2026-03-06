@@ -2,342 +2,630 @@ import { Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
 import LeadForm from "@/components/lead-form";
 import YouTubeEmbed from "@/components/youtube-embed";
-import { courses, teachers, faqItems } from "@/lib/data";
-import { CheckCircle2, ArrowRight, Star, Flame, Scale, FileText, Briefcase, Building2, Globe, Users, Clock, Calendar, Wrench, BookOpen, GraduationCap } from "lucide-react";
+import { faqItems } from "@/lib/data";
+import {
+  CheckCircle2, ArrowRight, ChevronRight, Scale, FileText,
+  Monitor, Clock, Award, Users, Laptop, MessageSquare,
+  Star, Building2, Shield, BookOpen, Globe
+} from "lucide-react";
 
-const course = courses.find((c) => c.id === "jurisprudence")!;
-const mentor = teachers.find((t) => t.id === "teacher-2")!;
+const COURSE_INFO = [
+  { label: "Yaqinroq yozilish", value: "10-mart" },
+  { label: "O'qish muddati", value: "1 yil" },
+  { label: "O'qish formati", value: "Masofaviy" },
+  { label: "Tugatgandan so'ng hujjat", value: "Rasmiy diplom" },
+  { label: "Soatlar soni", value: "1600 soat" },
+];
 
-const LAW_AREAS = [
+const FOR_WHOM = [
   {
-    icon: Scale,
-    name: "Fuqarolik huquqi",
-    color: "from-amber-500 to-yellow-600",
-    topics: ["Shartnomalar tuzish", "Mulk huquqi", "Meros huquqi", "Intellektual mulk", "Fuqarolik javobgarlik"],
-    desc: "O'zbekiston Fuqarolik Kodeksi asosida amaliy huquq."
+    emoji: "👔",
+    title: "Yuridik karyerani endigina boshlayotgan yosh mutaxassislar uchun",
+    desc: "Nazariy bilimlaringizni mustahkamlang, qo'shimcha amaliy ko'nikmalar oling, yuridik hujjatlar bilan ishlashda professional yondashuvni rivojlantiring va malakangizni oshiring.",
   },
   {
-    icon: Briefcase,
-    name: "Mehnat huquqi",
-    color: "from-orange-500 to-amber-600",
-    topics: ["Mehnat shartnomasi", "Ishga qabul va bo'shatish", "Ish vaqti", "Mehnat muhofazasi"],
-    desc: "Mehnat Kodeksi bo'yicha xodim va ish beruvchi huquqlari."
+    emoji: "🚀",
+    title: "Yangi kasbni noldan egallashni xohlayotganlar uchun",
+    desc: "Nufuzli kasbga ega bo'lish uchun zarur bilimlarni olasiz va sevimli ishingiz bilan daromad topishni boshlaysiz.",
   },
   {
-    icon: FileText,
-    name: "Soliq huquqi",
-    color: "from-rose-500 to-pink-600",
-    topics: ["Soliq tizimi", "Daromad solig'i", "QQS", "Soliq tekshiruvlari"],
-    desc: "Soliq Kodeksi va soliq rejalash asoslari."
+    emoji: "💼",
+    title: "Biznes va moliya sohasidagi mutaxassislar uchun",
+    desc: "Yuridik hujjatlar bilan qanday to'g'ri ishlashni, qonunchilik normalariga qanday rioya qilishni, yuridik risklarni qanday minimallashtirish va mumkin bo'lgan yuridik muammolardan qochishni tushunasiz.",
   },
   {
-    icon: Building2,
-    name: "Tijorat huquqi",
-    color: "from-violet-500 to-purple-600",
-    topics: ["Tadbirkorlik", "Kompaniya tashkil etish", "Bankrotlik", "Raqobat huquqi"],
-    desc: "Korporativ va tijorat qonunchiligi."
-  },
-  {
-    icon: Globe,
-    name: "Xalqaro huquq",
-    color: "from-blue-500 to-indigo-600",
-    topics: ["Xalqaro savdo", "Xalqaro shartnomalar", "Arbitraj", "Xalqaro xususiy huquq"],
-    desc: "Tashqi iqtisodiy faoliyat uchun zarur bilimlar."
+    emoji: "🎓",
+    title: "Huquqni o'rganayotgan talabalar uchun",
+    desc: "Yurispprudensiya sohasida fundamental bilimlar olishni istayotganlar va amaliy ko'nikmalarini chuqurlashtirmoqchi bo'lganlar uchun.",
   },
 ];
 
-const WHO_BENEFITS = [
-  { role: "Biznes egasi", benefit: "Shartnomalarni to'g'ri tuzasiz va huquqiy xavflarni minimallashtirasz" },
-  { role: "HR menejer", benefit: "Mehnat qonunchiligi asosida to'g'ri ish yuritasiz" },
-  { role: "Buxgalter", benefit: "Soliq huquqi bo'yicha bilimlaringiz kengayadi" },
-  { role: "Yurist bo'lmoqchi", benefit: "O'zbekiston qonunchiligini amalda qo'llashni o'rganasiz" },
-  { role: "Davlat xizmatchisi", benefit: "Qonuniy normalar va tartib-taomillarni chuqur tushunasiz" },
+const SKILLS = [
+  { emoji: "⚖️", text: "Fuqarolik huquqini o'rganish" },
+  { emoji: "🔒", text: "Jinoyat huquqini o'rganish" },
+  { emoji: "📋", text: "Yurist professional etikasini egallash" },
+  { emoji: "🔍", text: "Kriminalistikani o'rganish" },
+  { emoji: "📜", text: "Notariat asoslarini o'rganish" },
+  { emoji: "💡", text: "Intellektual mulk huquqini o'rganish" },
+];
+
+const ABOUT_FEATURES = [
+  {
+    emoji: "📰",
+    title: "Faqat dolzarb kontent",
+    desc: "Biz muntazam ravishda bozordagi o'zgarishlarni kuzatib boramiz va dasturlarni yangi voqelikka moslashtirамiz. Ichki tadqiqotlar o'tkazib, dasturlarni ish beruvchilar talablariga moslashtirамiz.",
+  },
+  {
+    emoji: "🖥️",
+    title: "Qulay masofaviy format",
+    desc: "Dastur asosiy faoliyatdan uzmay, masofaviy formatda qulay o'tishi uchun ishlab chiqilgan. O'quv bloklari kundalik tartibga osongina kiritilishi uchun yozuvlarda mavjud.",
+  },
+  {
+    emoji: "⚡",
+    title: "Tezroq o'rganing",
+    desc: "Dasturni intensiv tarzda o'tish mumkin — standart dasturlardagi bir xil bilim va ko'nikmalarni ikki baravar tezroq olasiz. O'qish narxi o'zgarishsiz qoladi.",
+  },
+];
+
+const CURRICULUM_SUBJECTS = [
+  "Davlat va huquq nazariyasi",
+  "Ma'muriy huquq",
+  "Fuqarolik huquqi",
+  "Mehnat huquqi",
+  "Oila huquqi",
+  "Konstitutsiyaviy huquq",
+];
+
+const TRAINING_STEPS = [
+  {
+    icon: FileText,
+    title: "Onlayn hujjatlar topshirish",
+    desc: "Masofaviy o'qish formati barcha hujjatlarni masofadan turib topshirish imkonini beradi.",
+  },
+  {
+    icon: Monitor,
+    title: "Yetakchi ekspertlar videoleksiyalarini ko'ring",
+    desc: "Har bir talabaning shaxsiy kabineti bor, u erda leksiyalar o'tkaziladi. Barcha mashg'ulotlar yozuvlari o'qish oxirigacha shaxsiy kabinetda saqlanadi.",
+  },
+  {
+    icon: BookOpen,
+    title: "Ko'rgazmali ekspert materiallarni o'rganing",
+    desc: "Ekspert material dalillarga asoslangan yondashuv (advocacy-based approach) bilan tayyorlangan va o'rganish uchun intuitiv.",
+  },
+  {
+    icon: Clock,
+    title: "O'quv vaqtini o'zingiz rejalashtiring",
+    desc: "O'qish vaqtini hayot tarzingizga mos ravishda mustaqil taqsimlashingiz va qulay sharoitda o'rganishingiz mumkin.",
+  },
+];
+
+const FBA_BENEFITS = [
+  { icon: Globe, title: "Masofaviy ta'lim", desc: "Dunyoning istalgan nuqtasidan o'qishingiz mumkin" },
+  { icon: Shield, title: "Soliq imtiyozi", desc: "O'qish xarajatlarining bir qismini qaytarish imkoniyati" },
+  { icon: Building2, title: "Moslashtirilgan dasturlar", desc: "Ish beruvchilar talablariga mos ta'lim dasturlari" },
+  { icon: MessageSquare, title: "Mentor va kurator", desc: "Kurs bo'yicha savollar uchun mentor bilan chat va kurator yordami" },
+];
+
+const TEACHERS = [
+  {
+    name: "Malika Yusupova",
+    role: "Huquq fanlari nomzodi, 18+ yillik tajriba",
+    desc: "Huquqiy platformalardagi maqolalar muallifi. 18 yildan ortiq amaliy tajriba. Fuqarolik va tijorat huquqi bo'yicha mutaxassis.",
+    initials: "MY",
+    color: "from-amber-600 to-yellow-700",
+  },
+  {
+    name: "Jahongir Raxmatullayev",
+    role: "Advokat, huquq fanlari nomzodi",
+    desc: "20 yildan ortiq amaliy tajribaga ega advokat. Moliyaviy huquq bo'yicha mutaxassis. Huquq fakultetida dars beradi.",
+    initials: "JR",
+    color: "from-orange-600 to-amber-700",
+  },
+  {
+    name: "Dilnoza Xasanova",
+    role: "Amaliyotchi yurist va maslahatchi",
+    desc: "Amaliyotchi yurist, o'qituvchi, huquq va biznesni yuridik qo'llab-quvvatlash masalalari bo'yicha maslahatchi. Huquqiy konsaltingda 10+ yil. O'quv qo'llanmalari muallifi.",
+    initials: "DX",
+    color: "from-rose-500 to-pink-600",
+  },
+];
+
+const PRICING_FEATURES = [
+  { icon: Globe, text: "Dunyoning istalgan nuqtasidan masofaviy o'qish" },
+  { icon: Shield, text: "Soliq imtiyozidan foydalanish imkoniyati" },
+  { icon: Clock, text: "1 yil o'qish muddati" },
+  { icon: Award, text: "Rasmiy diplom" },
+  { icon: Users, text: "To'liq qaytarish — birinchi ikki hafta ichida" },
+  { icon: MessageSquare, text: "0% foiz bilan bo'lib to'lash" },
+];
+
+const FAQ_ITEMS = [
+  {
+    q: "O'quv yurtiga kelish shart emasmi?",
+    a: "O'qish uchun shaxsiy ishtirok talab etilmaydi. Talabalarning hujjatlar topshirishdan tortib diplom himoyasiga qadar barcha ishi masofadan amalga oshiriladi.",
+  },
+  {
+    q: "Xorijiy fuqarolar o'qiy oladimi?",
+    a: "Ha, masofaviy format xorijiy fuqarolarga, shu jumladan O'zbekiston fuqarolariga ham o'qish imkonini beradi. Hujjatlarni onlayn topshirish mumkin.",
+  },
+  {
+    q: "Boshqa mamlakatdan to'lash mumkinmi?",
+    a: "Ha, to'lovni turli xalqaro to'lov tizimlari orqali amalga oshirish mumkin. Batafsil ma'lumot uchun bizning menejerlarimizga murojaat qiling.",
+  },
+  {
+    q: "Nastavnik va texnik yordam bo'ladimi?",
+    a: "Ha, har bir talabaga mentor va kurator biriktiriladi. Kurs davomida barcha savollaringizga javob olasiz. Texnik muammolar bo'lsa, texnik yordam xizmati ishlaydi.",
+  },
+  {
+    q: "O'qishni qanday tezlashtirish mumkin?",
+    a: "Dasturni intensiv tarzda o'tish mumkin — standart dasturlardagi bir xil bilim va ko'nikmalarni ikki baravar tezroq olasiz. Narxi o'zgarishsiz qoladi.",
+  },
+  {
+    q: "Bo'lib to'lash imkoni bormi?",
+    a: "Ha, 12 oyga 0% foiz bilan bo'lib to'lash imkoni mavjud. Butun summani bir to'lovda to'lasangiz 10% chegirma beriladi.",
+  },
 ];
 
 export default function JurisprudencePage() {
   useSEO({
-    title: "Huquqshunoslik Kursi — Mehnat, Soliq, Tijorat Huquqi | FBA Academy",
-    description: "Huquqshunoslik kursi: O'zbekiston qonunchiligi — Fuqarolik, Mehnat, Soliq va Tijorat huquqi. Biznes egalari, HR va buxgalterlar uchun amaliy huquq bilimi. 5 oylik kurs.",
-    keywords: "huquqshunoslik kursi O'zbekiston, mehnat huquqi kurs, soliq huquqi, fuqarolik huquqi, tijorat huquqi Toshkent, FBA Academy",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "Huquqshunoslik (Jurisprudence) — O'zbekiston Qonunchiligi",
-      "description": "Fuqarolik, Mehnat, Soliq, Tijorat va Xalqaro huquq asoslari.",
-      "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
-      "educationalLevel": "Beginner",
-      "timeRequired": "P5M",
-    },
+    title: "Huquqshunoslik Kursi — Fuqarolik, Jinoyat, Ma'muriy Huquq | FBA Academy",
+    description: "Huquqshunoslik kursi O'zbekistonda: Fuqarolik, Jinoyat, Ma'muriy, Mehnat va Oila huquqi. Masofaviy o'qish, 1600 soat, rasmiy diplom. Noldan yurist bo'lish uchun.",
+    keywords: "huquqshunoslik kursi, yurist kursi O'zbekiston, fuqarolik huquqi, jinoyat huquqi, masofaviy huquq kursi, FBA Academy",
+    jsonLd: [
+      {
+        "@type": "Course",
+        "name": "Huquqshunoslik — Jurisprudence",
+        "description": "Fuqarolik, Jinoyat, Ma'muriy, Mehnat va Oila huquqi. 1600 soat, masofaviy format, rasmiy diplom.",
+        "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
+        "educationalLevel": "Beginner",
+        "timeRequired": "P12M",
+        "inLanguage": "uz",
+        "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" },
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": FAQ_ITEMS.map((f) => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": { "@type": "Answer", "text": f.a },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Bosh sahifa", "item": "https://fbaacademy.uz" },
+          { "@type": "ListItem", "position": 2, "name": "Kurslar", "item": "https://fbaacademy.uz/courses" },
+          { "@type": "ListItem", "position": 3, "name": "Huquqshunoslik", "item": "https://fbaacademy.uz/course/jurisprudence" },
+        ],
+      },
+    ],
   });
-
-  const faqs = faqItems.filter((f) => f.category === "Huquqshunoslik" || f.category === "Umumiy" || f.category === "To'lov").slice(0, 5);
 
   return (
     <Layout>
-      {/* Hero — amber/stone legal feel */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-stone-900 via-amber-950 to-slate-900 pb-16 pt-10 sm:pb-20 sm:pt-14" data-testid="section-law-hero">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/15 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link href="/courses">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-slate-400 cursor-pointer hover:text-white transition-colors">← Barcha kurslar</span>
-          </Link>
-          <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
-            <div className="lg:col-span-3">
-              <div className="mb-4 flex flex-wrap gap-2">
-                <Badge className="rounded-full bg-amber-500/20 text-amber-300 border-amber-400/30 px-3">⚖️ Amaliy huquq bilimi</Badge>
-                <Badge className="rounded-full bg-stone-500/20 text-stone-300 border-stone-400/30 px-3">O'zbekiston qonunchiligi</Badge>
-              </div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-law-title">
-                Huquqshunoslik<br />
-                <span className="bg-gradient-to-r from-amber-300 to-yellow-300 bg-clip-text text-transparent">Jurisprudence</span>
-              </h1>
-              <p className="mt-4 max-w-xl text-slate-300 leading-relaxed text-lg">{course.description}</p>
-              <div className="mt-5 flex items-center gap-4">
-                <div className="flex items-center gap-1.5">
-                  {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
-                  <span className="text-sm font-bold text-white ml-1">{course.rating}</span>
-                </div>
-                <span className="text-sm text-slate-400">{course.studentsCount} talaba · {course.duration}</span>
-              </div>
-              <div className="mt-8 grid grid-cols-3 gap-3">
-                {[
-                  { icon: Scale, label: "5 soha", sub: "Fuqarolik, Mehnat..." },
-                  { icon: FileText, label: course.practiceHours + " soat", sub: "Amaliyot" },
-                  { icon: Users, label: course.studentsCount, sub: "Bitiruvchi" },
-                ].map((item, i) => (
-                  <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 backdrop-blur-sm" data-testid={`law-feature-${i}`}>
-                    <item.icon className="mb-2 h-5 w-5 text-amber-300" />
-                    <div className="text-xs font-bold text-white sm:text-sm">{item.label}</div>
-                    <div className="text-xs text-slate-400">{item.sub}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl dark:bg-card" data-testid="card-law-enroll">
-                <div className="mb-2 flex items-center justify-between">
-                  <h3 className="text-lg font-bold">So'rov qoldiring</h3>
-                  <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
-                </div>
-                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-600">
-                  <Flame className="h-4 w-4" /> Joylar cheklangan
-                </div>
-                <div className="mb-4 flex items-baseline gap-2">
-                  <span className="text-3xl font-extrabold" data-testid="text-law-price">{course.price} UZS</span>
-                  <span className="text-sm text-muted-foreground line-through">{course.oldPrice} UZS</span>
-                </div>
-                <LeadForm source="course-jurisprudence" buttonText="Chegirma bilan yozilish" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5 Law Areas */}
-      <section className="py-14 sm:py-20" data-testid="section-law-areas">
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <section className="bg-white py-10 sm:py-14" data-testid="section-law-hero">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-areas-title">5 ta huquq sohasi</h2>
-          <p className="mb-10 text-muted-foreground">O'zbekiston qonunchiligining eng muhim sohalari amaliyot bilan</p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {LAW_AREAS.map((area, i) => (
-              <div key={i} className="group rounded-2xl border bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-card overflow-hidden" data-testid={`law-area-${i}`}>
-                <div className={`h-2 w-full bg-gradient-to-r ${area.color}`} />
-                <div className="p-6">
-                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${area.color} shadow-md`}>
-                    <area.icon className="h-5 w-5 text-white" />
-                  </div>
-                  <h3 className="mb-2 text-lg font-extrabold">{area.name}</h3>
-                  <p className="mb-4 text-xs text-muted-foreground">{area.desc}</p>
-                  <ul className="space-y-1.5">
-                    {area.topics.map((topic, j) => (
-                      <li key={j} className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-amber-500" /> {topic}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          {/* Breadcrumb */}
+          <nav className="mb-6 flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Link href="/" className="hover:text-foreground" data-testid="breadcrumb-home">Bosh sahifa</Link>
+            <ChevronRight className="h-3 w-3" />
+            <Link href="/courses" className="hover:text-foreground" data-testid="breadcrumb-courses">Kurslar</Link>
+            <ChevronRight className="h-3 w-3" />
+            <span className="font-semibold text-foreground">Huquqshunoslik</span>
+          </nav>
 
-      {/* YouTube + Who Benefits */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-law-video">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="grid gap-10 lg:grid-cols-[1fr_380px] lg:gap-14 lg:items-start">
+            {/* Left */}
             <div>
-              <h2 className="text-2xl font-extrabold sm:text-3xl">Kim qanday foyda oladi?</h2>
-              <p className="mt-4 mb-6 text-muted-foreground">Har xil mutaxassislar uchun amaliy huquq bilimlari</p>
-              <div className="space-y-4">
-                {WHO_BENEFITS.map((item, i) => (
-                  <div key={i} className="flex gap-3 rounded-xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`law-who-${i}`}>
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-100">
-                      <Scale className="h-4 w-4 text-amber-600" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold">{item.role}</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">{item.benefit}</div>
-                    </div>
+              <div className="mb-2 flex flex-wrap gap-2">
+                <Badge className="rounded-full border-amber-200 bg-amber-50 text-amber-700">⚖️ Kurs</Badge>
+                <Badge className="rounded-full border-slate-200 bg-slate-50 text-slate-600">Masofaviy format</Badge>
+              </div>
+              <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-tight" data-testid="text-law-title">
+                Huquqshunoslik
+              </h1>
+              <p className="mt-4 max-w-xl text-slate-600 leading-relaxed">
+                Huquqshunoslik kursi ushbu bilim sohasining asosiy tushunchalarini o'zlashtirishni istaydigan tinglovchilar uchun foydali bo'ladi. O'quv dasturiga davlat va huquq nazariyasi, shuningdek konstitutsiyaviy, fuqarolik, oila, mehnat, jinoyat va ma'muriy huquqning alohida muhim tarmoqlari bo'yicha asoslar kiradi.
+              </p>
+
+              {/* Course info table */}
+              <div className="mt-6 overflow-hidden rounded-2xl border" data-testid="course-info-table">
+                {COURSE_INFO.map((item, i) => (
+                  <div key={i} className={`flex items-center justify-between px-5 py-3.5 ${i % 2 === 0 ? "bg-slate-50" : "bg-white"}`}>
+                    <span className="text-sm text-slate-500">{item.label}</span>
+                    <span className="text-sm font-bold text-slate-900">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href="#pricing">
+                  <Button className="gap-2 rounded-full bg-amber-600 px-6 font-bold text-white hover:bg-amber-700" data-testid="button-law-enroll">
+                    Kursga yozilish <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </a>
+                <a href="#curriculum">
+                  <Button variant="outline" className="rounded-full border-2 px-6 font-bold" data-testid="button-law-program">
+                    Dasturni ko'rish
+                  </Button>
+                </a>
+              </div>
+            </div>
+
+            {/* Right — form */}
+            <div className="rounded-2xl border bg-white p-6 shadow-xl" data-testid="card-law-form">
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="text-lg font-extrabold">Konsultatsiya olish</h3>
+                <Badge className="rounded-full border-green-200 bg-green-50 text-green-700 font-semibold text-xs">Bepul</Badge>
+              </div>
+              <div className="mb-4 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3">
+                <div className="text-xs font-bold text-amber-800 uppercase tracking-wide">📅 Yaqinroq yozilish</div>
+                <div className="text-base font-extrabold text-amber-900 mt-0.5">10-mart, 2026</div>
+              </div>
+              <LeadForm source="course-jurisprudence" buttonText="Ariza topshirish" />
+              <p className="mt-3 text-center text-xs text-muted-foreground">Ariza topshirish bilan siz shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOR WHOM ─────────────────────────────────────────── */}
+      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-law-for-whom">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-for-whom-title">
+            Bu dastur kimlar uchun?
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {FOR_WHOM.map((item, i) => (
+              <div key={i} className="flex items-start gap-4 rounded-2xl border bg-white p-6 shadow-sm hover:shadow-md transition-shadow" data-testid={`for-whom-card-${i}`}>
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-50 text-2xl border border-amber-100">
+                  {item.emoji}
+                </div>
+                <div>
+                  <h3 className="text-sm font-extrabold text-slate-900 leading-snug">{item.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SKILLS ───────────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-law-skills">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div>
+              <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-skills-title">
+                Nimalarga o'rganasiz?
+              </h2>
+              <div className="space-y-3">
+                {SKILLS.map((skill, i) => (
+                  <div key={i} className="flex items-center gap-3 rounded-xl border bg-white px-5 py-4 shadow-sm" data-testid={`skill-item-${i}`}>
+                    <span className="text-2xl">{skill.emoji}</span>
+                    <span className="text-sm font-semibold text-slate-800">{skill.text}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <YouTubeEmbed videoId={course.videoId!} title="Huquqshunoslik kursi haqida" />
+            <div className="overflow-hidden rounded-2xl shadow-2xl">
+              <YouTubeEmbed videoId="eTriMFVGcYg" title="Huquqshunoslik kursi haqida" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Salary */}
-      <section className="py-14" data-testid="section-law-salary">
+      {/* ── ABOUT TRAINING ───────────────────────────────────── */}
+      <section className="bg-stone-50 py-14 sm:py-20" data-testid="section-law-about">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-slate-900 p-6 shadow-2xl sm:p-10">
-            <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">Yurist maoshi O'zbekistonda</h2>
-            <div className="space-y-4">
-              {course.salaryLevels.map((level, i) => (
-                <div key={i} className="rounded-2xl bg-[#c8ff00] p-4 sm:p-5" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "200px" }} data-testid={`law-salary-${i}`}>
-                  <div className="text-lg font-extrabold text-slate-900 sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm font-medium text-slate-700">{level.level} — {level.description}</div>
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-about-title">
+            O'qish haqida
+          </h2>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {ABOUT_FEATURES.map((f, i) => (
+              <div key={i} className="overflow-hidden rounded-2xl border bg-white shadow-sm" data-testid={`about-feature-${i}`}>
+                <div className="h-1.5 w-full bg-gradient-to-r from-amber-500 to-yellow-500" />
+                <div className="p-6">
+                  <div className="mb-3 text-3xl">{f.emoji}</div>
+                  <h3 className="text-base font-extrabold text-slate-900">{f.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{f.desc}</p>
+                  {i === 2 && (
+                    <a href="#pricing" className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-700 hover:text-amber-800">
+                      Batafsil ma'lumot <ArrowRight className="h-3 w-3" />
+                    </a>
+                  )}
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Tools */}
-      <section className="bg-slate-50 py-12 dark:bg-slate-900/50" data-testid="section-law-tools">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold">Huquqiy ma'lumotlar bazalari</h2>
-          <div className="flex flex-wrap gap-3">
-            {course.tools.map((tool, i) => (
-              <div key={i} className="rounded-full border-2 border-amber-200 bg-amber-50 px-5 py-2.5 text-sm font-semibold text-amber-800 shadow-sm dark:border-amber-800 dark:bg-amber-900/20 dark:text-amber-300" data-testid={`law-tool-${i}`}>
-                {tool}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Skills */}
-      <section className="py-14" data-testid="section-law-skills">
+      {/* ── CURRICULUM ───────────────────────────────────────── */}
+      <section id="curriculum" className="py-14 sm:py-20" data-testid="section-law-curriculum">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-2xl font-extrabold">Siz o'rganasiz</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {course.skills.map((skill, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm dark:bg-card" data-testid={`law-skill-${i}`}>
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-amber-500" />
-                <span className="font-medium text-sm">{skill}</span>
+          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-curriculum-title">
+            Kursning qisqa dasturi
+          </h2>
+          <p className="mb-8 text-slate-500 text-sm max-w-2xl">
+            O'qitadigan amaliyotlar va kurs quriladigan metodologiya nafaqat o'qituvchilarning amaliy tajribasi, balki ilmiy tadqiqotlar bilan ham sinovdan o'tgan.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 max-w-3xl">
+            {CURRICULUM_SUBJECTS.map((subject, i) => (
+              <div key={i} className="flex items-center gap-3 rounded-xl border bg-white px-5 py-4 shadow-sm hover:border-amber-200 hover:shadow-md transition-all" data-testid={`curriculum-subject-${i}`}>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-sm font-extrabold text-amber-700">
+                  {i + 1}
+                </div>
+                <span className="text-sm font-semibold text-slate-800">{subject}</span>
+              </div>
+            ))}
+          </div>
+          {/* CTA for full program */}
+          <div className="mt-8 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-6" data-testid="curriculum-cta">
+            <h3 className="text-base font-extrabold text-amber-900">To'liq o'quv rejasini oling</h3>
+            <p className="mt-1 text-sm text-amber-700 mb-4">Kontakt ma'lumotlaringizni qoldiring, biz to'liq o'quv rejasini yuboramiz</p>
+            <LeadForm source="course-jurisprudence-curriculum" buttonText="To'liq dasturni olish" compact />
+          </div>
+        </div>
+      </section>
+
+      {/* ── TRAINING ORDER ───────────────────────────────────── */}
+      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-law-training-order">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-2 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-order-title">
+            O'qish tartibi
+          </h2>
+          <p className="mb-8 text-slate-500 text-sm">Kursga kirgan paytdan diplom olguncha</p>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {TRAINING_STEPS.map((step, i) => (
+              <div key={i} className="relative rounded-2xl border bg-white p-6 shadow-sm" data-testid={`training-step-${i}`}>
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100">
+                  <step.icon className="h-6 w-6 text-amber-600" />
+                </div>
+                <div className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-amber-600 text-xs font-extrabold text-white">
+                  {i + 1}
+                </div>
+                <h3 className="text-sm font-extrabold text-slate-900">{step.title}</h3>
+                <p className="mt-2 text-xs text-slate-600 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Modules */}
-      <section className="bg-slate-50 py-14 dark:bg-slate-900/50" data-testid="section-law-modules">
+      {/* ── FBA BENEFITS ─────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-law-fba-benefits">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold sm:text-3xl">Kurs dasturi</h2>
-          <div className="mb-6 flex flex-wrap gap-2">
-            {[{ icon: Calendar, text: course.duration }, { icon: BookOpen, text: `${course.projects} loyiha` }, { icon: Clock, text: `${course.theoryHours} soat nazariya` }, { icon: Wrench, text: `${course.practiceHours} soat amaliyot` }].map((item, i) => (
-              <Badge key={i} variant="outline" className="rounded-full gap-1.5 border-2 px-3 py-1.5 text-xs font-semibold">
-                <item.icon className="h-3.5 w-3.5" /> {item.text}
-              </Badge>
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-fba-benefits-title">
+            FBA Academy da o'qish — bu:
+          </h2>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {FBA_BENEFITS.map((b, i) => (
+              <div key={i} className="flex flex-col items-start gap-3 rounded-2xl border bg-white p-6 shadow-sm hover:shadow-md transition-shadow" data-testid={`fba-benefit-${i}`}>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 border border-amber-100">
+                  <b.icon className="h-6 w-6 text-amber-600" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-extrabold text-slate-900">{b.title}</h3>
+                  <p className="mt-1 text-xs text-slate-500">{b.desc}</p>
+                </div>
+              </div>
             ))}
-          </div>
-          <div className="mx-auto max-w-3xl">
-            <Accordion type="multiple" className="space-y-3">
-              {course.modules.map((mod, i) => (
-                <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border bg-white px-5 shadow-sm dark:bg-card" data-testid={`law-module-${i}`}>
-                  <AccordionTrigger className="text-left py-4">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 text-sm font-bold text-white shadow-md">{i + 1}</span>
-                      <div>
-                        <span className="text-sm font-bold sm:text-base">{mod.title}</span>
-                        <div className="text-xs text-muted-foreground">{mod.topics.length} mavzu</div>
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="ml-12 space-y-2.5 pb-3">
-                      {mod.topics.map((topic, j) => (
-                        <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> {topic}
-                        </li>
-                      ))}
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
           </div>
         </div>
       </section>
 
-      {/* Support */}
-      <section className="py-14" data-testid="section-law-support">
+      {/* ── TEACHERS ─────────────────────────────────────────── */}
+      <section className="bg-slate-50 py-14 sm:py-20" data-testid="section-law-teachers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">O'quv jarayonida siz bilan birga</h2>
+          <h2 className="mb-2 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-teachers-title">
+            O'qituvchilar
+          </h2>
+          <p className="mb-8 text-slate-500 text-sm">7 yildan 25 yilgacha tajribaga ega yetakchi o'zbek va xalqaro ekspertlar o'qitadi</p>
           <div className="grid gap-6 sm:grid-cols-3">
-            {course.supportTeam.map((person, i) => (
-              <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`law-support-${i}`}>
-                <div className="h-48 overflow-hidden">
-                  <img src={person.avatar} alt={person.role} className="h-full w-full object-cover object-top" loading="lazy" />
+            {TEACHERS.map((t, i) => (
+              <div key={i} className="overflow-hidden rounded-2xl border bg-white shadow-md" data-testid={`teacher-card-${i}`}>
+                <div className={`flex h-44 items-center justify-center bg-gradient-to-br ${t.color}`}>
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/20 text-2xl font-extrabold text-white ring-4 ring-white/30">
+                    {t.initials}
+                  </div>
                 </div>
                 <div className="p-5">
-                  <h3 className="text-base font-bold">{person.role}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{person.description}</p>
+                  <h3 className="text-base font-extrabold text-slate-900">{t.name}</h3>
+                  <div className="mt-0.5 text-xs font-semibold text-amber-600">{t.role}</div>
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">{t.desc}</p>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-gradient-to-r from-amber-700 to-orange-800 py-12" data-testid="section-law-cta">
+      {/* ── LICENSE & DIPLOMA ────────────────────────────────── */}
+      <section className="py-14" data-testid="section-law-diploma">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Huquqshunoslik haqida bepul konsultatsiya</h2>
-              <p className="mt-3 text-amber-100">Kurs va karyera imkoniyatlari haqida barcha savollaringizga javob oling</p>
-              <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-white px-8 font-bold text-amber-700 hover:bg-slate-100" data-testid="button-law-cta">
-                  Konsultatsiya olish <ArrowRight className="h-5 w-5" />
-                </Button>
-              </Link>
+          <div className="grid gap-6 lg:grid-cols-2">
+            {/* License */}
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6" data-testid="license-card">
+              <div className="mb-3 flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100">
+                  <Shield className="h-6 w-6 text-amber-600" />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-slate-900">Ta'lim litsenziyasi</h3>
+                  <div className="text-xs text-amber-700 font-medium">Davlat tomonidan berilgan</div>
+                </div>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                FBA Academy ta'lim faoliyatini olib borish uchun rasmiy litsenziyaga ega. Litsenziyani Ta'lim nazorati xizmatining rasmiy saytida tekshirishingiz mumkin.
+              </p>
             </div>
-            <div className="flex items-center gap-5">
-              <img src={mentor.avatar} alt={mentor.name} className="h-20 w-20 shrink-0 rounded-2xl object-cover object-top ring-4 ring-white/20 shadow-xl" loading="lazy" />
-              <div>
-                <h3 className="text-xl font-bold text-white">{mentor.name}</h3>
-                <p className="text-sm text-amber-200">{mentor.role}</p>
+            {/* Diploma */}
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-testid="diploma-card">
+              <div className="mb-3 flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100">
+                  <Award className="h-6 w-6 text-slate-600" />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-slate-900">O'qish yakunidagi hujjatlar</h3>
+                  <div className="text-xs text-slate-500 font-medium">Belgilangan namunadagi diplom</div>
+                </div>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Bitiruv testlarini muvaffaqiyatli topshirgandan so'ng talabalar o'z kompetensiya darajasini tasdiqlovchi hujjat oladilar — professional qayta tayyorlash diplomi.
+              </p>
+              <div className="mt-3 flex items-center gap-2 text-sm font-bold text-slate-900">
+                <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0" />
+                Rezyumega ko'rsatishingiz mumkin
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-14" data-testid="section-law-faq">
+      {/* ── CAREER ───────────────────────────────────────────── */}
+      <section className="bg-stone-900 py-12" data-testid="section-law-career">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-extrabold">Ko'p beriladigan savollar</h2>
-          <div className="mx-auto max-w-3xl">
+          <h2 className="mb-6 text-xl font-extrabold text-white sm:text-2xl" data-testid="text-law-career-title">
+            Kim bo'lib ishlashingiz mumkin
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {["Yurist", "Huquqiy maslahatchi", "Korporativ huquqshunos", "Adliya xodimi", "Notarius yordamchisi", "Kompaniya ichki huquqshunosi"].map((role, i) => (
+              <div key={i} className="rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/20 transition-colors" data-testid={`career-role-${i}`}>
+                {role}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PRICING ──────────────────────────────────────────── */}
+      <section id="pricing" className="py-14 sm:py-20" data-testid="section-law-pricing">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-pricing-title">
+            O'qish narxi
+          </h2>
+          <div className="grid gap-6 lg:grid-cols-[1fr_400px]">
+            {/* Pricing info */}
+            <div className="space-y-4">
+              <div className="overflow-hidden rounded-2xl border bg-white shadow-md">
+                <div className="bg-amber-600 px-6 py-4 text-white">
+                  <div className="text-xs font-bold uppercase tracking-wide opacity-80">12 oyga bo'lib to'lashda</div>
+                  <div className="mt-1 flex items-baseline gap-2">
+                    <span className="text-3xl font-extrabold" data-testid="text-law-price">990 000</span>
+                    <span className="text-lg font-bold">so'm/oy</span>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3 mb-4">
+                    <span className="text-sm text-slate-600">Bir to'lovda to'lashda</span>
+                    <span className="text-sm font-extrabold text-green-600">10% chegirma</span>
+                  </div>
+                  <div className="grid gap-3">
+                    {PRICING_FEATURES.map((f, i) => (
+                      <div key={i} className="flex items-center gap-2.5 text-sm text-slate-700">
+                        <f.icon className="h-4 w-4 shrink-0 text-amber-500" /> {f.text}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              {/* 0% installment badge */}
+              <div className="rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4 flex items-center gap-3">
+                <div className="text-2xl">💳</div>
+                <div>
+                  <div className="text-sm font-extrabold text-blue-900">T-Bank dan bo'lib to'lash</div>
+                  <div className="text-xs text-blue-700">Foizsiz, qo'shimcha to'lovlarsiz</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Form */}
+            <div className="rounded-2xl border bg-white p-6 shadow-xl" data-testid="card-law-pricing-form">
+              <h3 className="mb-4 text-lg font-extrabold">Kursga yozilish yoki bepul konsultatsiya</h3>
+              <LeadForm source="course-jurisprudence-pricing" buttonText="Ariza topshirish" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CORPORATE CTA ────────────────────────────────────── */}
+      <section className="bg-amber-50 border-y border-amber-200 py-10" data-testid="section-law-corporate">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-6 lg:grid-cols-[1fr_auto]">
+            <div>
+              <h2 className="text-lg font-extrabold text-slate-900 sm:text-xl" data-testid="text-law-corporate-title">
+                Xodimlar uchun dastur kerakmi?
+              </h2>
+              <p className="mt-1 text-sm text-slate-600">
+                Agar o'z xodimlaringizni o'qitishni tashkil qilish kerak bo'lsa — ariza qoldiring. Biz siz uchun individual taklif tayyorladik.
+              </p>
+            </div>
+            <Link href="/corporate">
+              <Button className="rounded-full bg-amber-600 px-6 font-bold text-white hover:bg-amber-700 whitespace-nowrap" data-testid="button-law-corporate">
+                Ariza qoldirish <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────────── */}
+      <section className="py-14 sm:py-20" data-testid="section-law-faq">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl" data-testid="text-law-faq-title">
+            Ko'p beriladigan savollar
+          </h2>
+          <div className="max-w-3xl">
             <Accordion type="multiple" className="space-y-3">
-              {faqs.map((faq) => (
-                <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border bg-white px-6 shadow-sm dark:bg-card" data-testid={`law-faq-${faq.id}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
+              {FAQ_ITEMS.map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="rounded-2xl border bg-white px-6 shadow-sm" data-testid={`law-faq-${i}`}>
+                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base hover:no-underline">{faq.q}</AccordionTrigger>
+                  <AccordionContent className="text-slate-600 pb-5 text-sm leading-relaxed">{faq.a}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="mt-10 max-w-3xl rounded-2xl bg-amber-600 p-6 text-white sm:p-8" data-testid="law-faq-bottom-cta">
+            <h3 className="text-lg font-extrabold sm:text-xl">Savollaringiz qoldimi?</h3>
+            <p className="mt-2 text-amber-100 text-sm">Qabul komissiyasidan maslahat oling</p>
+            <div className="mt-5 max-w-sm">
+              <LeadForm source="course-jurisprudence-faq" buttonText="Ariza topshirish" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── RELATED COURSES ──────────────────────────────────── */}
+      <section className="bg-slate-50 py-12" data-testid="section-law-related">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-lg font-extrabold" data-testid="text-law-related-title">Siz uchun qiziq bo'lishi mumkin</h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              { href: "/course/financial-modeling", label: "Moliyaviy Modellashtirish", desc: "DCF, FAST, Excel tahlili", color: "from-emerald-500 to-green-600" },
+              { href: "/course/1c-course", label: "1C: Buxgalteriya", desc: "Amaliy buxgalteriya dasturi", color: "from-blue-500 to-indigo-600" },
+              { href: "/course/dipifr", label: "DipIFR", desc: "IFRS xalqaro standartlari", color: "from-indigo-500 to-slate-600" },
+            ].map((r, i) => (
+              <Link key={i} href={r.href} data-testid={`related-course-${i}`}>
+                <div className="group relative overflow-hidden rounded-2xl border bg-white p-5 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5">
+                  <div className={`absolute left-0 top-0 h-full w-1 bg-gradient-to-b ${r.color}`} />
+                  <div className="pl-3">
+                    <div className="text-base font-extrabold text-slate-900 group-hover:text-amber-700 transition-colors">{r.label}</div>
+                    <div className="mt-1 text-xs text-slate-500">{r.desc}</div>
+                    <div className="mt-3 flex items-center gap-1 text-xs font-bold text-amber-600">
+                      Batafsil <ArrowRight className="h-3 w-3" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
