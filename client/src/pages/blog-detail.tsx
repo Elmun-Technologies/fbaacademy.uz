@@ -1,15 +1,33 @@
 import { useParams, Link } from "wouter";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import Layout from "@/components/layout/layout";
 import LeadForm from "@/components/lead-form";
 import { blogPosts } from "@/lib/data";
 import { useLanguage } from "@/contexts/language-context";
-import { Calendar, Clock, User, ArrowLeft, Share2, BookOpen, ArrowRight, Copy, Check } from "lucide-react";
+import {
+  Calendar, Clock, User, ArrowLeft, ArrowRight,
+  BookOpen, Eye, ThumbsUp, Share2, Check, Copy,
+} from "lucide-react";
 import { SiTelegram, SiFacebook } from "react-icons/si";
+import { SiX } from "react-icons/si";
+
+const CATEGORY_COLORS: Record<string, string> = {
+  "ACCA": "bg-purple-100 text-purple-700",
+  "DipIFR": "bg-indigo-100 text-indigo-700",
+  "Financial Modeling": "bg-emerald-100 text-emerald-700",
+  "1C Buxgalteriya": "bg-blue-100 text-blue-700",
+  "Huquqshunoslik": "bg-amber-100 text-amber-700",
+  "Karyera": "bg-pink-100 text-pink-700",
+};
+
+function fakeViews(id: string): number {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) & 0xffffffff;
+  return 350 + Math.abs(h % 1200);
+}
 
 function ReadingProgress() {
   const [progress, setProgress] = useState(0);
@@ -24,59 +42,12 @@ function ReadingProgress() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] h-1 bg-slate-200">
+    <div className="fixed left-0 right-0 top-0 z-[60] h-1 bg-slate-200">
       <div
         className="h-full bg-gradient-to-r from-purple-600 to-pink-500 transition-all duration-150"
         style={{ width: `${progress}%` }}
         data-testid="reading-progress"
       />
-    </div>
-  );
-}
-
-function ShareButtons({ title, url }: { title: string; url: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const copy = async () => {
-    await navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const encoded = encodeURIComponent(url);
-  const encodedTitle = encodeURIComponent(title);
-
-  return (
-    <div className="flex items-center gap-2 flex-wrap" data-testid="share-buttons">
-      <span className="text-xs font-bold text-slate-500 flex items-center gap-1">
-        <Share2 className="h-3.5 w-3.5" /> Ulashish:
-      </span>
-      <a
-        href={`https://t.me/share/url?url=${encoded}&text=${encodedTitle}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-full bg-[#0088cc] px-3 py-1.5 text-xs font-bold text-white hover:opacity-90 transition-opacity"
-        data-testid="share-telegram"
-      >
-        <SiTelegram className="h-3.5 w-3.5" /> Telegram
-      </a>
-      <a
-        href={`https://www.facebook.com/sharer/sharer.php?u=${encoded}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-1.5 rounded-full bg-[#1877f2] px-3 py-1.5 text-xs font-bold text-white hover:opacity-90 transition-opacity"
-        data-testid="share-facebook"
-      >
-        <SiFacebook className="h-3.5 w-3.5" /> Facebook
-      </a>
-      <button
-        onClick={copy}
-        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors"
-        data-testid="share-copy"
-      >
-        {copied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
-        {copied ? "Nusxalandi!" : "Link nusxalash"}
-      </button>
     </div>
   );
 }
@@ -96,7 +67,7 @@ function TableOfContents({ content }: { content: string }) {
       <div className="mb-3 flex items-center gap-2 text-sm font-extrabold text-purple-800">
         <BookOpen className="h-4 w-4" /> Maqola tarkibi
       </div>
-      <ol className="space-y-2">
+      <ol className="space-y-1.5">
         {headings.map((h, i) => (
           <li key={i}>
             <a href={`#${h.id}`} className="text-sm text-purple-700 hover:text-purple-900 hover:underline transition-colors">
@@ -116,17 +87,80 @@ function processContent(html: string): string {
   });
 }
 
+function ShareRow({ title, url }: { title: string; url: string }) {
+  const [copied, setCopied] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const encoded = encodeURIComponent(url);
+  const encodedTitle = encodeURIComponent(title);
+
+  const copy = async () => {
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="flex flex-wrap items-center gap-2" data-testid="share-buttons">
+      <button
+        onClick={() => setLiked((p) => !p)}
+        className={`flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+          liked
+            ? "border-purple-500 bg-purple-50 text-purple-700"
+            : "border-slate-200 bg-white text-slate-700 hover:border-purple-300 hover:text-purple-700"
+        }`}
+        data-testid="share-like"
+      >
+        <ThumbsUp className="h-4 w-4" />
+        Foydali maqola
+      </button>
+      <a
+        href={`https://t.me/share/url?url=${encoded}&text=${encodedTitle}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-[#0088cc] hover:text-[#0088cc] transition-colors"
+        data-testid="share-telegram"
+      >
+        <SiTelegram className="h-4 w-4 text-[#0088cc]" />
+        Ulashish
+      </a>
+      <a
+        href={`https://www.facebook.com/sharer/sharer.php?u=${encoded}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-[#1877f2] hover:text-[#1877f2] transition-colors"
+        data-testid="share-facebook"
+      >
+        <SiFacebook className="h-4 w-4 text-[#1877f2]" />
+        Ulashish
+      </a>
+      <a
+        href={`https://twitter.com/intent/tweet?url=${encoded}&text=${encodedTitle}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors"
+        data-testid="share-twitter"
+      >
+        <SiX className="h-4 w-4" />
+        Tvitlash
+      </a>
+      <button
+        onClick={copy}
+        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400 transition-colors"
+        data-testid="share-copy"
+      >
+        {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+        {copied ? "Nusxalandi!" : "Nusxalash"}
+      </button>
+    </div>
+  );
+}
+
 export default function BlogDetail() {
   const { id } = useParams<{ id: string }>();
   const { t } = useLanguage();
-  const [subscribeEmail, setSubscribeEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-  const articleRef = useRef<HTMLElement>(null);
 
   const post = blogPosts.find((p) => p.id === id);
-  const otherPosts = blogPosts.filter((p) => p.id !== id).slice(0, 3);
-  const sameCategory = blogPosts.filter((p) => p.id !== id && p.category === post?.category).slice(0, 2);
-  const related = sameCategory.length > 0 ? sameCategory : otherPosts.slice(0, 2);
+  const relatedPosts = blogPosts.filter((p) => p.id !== id).slice(0, 3);
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : `https://fbaacademy.uz/blog/${id}`;
 
@@ -135,27 +169,27 @@ export default function BlogDetail() {
     description: post?.excerpt || "Bu maqola mavjud emas.",
     ogType: "article",
     publishedTime: post?.date,
-    jsonLd: post ? [
-      {
-        "@type": "Article",
-        "headline": post.title,
-        "description": post.excerpt,
-        "author": { "@type": "Person", "name": post.author },
-        "publisher": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
-        "datePublished": post.date,
-        "image": post.image,
-        "articleSection": post.category,
-        "inLanguage": "uz",
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Bosh sahifa", "item": "https://fbaacademy.uz" },
-          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://fbaacademy.uz/blog" },
-          { "@type": "ListItem", "position": 3, "name": post.title, "item": currentUrl },
-        ],
-      },
-    ] : undefined,
+    breadcrumb: post
+      ? [
+          { name: "Blog", url: "https://fbaacademy.uz/blog" },
+          { name: post.title, url: `https://fbaacademy.uz/blog/${post.id}` },
+        ]
+      : undefined,
+    jsonLd: post
+      ? [
+          {
+            "@type": "Article",
+            "headline": post.title,
+            "description": post.excerpt,
+            "author": { "@type": "Person", "name": post.author },
+            "publisher": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
+            "datePublished": post.date,
+            "image": post.image,
+            "articleSection": post.category,
+            "inLanguage": "uz",
+          },
+        ]
+      : undefined,
   });
 
   if (!post) {
@@ -165,7 +199,9 @@ export default function BlogDetail() {
           <div className="text-center">
             <h2 className="text-2xl font-bold" data-testid="text-blog-not-found">Maqola topilmadi</h2>
             <Link href="/blog">
-              <Button variant="outline" className="mt-4 rounded-full" data-testid="button-back-to-blog">{t.common.backToBlog}</Button>
+              <Button variant="outline" className="mt-4 rounded-full" data-testid="button-back-to-blog">
+                {t.common.backToBlog}
+              </Button>
             </Link>
           </div>
         </div>
@@ -174,163 +210,215 @@ export default function BlogDetail() {
   }
 
   const processedContent = processContent(post.content);
+  const catColor = CATEGORY_COLORS[post.category] || "bg-slate-100 text-slate-600";
 
   return (
     <Layout>
       <ReadingProgress />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-12 sm:py-16">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <Link href="/blog">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-slate-400 cursor-pointer hover:text-white transition-colors" data-testid="link-back-blog">
-              <ArrowLeft className="h-4 w-4" /> {t.common.backToBlog}
-            </span>
-          </Link>
-          <div className="mb-4 flex items-center gap-3 text-sm text-slate-400 flex-wrap">
-            <Badge className="rounded-full bg-purple-500/20 text-purple-200 border-purple-400/30">{post.category}</Badge>
-            <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> {post.date}</span>
-            <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {post.readTime}</span>
-            <span className="flex items-center gap-1"><User className="h-3.5 w-3.5" /> {post.author}</span>
-          </div>
-          <h1 className="text-3xl font-extrabold leading-tight text-white sm:text-4xl" data-testid="text-blog-detail-title">{post.title}</h1>
-          <p className="mt-4 text-lg text-slate-300">{post.excerpt}</p>
-
-          {/* Share buttons in hero */}
-          <div className="mt-6">
-            <ShareButtons title={post.title} url={currentUrl} />
-          </div>
+      {/* Breadcrumb nav */}
+      <div className="border-b bg-white py-3">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center gap-2 text-sm text-slate-500" aria-label="Breadcrumb">
+            <Link href="/">
+              <span className="cursor-pointer hover:text-purple-700 transition-colors">Bosh sahifa</span>
+            </Link>
+            <span>/</span>
+            <Link href="/blog">
+              <span className="cursor-pointer hover:text-purple-700 transition-colors">Blog</span>
+            </Link>
+            <span>/</span>
+            <span className="line-clamp-1 text-slate-900 font-medium">{post.title}</span>
+          </nav>
         </div>
-      </section>
+      </div>
 
-      {/* Cover image */}
-      {post.image && (
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 -mt-6 relative z-10">
-          <img
-            src={post.image}
-            alt={post.title}
-            className="w-full rounded-2xl shadow-2xl object-cover h-56 sm:h-72"
-            loading="eager"
-          />
-        </div>
-      )}
+      {/* Main two-column layout */}
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+        <div className="grid gap-8 lg:grid-cols-3">
 
-      {/* Content */}
-      <article className="py-10 sm:py-14" ref={articleRef}>
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <TableOfContents content={post.content} />
-
-          <div
-            className="prose prose-slate prose-lg max-w-none
-              prose-headings:font-extrabold prose-headings:text-slate-900
-              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:scroll-mt-24
-              prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-4
-              prose-strong:text-slate-900 prose-strong:font-bold
-              prose-ul:space-y-2 prose-li:text-slate-700
-              prose-ol:space-y-2
-              prose-table:text-sm prose-th:bg-slate-50 prose-th:font-bold prose-td:text-slate-600"
-            dangerouslySetInnerHTML={{ __html: processedContent }}
-            data-testid="text-blog-content"
-          />
-
-          {/* Bottom share */}
-          <div className="mt-10 border-t pt-6">
-            <ShareButtons title={post.title} url={currentUrl} />
-          </div>
-
-          {/* Author card */}
-          <div className="mt-8 rounded-2xl border bg-slate-50 p-5 flex items-start gap-4" data-testid="author-card">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-pink-600 text-sm font-extrabold text-white">
-              {post.author.split(" ").map(n => n[0]).join("")}
+          {/* LEFT — Article content */}
+          <article className="lg:col-span-2" data-testid="article-content">
+            {/* Meta row */}
+            <div className="mb-4 flex flex-wrap items-center gap-3">
+              <Link href="/blog">
+                <span className="inline-flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-purple-700 transition-colors" data-testid="link-back-blog">
+                  <ArrowLeft className="h-4 w-4" /> Blog
+                </span>
+              </Link>
+              <span className={`rounded-md px-2.5 py-0.5 text-xs font-bold ${catColor}`}>{post.category}</span>
+              <span className="flex items-center gap-1 text-xs text-slate-400"><Calendar className="h-3.5 w-3.5" /> {post.date}</span>
+              <span className="flex items-center gap-1 text-xs text-slate-400"><Clock className="h-3.5 w-3.5" /> {post.readTime}</span>
+              <span className="flex items-center gap-1 text-xs text-slate-400"><Eye className="h-3.5 w-3.5" /> {fakeViews(post.id).toLocaleString()}</span>
+              <span className="flex items-center gap-1 text-xs text-slate-400"><User className="h-3.5 w-3.5" /> {post.author}</span>
             </div>
-            <div>
-              <div className="text-sm font-extrabold text-slate-900">{post.author}</div>
-              <div className="text-xs text-slate-500 mt-0.5">FBA Academy mutaxassisi</div>
-              <p className="mt-2 text-sm text-slate-600">ACCA va xalqaro moliya sertifikatlari bo'yicha mutaxassis. FBA Academy da mentor va o'qituvchi.</p>
-            </div>
-          </div>
-        </div>
-      </article>
 
-      {/* Newsletter subscription */}
-      <section className="bg-gradient-to-r from-purple-600 to-pink-600 py-10" data-testid="section-blog-subscribe">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-xl font-extrabold text-white sm:text-2xl">{t.common.subscribe}</h2>
-          <p className="mt-2 text-purple-100 text-sm">{t.common.subscribeDesc}</p>
-          {subscribed ? (
-            <div className="mt-5 rounded-full bg-white/20 px-6 py-3 text-sm font-bold text-white inline-flex items-center gap-2" data-testid="subscribe-success">
-              <Check className="h-4 w-4" /> Obuna bo'ldingiz! Rahmat.
-            </div>
-          ) : (
-            <form
-              className="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-center"
-              onSubmit={(e) => { e.preventDefault(); setSubscribed(true); }}
-              data-testid="subscribe-form"
-            >
-              <input
-                type="email"
-                required
-                value={subscribeEmail}
-                onChange={(e) => setSubscribeEmail(e.target.value)}
-                placeholder={t.common.emailPlaceholder}
-                className="rounded-full border-0 px-5 py-3 text-sm text-slate-900 shadow-md focus:ring-2 focus:ring-white sm:w-72"
-                data-testid="input-subscribe-email"
-              />
-              <button
-                type="submit"
-                className="rounded-full bg-white px-6 py-3 text-sm font-bold text-purple-700 shadow-md hover:bg-purple-50 transition-colors"
-                data-testid="button-subscribe-submit"
-              >
-                {t.common.subscribeBtn}
-              </button>
-            </form>
-          )}
-        </div>
-      </section>
+            {/* Title */}
+            <h1 className="mb-4 text-2xl font-extrabold leading-tight text-slate-900 sm:text-3xl" data-testid="text-blog-detail-title">
+              {post.title}
+            </h1>
 
-      {/* CTA — lead form */}
-      <section className="py-10" data-testid="section-blog-cta">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl bg-slate-900 p-6 sm:p-8">
-            <h3 className="text-lg font-extrabold text-white sm:text-xl">FBA Academy kurslariga qiziqyapsizmi?</h3>
-            <p className="mt-2 text-slate-400 text-sm">Bepul konsultatsiya oling — 30 daqiqada o'zingiz uchun to'g'ri kursni tanlang</p>
-            <div className="mt-5 max-w-sm">
-              <LeadForm source={`blog-${post.id}`} buttonText="Bepul konsultatsiya" />
-            </div>
-          </div>
-        </div>
-      </section>
+            {/* Lead paragraph */}
+            <p className="mb-6 text-base text-slate-600 leading-relaxed border-l-4 border-purple-400 pl-4 italic">
+              {post.excerpt}
+            </p>
 
-      {/* Related articles */}
-      {related.length > 0 && (
-        <section className="bg-slate-50 py-12" data-testid="section-related-articles">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-6 text-xl font-extrabold" data-testid="text-related-title">{t.common.relatedArticles}</h2>
-            <div className="grid gap-5 sm:grid-cols-2">
-              {related.map((p) => (
+            {/* Cover image */}
+            {post.image && (
+              <div className="mb-8 overflow-hidden rounded-2xl shadow-md">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full object-cover h-56 sm:h-72"
+                  loading="eager"
+                  width={800}
+                  height={400}
+                />
+              </div>
+            )}
+
+            {/* Table of contents */}
+            <TableOfContents content={post.content} />
+
+            {/* Article body */}
+            <div
+              className="prose prose-slate prose-base max-w-none
+                prose-headings:font-extrabold prose-headings:text-slate-900
+                prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-3 prose-h2:scroll-mt-24
+                prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-4
+                prose-strong:text-slate-900
+                prose-ul:space-y-2 prose-li:text-slate-700
+                prose-ol:space-y-2
+                prose-table:text-sm prose-th:bg-slate-50 prose-th:font-bold prose-td:text-slate-600"
+              dangerouslySetInnerHTML={{ __html: processedContent }}
+              data-testid="text-blog-content"
+            />
+
+            {/* Author card */}
+            <div className="mt-10 flex items-start gap-4 rounded-2xl border bg-slate-50 p-5" data-testid="author-card">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-pink-600 text-sm font-extrabold text-white">
+                {post.author.split(" ").map((n) => n[0]).join("")}
+              </div>
+              <div>
+                <div className="text-sm font-extrabold text-slate-900">{post.author}</div>
+                <div className="text-xs text-slate-500">FBA Academy mutaxassisi</div>
+                <p className="mt-1.5 text-sm text-slate-600">
+                  ACCA va xalqaro moliya sertifikatlari bo'yicha mutaxassis. FBA Academy da mentor va o'qituvchi.
+                </p>
+              </div>
+            </div>
+
+            {/* Share row at bottom */}
+            <div className="mt-8 border-t pt-6">
+              <ShareRow title={post.title} url={currentUrl} />
+            </div>
+          </article>
+
+          {/* RIGHT — Sticky sidebar */}
+          <aside className="hidden lg:block" data-testid="blog-sidebar">
+            <div className="sticky top-24 space-y-5">
+              {/* CTA card */}
+              <div className="rounded-2xl bg-gradient-to-br from-purple-600 to-pink-600 p-6 text-white shadow-lg">
+                <div className="mb-1 text-xs font-bold uppercase tracking-wide text-purple-200">Bepul maslahat</div>
+                <h3 className="mb-2 text-lg font-extrabold leading-snug">
+                  Karyerangizni hozir boshlang
+                </h3>
+                <p className="mb-4 text-sm text-purple-100">
+                  30 daqiqada o'zingizga to'g'ri kursni tanlang. Mutaxassis bilan bepul.
+                </p>
+                <LeadForm source={`blog-sidebar-${post.id}`} buttonText="Bepul konsultatsiya" />
+              </div>
+
+              {/* Related in sidebar */}
+              <div className="rounded-2xl border bg-white shadow-sm overflow-hidden">
+                <div className="border-b px-4 py-3">
+                  <span className="text-sm font-extrabold text-slate-900">O'qing ham</span>
+                </div>
+                <div className="divide-y">
+                  {blogPosts.filter((p) => p.id !== post.id).slice(0, 3).map((p) => (
+                    <Link key={p.id} href={`/blog/${p.id}`}>
+                      <div className="group flex items-start gap-3 p-3 hover:bg-slate-50 transition-colors cursor-pointer">
+                        {p.image && (
+                          <div className="h-14 w-20 shrink-0 overflow-hidden rounded-lg">
+                            <img
+                              src={p.image}
+                              alt={p.title}
+                              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                              loading="lazy"
+                              width={80}
+                              height={56}
+                            />
+                          </div>
+                        )}
+                        <div className="min-w-0 flex-1">
+                          <span className={`mb-0.5 inline-block rounded px-1.5 py-0.5 text-[10px] font-bold ${CATEGORY_COLORS[p.category] || "bg-slate-100 text-slate-600"}`}>
+                            {p.category}
+                          </span>
+                          <p className="text-xs font-bold leading-snug text-slate-800 line-clamp-2 group-hover:text-purple-700 transition-colors">
+                            {p.title}
+                          </p>
+                          <span className="mt-1 flex items-center gap-1 text-[10px] text-slate-400">
+                            <Clock className="h-3 w-3" /> {p.readTime}
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      {/* "O'qing ham" — full width 3-card section */}
+      {relatedPosts.length > 0 && (
+        <section className="border-t bg-white py-12" data-testid="section-related-articles">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="mb-6 text-xl font-extrabold text-slate-900 sm:text-2xl" data-testid="text-related-title">
+              O'qing ham
+            </h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedPosts.map((p) => (
                 <Link key={p.id} href={`/blog/${p.id}`}>
-                  <Card className="group cursor-pointer border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden" data-testid={`link-related-blog-${p.id}`}>
+                  <div className="group cursor-pointer overflow-hidden rounded-2xl border bg-white shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5" data-testid={`link-related-blog-${p.id}`}>
                     {p.image && (
-                      <div className="h-36 overflow-hidden">
-                        <img src={p.image} alt={p.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                      <div className="relative h-44 overflow-hidden">
+                        <img
+                          src={p.image}
+                          alt={p.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                          width={400}
+                          height={176}
+                        />
+                        <div className="absolute left-3 bottom-3">
+                          <span className={`rounded-md px-2 py-0.5 text-xs font-bold ${CATEGORY_COLORS[p.category] || "bg-slate-100 text-slate-600"}`}>
+                            {p.category}
+                          </span>
+                        </div>
                       </div>
                     )}
-                    <div className="p-5">
-                      <div className="mb-2 flex items-center gap-2">
-                        <Badge className="rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">{p.category}</Badge>
-                        <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock className="h-3 w-3" /> {p.readTime}</span>
-                      </div>
-                      <h3 className="font-bold leading-snug text-foreground text-sm line-clamp-2">{p.title}</h3>
-                      <div className="mt-3 flex items-center gap-1 text-xs font-bold text-purple-600">
-                        {t.common.readMore} <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                    <div className="p-4">
+                      <h3 className="mb-2 text-sm font-extrabold leading-snug text-slate-900 line-clamp-2 group-hover:text-purple-700 transition-colors">
+                        {p.title}
+                      </h3>
+                      <p className="mb-3 text-xs text-slate-500 line-clamp-2">{p.excerpt}</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3 text-xs text-slate-400">
+                          <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {p.date}</span>
+                          <span className="flex items-center gap-1"><Eye className="h-3 w-3" /> {fakeViews(p.id).toLocaleString()}</span>
+                        </div>
+                        <Badge className="shrink-0 rounded-full bg-purple-50 px-2 py-0 text-[10px] font-bold text-purple-600">
+                          Yangi
+                        </Badge>
                       </div>
                     </div>
-                  </Card>
+                  </div>
                 </Link>
               ))}
             </div>
-            <div className="mt-6 text-center">
+            <div className="mt-8 text-center">
               <Link href="/blog">
                 <Button variant="outline" className="rounded-full gap-2" data-testid="button-all-posts">
                   Barcha maqolalar <ArrowRight className="h-4 w-4" />
@@ -340,6 +428,15 @@ export default function BlogDetail() {
           </div>
         </section>
       )}
+
+      {/* Mobile CTA (shown only on small screens, sidebar is hidden) */}
+      <section className="bg-gradient-to-r from-purple-700 to-pink-600 py-10 lg:hidden" data-testid="section-blog-mobile-cta">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6">
+          <h3 className="mb-2 text-lg font-extrabold text-white">Bepul konsultatsiya oling</h3>
+          <p className="mb-4 text-sm text-purple-100">O'zingizga to'g'ri kursni mutaxassis bilan tanlang</p>
+          <LeadForm source={`blog-mobile-${post.id}`} buttonText="Bepul konsultatsiya" />
+        </div>
+      </section>
     </Layout>
   );
 }

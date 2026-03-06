@@ -1,15 +1,29 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/layout/layout";
 import { blogPosts } from "@/lib/data";
 import { useLanguage } from "@/contexts/language-context";
-import { Clock, ArrowRight, Calendar, User, Search } from "lucide-react";
+import { Clock, ArrowRight, Search, Eye } from "lucide-react";
 
 const ALL_CATEGORIES = ["Barchasi", "ACCA", "DipIFR", "Financial Modeling", "1C Buxgalteriya", "Huquqshunoslik", "Karyera"];
+
+const CATEGORY_COLORS: Record<string, string> = {
+  "ACCA": "bg-purple-100 text-purple-700",
+  "DipIFR": "bg-indigo-100 text-indigo-700",
+  "Financial Modeling": "bg-emerald-100 text-emerald-700",
+  "1C Buxgalteriya": "bg-blue-100 text-blue-700",
+  "Huquqshunoslik": "bg-amber-100 text-amber-700",
+  "Karyera": "bg-pink-100 text-pink-700",
+};
+
+function fakeViews(id: string): number {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) & 0xffffffff;
+  return 350 + Math.abs(h % 1200);
+}
 
 export default function Blog() {
   const { t } = useLanguage();
@@ -20,6 +34,7 @@ export default function Blog() {
     title: "Blog — ACCA, DipIFR, Moliya va Buxgalteriya maqolalari | FBA Academy",
     description: "ACCA imtihoniga tayyorlanish, DipIFR, Financial Modeling, 1C Buxgalteriya va Huquqshunoslik bo'yicha to'liq maqolalar. O'zbekistonda moliya sohasida karyera maslahatlar.",
     keywords: "ACCA blog, DipIFR maqolalar, moliya ta'limi, buxgalteriya maslahat, financial modeling O'zbekiston, 1C kurs",
+    breadcrumb: [{ name: "Blog", url: "https://fbaacademy.uz/blog" }],
     jsonLd: [
       {
         "@type": "Blog",
@@ -47,80 +62,26 @@ export default function Blog() {
     return matchCat && matchSearch;
   });
 
-  const featured = blogPosts[0];
-  const rest = filtered.filter((p) => p.id !== featured.id);
+  const featured = filtered[0];
+  const sidebarPosts = blogPosts.filter((p) => p.id !== featured?.id).slice(0, 4);
+  const gridPosts = filtered.filter((p) => p.id !== featured?.id);
+
+  const catColor = (cat: string) => CATEGORY_COLORS[cat] || "bg-slate-100 text-slate-600";
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 py-14 sm:py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Badge className="mb-4 rounded-full border-purple-400/30 bg-purple-500/20 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-sm">
-            {t.blog.title}
-          </Badge>
-          <h1 className="mb-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl" data-testid="text-blog-title">
-            {t.blog.title}
-          </h1>
-          <p className="max-w-2xl text-slate-300">{t.blog.subtitle}</p>
-
-          {/* Search */}
-          <div className="mt-6 relative max-w-md">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Maqola qidirish..."
-              className="w-full rounded-full border-0 bg-white/10 py-3 pl-11 pr-5 text-sm text-white placeholder-slate-400 backdrop-blur-sm focus:bg-white/15 focus:outline-none focus:ring-2 focus:ring-purple-400"
-              data-testid="input-blog-search"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Featured post */}
-      {activeCategory === "Barchasi" && !searchQuery && (
-        <section className="py-8 sm:py-12" data-testid="section-blog-featured">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <Link href={`/blog/${featured.id}`}>
-              <div className="group cursor-pointer overflow-hidden rounded-2xl border bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 lg:grid lg:grid-cols-5" data-testid="card-blog-featured">
-                <div className="h-56 overflow-hidden lg:col-span-2 lg:h-auto">
-                  <img src={featured.image} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" />
-                </div>
-                <div className="p-6 lg:col-span-3 lg:flex lg:flex-col lg:justify-center lg:p-8">
-                  <div className="mb-3 flex items-center gap-3 flex-wrap">
-                    <Badge className="rounded-full bg-purple-100 text-purple-700 font-semibold">{featured.category}</Badge>
-                    <Badge className="rounded-full bg-yellow-100 text-yellow-700 font-semibold">⭐ Tavsiya etiladi</Badge>
-                    <span className="flex items-center gap-1 text-xs text-muted-foreground"><Clock className="h-3 w-3" /> {featured.readTime}</span>
-                  </div>
-                  <h2 className="text-xl font-extrabold text-slate-900 sm:text-2xl leading-snug group-hover:text-purple-700 transition-colors">{featured.title}</h2>
-                  <p className="mt-3 text-sm text-slate-500 line-clamp-3">{featured.excerpt}</p>
-                  <div className="mt-5 flex items-center justify-between">
-                    <span className="flex items-center gap-1.5 text-xs text-muted-foreground"><User className="h-3.5 w-3.5" /> {featured.author}</span>
-                    <span className="flex items-center gap-1 text-sm font-bold text-purple-600">
-                      {t.common.readMore} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </section>
-      )}
-
-      {/* Category filter */}
-      <section className="bg-slate-50 py-4 sm:py-6" data-testid="section-blog-filters">
+      {/* Category tab strip */}
+      <div className="sticky top-16 z-30 border-b bg-white shadow-sm" data-testid="section-blog-filters">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex items-center gap-1 overflow-x-auto py-3 scrollbar-hide">
             {ALL_CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+                className={`shrink-0 flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold transition-colors whitespace-nowrap ${
                   activeCategory === cat
-                    ? "bg-purple-600 text-white shadow-md"
-                    : "border border-slate-200 bg-white text-slate-700 hover:border-purple-300 hover:text-purple-700"
+                    ? "bg-purple-600 text-white"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 }`}
                 data-testid={`filter-category-${cat}`}
               >
@@ -129,61 +90,184 @@ export default function Blog() {
             ))}
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Main layout: featured + sidebar */}
+      {featured && (
+        <section className="py-8 sm:py-10" data-testid="section-blog-hero">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-8 lg:grid-cols-3">
+              {/* Featured post — left 2/3 */}
+              <Link href={`/blog/${featured.id}`} className="lg:col-span-2">
+                <div className="group cursor-pointer overflow-hidden rounded-2xl border bg-white shadow-md hover:shadow-xl transition-all duration-300" data-testid="card-blog-featured">
+                  {featured.image && (
+                    <div className="relative h-64 overflow-hidden sm:h-80">
+                      <img
+                        src={featured.image}
+                        alt={featured.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="eager"
+                        width={800}
+                        height={400}
+                      />
+                      <div className="absolute left-3 top-3">
+                        <span className={`rounded-md px-2 py-0.5 text-xs font-bold ${catColor(featured.category)}`}>
+                          {featured.category}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  <div className="p-5 sm:p-6">
+                    <h2 className="text-xl font-extrabold leading-snug text-slate-900 group-hover:text-purple-700 transition-colors sm:text-2xl" data-testid="text-blog-featured-title">
+                      {featured.title}
+                    </h2>
+                    <p className="mt-2 text-sm text-slate-500 line-clamp-2">{featured.excerpt}</p>
+                    <div className="mt-4 flex items-center gap-4 text-xs text-slate-400">
+                      <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {featured.readTime}</span>
+                      <span className="flex items-center gap-1"><Eye className="h-3.5 w-3.5" /> {fakeViews(featured.id).toLocaleString()}</span>
+                      <span className="ml-auto flex items-center gap-1 text-xs font-bold text-purple-600">
+                        {t.common.readMore} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Sidebar — right 1/3 */}
+              <div className="flex flex-col gap-5">
+                {/* Search */}
+                <div className="relative" data-testid="blog-sidebar-search">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Maqola qidirish..."
+                    className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-200"
+                    data-testid="input-blog-search"
+                  />
+                </div>
+
+                {/* Recent posts list */}
+                <div className="rounded-2xl border bg-white shadow-sm overflow-hidden" data-testid="blog-sidebar-recent">
+                  <div className="border-b px-4 py-3">
+                    <span className="text-sm font-extrabold text-slate-900">So'nggi maqolalar</span>
+                  </div>
+                  <div className="divide-y">
+                    {sidebarPosts.map((p) => (
+                      <Link key={p.id} href={`/blog/${p.id}`}>
+                        <div className="group flex items-start gap-3 p-3 hover:bg-slate-50 transition-colors cursor-pointer" data-testid={`sidebar-post-${p.id}`}>
+                          {p.image && (
+                            <div className="h-14 w-20 shrink-0 overflow-hidden rounded-lg">
+                              <img
+                                src={p.image}
+                                alt={p.title}
+                                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                                width={80}
+                                height={56}
+                              />
+                            </div>
+                          )}
+                          <div className="min-w-0 flex-1">
+                            <span className={`mb-0.5 inline-block rounded px-1.5 py-0.5 text-[10px] font-bold ${catColor(p.category)}`}>
+                              {p.category}
+                            </span>
+                            <p className="text-xs font-bold leading-snug text-slate-800 line-clamp-2 group-hover:text-purple-700 transition-colors">
+                              {p.title}
+                            </p>
+                            <div className="mt-1 flex items-center gap-2 text-[10px] text-slate-400">
+                              <span className="flex items-center gap-0.5"><Clock className="h-3 w-3" /> {p.readTime}</span>
+                              <span className="flex items-center gap-0.5"><Eye className="h-3 w-3" /> {fakeViews(p.id).toLocaleString()}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Articles grid */}
-      <section className="py-10 sm:py-14" data-testid="section-blog-grid">
+      <section className="bg-slate-50 py-8 sm:py-12" data-testid="section-blog-grid">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {filtered.length === 0 ? (
+          {gridPosts.length === 0 && !featured ? (
             <div className="py-20 text-center">
               <div className="text-4xl">🔍</div>
-              <p className="mt-3 text-muted-foreground">Hech narsa topilmadi. Boshqa so'z bilan qidiring.</p>
-              <Button variant="outline" className="mt-4 rounded-full" onClick={() => { setSearchQuery(""); setActiveCategory("Barchasi"); }} data-testid="button-reset-search">
+              <p className="mt-3 text-slate-500">Hech narsa topilmadi. Boshqa so'z bilan qidiring.</p>
+              <Button
+                variant="outline"
+                className="mt-4 rounded-full"
+                onClick={() => { setSearchQuery(""); setActiveCategory("Barchasi"); }}
+                data-testid="button-reset-search"
+              >
                 Barcha maqolalar
               </Button>
             </div>
           ) : (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {(activeCategory === "Barchasi" && !searchQuery ? rest : filtered).map((post) => (
-                <Link key={post.id} href={`/blog/${post.id}`}>
-                  <Card className="group cursor-pointer border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full overflow-hidden" data-testid={`card-blog-${post.id}`}>
-                    {post.image && (
-                      <div className="h-44 overflow-hidden">
-                        <img src={post.image} alt={post.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <>
+              {gridPosts.length > 0 && (
+                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {gridPosts.map((post) => (
+                    <Link key={post.id} href={`/blog/${post.id}`}>
+                      <div className="group cursor-pointer overflow-hidden rounded-2xl border bg-white shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 h-full flex flex-col" data-testid={`card-blog-${post.id}`}>
+                        {post.image && (
+                          <div className="relative h-44 overflow-hidden">
+                            <img
+                              src={post.image}
+                              alt={post.title}
+                              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              loading="lazy"
+                              width={400}
+                              height={176}
+                            />
+                            <div className="absolute left-3 top-3">
+                              <span className={`rounded-md px-2 py-0.5 text-xs font-bold ${catColor(post.category)}`}>
+                                {post.category}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                        <div className="flex flex-1 flex-col p-4">
+                          <h2 className="mb-2 text-sm font-extrabold leading-snug text-slate-900 line-clamp-2 group-hover:text-purple-700 transition-colors" data-testid={`text-blog-title-${post.id}`}>
+                            {post.title}
+                          </h2>
+                          <p className="mb-3 flex-1 text-xs text-slate-500 line-clamp-2">{post.excerpt}</p>
+                          <div className="flex items-center justify-between text-xs text-slate-400">
+                            <div className="flex items-center gap-3">
+                              <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {post.readTime}</span>
+                              <span className="flex items-center gap-1"><Eye className="h-3 w-3" /> {fakeViews(post.id).toLocaleString()}</span>
+                            </div>
+                            <Badge className="shrink-0 rounded-full bg-purple-50 px-2 py-0 text-[10px] font-bold text-purple-600">
+                              Yangi
+                            </Badge>
+                          </div>
+                        </div>
                       </div>
-                    )}
-                    <div className="p-5">
-                      <div className="mb-3 flex items-center gap-2 flex-wrap text-xs text-muted-foreground">
-                        <Badge className="rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">{post.category}</Badge>
-                        <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {post.date}</span>
-                        <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {post.readTime}</span>
-                      </div>
-                      <h2 className="mb-2 text-base font-extrabold leading-snug text-foreground line-clamp-2 group-hover:text-purple-700 transition-colors" data-testid={`text-blog-title-${post.id}`}>{post.title}</h2>
-                      <p className="mb-4 text-sm text-muted-foreground line-clamp-2">{post.excerpt}</p>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <User className="h-3 w-3" /> {post.author}
-                        </span>
-                        <span className="flex items-center gap-1 text-sm font-semibold text-purple-600">
-                          {t.common.readMore} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                        </span>
-                      </div>
-                    </div>
-                  </Card>
-                </Link>
-              ))}
-            </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              {gridPosts.length === 0 && filtered.length > 0 && (
+                <p className="py-10 text-center text-sm text-slate-500">Barcha maqolalar yuqorida ko'rsatildi.</p>
+              )}
+            </>
           )}
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="bg-slate-900 py-12" data-testid="section-blog-bottom-cta">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-xl font-extrabold text-white sm:text-2xl">Maqolalar sizga foydali bo'ldimi?</h2>
-          <p className="mt-2 text-slate-400 text-sm">Bepul konsultatsiya oling va o'zingizga mos kursni tanlang</p>
+      {/* CTA banner */}
+      <section className="bg-gradient-to-r from-purple-700 to-pink-600 py-12" data-testid="section-blog-cta">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-xl font-extrabold text-white sm:text-2xl">Moliya sohasida karyerangizni boshlang</h2>
+          <p className="mt-2 text-purple-100 text-sm">ACCA, DipIFR, Financial Modeling — bepul konsultatsiyada to'g'ri kursni tanlang</p>
           <Link href="/contacts">
-            <Button className="mt-6 gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-8 font-bold text-white shadow-lg hover:from-purple-700 hover:to-pink-700" data-testid="button-blog-cta">
+            <Button className="mt-6 gap-2 rounded-full bg-white px-8 font-bold text-purple-700 shadow-lg hover:bg-purple-50" data-testid="button-blog-cta">
               Bepul konsultatsiya <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
