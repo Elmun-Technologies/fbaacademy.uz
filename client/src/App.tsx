@@ -19,12 +19,32 @@ import CorporateTraining from "@/pages/corporate-training";
 import Partnership from "@/pages/partnership";
 import Grants from "@/pages/grants";
 
+import AccaPage from "@/pages/courses/acca";
+import AppliedKnowledgePage from "@/pages/courses/applied-knowledge";
+import AppliedSkillsPage from "@/pages/courses/applied-skills";
+import StrategicProfessionalPage from "@/pages/courses/strategic-professional";
+import DipIFRPage from "@/pages/courses/dipifr";
+import FinancialModelingPage from "@/pages/courses/financial-modeling";
+import JurisprudencePage from "@/pages/courses/jurisprudence";
+import OneCPage from "@/pages/courses/one-c";
+
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/courses" component={Catalog} />
+
+      <Route path="/course/acca" component={AccaPage} />
+      <Route path="/course/applied-knowledge" component={AppliedKnowledgePage} />
+      <Route path="/course/applied-skills" component={AppliedSkillsPage} />
+      <Route path="/course/strategic-professional" component={StrategicProfessionalPage} />
+      <Route path="/course/dipifr" component={DipIFRPage} />
+      <Route path="/course/financial-modeling" component={FinancialModelingPage} />
+      <Route path="/course/jurisprudence" component={JurisprudencePage} />
+      <Route path="/course/1c-course" component={OneCPage} />
+
       <Route path="/course/:id" component={CourseDetail} />
+
       <Route path="/teachers" component={Teachers} />
       <Route path="/about" component={About} />
       <Route path="/blog" component={Blog} />
