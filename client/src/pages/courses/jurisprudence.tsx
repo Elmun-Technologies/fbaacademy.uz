@@ -321,7 +321,7 @@ export default function JurisprudencePage() {
             {/* Left */}
             <div>
               <div className="mb-2 flex flex-wrap gap-2">
-                <Badge className="rounded-full border-amber-200 bg-amber-50 text-amber-700">⚖️ Kurs</Badge>
+                <Badge className="rounded-full border-amber-500/30 bg-amber-900/20 text-amber-300">⚖️ Kurs</Badge>
                 <Badge className="rounded-full border-slate-200 bg-[#111] text-zinc-400">Masofaviy format</Badge>
               </div>
               <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-law-title">
@@ -361,9 +361,9 @@ export default function JurisprudencePage() {
                 <h3 className="text-lg font-extrabold">Konsultatsiya olish</h3>
                 <Badge className="rounded-full border-green-200 bg-green-50 text-green-700 font-semibold text-xs">Bepul</Badge>
               </div>
-              <div className="mb-4 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3">
-                <div className="text-xs font-bold text-amber-800 uppercase tracking-wide">📅 Yaqinroq yozilish</div>
-                <div className="text-base font-extrabold text-amber-900 mt-0.5">10-mart, 2026</div>
+              <div className="mb-4 rounded-xl bg-amber-900/20 border border-amber-500/30 px-4 py-3">
+                <div className="text-xs font-bold text-amber-300 uppercase tracking-wide">📅 Yaqinroq yozilish</div>
+                <div className="text-base font-extrabold text-amber-200 mt-0.5">10-mart, 2026</div>
               </div>
               <LeadForm source="course-jurisprudence" buttonText="Ariza topshirish" />
               <p className="mt-3 text-center text-xs text-zinc-400">Ariza topshirish bilan siz shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz</p>
@@ -381,7 +381,7 @@ export default function JurisprudencePage() {
           <div className="grid gap-4 sm:grid-cols-2">
             {FOR_WHOM.map((item, i) => (
               <div key={i} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-zinc-900 p-6 hover:shadow-md transition-shadow" data-testid={`for-whom-card-${i}`}>
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-50 text-2xl border border-amber-100">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-900/20 text-2xl border border-amber-500/20">
                   {item.emoji}
                 </div>
                 <div>
@@ -433,7 +433,7 @@ export default function JurisprudencePage() {
                   <h3 className="text-base font-extrabold text-white">{f.title}</h3>
                   <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{f.desc}</p>
                   {i === 2 && (
-                    <a href="#pricing" className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-700 hover:text-amber-800">
+                    <a href="#pricing" className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-400 hover:text-amber-300">
                       Batafsil ma'lumot <ArrowRight className="h-3 w-3" />
                     </a>
                   )}
@@ -455,8 +455,8 @@ export default function JurisprudencePage() {
           </p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 max-w-3xl">
             {CURRICULUM_SUBJECTS.map((subject, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 px-5 py-4 shadow-sm hover:border-amber-200 hover:shadow-md transition-all" data-testid={`curriculum-subject-${i}`}>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-sm font-extrabold text-amber-700">
+              <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 px-5 py-4 shadow-sm hover:border-amber-500/30 hover:shadow-md transition-all" data-testid={`curriculum-subject-${i}`}>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-800/40 text-sm font-extrabold text-amber-300">
                   {i + 1}
                 </div>
                 <span className="text-sm font-semibold text-zinc-200">{subject}</span>
@@ -464,9 +464,9 @@ export default function JurisprudencePage() {
             ))}
           </div>
           {/* CTA for full program */}
-          <div className="mt-8 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-6" data-testid="curriculum-cta">
-            <h3 className="text-base font-extrabold text-amber-900">To'liq o'quv rejasini oling</h3>
-            <p className="mt-1 text-sm text-amber-700 mb-4">Kontakt ma'lumotlaringizni qoldiring, biz to'liq o'quv rejasini yuboramiz</p>
+          <div className="mt-8 max-w-3xl rounded-2xl border border-amber-500/30 bg-amber-900/20 p-6" data-testid="curriculum-cta">
+            <h3 className="text-base font-extrabold text-amber-200">To'liq o'quv rejasini oling</h3>
+            <p className="mt-1 text-sm text-amber-400 mb-4">Kontakt ma'lumotlaringizni qoldiring, biz to'liq o'quv rejasini yuboramiz</p>
             <LeadForm source="course-jurisprudence-curriculum" buttonText="To'liq dasturni olish" compact />
           </div>
         </div>
@@ -482,8 +482,8 @@ export default function JurisprudencePage() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {TRAINING_STEPS.map((step, i) => (
               <div key={i} className="relative rounded-2xl border border-white/10 bg-zinc-900 p-6" data-testid={`training-step-${i}`}>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100">
-                  <step.icon className="h-6 w-6 text-amber-600" />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-800/40">
+                  <step.icon className="h-6 w-6 text-amber-400" />
                 </div>
                 <div className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-amber-600 text-xs font-extrabold text-white">
                   {i + 1}
@@ -505,8 +505,8 @@ export default function JurisprudencePage() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {FBA_BENEFITS.map((b, i) => (
               <div key={i} className="flex flex-col items-start gap-3 rounded-2xl border border-white/10 bg-zinc-900 p-6 hover:shadow-md transition-shadow" data-testid={`fba-benefit-${i}`}>
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 border border-amber-100">
-                  <b.icon className="h-6 w-6 text-amber-600" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-900/20 border border-amber-500/20">
+                  <b.icon className="h-6 w-6 text-amber-400" />
                 </div>
                 <div>
                   <h3 className="text-sm font-extrabold text-white">{b.title}</h3>
@@ -535,7 +535,7 @@ export default function JurisprudencePage() {
                 </div>
                 <div className="p-5">
                   <h3 className="text-base font-extrabold text-white">{t.name}</h3>
-                  <div className="mt-0.5 text-xs font-semibold text-amber-600">{t.role}</div>
+                  <div className="mt-0.5 text-xs font-semibold text-amber-400">{t.role}</div>
                   <p className="mt-3 text-sm text-zinc-400 leading-relaxed">{t.desc}</p>
                 </div>
               </div>
@@ -549,14 +549,14 @@ export default function JurisprudencePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 lg:grid-cols-2">
             {/* License */}
-            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6" data-testid="license-card">
+            <div className="rounded-2xl border border-amber-500/30 bg-amber-900/20 p-6" data-testid="license-card">
               <div className="mb-3 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100">
-                  <Shield className="h-6 w-6 text-amber-600" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-800/40">
+                  <Shield className="h-6 w-6 text-amber-400" />
                 </div>
                 <div>
                   <h3 className="text-base font-extrabold text-white">Ta'lim litsenziyasi</h3>
-                  <div className="text-xs text-amber-700 font-medium">Davlat tomonidan berilgan</div>
+                  <div className="text-xs text-amber-400 font-medium">Davlat tomonidan berilgan</div>
                 </div>
               </div>
               <p className="text-sm text-zinc-400 leading-relaxed">
@@ -653,7 +653,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── CORPORATE CTA ────────────────────────────────────── */}
-      <section className="bg-amber-50 border-y border-amber-200 py-10" data-testid="section-law-corporate">
+      <section className="bg-[#111] border-y border-white/10 py-10" data-testid="section-law-corporate">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-6 lg:grid-cols-[1fr_auto]">
             <div>

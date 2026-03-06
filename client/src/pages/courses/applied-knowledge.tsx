@@ -145,7 +145,7 @@ export default function AppliedKnowledgePage() {
                   <h3 className="text-lg font-bold">So'rov qoldiring</h3>
                   <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
                 </div>
-                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-600">
+                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-400">
                   <Flame className="h-4 w-4" /> Joylar cheklangan
                 </div>
                 <div className="mb-4 flex items-baseline gap-2">
@@ -162,14 +162,14 @@ export default function AppliedKnowledgePage() {
       {/* ACCA Journey Progress */}
       <section className="bg-gradient-to-r from-sky-50 to-blue-50 py-10 dark:from-sky-950/20 dark:to-blue-950/20" data-testid="section-journey">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-6 text-center text-sm font-semibold uppercase tracking-wider text-sky-600">ACCA sertifikatlanish yo'li</p>
+          <p className="mb-6 text-center text-sm font-semibold uppercase tracking-wider text-sky-400">ACCA sertifikatlanish yo'li</p>
           <div className="relative flex items-start justify-between">
             <div className="absolute left-0 right-0 top-5 h-0.5 bg-gradient-to-r from-sky-400 via-slate-300 to-slate-200 sm:mx-[8%]" />
             {JOURNEY.map((step, i) => (
               <div key={i} className="relative flex flex-1 flex-col items-center text-center" data-testid={`journey-step-${i}`}>
                 <div className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full text-sm font-extrabold shadow-md ${step.active ? "bg-sky-500 text-white ring-4 ring-sky-200" : "bg-zinc-900 text-zinc-500 border-2 border-slate-200"}`}>{step.step}</div>
-                <div className={`mt-2 text-xs font-bold sm:text-sm ${step.active ? "text-sky-700" : "text-zinc-500"}`}>{step.label}</div>
-                <div className={`mt-0.5 text-xs ${step.active ? "text-sky-600" : "text-slate-300"}`}>{step.desc}</div>
+                <div className={`mt-2 text-xs font-bold sm:text-sm ${step.active ? "text-sky-300" : "text-zinc-500"}`}>{step.label}</div>
+                <div className={`mt-0.5 text-xs ${step.active ? "text-sky-400" : "text-zinc-400"}`}>{step.desc}</div>
               </div>
             ))}
           </div>
@@ -211,7 +211,7 @@ export default function AppliedKnowledgePage() {
       {/* Salary */}
       <section className="py-14 sm:py-20" data-testid="section-ak-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-slate-900 p-6 shadow-2xl sm:p-10">
+          <div className="rounded-3xl bg-zinc-900 p-6 shadow-2xl sm:p-10">
             <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">Maoshingiz tajriba bilan o'sadi</h2>
             <div className="space-y-4">
               {course.salaryLevels.map((level, i) => (
@@ -302,7 +302,7 @@ export default function AppliedKnowledgePage() {
             {course.forWhom.map((item, i) => (
               <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5" data-testid={`ak-for-whom-${i}`}>
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-100">
-                  <GraduationCap className="h-4 w-4 text-sky-600" />
+                  <GraduationCap className="h-4 w-4 text-sky-400" />
                 </div>
                 <span className="font-medium text-sm leading-relaxed">{item}</span>
               </div>
@@ -337,7 +337,7 @@ export default function AppliedKnowledgePage() {
           <div className="rounded-3xl border-2 border-sky-200 bg-sky-50 p-8 dark:border-sky-800 dark:bg-sky-950/20">
             <div className="grid gap-6 md:grid-cols-2 md:items-center">
               <div>
-                <Badge className="mb-3 rounded-full bg-sky-500/20 text-sky-700 border-sky-300 text-xs font-bold">Keyingi qadam</Badge>
+                <Badge className="mb-3 rounded-full bg-sky-500/20 text-sky-300 border-sky-500/30 text-xs font-bold">Keyingi qadam</Badge>
                 <h3 className="text-xl font-extrabold">Applied Knowledge'dan so'ng</h3>
                 <p className="mt-2 text-zinc-400 text-sm">Applied Knowledge'ni muvaffaqiyatli tugatgach, ACCA Applied Skills bosqichiga o'ting va 6 ta yangi imtihon topshiring.</p>
               </div>
@@ -361,7 +361,7 @@ export default function AppliedKnowledgePage() {
               <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Bepul konsultatsiya olish</h2>
               <p className="mt-3 text-sky-100">Applied Knowledge haqida barcha savollaringizga 10 daqiqada javob oling</p>
               <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-sky-700 hover:bg-zinc-800" data-testid="button-ak-cta">
+                <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-sky-400 hover:bg-zinc-800" data-testid="button-ak-cta">
                   Konsultatsiya olish <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>

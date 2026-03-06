@@ -459,9 +459,9 @@ export default function FinancialModelingPage() {
                 <h3 className="text-lg font-extrabold">Konsultatsiya olish</h3>
                 <span className="rounded-full bg-rose-500 px-3 py-1 text-xs font-extrabold text-white">-50% chegirma</span>
               </div>
-              <div className="mb-4 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3">
-                <div className="text-xs font-bold text-amber-800 uppercase tracking-wide">⏰ Chegirma muddati</div>
-                <div className="text-sm text-amber-700 font-medium mt-0.5">8-mart gacha — maxsus narx saqlanadi</div>
+              <div className="mb-4 rounded-xl bg-amber-900/20 border border-amber-500/30 px-4 py-3">
+                <div className="text-xs font-bold text-amber-300 uppercase tracking-wide">⏰ Chegirma muddati</div>
+                <div className="text-sm text-amber-400 font-medium mt-0.5">8-mart gacha — maxsus narx saqlanadi</div>
               </div>
               <div className="mb-5">
                 <div className="flex items-baseline gap-2">
@@ -571,7 +571,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── FOR WHOM — dark cards ─────────────────────────────── */}
-      <section className="bg-slate-900 py-14 sm:py-20" data-testid="section-fm-for-whom">
+      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-fm-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-fm-for-whom-title">
             Bu kurs kimlar uchun foydali
@@ -869,7 +869,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── PRICING ──────────────────────────────────────────── */}
-      <section id="pricing" className="bg-slate-900 py-14 sm:py-20" data-testid="section-fm-pricing">
+      <section id="pricing" className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-fm-pricing">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-fm-pricing-title">Kurs narxi</h2>
           <div className="grid gap-6 lg:grid-cols-[1fr_420px]">

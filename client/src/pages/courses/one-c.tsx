@@ -355,14 +355,14 @@ export default function OneCPage() {
         <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6 lg:px-8">
           <ol className="flex flex-wrap items-center gap-1.5 text-xs text-zinc-400" itemScope itemType="https://schema.org/BreadcrumbList">
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <Link href="/" className="hover:text-blue-600 transition-colors" itemProp="item" data-testid="breadcrumb-home">
+              <Link href="/" className="hover:text-purple-400 transition-colors" itemProp="item" data-testid="breadcrumb-home">
                 <span itemProp="name">Bosh sahifa</span>
               </Link>
               <meta itemProp="position" content="1" />
             </li>
             <li aria-hidden="true" className="text-slate-300">/</li>
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <Link href="/courses" className="hover:text-blue-600 transition-colors" itemProp="item" data-testid="breadcrumb-courses">
+              <Link href="/courses" className="hover:text-purple-400 transition-colors" itemProp="item" data-testid="breadcrumb-courses">
                 <span itemProp="name">Kurslar</span>
               </Link>
               <meta itemProp="position" content="2" />
@@ -456,7 +456,7 @@ export default function OneCPage() {
                 <span className="text-2xl font-extrabold text-white" data-testid="text-1c-price">{course.price} UZS</span>
                 <span className="text-sm text-zinc-400 line-through">{course.oldPrice} UZS</span>
               </div>
-              <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-amber-600">
+              <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-amber-400">
                 <Flame className="h-3.5 w-3.5" /> Chegirma muddati cheklangan
               </div>
               <LeadForm source="course-1c" buttonText="Konsultatsiya olish" />
@@ -482,7 +482,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 2. COURSE FEATURES ===== */}
-      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-features">
+      <section className="bg-[#111] py-14" data-testid="section-features">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-10 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-features-title">
             Kursda sizi nima kutayapti — amaliyot va trend bilimlar
@@ -504,10 +504,10 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 3. WHY 1C — dark with photo + stat ===== */}
-      <section className="bg-slate-900 py-14" data-testid="section-why-1c">
+      <section className="bg-[#0d0d0d] py-14" data-testid="section-why-1c">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">1C — O'zbekistondagi asosiy buxgalteriya dasturi</h2>
-          <div className="overflow-hidden rounded-3xl bg-slate-800">
+          <div className="overflow-hidden rounded-3xl bg-zinc-900">
             <div className="grid lg:grid-cols-2">
               <div className="relative min-h-[280px] overflow-hidden">
                 <img
@@ -585,7 +585,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 5. CERTIFICATE ===== */}
-      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-certificate">
+      <section className="bg-[#111] py-14" data-testid="section-certificate">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900">
             <div className="grid lg:grid-cols-2 lg:items-center">
@@ -655,7 +655,7 @@ export default function OneCPage() {
             <div className="mt-4 flex items-center justify-between">
               <div className="flex gap-2">
                 {PORTFOLIO_PROJECTS.map((_, i) => (
-                  <button key={i} onClick={() => setActiveProjectIdx(i)} className={`h-2 rounded-full transition-all ${i === activeProjectIdx ? "w-8 bg-blue-600" : "w-2 bg-slate-300"}`} data-testid={`project-dot-${i}`} />
+                  <button key={i} onClick={() => setActiveProjectIdx(i)} className={`h-2 rounded-full transition-all ${i === activeProjectIdx ? "w-8 bg-blue-600" : "w-2 bg-zinc-600"}`} data-testid={`project-dot-${i}`} />
                 ))}
               </div>
               <div className="flex gap-2">
@@ -672,7 +672,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 7. PRACTICE TASKS ===== */}
-      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-practice">
+      <section className="bg-[#111] py-14" data-testid="section-practice">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900">
             <div className="grid gap-6 p-8 sm:p-10 lg:grid-cols-[auto_1fr] lg:gap-12 lg:items-center">
@@ -699,7 +699,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 8. BONUS SOFTWARE ACCESS ===== */}
-      <section className="bg-slate-900 py-14" data-testid="section-bonus">
+      <section className="bg-[#0d0d0d] py-14" data-testid="section-bonus">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">6 oy bepul 1C dasturiga kirish</h2>
           <p className="mb-10 text-zinc-500">O'qish uchun zarur barcha dasturlar va resurslar tekin</p>
@@ -725,7 +725,7 @@ export default function OneCPage() {
       {/* ===== 9. CAREER HELP ===== */}
       <section className="py-14 sm:py-20" data-testid="section-career">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl bg-slate-900 p-8 sm:p-10">
+          <div className="overflow-hidden rounded-3xl bg-zinc-900 p-8 sm:p-10">
             <div className="grid gap-10 lg:grid-cols-[1fr_auto]">
               <div>
                 <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Ish topishga qadam-baqadam yordam beramiz</h2>
@@ -754,7 +754,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 10. CONFIGURATION TYPES ===== */}
-      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-configs">
+      <section className="bg-[#111] py-14" data-testid="section-configs">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
@@ -829,7 +829,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 12. TEACHER ===== */}
-      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-teacher">
+      <section className="bg-[#111] py-14" data-testid="section-teacher">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">Sizga amaliyotchi ekspertlar dars beradi</h2>
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900">
@@ -914,7 +914,7 @@ export default function OneCPage() {
               <h3 className="mb-1 text-lg font-extrabold text-white">O'qishni to'lash yoki konsultatsiya olish</h3>
               <p className="mb-4 text-sm text-zinc-400">Menejerimiz siz bilan bog'lanadi</p>
               <LeadForm source="course-1c-pricing" buttonText="Yozilish" />
-              <p className="mt-3 text-center text-xs text-zinc-400">Allaqachon akkauntingiz bormi? <span className="text-blue-600 cursor-pointer">Kirish</span></p>
+              <p className="mt-3 text-center text-xs text-zinc-400">Allaqachon akkauntingiz bormi? <span className="text-blue-400 cursor-pointer">Kirish</span></p>
             </div>
           </div>
         </div>
@@ -931,7 +931,7 @@ export default function OneCPage() {
               <button
                 key={cat}
                 onClick={() => setActiveFaqTab(cat)}
-                className={`rounded-full px-5 py-2 text-sm font-bold transition-all ${activeFaqTab === cat ? "bg-slate-900 text-white dark:bg-zinc-900 dark:text-white" : "border border-slate-200 bg-zinc-900 text-zinc-300 hover:border-slate-400 dark:text-slate-300"}`}
+                className={`rounded-full px-5 py-2 text-sm font-bold transition-all ${activeFaqTab === cat ? "bg-slate-900 text-white dark:bg-zinc-900 dark:text-white" : "border border-white/20 bg-zinc-900 text-zinc-300 hover:border-white/40"}`}
                 data-testid={`faq-tab-${cat}`}
               >
                 {cat}
@@ -958,7 +958,7 @@ export default function OneCPage() {
             <h3 className="text-xl font-extrabold text-white sm:text-2xl">Hali savollaringiz bormi?</h3>
             <p className="mt-2 text-blue-100">Menejerimiz barcha tafsilotlarni tushuntiradi</p>
             <Link href="#enroll">
-              <Button size="lg" className="mt-5 rounded-full bg-zinc-900 px-8 font-bold text-blue-700 hover:bg-zinc-800" data-testid="button-final-cta">
+              <Button size="lg" className="mt-5 rounded-full bg-zinc-900 px-8 font-bold text-blue-400 hover:bg-zinc-800" data-testid="button-final-cta">
                 Bepul konsultatsiya <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

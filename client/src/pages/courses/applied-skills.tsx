@@ -130,7 +130,7 @@ export default function AppliedSkillsPage() {
                   <h3 className="text-lg font-bold">So'rov qoldiring</h3>
                   <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
                 </div>
-                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-600">
+                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-400">
                   <Flame className="h-4 w-4" /> Joylar cheklangan
                 </div>
                 <div className="mb-4 flex items-baseline gap-2">
@@ -177,7 +177,7 @@ export default function AppliedSkillsPage() {
                       <span className="font-semibold">{item.skill}</span>
                       <span className="text-zinc-400">{item.level}%</span>
                     </div>
-                    <div className="h-2.5 w-full rounded-full bg-slate-200 dark:bg-slate-700">
+                    <div className="h-2.5 w-full rounded-full bg-zinc-700">
                       <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500" style={{ width: `${item.level}%` }} />
                     </div>
                   </div>
@@ -194,7 +194,7 @@ export default function AppliedSkillsPage() {
       {/* Salary */}
       <section className="py-14" data-testid="section-as-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-slate-900 p-6 shadow-2xl sm:p-10">
+          <div className="rounded-3xl bg-zinc-900 p-6 shadow-2xl sm:p-10">
             <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">Maosh darajasi</h2>
             <div className="space-y-4">
               {course.salaryLevels.map((level, i) => (

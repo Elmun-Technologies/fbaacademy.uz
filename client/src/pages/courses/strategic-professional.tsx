@@ -157,7 +157,7 @@ export default function StrategicProfessionalPage() {
                   <h3 className="text-lg font-bold">So'rov qoldiring</h3>
                   <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
                 </div>
-                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-600">
+                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-400">
                   <Flame className="h-4 w-4" /> Joylar cheklangan
                 </div>
                 <div className="mb-4 flex items-baseline gap-2">
@@ -176,8 +176,8 @@ export default function StrategicProfessionalPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {ELITE_STATS.map((s, i) => (
-              <div key={i} className="rounded-2xl border-2 border-amber-200 bg-zinc-900 p-5 text-center shadow-sm dark:border-amber-900/30" data-testid={`sp-stat-${i}`}>
-                <div className="text-2xl font-extrabold text-amber-700 dark:text-amber-400 sm:text-3xl">{s.value}</div>
+              <div key={i} className="rounded-2xl border-2 border-amber-500/30 bg-zinc-900 p-5 text-center shadow-sm dark:border-amber-900/30" data-testid={`sp-stat-${i}`}>
+                <div className="text-2xl font-extrabold text-amber-300 sm:text-3xl">{s.value}</div>
                 <div className="mt-1 text-xs text-zinc-400 sm:text-sm">{s.label}</div>
               </div>
             ))}
@@ -192,10 +192,10 @@ export default function StrategicProfessionalPage() {
           <p className="mb-10 text-zinc-400">2 ta majburiy + 2 ta ixtiyoriy qog'ozdan birini tanlaysiz</p>
           <div className="grid gap-6 sm:grid-cols-2">
             {PAPERS.map((paper, i) => (
-              <div key={i} className={`rounded-2xl border-2 p-6 shadow-md ${paper.type === "Majburiy" ? "border-amber-200 bg-amber-50 dark:bg-amber-950/20" : "border-slate-200 bg-zinc-900"}`} data-testid={`sp-paper-${i}`}>
+              <div key={i} className={`rounded-2xl border-2 p-6 shadow-md ${paper.type === "Majburiy" ? "border-amber-500/30 bg-amber-900/10" : "border-white/10 bg-zinc-900"}`} data-testid={`sp-paper-${i}`}>
                 <div className="mb-4 flex items-center justify-between">
                   <span className={`inline-flex rounded-full px-4 py-1.5 text-sm font-extrabold text-white shadow-md ${paper.badge}`}>{paper.code}</span>
-                  <Badge variant="outline" className={`rounded-full text-xs font-bold ${paper.type === "Majburiy" ? "border-amber-400 text-amber-700" : "border-slate-400 text-zinc-400"}`}>{paper.type}</Badge>
+                  <Badge variant="outline" className={`rounded-full text-xs font-bold ${paper.type === "Majburiy" ? "border-amber-400 text-amber-400" : "border-slate-400 text-zinc-400"}`}>{paper.type}</Badge>
                 </div>
                 <h3 className="mb-2 text-lg font-extrabold">{paper.name}</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">{paper.desc}</p>
@@ -206,7 +206,7 @@ export default function StrategicProfessionalPage() {
       </section>
 
       {/* Career Path Timeline */}
-      <section className="bg-slate-900 py-14 sm:py-20" data-testid="section-career-path">
+      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-career-path">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">CFO bo'lish yo'li</h2>
           <p className="mb-10 text-zinc-500">ACCA Strategic Professional sertifikati bilan karyerangiz qanday o'sadi</p>
@@ -328,7 +328,7 @@ export default function StrategicProfessionalPage() {
               <h2 className="text-2xl font-extrabold text-white sm:text-3xl">ACCA yo'lingizni boshlaymizmi?</h2>
               <p className="mt-3 text-amber-100">Bepul konsultatsiyada Strategic Professional haqida barcha savollarga javob oling</p>
               <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-amber-700 hover:bg-zinc-800" data-testid="button-sp-cta">
+                <Button size="lg" className="mt-6 gap-2 rounded-full bg-zinc-900 px-8 font-bold text-amber-400 hover:bg-zinc-800" data-testid="button-sp-cta">
                   Konsultatsiya olish <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>

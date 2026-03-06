@@ -238,7 +238,7 @@ export default function AccaPage() {
                   <h3 className="text-lg font-bold">{t.page.submitRequest}</h3>
                   <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
                 </div>
-                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-600">
+                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-400">
                   <Flame className="h-4 w-4" /> {t.page.spotsLimited}
                 </div>
                 <div className="mb-4 flex items-baseline gap-2">
@@ -258,7 +258,7 @@ export default function AccaPage() {
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {GLOBAL_STATS.map((s, i) => (
               <div key={i} className="rounded-2xl border-2 border-purple-100 bg-purple-50 p-5 text-center dark:border-purple-900/30 dark:bg-purple-900/10" data-testid={`stat-${i}`}>
-                <div className="text-2xl font-extrabold text-purple-700 dark:text-purple-300 sm:text-3xl">{s.value}</div>
+                <div className="text-2xl font-extrabold text-purple-300 sm:text-3xl">{s.value}</div>
                 <div className="mt-1 text-xs text-zinc-400 sm:text-sm">{tx[s.labelKey as keyof typeof tx] as string}</div>
               </div>
             ))}
@@ -269,7 +269,7 @@ export default function AccaPage() {
       {/* ACCA 3-Stage Roadmap */}
       <section className="py-14 sm:py-20" data-testid="section-roadmap">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Badge variant="outline" className="mb-4 rounded-full border-purple-200 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-purple-600">{tx.roadmapLabel}</Badge>
+          <Badge variant="outline" className="mb-4 rounded-full border-purple-500/30 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-purple-400">{tx.roadmapLabel}</Badge>
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-roadmap-title">{tx.roadmapTitle}</h2>
           <p className="mb-10 text-zinc-400">{tx.roadmapDesc}</p>
           <div className="relative grid gap-6 md:grid-cols-3">
@@ -287,7 +287,7 @@ export default function AccaPage() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-purple-600 opacity-0 transition-opacity group-hover:opacity-100">
+                  <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-purple-400 opacity-0 transition-opacity group-hover:opacity-100">
                     {t.common.learnMore} <ArrowRight className="h-4 w-4" />
                   </div>
                 </div>
@@ -322,7 +322,7 @@ export default function AccaPage() {
       {/* Salary */}
       <section className="py-14 sm:py-20" data-testid="section-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-slate-900 p-6 shadow-2xl sm:p-10">
+          <div className="rounded-3xl bg-zinc-900 p-6 shadow-2xl sm:p-10">
             <h2 className="mb-2 text-2xl font-extrabold text-white sm:text-3xl">{t.page.salary.title}</h2>
             <p className="mb-8 text-zinc-500 text-sm">{tx.salaryDemand}</p>
             <div className="space-y-4">
@@ -361,7 +361,7 @@ export default function AccaPage() {
             {course.forWhom.map((item, i) => (
               <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5" data-testid={`for-whom-${i}`}>
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900/30">
-                  <GraduationCap className="h-4 w-4 text-purple-600" />
+                  <GraduationCap className="h-4 w-4 text-purple-400" />
                 </div>
                 <span className="font-medium text-sm leading-relaxed">{item}</span>
               </div>

@@ -37,10 +37,10 @@ const IFRS_STANDARDS = [
 ];
 
 const TYPE_COLORS: Record<string, string> = {
-  "Asosiy": "bg-indigo-100 text-indigo-700 border-indigo-200",
+  "Asosiy": "bg-indigo-800/40 text-indigo-300 border-indigo-500/30",
   "Muhim": "bg-emerald-800/40 text-emerald-300 border-emerald-500/30",
   "Murakkab": "bg-rose-100 text-rose-700 border-rose-200",
-  "O'rta": "bg-amber-100 text-amber-700 border-amber-200",
+  "O'rta": "bg-amber-800/40 text-amber-300 border-amber-500/30",
 };
 
 const HERO_BADGES = [
@@ -356,14 +356,14 @@ export default function DipIFRPage() {
         <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6 lg:px-8">
           <ol className="flex flex-wrap items-center gap-1.5 text-xs text-zinc-400" itemScope itemType="https://schema.org/BreadcrumbList">
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <Link href="/" className="hover:text-indigo-600 transition-colors" itemProp="item" data-testid="breadcrumb-home">
+              <Link href="/" className="hover:text-indigo-400 transition-colors" itemProp="item" data-testid="breadcrumb-home">
                 <span itemProp="name">Bosh sahifa</span>
               </Link>
               <meta itemProp="position" content="1" />
             </li>
             <li aria-hidden="true" className="text-slate-300">/</li>
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <Link href="/courses" className="hover:text-indigo-600 transition-colors" itemProp="item" data-testid="breadcrumb-courses">
+              <Link href="/courses" className="hover:text-indigo-400 transition-colors" itemProp="item" data-testid="breadcrumb-courses">
                 <span itemProp="name">Kurslar</span>
               </Link>
               <meta itemProp="position" content="2" />
@@ -437,7 +437,7 @@ export default function DipIFRPage() {
                   data-testid="img-hero-dipifr"
                 />
                 <div className="absolute -bottom-4 -right-4 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble-hero">
-                  <div className="text-2xl font-extrabold text-indigo-700">87%</div>
+                  <div className="text-2xl font-extrabold text-indigo-300">87%</div>
                   <div className="text-xs text-zinc-400 leading-snug">bitiruvchilar<br/>imtihonni o'tadilar</div>
                 </div>
               </div>
@@ -453,7 +453,7 @@ export default function DipIFRPage() {
                 <span className="text-2xl font-extrabold text-white" data-testid="text-dipifr-price">{course.price} UZS</span>
                 <span className="text-sm text-zinc-400 line-through">{course.oldPrice} UZS</span>
               </div>
-              <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-amber-600">
+              <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-amber-400">
                 <Flame className="h-3.5 w-3.5" /> Joylar cheklangan — chegirma muddati tugayapti
               </div>
               <LeadForm source="course-dipifr" buttonText="Konsultatsiya olish" />
@@ -479,7 +479,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 2. COURSE FEATURES ===== */}
-      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-features">
+      <section className="bg-[#111] py-14" data-testid="section-features">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">Kursda sizni nima kutmoqda — amaliyot va kafolatli natija</h2>
           <p className="mb-10 text-zinc-400">DipIFR.Kafolat — kompleks tayyorgarlik dasturi</p>
@@ -500,10 +500,10 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 3. WHY DIPIFR — dark + stat ===== */}
-      <section className="bg-slate-900 py-14" data-testid="section-why-dipifr">
+      <section className="bg-[#0d0d0d] py-14" data-testid="section-why-dipifr">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">DipIFR — O'rta Osiyo va MDHning asosiy IFRS malakasi</h2>
-          <div className="overflow-hidden rounded-3xl bg-slate-800">
+          <div className="overflow-hidden rounded-3xl bg-zinc-900">
             <div className="grid lg:grid-cols-2">
               <div className="relative min-h-[280px] overflow-hidden">
                 <img
@@ -513,7 +513,7 @@ export default function DipIFRPage() {
                   loading="lazy"
                 />
                 <div className="absolute left-6 top-6 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble">
-                  <div className="text-2xl font-extrabold text-indigo-700">87%</div>
+                  <div className="text-2xl font-extrabold text-indigo-300">87%</div>
                   <div className="text-xs text-zinc-400 leading-snug">FBA Academy<br/>bitiruvchilari imtihonni o'tadilar</div>
                 </div>
               </div>
@@ -562,7 +562,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 5. WHAT YOU LEARN — 4 Competencies ===== */}
-      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-competencies">
+      <section className="bg-[#111] py-14" data-testid="section-competencies">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">DipIFR kursida nima o'rganasiz?</h2>
           <p className="mb-10 text-zinc-400">4 ta asosiy kompetensiya — fundamental bilimdan imtihon kafolatigacha</p>
@@ -613,8 +613,8 @@ export default function DipIFRPage() {
               </thead>
               <tbody>
                 {IFRS_STANDARDS.map((std, i) => (
-                  <tr key={i} className={`border-t transition-colors hover:bg-indigo-50 dark:hover:bg-indigo-950/20 ${i % 2 === 0 ? "bg-zinc-900" : "bg-[#111] dark:bg-slate-900/30"}`} data-testid={`std-row-${i}`}>
-                    <td className="px-4 py-3 font-extrabold text-indigo-700 dark:text-indigo-400">{std.code}</td>
+                  <tr key={i} className={`border-t transition-colors hover:bg-indigo-950/30 ${i % 2 === 0 ? "bg-zinc-900" : "bg-[#111]"}`} data-testid={`std-row-${i}`}>
+                    <td className="px-4 py-3 font-extrabold text-indigo-300">{std.code}</td>
                     <td className="px-4 py-3 font-medium">{std.name}</td>
                     <td className="px-4 py-3 hidden sm:table-cell">
                       <Badge variant="outline" className={`rounded-full border text-xs ${TYPE_COLORS[std.type]}`}>{std.type}</Badge>
@@ -628,7 +628,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 7. COURSE COMPONENTS ===== */}
-      <section className="bg-slate-900 py-14" data-testid="section-components">
+      <section className="bg-[#0d0d0d] py-14" data-testid="section-components">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">DipIFR.Kafolat — kompleks dastur tarkibi</h2>
           <p className="mb-10 text-zinc-500">Uchta komponent birgalikda kafolatlangan natija beradi</p>
@@ -639,7 +639,7 @@ export default function DipIFRPage() {
                   <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 text-xl font-extrabold text-white">{comp.num}</div>
                   <h3 className="text-base font-extrabold text-white">{comp.title}</h3>
                 </div>
-                <div className="bg-slate-800 p-5">
+                <div className="bg-zinc-900 p-5">
                   <p className="text-sm text-slate-300 leading-relaxed">{comp.desc}</p>
                 </div>
               </div>
@@ -677,7 +677,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 9. CERTIFICATE ===== */}
-      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-certificate">
+      <section className="bg-[#111] py-14" data-testid="section-certificate">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900">
             <div className="grid lg:grid-cols-2 lg:items-center">
@@ -704,14 +704,14 @@ export default function DipIFRPage() {
                   <div className="overflow-hidden rounded-2xl bg-zinc-900 shadow-lg ring-1 ring-slate-200/50">
                     <img src={`${UNSPLASH}/photo-1589829545856-d10d557cf95f?w=300&h=220&fit=crop`} alt="ACCA DipIFR Diplomi" className="h-36 w-full object-cover" loading="lazy" />
                     <div className="p-3">
-                      <div className="text-xs font-bold text-indigo-700 uppercase tracking-wide">ACCA</div>
+                      <div className="text-xs font-bold text-indigo-300 uppercase tracking-wide">ACCA</div>
                       <div className="mt-0.5 text-xs text-zinc-400">DipIFR Diplom</div>
                     </div>
                   </div>
                   <div className="overflow-hidden rounded-2xl bg-zinc-900 shadow-lg ring-1 ring-slate-200/50">
                     <img src={`${UNSPLASH}/photo-1554224155-6726b3ff858f?w=300&h=220&fit=crop`} alt="FBA Academy Sertifikati" className="h-36 w-full object-cover" loading="lazy" />
                     <div className="p-3">
-                      <div className="text-xs font-bold text-indigo-700 uppercase tracking-wide">FBA Academy</div>
+                      <div className="text-xs font-bold text-indigo-300 uppercase tracking-wide">FBA Academy</div>
                       <div className="mt-0.5 text-xs text-zinc-400">Sertifikat</div>
                     </div>
                   </div>
@@ -725,7 +725,7 @@ export default function DipIFRPage() {
       {/* ===== 10. SALARY ===== */}
       <section className="py-14" data-testid="section-dipifr-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-slate-900 p-6 shadow-2xl sm:p-10">
+          <div className="rounded-3xl bg-zinc-900 p-6 shadow-2xl sm:p-10">
             <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">DipIFR bilan maosh darajasi</h2>
             <p className="mb-8 text-zinc-500">O'zbekistondagi moliya va buxgalteriya sohasidagi taxminiy maosh</p>
             <div className="space-y-4">
@@ -741,7 +741,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 11. PROGRAM MODULES ===== */}
-      <section id="program" className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-dipifr-modules">
+      <section id="program" className="bg-[#111] py-14" data-testid="section-dipifr-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.curriculum}</h2>
           <div className="mb-6 flex flex-wrap gap-2">
@@ -820,7 +820,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 13. SUPPORT TEAM + TEACHER ===== */}
-      <section className="bg-[#111] py-14 dark:bg-slate-900/30" data-testid="section-support">
+      <section className="bg-[#111] py-14" data-testid="section-support">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.supportTitle}</h2>
 
@@ -832,7 +832,7 @@ export default function DipIFRPage() {
               </div>
               <div className="p-6 lg:p-8">
                 <h3 className="text-xl font-extrabold" data-testid="text-teacher-name">{mentor.name}</h3>
-                <p className="text-sm font-medium text-indigo-600">{mentor.role} · {mentor.experience}</p>
+                <p className="text-sm font-medium text-indigo-400">{mentor.role} · {mentor.experience}</p>
                 <ul className="mt-4 space-y-2.5">
                   {[
                     "ACCA Fellow va DipIFR ekspert, 12 yillik tajriba",
@@ -841,7 +841,7 @@ export default function DipIFRPage() {
                     "700+ talabani DipIFR imtihoniga muvaffaqiyatli tayyorlagan",
                   ].map((point, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-sm" data-testid={`teacher-point-${i}`}>
-                      <div className="mt-1 h-4 w-4 shrink-0 rounded-full bg-indigo-100 flex items-center justify-center">
+                      <div className="mt-1 h-4 w-4 shrink-0 rounded-full bg-indigo-800/40 flex items-center justify-center">
                         <div className="h-1.5 w-1.5 rounded-full bg-indigo-600" />
                       </div>
                       <span className="text-zinc-400">{point}</span>
@@ -918,7 +918,7 @@ export default function DipIFRPage() {
               <button
                 key={cat}
                 onClick={() => setActiveFaqTab(cat)}
-                className={`rounded-full px-5 py-2 text-sm font-bold transition-all ${activeFaqTab === cat ? "bg-slate-900 text-white dark:bg-zinc-900 dark:text-white" : "border border-slate-200 bg-zinc-900 text-zinc-300 hover:border-slate-400 dark:text-slate-300"}`}
+                className={`rounded-full px-5 py-2 text-sm font-bold transition-all ${activeFaqTab === cat ? "bg-zinc-900 text-white" : "border border-white/20 bg-zinc-900 text-zinc-300 hover:border-white/40"}`}
                 data-testid={`faq-tab-${cat}`}
               >
                 {cat}
@@ -940,7 +940,7 @@ export default function DipIFRPage() {
             <h3 className="text-xl font-extrabold text-white sm:text-2xl">Hali savollaringiz bormi?</h3>
             <p className="mt-2 text-indigo-100">Menejerimiz barcha tafsilotlarni tushuntiradi va sizga eng mos yo'nalishni tavsiya qiladi</p>
             <Link href="#enroll">
-              <Button size="lg" className="mt-5 rounded-full bg-zinc-900 px-8 font-bold text-indigo-700 hover:bg-zinc-800" data-testid="button-final-cta">
+              <Button size="lg" className="mt-5 rounded-full bg-zinc-900 px-8 font-bold text-indigo-400 hover:bg-zinc-800" data-testid="button-final-cta">
                 Bepul konsultatsiya <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
