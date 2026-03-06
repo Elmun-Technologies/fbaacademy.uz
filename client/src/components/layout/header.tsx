@@ -66,6 +66,17 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-0.5 lg:flex" data-testid="nav-desktop">
+            {/* About Us */}
+            <a
+              href="/about"
+              className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                location === "/about" ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+              data-testid="link-nav-about"
+            >
+              {t.nav.about}
+            </a>
+
             {/* Kurslar dropdown */}
             <div className="relative" ref={coursesRef}>
               <button
@@ -168,15 +179,15 @@ export default function Header() {
               )}
             </div>
 
-            {/* Teachers link */}
+            {/* Result */}
             <a
-              href="/teachers"
+              href="/achievements"
               className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
-                location === "/teachers" ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                location === "/achievements" ? "text-purple-700 bg-purple-50" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               }`}
-              data-testid="link-nav-teachers"
+              data-testid="link-nav-results"
             >
-              {t.nav.teachers}
+              {t.nav.results}
             </a>
           </nav>
         </div>
@@ -299,11 +310,12 @@ export default function Header() {
                     </a>
                   </div>
 
-                  {/* Other pages */}
+                  {/* Main pages */}
                   <div className="mt-1 border-t pt-2">
                     {[
-                      { label: t.nav.teachers, path: "/teachers" },
                       { label: t.nav.about, path: "/about" },
+                      { label: t.nav.results, path: "/achievements" },
+                      { label: t.nav.teachers, path: "/teachers" },
                       { label: t.nav.blog, path: "/blog" },
                       { label: t.nav.faq, path: "/faq" },
                       { label: t.nav.contacts, path: "/contacts" },
