@@ -31,15 +31,43 @@ export default function Home() {
   useSEO({
     title: "FBA Academy — ACCA, DipIFR, Financial Modeling, Huquqshunoslik, 1C kurslari | O'zbekiston",
     description: "FBA Academy — O'zbekistondagi yetakchi moliya ta'lim platformasi. ACCA, DipIFR, Financial Modeling, Huquqshunoslik va 1C: Buxgalteriya kurslari. 5000+ bitiruvchi, 92% ishga joylashish.",
-    keywords: "ACCA, DipIFR, Financial Modeling, 1C Buxgalteriya, Huquqshunoslik, moliya kurslari, O'zbekiston",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "FBA Academy — Bosh sahifa",
-      "description": "O'zbekistondagi yetakchi moliya va buxgalteriya ta'lim platformasi",
-      "url": "https://fbaacademy.uz/",
-      "isPartOf": { "@type": "WebSite", "name": "FBA Academy", "url": "https://fbaacademy.uz" }
-    }
+    keywords: "ACCA kurslari O'zbekiston, DipIFR Toshkent, Financial Modeling kursi, 1C Buxgalteriya, Huquqshunoslik kursi, moliya sertifikati, xalqaro sertifikat, Big Four, buxgalteriya kurslari Toshkent",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "FBA Academy — Bosh sahifa",
+        "description": "O'zbekistondagi yetakchi moliya va buxgalteriya ta'lim platformasi. ACCA, DipIFR, Financial Modeling, 1C Buxgalteriya kurslari.",
+        "url": "https://fbaacademy.uz/",
+        "isPartOf": { "@type": "WebSite", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Bosh sahifa", "item": "https://fbaacademy.uz/" }]
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "FBA Academy kurslari",
+        "description": "O'zbekistondagi professional moliya va buxgalteriya kurslari",
+        "url": "https://fbaacademy.uz/courses",
+        "numberOfItems": 5,
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "ACCA", "url": "https://fbaacademy.uz/course/acca", "description": "ACCA xalqaro moliyaviy hisobot sertifikati. 3 bosqich: Applied Knowledge, Applied Skills, Strategic Professional." },
+          { "@type": "ListItem", "position": 2, "name": "DipIFR", "url": "https://fbaacademy.uz/course/dipifr", "description": "Diploma in International Financial Reporting Standards — ACCA DipIFR xalqaro diplom." },
+          { "@type": "ListItem", "position": 3, "name": "Financial Modeling", "url": "https://fbaacademy.uz/course/financial-modeling", "description": "Excel, DCF, kompaniya baholash va investitsiya tahlili. Real loyihalar bilan amaliy ko'nikmalar." },
+          { "@type": "ListItem", "position": 4, "name": "1C: Buxgalteriya", "url": "https://fbaacademy.uz/course/1c-course", "description": "1C: Buxgalteriya 8.3 versiyasini boshlash. O'zbek bozori uchun sertifikatlash." },
+          { "@type": "ListItem", "position": 5, "name": "Huquqshunoslik", "url": "https://fbaacademy.uz/course/jurisprudence", "description": "Biznes va soliq huquqi. Fuqarolik, Mehnat, Tijorat va Soliq kodekslari bo'yicha." }
+        ]
+      }
+    ],
+    faqItems: [
+      { question: "FBA Academy qanday kurslar taklif etadi?", answer: "FBA Academy ACCA, DipIFR, Financial Modeling, 1C: Buxgalteriya va Huquqshunoslik kurslarini taklif etadi. Barcha kurslar amaliy va xalqaro sertifikatga yo'naltirilgan." },
+      { question: "Kurslar online yoki oflaynda o'tiladimi?", answer: "Kurslar onlayn formatda o'tkaziladi. Har hafta yangi leksiyalar, amaliy topshiriqlar va Q&A sessiyalar mavjud." },
+      { question: "Qancha vaqtda kursni tugatish mumkin?", answer: "Kurs davomiyligi 3 oydan 12 oygacha, kurs turiga qarab. ACCA to'liq dasturi 12-18 oy, DipIFR 4-6 oy." },
+      { question: "Bitiruvchilar qancha maosh oladi?", answer: "ACCA sertifikatlangan mutaxassislar O'zbekistonda o'rtacha 3-8 mln so'm, xalqaro kompaniyalarda 1000-3000 USD maosh oladi." },
+      { question: "To'lov qanday amalga oshiriladi?", answer: "Click, Payme, bank o'tkazmasi yoki naqd to'lov orqali. Oy sayin to'lash ham mumkin." }
+    ]
   });
 
   const featuredCourses = FEATURED_IDS.map(id => courses.find(c => c.id === id)).filter(Boolean) as typeof courses;
