@@ -517,8 +517,8 @@ export default function OneCPage() {
                   loading="lazy"
                 />
                 <div className="absolute left-6 top-6 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble">
-                  <div className="text-2xl font-extrabold text-white">80%+</div>
-                  <div className="text-xs text-zinc-400 leading-snug">O'zbekiston kompaniyalari<br/>1C ishlatadi</div>
+                  <div className="text-2xl font-extrabold text-blue-700">80%+</div>
+                  <div className="text-xs text-zinc-600 leading-snug">O'zbekiston kompaniyalari<br/>1C ishlatadi</div>
                 </div>
               </div>
               <div className="flex flex-col justify-center p-8 lg:p-10">

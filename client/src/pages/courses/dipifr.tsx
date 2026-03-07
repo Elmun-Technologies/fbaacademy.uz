@@ -437,8 +437,8 @@ export default function DipIFRPage() {
                   data-testid="img-hero-dipifr"
                 />
                 <div className="absolute -bottom-4 -right-4 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble-hero">
-                  <div className="text-2xl font-extrabold text-indigo-300">87%</div>
-                  <div className="text-xs text-zinc-400 leading-snug">bitiruvchilar<br/>imtihonni o'tadilar</div>
+                  <div className="text-2xl font-extrabold text-indigo-700">87%</div>
+                  <div className="text-xs text-zinc-600 leading-snug">bitiruvchilar<br/>imtihonni o'tadilar</div>
                 </div>
               </div>
             </div>
@@ -513,8 +513,8 @@ export default function DipIFRPage() {
                   loading="lazy"
                 />
                 <div className="absolute left-6 top-6 rounded-2xl bg-white/95 px-5 py-3 shadow-xl backdrop-blur-sm" data-testid="stat-bubble">
-                  <div className="text-2xl font-extrabold text-indigo-300">87%</div>
-                  <div className="text-xs text-zinc-400 leading-snug">FBA Academy<br/>bitiruvchilari imtihonni o'tadilar</div>
+                  <div className="text-2xl font-extrabold text-indigo-700">87%</div>
+                  <div className="text-xs text-zinc-600 leading-snug">FBA Academy<br/>bitiruvchilari imtihonni o'tadilar</div>
                 </div>
               </div>
               <div className="flex flex-col justify-center p-8 lg:p-10">
