@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback, useRef } from "react";
-import { X, ArrowRight, Clock, Flame, Gift, Phone } from "lucide-react";
+import { X, ArrowRight, Flame, Gift, CheckCircle, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { useLocation } from "wouter";
 
-type PopupType = "time" | "scroll" | "exit" | null;
+type PopupType = "consult" | "discount" | "exit" | null;
 
 const POPUP_COOLDOWN_KEY = "fba_popup_shown_at";
-const COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
+const COOLDOWN_MS = 60 * 60 * 1000;
 
 function shouldShowPopup(): boolean {
   try {
@@ -24,165 +24,208 @@ function markPopupShown() {
   } catch {}
 }
 
-interface PopupProps {
-  type: PopupType;
-  onClose: () => void;
+const COURSE_OPTIONS = [
+  { id: "applied-knowledge", uz: "Applied Knowledge (F1–F3)", ru: "Applied Knowledge (F1–F3)", en: "Applied Knowledge (F1–F3)" },
+  { id: "applied-skills",    uz: "Applied Skills (F4–F9)",   ru: "Applied Skills (F4–F9)",   en: "Applied Skills (F4–F9)" },
+  { id: "strategic-professional", uz: "Strategic Professional", ru: "Strategic Professional", en: "Strategic Professional" },
+  { id: "dipifr",            uz: "DipIFR (Rus tili)",        ru: "DipIFR (на русском)",      en: "DipIFR" },
+  { id: "financial-modeling", uz: "Financial Modeling",      ru: "Финансовое моделирование", en: "Financial Modeling" },
+  { id: "jurisprudence",     uz: "Yuridik Savodxonlik",      ru: "Юридическая грамотность",  en: "Business Jurisprudence" },
+  { id: "one-c",             uz: "1C: Buxgalteriya",         ru: "1С: Бухгалтерия",          en: "1C: Accounting" },
+];
+
+const COURSE_STYLES: Record<string, { gradient: string; accent: string; border: string }> = {
+  "applied-knowledge":   { gradient: "from-sky-700 to-blue-800",      accent: "text-sky-300",    border: "border-sky-500/40" },
+  "applied-skills":      { gradient: "from-teal-700 to-emerald-800",  accent: "text-emerald-300", border: "border-emerald-500/40" },
+  "strategic-professional": { gradient: "from-purple-700 to-violet-800", accent: "text-purple-300", border: "border-purple-500/40" },
+  "dipifr":              { gradient: "from-indigo-700 to-violet-800", accent: "text-indigo-300",  border: "border-indigo-500/40" },
+  "financial-modeling":  { gradient: "from-amber-700 to-orange-800",  accent: "text-amber-300",   border: "border-amber-500/40" },
+  "jurisprudence":       { gradient: "from-rose-700 to-pink-800",     accent: "text-rose-300",    border: "border-rose-500/40" },
+  "one-c":               { gradient: "from-green-700 to-teal-800",    accent: "text-green-300",   border: "border-green-500/40" },
+  "default":             { gradient: "from-purple-700 to-pink-800",   accent: "text-purple-300",  border: "border-purple-500/40" },
+};
+
+function detectCourse(location: string): string {
+  if (location.includes("applied-knowledge")) return "applied-knowledge";
+  if (location.includes("applied-skills"))    return "applied-skills";
+  if (location.includes("strategic-professional")) return "strategic-professional";
+  if (location.includes("dipifr"))            return "dipifr";
+  if (location.includes("financial-modeling")) return "financial-modeling";
+  if (location.includes("jurisprudence"))     return "jurisprudence";
+  if (location.includes("one-c"))             return "one-c";
+  return "";
 }
 
-function TimePopup({ onClose }: { onClose: () => void }) {
-  const { lang } = useLanguage();
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [sent, setSent] = useState(false);
+const INPUT_CLASS = "w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-sm font-medium text-white placeholder:text-zinc-500 focus:border-amber-400 focus:outline-none transition-colors";
+const SELECT_CLASS = "w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 pr-9 text-sm font-medium text-white focus:border-amber-400 focus:outline-none appearance-none transition-colors cursor-pointer";
 
-  const text = {
-    uz: { title: "Bepul konsultatsiya oling", sub: "10 daqiqada barcha savollarga javob", cta: "Konsultatsiya olish", success: "So'rov yuborildi!", namePh: "Ismingiz", phonePh: "Telefon raqamingiz" },
-    ru: { title: "Получите бесплатную консультацию", sub: "Ответим на все вопросы за 10 минут", cta: "Получить консультацию", success: "Заявка отправлена!", namePh: "Ваше имя", phonePh: "Номер телефона" },
-    en: { title: "Get a Free Consultation", sub: "We'll answer all your questions in 10 minutes", cta: "Get Consultation", success: "Request sent!", namePh: "Your name", phonePh: "Phone number" },
-  }[lang];
+interface CourseSelectProps {
+  lang: string;
+  value: string;
+  onChange: (v: string) => void;
+  detectedCourse: string;
+  testId: string;
+}
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-    setTimeout(onClose, 2000);
-  };
+function CourseField({ lang, value, onChange, detectedCourse, testId }: CourseSelectProps) {
+  const labels = {
+    uz: "Qaysi kursga qiziqasiz?",
+    ru: "Какой курс вас интересует?",
+    en: "Which course interests you?",
+  }[lang as "uz" | "ru" | "en"] ?? "Qaysi kursga qiziqasiz?";
+
+  const placeholder = {
+    uz: "Kursni tanlang",
+    ru: "Выберите курс",
+    en: "Select a course",
+  }[lang as "uz" | "ru" | "en"] ?? "Kursni tanlang";
+
+  if (detectedCourse) {
+    const option = COURSE_OPTIONS.find((c) => c.id === detectedCourse);
+    const name = option ? (option as Record<string, string>)[lang] || option.uz : detectedCourse;
+    const style = COURSE_STYLES[detectedCourse] ?? COURSE_STYLES["default"];
+    return (
+      <div className="flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800/60 px-4 py-3" data-testid={testId}>
+        <CheckCircle className={`h-4 w-4 shrink-0 ${style.accent}`} />
+        <span className="text-sm font-semibold text-white">{name}</span>
+      </div>
+    );
+  }
 
   return (
-    <div className="relative w-full max-w-lg mx-4">
-      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 shadow-lg text-zinc-400 hover:text-white transition-colors" data-testid="button-popup-close-time">
-        <X className="h-4 w-4" />
-      </button>
-      <div className="rounded-2xl overflow-hidden shadow-2xl">
-        {/* Top accent */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-6 text-white">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
-              <Phone className="h-5 w-5" />
-            </div>
-            <div>
-              <div className="text-xs font-bold uppercase tracking-wider opacity-80">FBA Academy</div>
-              <div className="text-xl font-extrabold leading-tight">{text.title}</div>
-            </div>
-          </div>
-          <p className="text-sm opacity-90">{text.sub}</p>
-        </div>
-        {/* Form */}
-        <div className="bg-zinc-900 px-8 py-6">
-          {sent ? (
-            <div className="flex flex-col items-center justify-center py-6 gap-3">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-800/40">
-                <ArrowRight className="h-7 w-7 text-green-600" />
-              </div>
-              <p className="text-lg font-bold text-white">{text.success}</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              <input
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder={text.namePh}
-                className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm font-medium focus:border-purple-500 focus:outline-none"
-                data-testid="input-popup-time-name"
-              />
-              <input
-                type="tel"
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder={text.phonePh}
-                className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm font-medium focus:border-purple-500 focus:outline-none"
-                data-testid="input-popup-time-phone"
-              />
-              <button type="submit" className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 py-3.5 text-sm font-bold text-white hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg" data-testid="button-popup-time-submit">
-                {text.cta} <ArrowRight className="inline h-4 w-4 ml-1" />
-              </button>
-              <p className="text-center text-xs text-slate-400">+998 78 113 80 90 · fbaacademyuz1@gmail.com</p>
-            </form>
-          )}
-        </div>
-      </div>
+    <div className="relative" data-testid={testId}>
+      <select
+        required
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={SELECT_CLASS}
+        aria-label={labels}
+      >
+        <option value="" disabled>{placeholder}</option>
+        {COURSE_OPTIONS.map((c) => (
+          <option key={c.id} value={c.id}>{(c as Record<string, string>)[lang] || c.uz}</option>
+        ))}
+      </select>
+      <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
     </div>
   );
 }
 
-function ScrollPopup({ onClose }: { onClose: () => void }) {
+interface PopupInnerProps {
+  onClose: () => void;
+  detectedCourse: string;
+}
+
+function ConsultPopup({ onClose, detectedCourse }: PopupInnerProps) {
   const { lang } = useLanguage();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [course, setCourse] = useState(detectedCourse);
   const [sent, setSent] = useState(false);
-  const [spots] = useState(() => Math.floor(Math.random() * 5) + 3);
 
-  const text = {
-    uz: {
-      badge: "Maxsus taklif",
-      title: "-25%\nCHEGIRMA",
-      titleEnd: "faqat bugun",
-      sub: "Joylar cheklangan — bugungi kunga qadar chegirma amal qiladi",
-      spots: "Qolgan joy",
-      cta: "Chegirma bilan yozilish",
-      success: "Tabriklaymiz!",
-      namePh: "Ismingiz", phonePh: "Telefon raqamingiz",
-    },
-    ru: {
-      badge: "Специальное предложение",
-      title: "-25%\nСКИДКА",
-      titleEnd: "только сегодня",
-      sub: "Места ограничены — скидка действует до конца дня",
-      spots: "Осталось мест",
-      cta: "Записаться со скидкой",
-      success: "Поздравляем!",
-      namePh: "Ваше имя", phonePh: "Номер телефона",
-    },
-    en: {
-      badge: "Special offer",
-      title: "-25%\nDISCOUNT",
-      titleEnd: "today only",
-      sub: "Limited spots — discount valid today only",
-      spots: "Spots left",
-      cta: "Enroll with discount",
-      success: "Congratulations!",
-      namePh: "Your name", phonePh: "Phone number",
-    },
-  }[lang];
+  const style = COURSE_STYLES[detectedCourse] ?? COURSE_STYLES["default"];
+
+  const t = {
+    uz: { title: "Bepul konsultatsiya oling", sub: "10 daqiqada barcha savollarga javob beramiz", cta: "Konsultatsiya olish", success: "So'rov yuborildi!", namePh: "Ismingiz", phonePh: "Telefon raqamingiz (+998 90 ...)" },
+    ru: { title: "Получите бесплатную консультацию", sub: "Ответим на все вопросы за 10 минут", cta: "Получить консультацию", success: "Заявка отправлена!", namePh: "Ваше имя", phonePh: "Номер телефона (+998 90 ...)" },
+    en: { title: "Get a Free Consultation", sub: "We'll answer all your questions in 10 minutes", cta: "Get Consultation", success: "Request sent!", namePh: "Your name", phonePh: "Phone number (+998 90 ...)" },
+  }[lang as "uz" | "ru" | "en"] ?? { title: "Bepul konsultatsiya oling", sub: "", cta: "Konsultatsiya olish", success: "Yuborildi!", namePh: "Ismingiz", phonePh: "Telefon" };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!detectedCourse && !course) return;
     setSent(true);
-    setTimeout(onClose, 2000);
+    setTimeout(onClose, 2500);
   };
 
   return (
     <div className="relative w-full max-w-md mx-4">
-      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 shadow-lg text-zinc-400 hover:text-white" data-testid="button-popup-close-scroll">
+      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 border border-zinc-700 shadow-lg text-zinc-400 hover:text-white transition-colors" data-testid="button-popup-close-consult">
         <X className="h-4 w-4" />
       </button>
-      <div className="rounded-2xl overflow-hidden shadow-2xl bg-[#0f0a2e]">
-        <div className="px-8 pt-8 pb-4 text-center">
-          <span className="inline-block rounded-full bg-amber-400/20 border border-amber-400/40 px-3 py-1 text-xs font-bold text-amber-400 uppercase tracking-wider mb-4">{text.badge}</span>
-          <div className="text-5xl font-extrabold text-white leading-none mb-1 whitespace-pre-line">{text.title}</div>
-          <div className="text-lg font-semibold text-amber-400 mb-3">{text.titleEnd}</div>
-          <p className="text-sm text-slate-400 mb-4">{text.sub}</p>
-          <div className="inline-flex items-center gap-2 rounded-lg bg-red-500/20 border border-red-500/30 px-4 py-2">
+      <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+        <div className={`bg-gradient-to-br ${style.gradient} px-7 py-6 text-white`}>
+          <div className="text-xs font-bold uppercase tracking-widest opacity-75 mb-1">FBA Academy</div>
+          <div className="text-xl font-extrabold leading-tight">{t.title}</div>
+          <p className="text-sm opacity-80 mt-1">{t.sub}</p>
+        </div>
+        <div className="bg-zinc-900 px-7 py-6">
+          {sent ? (
+            <div className="flex flex-col items-center justify-center py-6 gap-3">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-900/40 border border-emerald-500/30">
+                <CheckCircle className="h-7 w-7 text-emerald-400" />
+              </div>
+              <p className="text-lg font-bold text-white">{t.success}</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <CourseField lang={lang} value={course} onChange={setCourse} detectedCourse={detectedCourse} testId="field-popup-consult-course" />
+              <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder={t.namePh} className={INPUT_CLASS} data-testid="input-popup-consult-name" />
+              <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={t.phonePh} className={INPUT_CLASS} data-testid="input-popup-consult-phone" />
+              <button type="submit" className={`w-full rounded-xl bg-gradient-to-r ${style.gradient} py-3.5 text-sm font-bold text-white hover:opacity-90 transition-all shadow-lg mt-1`} data-testid="button-popup-consult-submit">
+                {t.cta} <ArrowRight className="inline h-4 w-4 ml-1" />
+              </button>
+              <p className="text-center text-xs text-zinc-600">+998 78 113 80 90 · fbaacademy@gmail.com</p>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DiscountPopup({ onClose, detectedCourse }: PopupInnerProps) {
+  const { lang } = useLanguage();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [course, setCourse] = useState(detectedCourse);
+  const [sent, setSent] = useState(false);
+  const [spots] = useState(() => Math.floor(Math.random() * 5) + 3);
+
+  const t = {
+    uz: { badge: "Maxsus taklif", title: "-25%", titleSub: "chegirma — faqat bugun", sub: "Joylar cheklangan, bugunga qadar amal qiladi", spots: "Qolgan joy", cta: "Chegirma bilan yozilish", success: "Tabriklaymiz!", namePh: "Ismingiz", phonePh: "Telefon raqamingiz" },
+    ru: { badge: "Спецпредложение", title: "-25%", titleSub: "скидка — только сегодня", sub: "Мест ограничено, акция до конца дня", spots: "Осталось мест", cta: "Записаться со скидкой", success: "Поздравляем!", namePh: "Ваше имя", phonePh: "Номер телефона" },
+    en: { badge: "Special offer", title: "-25%", titleSub: "discount — today only", sub: "Limited spots, offer valid today only", spots: "Spots left", cta: "Enroll with discount", success: "Congratulations!", namePh: "Your name", phonePh: "Phone number" },
+  }[lang as "uz" | "ru" | "en"] ?? { badge: "Maxsus taklif", title: "-25%", titleSub: "chegirma", sub: "", spots: "Joy", cta: "Yozilish", success: "Tabriklaymiz!", namePh: "Ism", phonePh: "Telefon" };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!detectedCourse && !course) return;
+    setSent(true);
+    setTimeout(onClose, 2500);
+  };
+
+  return (
+    <div className="relative w-full max-w-sm mx-4">
+      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 border border-zinc-700 shadow-lg text-zinc-400 hover:text-white transition-colors" data-testid="button-popup-close-discount">
+        <X className="h-4 w-4" />
+      </button>
+      <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-zinc-950">
+        <div className="px-7 pt-7 pb-4 text-center">
+          <span className="inline-block rounded-full bg-amber-400/15 border border-amber-400/30 px-3 py-1 text-xs font-bold text-amber-400 uppercase tracking-wider mb-4">{t.badge}</span>
+          <div className="text-6xl font-extrabold text-white leading-none mb-0.5">{t.title}</div>
+          <div className="text-base font-semibold text-amber-400 mb-3">{t.titleSub}</div>
+          <p className="text-xs text-zinc-500 mb-4">{t.sub}</p>
+          <div className="inline-flex items-center gap-2 rounded-lg bg-red-500/15 border border-red-500/25 px-4 py-2">
             <Flame className="h-4 w-4 text-red-400" />
-            <span className="text-sm font-bold text-red-400">{text.spots}: {spots}</span>
+            <span className="text-sm font-bold text-red-400">{t.spots}: {spots}</span>
           </div>
         </div>
-        <div className="px-8 pb-8">
+        <div className="px-7 pb-7">
           {sent ? (
             <div className="flex flex-col items-center py-6 gap-2">
-              <div className="text-3xl">🎉</div>
-              <p className="text-white font-bold text-lg">{text.success}</p>
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-900/40 border border-emerald-500/30">
+                <CheckCircle className="h-7 w-7 text-emerald-400" />
+              </div>
+              <p className="text-white font-bold text-lg text-center">{t.success}</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4">
-              <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder={text.namePh}
-                className="w-full rounded-xl border-2 border-slate-700 bg-white/10 px-4 py-3 text-sm font-medium text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none" data-testid="input-popup-scroll-name" />
-              <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={text.phonePh}
-                className="w-full rounded-xl border-2 border-slate-700 bg-white/10 px-4 py-3 text-sm font-medium text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none" data-testid="input-popup-scroll-phone" />
-              <button type="submit" className="w-full rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 py-4 text-sm font-extrabold text-black hover:from-amber-500 hover:to-orange-600 transition-all shadow-lg" data-testid="button-popup-scroll-submit">
-                {text.cta}
+              <CourseField lang={lang} value={course} onChange={setCourse} detectedCourse={detectedCourse} testId="field-popup-discount-course" />
+              <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder={t.namePh} className={INPUT_CLASS} data-testid="input-popup-discount-name" />
+              <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={t.phonePh} className={INPUT_CLASS} data-testid="input-popup-discount-phone" />
+              <button type="submit" className="w-full rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 py-4 text-sm font-extrabold text-black hover:from-amber-500 hover:to-orange-600 transition-all shadow-lg" data-testid="button-popup-discount-submit">
+                {t.cta}
               </button>
             </form>
           )}
@@ -192,80 +235,59 @@ function ScrollPopup({ onClose }: { onClose: () => void }) {
   );
 }
 
-function ExitPopup({ onClose }: { onClose: () => void }) {
+function ExitPopup({ onClose, detectedCourse }: PopupInnerProps) {
   const { lang } = useLanguage();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [course, setCourse] = useState(detectedCourse);
   const [sent, setSent] = useState(false);
 
-  const text = {
-    uz: {
-      tag: "Uchib ketayapsizmi?",
-      title: "Kursga yoziling\nva karyerangizni\no'zgartiring!",
-      sub: "7 kun ichida muvofiq kelmasa — to'liq pulni qaytaramiz",
-      cta: "Yozilish",
-      success: "So'rov yuborildi!",
-      namePh: "Ismingiz", phonePh: "Telefon raqamingiz",
-      guarantee: "7 kunlik kafolat",
-    },
-    ru: {
-      tag: "Уходите?",
-      title: "Запишитесь на курс\nи измените\nсвою карьеру!",
-      sub: "Если не понравится в течение 7 дней — вернём деньги",
-      cta: "Записаться",
-      success: "Заявка отправлена!",
-      namePh: "Ваше имя", phonePh: "Номер телефона",
-      guarantee: "Гарантия 7 дней",
-    },
-    en: {
-      tag: "Leaving already?",
-      title: "Enroll in a course\nand transform\nyour career!",
-      sub: "Not satisfied in 7 days? Full money-back guarantee",
-      cta: "Enroll Now",
-      success: "Request sent!",
-      namePh: "Your name", phonePh: "Phone number",
-      guarantee: "7-day guarantee",
-    },
-  }[lang];
+  const style = COURSE_STYLES[detectedCourse] ?? COURSE_STYLES["default"];
+
+  const t = {
+    uz: { tag: "Uchib ketayapsizmi?", title: "Kursga yoziling va karyerangizni o'zgartiring!", sub: "7 kun ichida muvofiq kelmasa — to'liq pulni qaytaramiz", cta: "Yozilish", success: "So'rov yuborildi!", namePh: "Ismingiz", phonePh: "Telefon raqamingiz", guarantee: "7 kunlik kafolat" },
+    ru: { tag: "Уходите?", title: "Запишитесь на курс и измените свою карьеру!", sub: "Если не подойдёт за 7 дней — вернём деньги", cta: "Записаться", success: "Заявка отправлена!", namePh: "Ваше имя", phonePh: "Номер телефона", guarantee: "Гарантия 7 дней" },
+    en: { tag: "Leaving already?", title: "Enroll and transform your career!", sub: "Not satisfied in 7 days? Full money-back guarantee", cta: "Enroll Now", success: "Request sent!", namePh: "Your name", phonePh: "Phone number", guarantee: "7-day guarantee" },
+  }[lang as "uz" | "ru" | "en"] ?? { tag: "Uchib ketayapsizmi?", title: "", sub: "", cta: "Yozilish", success: "Yuborildi!", namePh: "Ism", phonePh: "Telefon", guarantee: "7 kun kafolat" };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!detectedCourse && !course) return;
     setSent(true);
-    setTimeout(onClose, 2000);
+    setTimeout(onClose, 2500);
   };
 
   return (
     <div className="relative w-full max-w-lg mx-4">
-      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 shadow-lg text-zinc-400 hover:text-white" data-testid="button-popup-close-exit">
+      <button onClick={onClose} className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 border border-zinc-700 shadow-lg text-zinc-400 hover:text-white transition-colors" data-testid="button-popup-close-exit">
         <X className="h-4 w-4" />
       </button>
-      <div className="rounded-2xl overflow-hidden shadow-2xl">
+      <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
         <div className="grid md:grid-cols-2">
-          {/* Left — visual */}
-          <div className="bg-gradient-to-br from-[#0f0a2e] via-[#1e1060] to-purple-900 p-8 flex flex-col justify-center">
-            <span className="inline-block rounded-full bg-amber-400/20 border border-amber-400/40 px-3 py-1 text-xs font-bold text-amber-400 uppercase tracking-wider mb-4">{text.tag}</span>
-            <div className="text-3xl font-extrabold text-white leading-tight whitespace-pre-line mb-4">{text.title}</div>
-            <div className="flex items-center gap-2 mt-2">
-              <Gift className="h-5 w-5 text-amber-400" />
-              <span className="text-sm font-bold text-amber-400">{text.guarantee}</span>
+          <div className={`bg-gradient-to-br ${style.gradient} p-7 flex flex-col justify-center gap-3`}>
+            <span className="inline-block w-fit rounded-full bg-white/15 border border-white/20 px-3 py-1 text-xs font-bold text-white uppercase tracking-wider">{t.tag}</span>
+            <div className="text-2xl font-extrabold text-white leading-tight">{t.title}</div>
+            <div className="flex items-center gap-2 mt-1">
+              <Gift className="h-4 w-4 text-amber-300 shrink-0" />
+              <span className="text-sm font-bold text-amber-300">{t.guarantee}</span>
             </div>
-            <p className="text-xs text-slate-400 mt-3">{text.sub}</p>
+            <p className="text-xs text-white/60">{t.sub}</p>
           </div>
-          {/* Right — form */}
-          <div className="bg-zinc-900 p-8 flex flex-col justify-center">
+          <div className="bg-zinc-900 p-7 flex flex-col justify-center">
             {sent ? (
               <div className="flex flex-col items-center py-4 gap-3">
-                <div className="text-4xl">🎉</div>
-                <p className="font-bold text-white text-center">{text.success}</p>
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-900/40 border border-emerald-500/30">
+                  <CheckCircle className="h-7 w-7 text-emerald-400" />
+                </div>
+                <p className="font-bold text-white text-center">{t.success}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder={text.namePh}
-                  className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm font-medium focus:border-purple-500 focus:outline-none" data-testid="input-popup-exit-name" />
-                <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={text.phonePh}
-                  className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm font-medium focus:border-purple-500 focus:outline-none" data-testid="input-popup-exit-phone" />
-                <button type="submit" className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 py-4 text-sm font-extrabold text-white hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg" data-testid="button-popup-exit-submit">
-                  {text.cta} <ArrowRight className="inline h-4 w-4 ml-1" />
+                <CourseField lang={lang} value={course} onChange={setCourse} detectedCourse={detectedCourse} testId="field-popup-exit-course" />
+                <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder={t.namePh} className={INPUT_CLASS} data-testid="input-popup-exit-name" />
+                <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={t.phonePh} className={INPUT_CLASS} data-testid="input-popup-exit-phone" />
+                <button type="submit" className={`w-full rounded-xl bg-gradient-to-r ${style.gradient} py-4 text-sm font-extrabold text-white hover:opacity-90 transition-all shadow-lg`} data-testid="button-popup-exit-submit">
+                  {t.cta} <ArrowRight className="inline h-4 w-4 ml-1" />
                 </button>
               </form>
             )}
@@ -281,6 +303,7 @@ export default function PopupManager() {
   const [location] = useLocation();
   const triggeredRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const detectedCourse = detectCourse(location);
 
   const showPopup = useCallback((type: PopupType) => {
     if (triggeredRef.current) return;
@@ -290,34 +313,23 @@ export default function PopupManager() {
     setActivePopup(type);
   }, []);
 
-  const closePopup = useCallback(() => {
-    setActivePopup(null);
-  }, []);
+  const closePopup = useCallback(() => setActivePopup(null), []);
 
   useEffect(() => {
     triggeredRef.current = false;
   }, [location]);
 
   useEffect(() => {
-    // Time-based trigger: 25 seconds
-    timerRef.current = setTimeout(() => {
-      showPopup("time");
-    }, 25000);
+    timerRef.current = setTimeout(() => showPopup("consult"), 25000);
 
-    // Scroll-based trigger: 60% of page
     const handleScroll = () => {
       const scrolled = window.scrollY;
       const total = document.body.scrollHeight - window.innerHeight;
-      if (total > 0 && scrolled / total > 0.6) {
-        showPopup("scroll");
-      }
+      if (total > 0 && scrolled / total > 0.6) showPopup("discount");
     };
 
-    // Exit intent trigger: mouse leaves viewport top
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 10) {
-        showPopup("exit");
-      }
+      if (e.clientY <= 10) showPopup("exit");
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -334,15 +346,15 @@ export default function PopupManager() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4"
       onClick={(e) => { if (e.target === e.currentTarget) closePopup(); }}
       data-testid="popup-overlay"
       role="dialog"
       aria-modal="true"
     >
-      {activePopup === "time" && <TimePopup onClose={closePopup} />}
-      {activePopup === "scroll" && <ScrollPopup onClose={closePopup} />}
-      {activePopup === "exit" && <ExitPopup onClose={closePopup} />}
+      {activePopup === "consult"  && <ConsultPopup  onClose={closePopup} detectedCourse={detectedCourse} />}
+      {activePopup === "discount" && <DiscountPopup onClose={closePopup} detectedCourse={detectedCourse} />}
+      {activePopup === "exit"     && <ExitPopup     onClose={closePopup} detectedCourse={detectedCourse} />}
     </div>
   );
 }
