@@ -184,6 +184,28 @@ export default function Header() {
             >
               {t.nav.results}
             </a>
+
+            {/* Blog */}
+            <a
+              href="/blog"
+              className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                location === "/blog" || location.startsWith("/blog/") ? "text-purple-400 bg-purple-600/20" : "text-zinc-300 hover:text-white hover:bg-zinc-800"
+              }`}
+              data-testid="link-nav-blog"
+            >
+              {t.nav.blog}
+            </a>
+
+            {/* Contacts */}
+            <a
+              href="/contacts"
+              className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                location === "/contacts" ? "text-purple-400 bg-purple-600/20" : "text-zinc-300 hover:text-white hover:bg-zinc-800"
+              }`}
+              data-testid="link-nav-contacts"
+            >
+              {t.nav.contacts}
+            </a>
           </nav>
         </div>
 
