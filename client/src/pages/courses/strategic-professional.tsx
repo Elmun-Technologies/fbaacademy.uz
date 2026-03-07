@@ -186,7 +186,7 @@ export default function StrategicProfessionalPage() {
       </section>
 
       {/* 4 Papers — 2+2 layout */}
-      <section className="py-14 sm:py-20" data-testid="section-sp-papers">
+      <section className="py-16 sm:py-24" data-testid="section-sp-papers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-sp-papers-title">Imtihon qog'ozlari</h2>
           <p className="mb-10 text-zinc-400">2 ta majburiy + 2 ta ixtiyoriy qog'ozdan birini tanlaysiz</p>
@@ -197,7 +197,7 @@ export default function StrategicProfessionalPage() {
                   <span className={`inline-flex rounded-full px-4 py-1.5 text-sm font-extrabold text-white shadow-md ${paper.badge}`}>{paper.code}</span>
                   <Badge variant="outline" className={`rounded-full text-xs font-bold ${paper.type === "Majburiy" ? "border-amber-400 text-amber-400" : "border-slate-400 text-zinc-400"}`}>{paper.type}</Badge>
                 </div>
-                <h3 className="mb-2 text-lg font-extrabold">{paper.name}</h3>
+                <h3 className="mb-2 text-lg font-extrabold text-white">{paper.name}</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">{paper.desc}</p>
               </div>
             ))}
@@ -206,7 +206,7 @@ export default function StrategicProfessionalPage() {
       </section>
 
       {/* Career Path Timeline */}
-      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-career-path">
+      <section className="bg-[#0d0d0d] py-16 sm:py-24" data-testid="section-career-path">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">CFO bo'lish yo'li</h2>
           <p className="mb-10 text-zinc-500">ACCA Strategic Professional sertifikati bilan karyerangiz qanday o'sadi</p>
@@ -224,7 +224,7 @@ export default function StrategicProfessionalPage() {
       </section>
 
       {/* YouTube */}
-      <section className="py-14" data-testid="section-sp-video">
+      <section className="py-16 sm:py-20" data-testid="section-sp-video">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
@@ -261,7 +261,7 @@ export default function StrategicProfessionalPage() {
       </section>
 
       {/* Modules */}
-      <section className="py-14" data-testid="section-sp-modules">
+      <section className="py-16 sm:py-20" data-testid="section-sp-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">Kurs dasturi</h2>
           <div className="mb-6 flex flex-wrap gap-2">
@@ -346,7 +346,7 @@ export default function StrategicProfessionalPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-14" data-testid="section-sp-faq">
+      <section className="py-16 sm:py-20" data-testid="section-sp-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">Ko'p beriladigan savollar</h2>
           <div className="mx-auto max-w-3xl">

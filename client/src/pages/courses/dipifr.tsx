@@ -490,7 +490,7 @@ export default function DipIFRPage() {
                   <CheckCircle2 className="h-4 w-4 text-indigo-500" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold leading-snug">{f.title}</h3>
+                  <h3 className="text-base font-bold leading-snug text-white">{f.title}</h3>
                   <p className="mt-1.5 text-sm text-zinc-400 leading-relaxed">{f.desc}</p>
                 </div>
               </div>
@@ -545,7 +545,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 4. FOR WHOM ===== */}
-      <section className="py-14 sm:py-20" data-testid="section-for-whom">
+      <section className="py-16 sm:py-24" data-testid="section-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.forWhom}</h2>
           <p className="mb-10 text-zinc-400">Xalqaro moliyaviy hisobot standartlarini o'rganmoqchi bo'lganlar uchun</p>
@@ -593,7 +593,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 6. IFRS STANDARDS TABLE ===== */}
-      <section className="py-14" data-testid="section-ifrs-standards">
+      <section className="py-16 sm:py-20" data-testid="section-ifrs-standards">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">O'rganiladigan IFRS/IAS standartlari</h2>
           <p className="mb-6 text-zinc-400">Kursda quyidagi asosiy standartlarni amaliyotda qo'llashni o'rganasiz</p>
@@ -649,7 +649,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 8. VIDEO + WHY ===== */}
-      <section className="py-14 sm:py-20" data-testid="section-dipifr-video">
+      <section className="py-16 sm:py-24" data-testid="section-dipifr-video">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
@@ -723,16 +723,19 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 10. SALARY ===== */}
-      <section className="py-14" data-testid="section-dipifr-salary">
+      <section className="py-16 sm:py-20" data-testid="section-dipifr-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-zinc-900 p-6 shadow-2xl sm:p-10">
+          <div className="rounded-3xl bg-zinc-900 p-8 shadow-2xl sm:p-12">
             <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">DipIFR bilan maosh darajasi</h2>
             <p className="mb-8 text-zinc-500">O'zbekistondagi moliya va buxgalteriya sohasidagi taxminiy maosh</p>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {course.salaryLevels.map((level, i) => (
-                <div key={i} className="rounded-2xl bg-indigo-400 p-4 sm:p-5 transition-all" style={{ maxWidth: `${45 + i * 27}%`, minWidth: "240px" }} data-testid={`dipifr-salary-${i}`}>
-                  <div className="text-lg font-extrabold text-white sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm font-medium text-indigo-100">{level.level} — {level.description}</div>
+                <div key={i} className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-800/80 p-5 transition-all hover:border-indigo-500/30 hover:bg-zinc-800" style={{ maxWidth: `${45 + i * 27}%`, minWidth: "240px" }} data-testid={`dipifr-salary-${i}`}>
+                  <div className="absolute left-0 top-0 h-full w-1 rounded-l-2xl bg-gradient-to-b from-indigo-400 to-violet-600" />
+                  <div className="pl-3">
+                    <div className="text-xl font-extrabold text-indigo-300 sm:text-2xl">{level.salary} so'm dan</div>
+                    <div className="mt-0.5 text-sm text-zinc-400">{level.level} — {level.description}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -786,7 +789,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 12. CORPORATE TRAINING ===== */}
-      <section className="py-14" data-testid="section-corporate">
+      <section className="py-16 sm:py-20" data-testid="section-corporate">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-800 to-slate-900">
             <div className="grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_360px] lg:gap-12">
@@ -910,7 +913,7 @@ export default function DipIFRPage() {
       </section>
 
       {/* ===== 15. FAQ ===== */}
-      <section className="py-14 sm:py-20" data-testid="section-faq">
+      <section className="py-16 sm:py-24" data-testid="section-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Savollarga javob beramiz</h2>
           <div className="mb-8 flex gap-2">

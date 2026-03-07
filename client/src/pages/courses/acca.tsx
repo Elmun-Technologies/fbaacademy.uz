@@ -267,22 +267,22 @@ export default function AccaPage() {
       </section>
 
       {/* ACCA 3-Stage Roadmap */}
-      <section className="py-14 sm:py-20" data-testid="section-roadmap">
+      <section className="py-16 sm:py-24" data-testid="section-roadmap">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Badge variant="outline" className="mb-4 rounded-full border-purple-500/30 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-purple-400">{tx.roadmapLabel}</Badge>
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-roadmap-title">{tx.roadmapTitle}</h2>
           <p className="mb-10 text-zinc-400">{tx.roadmapDesc}</p>
-          <div className="relative grid gap-6 md:grid-cols-3">
-            <div className="absolute left-0 right-0 top-8 hidden h-0.5 bg-gradient-to-r from-sky-400 via-emerald-400 to-amber-400 md:block md:mx-[16.7%]" />
+          <div className="relative grid gap-8 md:grid-cols-3">
+            <div className="absolute left-0 right-0 top-9 hidden h-0.5 bg-gradient-to-r from-sky-400 via-emerald-400 to-amber-400 md:block md:mx-[16.7%]" />
             {ACCA_STAGES.map((stage, i) => (
               <Link key={i} href={stage.href}>
-                <div className="course-card group cursor-pointer rounded-2xl border border-white/10 bg-zinc-900 p-6" data-testid={`card-stage-${i}`}>
+                <div className="course-card group cursor-pointer rounded-2xl border border-white/10 bg-zinc-900 p-7 sm:p-8" data-testid={`card-stage-${i}`}>
                   <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${stage.color} text-2xl font-extrabold text-white shadow-md icon-glow-purple animate-float`} style={{ animationDelay: `${i * 400}ms` }}>{i + 1}</div>
                   <Badge className={`mb-3 rounded-full bg-gradient-to-r ${stage.color} text-white text-xs font-bold shadow-sm`}>{stage.duration}</Badge>
-                  <h3 className="mb-3 text-lg font-extrabold">{stage.stage}</h3>
-                  <ul className="space-y-1.5">
+                  <h3 className="mb-3 text-lg font-extrabold text-white">{stage.stage}</h3>
+                  <ul className="space-y-2">
                     {stage.papers.map((p, j) => (
-                      <li key={j} className="flex items-center gap-2 text-xs text-zinc-400">
+                      <li key={j} className="flex items-center gap-2 text-sm text-zinc-400">
                         <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" /> {p}
                       </li>
                     ))}
@@ -320,16 +320,19 @@ export default function AccaPage() {
       </section>
 
       {/* Salary */}
-      <section className="py-14 sm:py-20" data-testid="section-salary">
+      <section className="py-16 sm:py-24" data-testid="section-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-zinc-900 p-6 shadow-2xl sm:p-10">
+          <div className="rounded-3xl bg-zinc-900 p-8 shadow-2xl sm:p-12">
             <h2 className="mb-2 text-2xl font-extrabold text-white sm:text-3xl">{t.page.salary.title}</h2>
             <p className="mb-8 text-zinc-500 text-sm">{tx.salaryDemand}</p>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {course.salaryLevels.map((level, i) => (
-                <div key={i} className="rounded-2xl bg-[#c8ff00] p-4 sm:p-5" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "220px" }} data-testid={`salary-${i}`}>
-                  <div className="text-lg font-extrabold text-white sm:text-xl">{level.salary} {t.page.salary.from}</div>
-                  <div className="text-sm font-medium text-zinc-300">{level.level} — {level.description}</div>
+                <div key={i} className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-800/80 p-5 transition-all hover:border-amber-500/30 hover:bg-zinc-800" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "240px" }} data-testid={`salary-${i}`}>
+                  <div className="absolute left-0 top-0 h-full w-1 rounded-l-2xl bg-gradient-to-b from-amber-400 to-amber-600" />
+                  <div className="pl-3">
+                    <div className="text-xl font-extrabold text-amber-300 sm:text-2xl">{level.salary} {t.page.salary.from}</div>
+                    <div className="mt-0.5 text-sm text-zinc-400">{level.level} — {level.description}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -354,7 +357,7 @@ export default function AccaPage() {
       </section>
 
       {/* For Whom */}
-      <section className="py-14 sm:py-20" data-testid="section-for-whom">
+      <section className="py-16 sm:py-24" data-testid="section-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.forWhom}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -411,7 +414,7 @@ export default function AccaPage() {
       </section>
 
       {/* Support */}
-      <section className="py-14 sm:py-20" data-testid="section-support">
+      <section className="py-16 sm:py-24" data-testid="section-support">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.supportTitle}</h2>
           <div className="grid gap-6 sm:grid-cols-3">
@@ -466,7 +469,7 @@ export default function AccaPage() {
       <CourseRelated excludeId="acca" />
 
       {/* FAQ */}
-      <section className="py-14 sm:py-20" data-testid="section-faq">
+      <section className="py-16 sm:py-24" data-testid="section-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.faqTitle}</h2>
           <div className="mx-auto max-w-3xl">

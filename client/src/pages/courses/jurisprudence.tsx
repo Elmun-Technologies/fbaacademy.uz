@@ -358,7 +358,7 @@ export default function JurisprudencePage() {
             {/* Right — form */}
             <div className="course-card rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-xl animate-scale-in delay-200" data-testid="card-law-form">
               <div className="mb-3 flex items-center justify-between">
-                <h3 className="text-lg font-extrabold">Konsultatsiya olish</h3>
+                <h3 className="text-lg font-extrabold text-white">Konsultatsiya olish</h3>
                 <Badge className="rounded-full border-green-500/30 bg-green-900/20 text-green-400 font-semibold text-xs">Bepul</Badge>
               </div>
               <div className="mb-4 rounded-xl bg-amber-900/20 border border-amber-500/30 px-4 py-3">
@@ -373,7 +373,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── FOR WHOM ─────────────────────────────────────────── */}
-      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-law-for-whom">
+      <section className="bg-[#111] py-16 sm:py-24" data-testid="section-law-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-for-whom-title">
             Bu dastur kimlar uchun?
@@ -395,7 +395,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── SKILLS ───────────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-law-skills">
+      <section className="py-16 sm:py-24" data-testid="section-law-skills">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
@@ -419,7 +419,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── ABOUT TRAINING ───────────────────────────────────── */}
-      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-law-about">
+      <section className="bg-[#0d0d0d] py-16 sm:py-24" data-testid="section-law-about">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-about-title">
             O'qish haqida
@@ -445,7 +445,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── CURRICULUM ───────────────────────────────────────── */}
-      <section id="curriculum" className="py-14 sm:py-20" data-testid="section-law-curriculum">
+      <section id="curriculum" className="py-16 sm:py-24" data-testid="section-law-curriculum">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-curriculum-title">
             Kursning qisqa dasturi
@@ -473,7 +473,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── TRAINING ORDER ───────────────────────────────────── */}
-      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-law-training-order">
+      <section className="bg-[#111] py-16 sm:py-24" data-testid="section-law-training-order">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-2 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-order-title">
             O'qish tartibi
@@ -497,7 +497,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── FBA BENEFITS ─────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-law-fba-benefits">
+      <section className="py-16 sm:py-24" data-testid="section-law-fba-benefits">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-fba-benefits-title">
             FBA Academy da o'qish — bu:
@@ -519,7 +519,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── TEACHERS ─────────────────────────────────────────── */}
-      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-law-teachers">
+      <section className="bg-[#111] py-16 sm:py-24" data-testid="section-law-teachers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-2 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-teachers-title">
             O'qituvchilar
@@ -545,7 +545,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── LICENSE & DIPLOMA ────────────────────────────────── */}
-      <section className="py-14" data-testid="section-law-diploma">
+      <section className="py-16 sm:py-20" data-testid="section-law-diploma">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 lg:grid-cols-2">
             {/* License */}
@@ -603,7 +603,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── PRICING ──────────────────────────────────────────── */}
-      <section id="pricing" className="py-14 sm:py-20" data-testid="section-law-pricing">
+      <section id="pricing" className="py-16 sm:py-24" data-testid="section-law-pricing">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-pricing-title">
             O'qish narxi
@@ -645,7 +645,7 @@ export default function JurisprudencePage() {
 
             {/* Form */}
             <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-xl" data-testid="card-law-pricing-form">
-              <h3 className="mb-4 text-lg font-extrabold">Kursga yozilish yoki bepul konsultatsiya</h3>
+              <h3 className="mb-4 text-lg font-extrabold text-white">Kursga yozilish yoki bepul konsultatsiya</h3>
               <LeadForm source="course-jurisprudence-pricing" buttonText="Ariza topshirish" />
             </div>
           </div>
@@ -674,7 +674,7 @@ export default function JurisprudencePage() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-law-faq">
+      <section className="py-16 sm:py-24" data-testid="section-law-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-law-faq-title">
             {t.page.faqTitle}
@@ -692,7 +692,7 @@ export default function JurisprudencePage() {
 
           {/* Bottom CTA */}
           <div className="mt-10 max-w-3xl rounded-2xl bg-amber-600 p-6 text-white sm:p-8" data-testid="law-faq-bottom-cta">
-            <h3 className="text-lg font-extrabold sm:text-xl">Savollaringiz qoldimi?</h3>
+            <h3 className="text-lg font-extrabold sm:text-xl text-white">Savollaringiz qoldimi?</h3>
             <p className="mt-2 text-amber-100 text-sm">Qabul komissiyasidan maslahat oling</p>
             <div className="mt-5 max-w-sm">
               <LeadForm source="course-jurisprudence-faq" buttonText="Ariza topshirish" />

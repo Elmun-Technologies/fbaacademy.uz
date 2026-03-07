@@ -494,7 +494,7 @@ export default function OneCPage() {
                   <CheckCircle2 className="h-4 w-4 text-blue-500" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold leading-snug">{f.title}</h3>
+                  <h3 className="text-base font-bold leading-snug text-white">{f.title}</h3>
                   <p className="mt-1.5 text-sm text-zinc-400 leading-relaxed">{f.desc}</p>
                 </div>
               </div>
@@ -549,7 +549,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 4. SKILLS + TOOLS ===== */}
-      <section className="py-14 sm:py-20" data-testid="section-skills-tools">
+      <section className="py-16 sm:py-24" data-testid="section-skills-tools">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">O'qishdan keyingi ko'nikmalaringiz</h2>
           <p className="mb-10 text-zinc-400">Ish beruvchilarning talablariga to'liq mos keladi</p>
@@ -631,7 +631,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 6. PORTFOLIO PROJECTS ===== */}
-      <section id="program" className="py-14 sm:py-20" data-testid="section-projects">
+      <section id="program" className="py-16 sm:py-24" data-testid="section-projects">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">Portfolio uchun {course.projects}+ yirik loyiha</h2>
           <p className="mb-10 text-zinc-400">Real kompaniya ma'lumotlari bilan ishlaysiz</p>
@@ -723,7 +723,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 9. CAREER HELP ===== */}
-      <section className="py-14 sm:py-20" data-testid="section-career">
+      <section className="py-16 sm:py-24" data-testid="section-career">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="overflow-hidden rounded-3xl bg-zinc-900 p-8 sm:p-10">
             <div className="grid gap-10 lg:grid-cols-[1fr_auto]">
@@ -796,7 +796,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 11. COURSE MODULES ===== */}
-      <section className="py-14" data-testid="section-modules">
+      <section className="py-16 sm:py-20" data-testid="section-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">{t.page.curriculum}</h2>
           <div className="mx-auto max-w-3xl">
@@ -921,7 +921,7 @@ export default function OneCPage() {
       </section>
 
       {/* ===== 14. FAQ ===== */}
-      <section className="py-14 sm:py-20" data-testid="section-faq">
+      <section className="py-16 sm:py-24" data-testid="section-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Savollaringizga javob beramiz</h2>
 

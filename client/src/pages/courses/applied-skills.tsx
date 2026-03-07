@@ -145,7 +145,7 @@ export default function AppliedSkillsPage() {
       </section>
 
       {/* 6 Paper Grid */}
-      <section className="py-14 sm:py-20" data-testid="section-six-papers">
+      <section className="py-16 sm:py-24" data-testid="section-six-papers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-papers-title">6 ta ACCA imtihon qog'ozi</h2>
           <p className="mb-10 text-zinc-400">Barcha 6 ta qog'ozni FBA Academy'da o'rganasiz — mantiqiy ketma-ketlikda</p>
@@ -192,15 +192,18 @@ export default function AppliedSkillsPage() {
       </section>
 
       {/* Salary */}
-      <section className="py-14" data-testid="section-as-salary">
+      <section className="py-16 sm:py-20" data-testid="section-as-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-zinc-900 p-6 shadow-2xl sm:p-10">
+          <div className="rounded-3xl bg-zinc-900 p-8 shadow-2xl sm:p-12">
             <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">Maosh darajasi</h2>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {course.salaryLevels.map((level, i) => (
-                <div key={i} className="rounded-2xl bg-[#c8ff00] p-4 sm:p-5" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "200px" }} data-testid={`as-salary-${i}`}>
-                  <div className="text-lg font-extrabold text-white sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm font-medium text-zinc-300">{level.level} — {level.description}</div>
+                <div key={i} className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-800/80 p-5 transition-all hover:border-emerald-500/30 hover:bg-zinc-800" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "240px" }} data-testid={`as-salary-${i}`}>
+                  <div className="absolute left-0 top-0 h-full w-1 rounded-l-2xl bg-gradient-to-b from-emerald-400 to-teal-600" />
+                  <div className="pl-3">
+                    <div className="text-xl font-extrabold text-emerald-300 sm:text-2xl">{level.salary} so'm dan</div>
+                    <div className="mt-0.5 text-sm text-zinc-400">{level.level} — {level.description}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -226,7 +229,7 @@ export default function AppliedSkillsPage() {
       </section>
 
       {/* Modules */}
-      <section className="py-14" data-testid="section-as-modules">
+      <section className="py-16 sm:py-20" data-testid="section-as-modules">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">Kurs dasturi</h2>
           <div className="mb-6 flex flex-wrap gap-2">
@@ -330,7 +333,7 @@ export default function AppliedSkillsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-14" data-testid="section-as-faq">
+      <section className="py-16 sm:py-20" data-testid="section-as-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">Ko'p beriladigan savollar</h2>
           <div className="mx-auto max-w-3xl">

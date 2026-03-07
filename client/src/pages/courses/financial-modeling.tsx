@@ -456,7 +456,7 @@ export default function FinancialModelingPage() {
             {/* Right — form card */}
             <div className="course-card rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-xl animate-scale-in delay-200" data-testid="card-fm-form">
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-lg font-extrabold">Konsultatsiya olish</h3>
+                <h3 className="text-lg font-extrabold text-white">Konsultatsiya olish</h3>
                 <span className="rounded-full bg-rose-500 px-3 py-1 text-xs font-extrabold text-white">-50% chegirma</span>
               </div>
               <div className="mb-4 rounded-xl bg-amber-900/20 border border-amber-500/30 px-4 py-3">
@@ -499,7 +499,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── FINANCIAL MODEL = UNIVERSAL TOOL ─────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-fm-universal">
+      <section className="py-16 sm:py-24" data-testid="section-fm-universal">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="overflow-hidden rounded-2xl shadow-2xl">
@@ -523,7 +523,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── CAREER VACANCIES ─────────────────────────────────── */}
-      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-fm-career">
+      <section className="bg-[#111] py-16 sm:py-24" data-testid="section-fm-career">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-career-title">
             Kursdan keyin quyidagi vakansiyalarga da'vo qilishingiz mumkin:
@@ -549,7 +549,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── INDUSTRIES ──────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-fm-industries">
+      <section className="py-16 sm:py-24" data-testid="section-fm-industries">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-industries-title">
             Qaysi sohalarda moliyaviy modellar kerak
@@ -571,7 +571,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── FOR WHOM — dark cards ─────────────────────────────── */}
-      <section className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-fm-for-whom">
+      <section className="bg-[#0d0d0d] py-16 sm:py-24" data-testid="section-fm-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-fm-for-whom-title">
             Bu kurs kimlar uchun foydali
@@ -589,7 +589,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── SKILLS GRID ──────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-fm-skills">
+      <section className="py-16 sm:py-24" data-testid="section-fm-skills">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-skills-title">
             Nimalarga o'rganasiz
@@ -625,7 +625,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── CURRICULUM ───────────────────────────────────────── */}
-      <section id="curriculum" className="py-14 sm:py-20" data-testid="section-fm-curriculum">
+      <section id="curriculum" className="py-16 sm:py-24" data-testid="section-fm-curriculum">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-2 flex items-center gap-2">
             <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-curriculum-title">{t.page.curriculum}</h2>
@@ -722,7 +722,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── PRACTICAL PROJECTS ───────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-fm-projects">
+      <section className="py-16 sm:py-24" data-testid="section-fm-projects">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-projects-title">
             Kursda amaliy tajriba olasiz
@@ -748,7 +748,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── TEACHERS ─────────────────────────────────────────── */}
-      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-fm-teachers">
+      <section className="bg-[#111] py-16 sm:py-24" data-testid="section-fm-teachers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-2 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-teachers-title">
             O'qituvchilaringiz — 10 yildan ortiq tajribali amaliyotchi moliyachilar
@@ -774,7 +774,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── CURATOR ──────────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-fm-curator">
+      <section className="py-16 sm:py-24" data-testid="section-fm-curator">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
@@ -821,7 +821,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── WHY FBA ──────────────────────────────────────────── */}
-      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-fm-why-fba">
+      <section className="bg-[#111] py-16 sm:py-24" data-testid="section-fm-why-fba">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-why-fba-title">
             Nima uchun FBA Academy?
@@ -839,7 +839,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── REVIEWS ──────────────────────────────────────────── */}
-      <section className="py-14 sm:py-20" data-testid="section-fm-reviews">
+      <section className="py-16 sm:py-24" data-testid="section-fm-reviews">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-2 flex items-baseline justify-between">
             <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-reviews-title">Talabalar sharhlari</h2>
@@ -869,7 +869,7 @@ export default function FinancialModelingPage() {
       </section>
 
       {/* ── PRICING ──────────────────────────────────────────── */}
-      <section id="pricing" className="bg-[#0d0d0d] py-14 sm:py-20" data-testid="section-fm-pricing">
+      <section id="pricing" className="bg-[#0d0d0d] py-16 sm:py-24" data-testid="section-fm-pricing">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-fm-pricing-title">Kurs narxi</h2>
           <div className="grid gap-6 lg:grid-cols-[1fr_420px]">
@@ -911,7 +911,7 @@ export default function FinancialModelingPage() {
       <CourseRelated excludeId="financial-modeling" />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
-      <section className="bg-[#111] py-14 sm:py-20" data-testid="section-fm-faq">
+      <section className="bg-[#111] py-16 sm:py-24" data-testid="section-fm-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-fm-faq-title">{t.page.faqTitle}</h2>
           <div className="mx-auto max-w-3xl">

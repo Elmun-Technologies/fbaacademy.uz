@@ -144,16 +144,19 @@ export default function CourseDetail() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl bg-zinc-900 border border-white/10 p-6 sm:p-10 dark:border">
             <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl" data-testid="text-salary-title">Maoshingiz tajriba bilan o'sadi</h2>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {course.salaryLevels.map((level, i) => (
                 <div
                   key={i}
-                  className="rounded-2xl bg-[#c8ff00] p-4 sm:p-5 transition-all duration-300"
-                  style={{ maxWidth: `${55 + i * 22}%`, minWidth: "220px" }}
+                  className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-800/80 p-5 transition-all duration-300 hover:border-amber-500/30 hover:bg-zinc-800"
+                  style={{ maxWidth: `${55 + i * 22}%`, minWidth: "240px" }}
                   data-testid={`card-salary-${i}`}
                 >
-                  <div className="text-lg font-extrabold text-white sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm font-medium text-zinc-300">{level.level} — {level.description}</div>
+                  <div className="absolute left-0 top-0 h-full w-1 rounded-l-2xl bg-gradient-to-b from-amber-400 to-amber-600" />
+                  <div className="pl-3">
+                    <div className="text-xl font-extrabold text-amber-300 sm:text-2xl">{level.salary} so'm dan</div>
+                    <div className="mt-0.5 text-sm text-zinc-400">{level.level} — {level.description}</div>
+                  </div>
                 </div>
               ))}
             </div>

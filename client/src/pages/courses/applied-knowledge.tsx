@@ -177,7 +177,7 @@ export default function AppliedKnowledgePage() {
       </section>
 
       {/* 3 Paper Cards */}
-      <section className="py-14 sm:py-20" data-testid="section-papers">
+      <section className="py-16 sm:py-24" data-testid="section-papers">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-papers-title">3 ta ACCA imtihon qog'ozi</h2>
           <p className="mb-10 text-zinc-400">Har birini ketma-ket yoki bir vaqtda topshirishingiz mumkin</p>
@@ -185,7 +185,7 @@ export default function AppliedKnowledgePage() {
             {PAPERS.map((paper, i) => (
               <div key={i} className="group rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" data-testid={`paper-card-${i}`}>
                 <div className={`mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br ${paper.color} px-4 py-2 text-lg font-extrabold text-white shadow-md`}>{paper.code}</div>
-                <h3 className="mb-2 text-lg font-extrabold">{paper.name}</h3>
+                <h3 className="mb-2 text-lg font-extrabold text-white">{paper.name}</h3>
                 <p className="mb-4 text-sm text-zinc-400 leading-relaxed">{paper.desc}</p>
                 <div className="flex items-center justify-between">
                   <Badge variant="outline" className="rounded-full text-xs">{paper.difficulty}</Badge>
@@ -209,15 +209,18 @@ export default function AppliedKnowledgePage() {
       </section>
 
       {/* Salary */}
-      <section className="py-14 sm:py-20" data-testid="section-ak-salary">
+      <section className="py-16 sm:py-24" data-testid="section-ak-salary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-zinc-900 p-6 shadow-2xl sm:p-10">
+          <div className="rounded-3xl bg-zinc-900 p-8 shadow-2xl sm:p-12">
             <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">Maoshingiz tajriba bilan o'sadi</h2>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {course.salaryLevels.map((level, i) => (
-                <div key={i} className="rounded-2xl bg-[#c8ff00] p-4 sm:p-5" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "200px" }} data-testid={`ak-salary-${i}`}>
-                  <div className="text-lg font-extrabold text-white sm:text-xl">{level.salary} so'm dan</div>
-                  <div className="text-sm font-medium text-zinc-300">{level.level} — {level.description}</div>
+                <div key={i} className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-800/80 p-5 transition-all hover:border-sky-500/30 hover:bg-zinc-800" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "240px" }} data-testid={`ak-salary-${i}`}>
+                  <div className="absolute left-0 top-0 h-full w-1 rounded-l-2xl bg-gradient-to-b from-sky-400 to-blue-600" />
+                  <div className="pl-3">
+                    <div className="text-xl font-extrabold text-sky-300 sm:text-2xl">{level.salary} so'm dan</div>
+                    <div className="mt-0.5 text-sm text-zinc-400">{level.level} — {level.description}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -240,7 +243,7 @@ export default function AppliedKnowledgePage() {
       </section>
 
       {/* Skills */}
-      <section className="py-14" data-testid="section-ak-skills">
+      <section className="py-16 sm:py-20" data-testid="section-ak-skills">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Siz o'rganasiz</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -295,7 +298,7 @@ export default function AppliedKnowledgePage() {
       </section>
 
       {/* Who it's for */}
-      <section className="py-14" data-testid="section-ak-for-whom">
+      <section className="py-16 sm:py-20" data-testid="section-ak-for-whom">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Kurs kimlar uchun?</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -379,7 +382,7 @@ export default function AppliedKnowledgePage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-14" data-testid="section-ak-faq">
+      <section className="py-16 sm:py-20" data-testid="section-ak-faq">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">Ko'p beriladigan savollar</h2>
           <div className="mx-auto max-w-3xl">
