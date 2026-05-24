@@ -1,150 +1,905 @@
 {
-  "client/src/pages/dynamic-course-page.tsx": {
-    "file": "chunks/dynamic-course-page-IDXGAJEI.js",
-    "isEntry": true,
-    "src": "client/src/pages/dynamic-course-page.tsx"
-  },
-  "client/src/pages/blog-detail.tsx": {
-    "file": "chunks/blog-detail-LIFTWA3V.js",
-    "isEntry": true,
-    "src": "client/src/pages/blog-detail.tsx"
-  },
-  "client/src/pages/cabinet.tsx": {
-    "file": "chunks/cabinet-2HNQCHUX.js",
-    "isEntry": true,
-    "src": "client/src/pages/cabinet.tsx"
-  },
-  "client/src/pages/privacy.tsx": {
-    "file": "chunks/privacy-YGTC6OVH.js",
-    "isEntry": true,
-    "src": "client/src/pages/privacy.tsx"
-  },
-  "client/src/pages/not-found.tsx": {
-    "file": "chunks/not-found-ZV7DR2F6.js",
-    "isEntry": true,
-    "src": "client/src/pages/not-found.tsx"
-  },
-  "client/src/pages/blog.tsx": {
-    "file": "chunks/blog-CQF6MZZ2.js",
-    "isEntry": true,
-    "src": "client/src/pages/blog.tsx"
-  },
-  "client/src/pages/contacts.tsx": {
-    "file": "chunks/contacts-RPIDWHTP.js",
-    "isEntry": true,
-    "src": "client/src/pages/contacts.tsx"
-  },
-  "client/src/pages/career-center.tsx": {
-    "file": "chunks/career-center-IEDSLWNF.js",
-    "isEntry": true,
-    "src": "client/src/pages/career-center.tsx"
-  },
-  "client/src/pages/case-studies.tsx": {
-    "file": "chunks/case-studies-HQ23EPZY.js",
-    "isEntry": true,
-    "src": "client/src/pages/case-studies.tsx"
-  },
-  "client/src/pages/faq.tsx": {
-    "file": "chunks/faq-EPY4WDZM.js",
-    "isEntry": true,
-    "src": "client/src/pages/faq.tsx"
-  },
-  "client/src/pages/corporate-training.tsx": {
-    "file": "chunks/corporate-training-4CYD3L4K.js",
-    "isEntry": true,
-    "src": "client/src/pages/corporate-training.tsx"
-  },
-  "client/src/pages/partnership.tsx": {
-    "file": "chunks/partnership-TGTNRHZT.js",
-    "isEntry": true,
-    "src": "client/src/pages/partnership.tsx"
-  },
-  "client/src/pages/home.tsx": {
-    "file": "chunks/home-2UVVMJY3.js",
-    "isEntry": true,
-    "src": "client/src/pages/home.tsx"
-  },
-  "client/src/pages/courses/dipifr.tsx": {
-    "file": "chunks/dipifr-YJFJN5FR.js",
-    "isEntry": true,
-    "src": "client/src/pages/courses/dipifr.tsx"
-  },
-  "client/src/pages/courses/financial-modeling.tsx": {
-    "file": "chunks/financial-modeling-XV7BARZO.js",
-    "isEntry": true,
-    "src": "client/src/pages/courses/financial-modeling.tsx"
-  },
-  "client/src/pages/courses/jurisprudence.tsx": {
-    "file": "chunks/jurisprudence-6O5TXQCP.js",
-    "isEntry": true,
-    "src": "client/src/pages/courses/jurisprudence.tsx"
-  },
-  "client/src/pages/courses/one-c.tsx": {
-    "file": "chunks/one-c-F7UCPY7F.js",
-    "isEntry": true,
-    "src": "client/src/pages/courses/one-c.tsx"
-  },
-  "client/src/pages/courses/msfo.tsx": {
-    "file": "chunks/msfo-4RIDBQ3R.js",
-    "isEntry": true,
-    "src": "client/src/pages/courses/msfo.tsx"
-  },
-  "client/src/pages/courses/f3-financial-accounting.tsx": {
-    "file": "chunks/f3-financial-accounting-75DLINOP.js",
-    "isEntry": true,
-    "src": "client/src/pages/courses/f3-financial-accounting.tsx"
-  },
-  "client/src/pages/teachers.tsx": {
-    "file": "chunks/teachers-W3KY2XIH.js",
-    "isEntry": true,
-    "src": "client/src/pages/teachers.tsx"
-  },
-  "client/src/pages/about.tsx": {
-    "file": "chunks/about-5AB6OROP.js",
-    "isEntry": true,
-    "src": "client/src/pages/about.tsx"
-  },
-  "client/src/main.tsx": {
-    "file": "main.js",
-    "isEntry": true,
-    "src": "client/src/main.tsx",
-    "css": [
-      "main.css"
+  "_accordion-CmigbFkY.js": {
+    "file": "assets/accordion-CmigbFkY.js",
+    "name": "accordion",
+    "imports": [
+      "index.html",
+      "_index-DXwZ0kB3.js",
+      "_layout-kSOZmGw8.js"
     ]
   },
-  "client/src/pages/catalog.tsx": {
-    "file": "chunks/catalog-7BJJEUTL.js",
-    "isEntry": true,
-    "src": "client/src/pages/catalog.tsx"
+  "_award-CHF0JjW_.js": {
+    "file": "assets/award-CHF0JjW_.js",
+    "name": "award",
+    "imports": [
+      "index.html"
+    ]
   },
-  "client/src/components/lead-form.tsx": {
-    "file": "chunks/lead-form-C736LV3B.js",
-    "isEntry": true,
-    "src": "client/src/components/lead-form.tsx"
+  "_badge-DjY1Nr5_.js": {
+    "file": "assets/badge-DjY1Nr5_.js",
+    "name": "badge",
+    "imports": [
+      "index.html"
+    ]
   },
-  "client/src/components/lead-form-extended.tsx": {
-    "file": "chunks/lead-form-extended-2JELG3Y7.js",
-    "isEntry": true,
-    "src": "client/src/components/lead-form-extended.tsx"
+  "_blog-categories-mVHdX7Xa.js": {
+    "file": "assets/blog-categories-mVHdX7Xa.js",
+    "name": "blog-categories",
+    "imports": [
+      "index.html"
+    ]
   },
-  "client/src/pages/courses/acca.tsx": {
-    "file": "chunks/acca-7H3L7P7P.js",
-    "isEntry": true,
-    "src": "client/src/pages/courses/acca.tsx"
+  "_blog-data-CI4PKTAE.js": {
+    "file": "assets/blog-data-CI4PKTAE.js",
+    "name": "blog-data",
+    "imports": [
+      "_site-data-4V05CjDi.js"
+    ]
   },
-  "client/src/pages/courses/applied-knowledge.tsx": {
-    "file": "chunks/applied-knowledge-HLLCGT5M.js",
-    "isEntry": true,
-    "src": "client/src/pages/courses/applied-knowledge.tsx"
+  "_book-open-BBnLUgew.js": {
+    "file": "assets/book-open-BBnLUgew.js",
+    "name": "book-open",
+    "imports": [
+      "index.html"
+    ]
   },
-  "client/src/pages/courses/applied-skills.tsx": {
-    "file": "chunks/applied-skills-LAPIJUOL.js",
-    "isEntry": true,
-    "src": "client/src/pages/courses/applied-skills.tsx"
+  "_breadcrumb-cDnnZ50t.js": {
+    "file": "assets/breadcrumb-cDnnZ50t.js",
+    "name": "breadcrumb",
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js"
+    ]
   },
-  "client/src/pages/courses/strategic-professional.tsx": {
-    "file": "chunks/strategic-professional-TZKSM6IM.js",
+  "_briefcase-C34jF6n4.js": {
+    "file": "assets/briefcase-C34jF6n4.js",
+    "name": "briefcase",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_building-2-qQOP0EJX.js": {
+    "file": "assets/building-2-qQOP0EJX.js",
+    "name": "building-2",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_calendar-Duh3L5kR.js": {
+    "file": "assets/calendar-Duh3L5kR.js",
+    "name": "calendar",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_certificate-preview-media-BTvzTBbH.js": {
+    "file": "assets/certificate-preview-media-BTvzTBbH.js",
+    "name": "certificate-preview-media",
+    "imports": [
+      "index.html",
+      "_public-media-picture-D4XvOtXf.js",
+      "_layout-kSOZmGw8.js"
+    ]
+  },
+  "_chart-column-H6xY9gNz.js": {
+    "file": "assets/chart-column-H6xY9gNz.js",
+    "name": "chart-column",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_check-CAC-3cMf.js": {
+    "file": "assets/check-CAC-3cMf.js",
+    "name": "check",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_circle-check-D50kJm96.js": {
+    "file": "assets/circle-check-D50kJm96.js",
+    "name": "circle-check",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_circle-help-D0wONqVN.js": {
+    "file": "assets/circle-help-D0wONqVN.js",
+    "name": "circle-help",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_clock-BFD3DiUN.js": {
+    "file": "assets/clock-BFD3DiUN.js",
+    "name": "clock",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_course-certificates-section-Dv1aBjNg.js": {
+    "file": "assets/course-certificates-section-Dv1aBjNg.js",
+    "name": "course-certificates-section",
+    "imports": [
+      "index.html",
+      "_badge-DjY1Nr5_.js",
+      "_certificate-preview-media-BTvzTBbH.js"
+    ]
+  },
+  "_course-reviews-section-BQEdbZss.js": {
+    "file": "assets/course-reviews-section-BQEdbZss.js",
+    "name": "course-reviews-section",
+    "imports": [
+      "index.html",
+      "_certificate-preview-media-BTvzTBbH.js"
+    ]
+  },
+  "_file-text-CgGckml_.js": {
+    "file": "assets/file-text-CgGckml_.js",
+    "name": "file-text",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_form-D-kDP_CX.js": {
+    "file": "assets/form-D-kDP_CX.js",
+    "name": "form",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_globe-CiOUS3vX.js": {
+    "file": "assets/globe-CiOUS3vX.js",
+    "name": "globe",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_index-CibxJM-5.js": {
+    "file": "assets/index-CibxJM-5.js",
+    "name": "index",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_index-DXwZ0kB3.js": {
+    "file": "assets/index-DXwZ0kB3.js",
+    "name": "index",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_input-BZTgo_Bw.js": {
+    "file": "assets/input-BZTgo_Bw.js",
+    "name": "input",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_instructor-photo-DOCtVXv7.js": {
+    "file": "assets/instructor-photo-DOCtVXv7.js",
+    "name": "instructor-photo",
+    "imports": [
+      "index.html",
+      "_public-media-picture-D4XvOtXf.js",
+      "_layout-kSOZmGw8.js"
+    ]
+  },
+  "_instructors-C1gFEHRM.js": {
+    "file": "assets/instructors-C1gFEHRM.js",
+    "name": "instructors"
+  },
+  "_layout-kSOZmGw8.js": {
+    "file": "assets/layout-kSOZmGw8.js",
+    "name": "layout",
+    "imports": [
+      "index.html"
+    ],
+    "dynamicImports": [
+      "src/pages/home.tsx",
+      "src/pages/catalog.tsx",
+      "src/pages/courses/acca.tsx",
+      "src/pages/courses/applied-knowledge.tsx",
+      "src/pages/courses/applied-skills.tsx",
+      "src/pages/courses/strategic-professional.tsx",
+      "src/pages/courses/dipifr.tsx",
+      "src/pages/courses/financial-modeling.tsx",
+      "src/pages/courses/jurisprudence.tsx",
+      "src/pages/courses/one-c.tsx",
+      "src/pages/courses/msfo.tsx",
+      "src/pages/courses/f3-financial-accounting.tsx",
+      "src/pages/teachers.tsx",
+      "src/pages/about.tsx",
+      "src/pages/blog.tsx",
+      "src/pages/contacts.tsx",
+      "src/pages/career-center.tsx",
+      "src/pages/case-studies.tsx",
+      "src/pages/faq.tsx",
+      "src/pages/corporate-training.tsx",
+      "src/pages/partnership.tsx"
+    ]
+  },
+  "_lazy-lead-form-2soRTVo6.js": {
+    "file": "assets/lazy-lead-form-2soRTVo6.js",
+    "name": "lazy-lead-form",
+    "imports": [
+      "index.html"
+    ],
+    "dynamicImports": [
+      "src/components/lead-form.tsx",
+      "src/components/lead-form-extended.tsx"
+    ]
+  },
+  "_localize-content-CarVk9VF.js": {
+    "file": "assets/localize-content-CarVk9VF.js",
+    "name": "localize-content"
+  },
+  "_lock-Bjf_91al.js": {
+    "file": "assets/lock-Bjf_91al.js",
+    "name": "lock",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_message-circle-CKeu5oHP.js": {
+    "file": "assets/message-circle-CKeu5oHP.js",
+    "name": "message-circle",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_partner-logos-P04dHz3J.js": {
+    "file": "assets/partner-logos-P04dHz3J.js",
+    "name": "partner-logos",
+    "imports": [
+      "_layout-kSOZmGw8.js"
+    ]
+  },
+  "_partner-logos-marquee-C0jp2yE6.js": {
+    "file": "assets/partner-logos-marquee-C0jp2yE6.js",
+    "name": "partner-logos-marquee",
+    "imports": [
+      "index.html",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "_public-media-picture-D4XvOtXf.js": {
+    "file": "assets/public-media-picture-D4XvOtXf.js",
+    "name": "public-media-picture",
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js"
+    ]
+  },
+  "_quote-BfCu-c32.js": {
+    "file": "assets/quote-BfCu-c32.js",
+    "name": "quote",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_search-xx-dPc6o.js": {
+    "file": "assets/search-xx-dPc6o.js",
+    "name": "search",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_site-data-4V05CjDi.js": {
+    "file": "assets/site-data-4V05CjDi.js",
+    "name": "site-data",
+    "imports": [
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "_star-BjbM4-Mt.js": {
+    "file": "assets/star-BjbM4-Mt.js",
+    "name": "star",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_target-8GLeNRGn.js": {
+    "file": "assets/target-8GLeNRGn.js",
+    "name": "target",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_trending-up-CMZSSKqr.js": {
+    "file": "assets/trending-up-CMZSSKqr.js",
+    "name": "trending-up",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_users-qp1isw8i.js": {
+    "file": "assets/users-qp1isw8i.js",
+    "name": "users",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_youtube-embed-DSGf1Jfw.js": {
+    "file": "assets/youtube-embed-DSGf1Jfw.js",
+    "name": "youtube-embed",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "index.html": {
+    "file": "assets/index-D-Du8A8S.js",
+    "name": "index",
+    "src": "index.html",
     "isEntry": true,
-    "src": "client/src/pages/courses/strategic-professional.tsx"
+    "dynamicImports": [
+      "src/pages/home.tsx",
+      "src/pages/catalog.tsx",
+      "src/pages/dynamic-course-page.tsx",
+      "src/pages/teachers.tsx",
+      "src/pages/about.tsx",
+      "src/pages/blog.tsx",
+      "src/pages/blog-detail.tsx",
+      "src/pages/contacts.tsx",
+      "src/pages/cabinet.tsx",
+      "src/pages/career-center.tsx",
+      "src/pages/case-studies.tsx",
+      "src/pages/faq.tsx",
+      "src/pages/corporate-training.tsx",
+      "src/pages/partnership.tsx",
+      "src/pages/privacy.tsx",
+      "src/pages/not-found.tsx",
+      "src/pages/courses/acca.tsx",
+      "src/pages/courses/applied-knowledge.tsx",
+      "src/pages/courses/applied-skills.tsx",
+      "src/pages/courses/strategic-professional.tsx",
+      "src/pages/courses/dipifr.tsx",
+      "src/pages/courses/financial-modeling.tsx",
+      "src/pages/courses/jurisprudence.tsx",
+      "src/pages/courses/one-c.tsx",
+      "src/pages/courses/msfo.tsx",
+      "src/pages/courses/f3-financial-accounting.tsx"
+    ],
+    "css": [
+      "assets/index-EaItWHS6.css"
+    ]
+  },
+  "src/components/lead-form-extended.tsx": {
+    "file": "assets/lead-form-extended-C_puSKcO.js",
+    "name": "lead-form-extended",
+    "src": "src/components/lead-form-extended.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_form-D-kDP_CX.js",
+      "_layout-kSOZmGw8.js",
+      "_input-BZTgo_Bw.js",
+      "_index-DXwZ0kB3.js",
+      "_index-CibxJM-5.js",
+      "_check-CAC-3cMf.js"
+    ]
+  },
+  "src/components/lead-form.tsx": {
+    "file": "assets/lead-form-CUljlNlL.js",
+    "name": "lead-form",
+    "src": "src/components/lead-form.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_form-D-kDP_CX.js",
+      "_layout-kSOZmGw8.js",
+      "_input-BZTgo_Bw.js"
+    ]
+  },
+  "src/pages/about.tsx": {
+    "file": "assets/about-VdKr6eel.js",
+    "name": "about",
+    "src": "src/pages/about.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_accordion-CmigbFkY.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_blog-data-CI4PKTAE.js",
+      "_site-data-4V05CjDi.js",
+      "_instructor-photo-DOCtVXv7.js",
+      "_partner-logos-marquee-C0jp2yE6.js",
+      "_localize-content-CarVk9VF.js",
+      "_circle-check-D50kJm96.js",
+      "_chart-column-H6xY9gNz.js",
+      "_briefcase-C34jF6n4.js",
+      "_trending-up-CMZSSKqr.js",
+      "_index-DXwZ0kB3.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js",
+      "_public-media-picture-D4XvOtXf.js"
+    ]
+  },
+  "src/pages/blog-detail.tsx": {
+    "file": "assets/blog-detail-D-0mdUw-.js",
+    "name": "blog-detail",
+    "src": "src/pages/blog-detail.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_badge-DjY1Nr5_.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_blog-data-CI4PKTAE.js",
+      "_site-data-4V05CjDi.js",
+      "_blog-categories-mVHdX7Xa.js",
+      "_localize-content-CarVk9VF.js",
+      "_book-open-BBnLUgew.js",
+      "_calendar-Duh3L5kR.js",
+      "_clock-BFD3DiUN.js",
+      "_check-CAC-3cMf.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "src/pages/blog.tsx": {
+    "file": "assets/blog-cEf4VYJH.js",
+    "name": "blog",
+    "src": "src/pages/blog.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_badge-DjY1Nr5_.js",
+      "_blog-data-CI4PKTAE.js",
+      "_site-data-4V05CjDi.js",
+      "_localize-content-CarVk9VF.js",
+      "_blog-categories-mVHdX7Xa.js",
+      "_clock-BFD3DiUN.js",
+      "_search-xx-dPc6o.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "src/pages/cabinet.tsx": {
+    "file": "assets/cabinet-rgVM-oAu.js",
+    "name": "cabinet",
+    "src": "src/pages/cabinet.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_badge-DjY1Nr5_.js",
+      "_lock-Bjf_91al.js"
+    ]
+  },
+  "src/pages/career-center.tsx": {
+    "file": "assets/career-center-CJMXR7jg.js",
+    "name": "career-center",
+    "src": "src/pages/career-center.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_badge-DjY1Nr5_.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_blog-data-CI4PKTAE.js",
+      "_site-data-4V05CjDi.js",
+      "_partner-logos-marquee-C0jp2yE6.js",
+      "_localize-content-CarVk9VF.js",
+      "_file-text-CgGckml_.js",
+      "_users-qp1isw8i.js",
+      "_target-8GLeNRGn.js",
+      "_briefcase-C34jF6n4.js",
+      "_building-2-qQOP0EJX.js",
+      "_trending-up-CMZSSKqr.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "src/pages/case-studies.tsx": {
+    "file": "assets/case-studies-xIZ3H88A.js",
+    "name": "case-studies",
+    "src": "src/pages/case-studies.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_course-reviews-section-BQEdbZss.js",
+      "_blog-data-CI4PKTAE.js",
+      "_site-data-4V05CjDi.js",
+      "_certificate-preview-media-BTvzTBbH.js",
+      "_localize-content-CarVk9VF.js",
+      "_trending-up-CMZSSKqr.js",
+      "_quote-BfCu-c32.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js",
+      "_public-media-picture-D4XvOtXf.js"
+    ]
+  },
+  "src/pages/catalog.tsx": {
+    "file": "assets/catalog-DC5TqA_d.js",
+    "name": "catalog",
+    "src": "src/pages/catalog.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_input-BZTgo_Bw.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_site-data-4V05CjDi.js",
+      "_blog-data-CI4PKTAE.js",
+      "_localize-content-CarVk9VF.js",
+      "_search-xx-dPc6o.js",
+      "_clock-BFD3DiUN.js",
+      "_star-BjbM4-Mt.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "src/pages/contacts.tsx": {
+    "file": "assets/contacts-BE3edwLO.js",
+    "name": "contacts",
+    "src": "src/pages/contacts.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_clock-BFD3DiUN.js",
+      "_message-circle-CKeu5oHP.js",
+      "_book-open-BBnLUgew.js",
+      "_circle-help-D0wONqVN.js"
+    ]
+  },
+  "src/pages/corporate-training.tsx": {
+    "file": "assets/corporate-training-_ds7OfcB.js",
+    "name": "corporate-training",
+    "src": "src/pages/corporate-training.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_badge-DjY1Nr5_.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_award-CHF0JjW_.js",
+      "_chart-column-H6xY9gNz.js",
+      "_target-8GLeNRGn.js",
+      "_book-open-BBnLUgew.js",
+      "_users-qp1isw8i.js",
+      "_building-2-qQOP0EJX.js",
+      "_clock-BFD3DiUN.js",
+      "_circle-check-D50kJm96.js"
+    ]
+  },
+  "src/pages/courses/acca.tsx": {
+    "file": "assets/acca-Beln5tge.js",
+    "name": "acca",
+    "src": "src/pages/courses/acca.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_blog-data-CI4PKTAE.js",
+      "_site-data-4V05CjDi.js",
+      "_award-CHF0JjW_.js",
+      "_circle-check-D50kJm96.js",
+      "_book-open-BBnLUgew.js",
+      "_trending-up-CMZSSKqr.js",
+      "_globe-CiOUS3vX.js",
+      "_users-qp1isw8i.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "src/pages/courses/applied-knowledge.tsx": {
+    "file": "assets/applied-knowledge-BJWmka4F.js",
+    "name": "applied-knowledge",
+    "src": "src/pages/courses/applied-knowledge.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_circle-check-D50kJm96.js",
+      "_book-open-BBnLUgew.js",
+      "_trending-up-CMZSSKqr.js",
+      "_award-CHF0JjW_.js",
+      "_users-qp1isw8i.js",
+      "_clock-BFD3DiUN.js"
+    ]
+  },
+  "src/pages/courses/applied-skills.tsx": {
+    "file": "assets/applied-skills-Z3z4268P.js",
+    "name": "applied-skills",
+    "src": "src/pages/courses/applied-skills.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_award-CHF0JjW_.js",
+      "_circle-check-D50kJm96.js",
+      "_book-open-BBnLUgew.js",
+      "_trending-up-CMZSSKqr.js",
+      "_users-qp1isw8i.js",
+      "_clock-BFD3DiUN.js"
+    ]
+  },
+  "src/pages/courses/dipifr.tsx": {
+    "file": "assets/dipifr-g40C2ZzP.js",
+    "name": "dipifr",
+    "src": "src/pages/courses/dipifr.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_accordion-CmigbFkY.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_blog-data-CI4PKTAE.js",
+      "_site-data-4V05CjDi.js",
+      "_course-certificates-section-Dv1aBjNg.js",
+      "_public-media-picture-D4XvOtXf.js",
+      "_course-reviews-section-BQEdbZss.js",
+      "_certificate-preview-media-BTvzTBbH.js",
+      "_circle-check-D50kJm96.js",
+      "_book-open-BBnLUgew.js",
+      "_file-text-CgGckml_.js",
+      "_chart-column-H6xY9gNz.js",
+      "_users-qp1isw8i.js",
+      "_award-CHF0JjW_.js",
+      "_index-DXwZ0kB3.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js",
+      "_badge-DjY1Nr5_.js"
+    ]
+  },
+  "src/pages/courses/f3-financial-accounting.tsx": {
+    "file": "assets/f3-financial-accounting-D7CFuWVM.js",
+    "name": "f3-financial-accounting",
+    "src": "src/pages/courses/f3-financial-accounting.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_youtube-embed-DSGf1Jfw.js",
+      "_instructors-C1gFEHRM.js",
+      "_instructor-photo-DOCtVXv7.js",
+      "_circle-check-D50kJm96.js",
+      "_book-open-BBnLUgew.js",
+      "_trending-up-CMZSSKqr.js",
+      "_award-CHF0JjW_.js",
+      "_clock-BFD3DiUN.js",
+      "_users-qp1isw8i.js",
+      "_public-media-picture-D4XvOtXf.js"
+    ]
+  },
+  "src/pages/courses/financial-modeling.tsx": {
+    "file": "assets/financial-modeling-DhkoKC8Q.js",
+    "name": "financial-modeling",
+    "src": "src/pages/courses/financial-modeling.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_trending-up-CMZSSKqr.js",
+      "_circle-check-D50kJm96.js",
+      "_clock-BFD3DiUN.js",
+      "_award-CHF0JjW_.js",
+      "_users-qp1isw8i.js"
+    ]
+  },
+  "src/pages/courses/jurisprudence.tsx": {
+    "file": "assets/jurisprudence-CKLs1wy8.js",
+    "name": "jurisprudence",
+    "src": "src/pages/courses/jurisprudence.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_award-CHF0JjW_.js",
+      "_circle-check-D50kJm96.js",
+      "_book-open-BBnLUgew.js",
+      "_users-qp1isw8i.js",
+      "_trending-up-CMZSSKqr.js"
+    ]
+  },
+  "src/pages/courses/msfo.tsx": {
+    "file": "assets/msfo-B9HW9bTM.js",
+    "name": "msfo",
+    "src": "src/pages/courses/msfo.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_partner-logos-marquee-C0jp2yE6.js",
+      "_circle-check-D50kJm96.js",
+      "_award-CHF0JjW_.js",
+      "_users-qp1isw8i.js",
+      "_clock-BFD3DiUN.js",
+      "_book-open-BBnLUgew.js",
+      "_building-2-qQOP0EJX.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "src/pages/courses/one-c.tsx": {
+    "file": "assets/one-c-BpAK3tCF.js",
+    "name": "one-c",
+    "src": "src/pages/courses/one-c.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_book-open-BBnLUgew.js",
+      "_circle-check-D50kJm96.js",
+      "_users-qp1isw8i.js",
+      "_trending-up-CMZSSKqr.js",
+      "_award-CHF0JjW_.js"
+    ]
+  },
+  "src/pages/courses/strategic-professional.tsx": {
+    "file": "assets/strategic-professional-p4WtMR_Q.js",
+    "name": "strategic-professional",
+    "src": "src/pages/courses/strategic-professional.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_award-CHF0JjW_.js",
+      "_circle-check-D50kJm96.js",
+      "_book-open-BBnLUgew.js",
+      "_trending-up-CMZSSKqr.js",
+      "_clock-BFD3DiUN.js",
+      "_users-qp1isw8i.js"
+    ]
+  },
+  "src/pages/dynamic-course-page.tsx": {
+    "file": "assets/dynamic-course-page-BczDRTWQ.js",
+    "name": "dynamic-course-page",
+    "src": "src/pages/dynamic-course-page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_index-DXwZ0kB3.js",
+      "_layout-kSOZmGw8.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_instructor-photo-DOCtVXv7.js",
+      "_index-CibxJM-5.js",
+      "_lock-Bjf_91al.js",
+      "_file-text-CgGckml_.js",
+      "_circle-help-D0wONqVN.js",
+      "_clock-BFD3DiUN.js",
+      "_calendar-Duh3L5kR.js",
+      "_award-CHF0JjW_.js",
+      "_youtube-embed-DSGf1Jfw.js",
+      "_message-circle-CKeu5oHP.js",
+      "_localize-content-CarVk9VF.js",
+      "_blog-data-CI4PKTAE.js",
+      "_site-data-4V05CjDi.js",
+      "_badge-DjY1Nr5_.js",
+      "_book-open-BBnLUgew.js",
+      "_star-BjbM4-Mt.js",
+      "_users-qp1isw8i.js",
+      "_circle-check-D50kJm96.js",
+      "_accordion-CmigbFkY.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_course-certificates-section-Dv1aBjNg.js",
+      "_public-media-picture-D4XvOtXf.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js",
+      "_certificate-preview-media-BTvzTBbH.js"
+    ]
+  },
+  "src/pages/faq.tsx": {
+    "file": "assets/faq-D2O4kYza.js",
+    "name": "faq",
+    "src": "src/pages/faq.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_accordion-CmigbFkY.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_message-circle-CKeu5oHP.js",
+      "_index-DXwZ0kB3.js"
+    ]
+  },
+  "src/pages/home.tsx": {
+    "file": "assets/home-w3KxAfD5.js",
+    "name": "home",
+    "src": "src/pages/home.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_instructor-photo-DOCtVXv7.js",
+      "_youtube-embed-DSGf1Jfw.js",
+      "_site-data-4V05CjDi.js",
+      "_partner-logos-marquee-C0jp2yE6.js",
+      "_localize-content-CarVk9VF.js",
+      "_award-CHF0JjW_.js",
+      "_trending-up-CMZSSKqr.js",
+      "_book-open-BBnLUgew.js",
+      "_briefcase-C34jF6n4.js",
+      "_circle-check-D50kJm96.js",
+      "_clock-BFD3DiUN.js",
+      "_star-BjbM4-Mt.js",
+      "_users-qp1isw8i.js",
+      "_quote-BfCu-c32.js",
+      "_public-media-picture-D4XvOtXf.js",
+      "_instructors-C1gFEHRM.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "src/pages/not-found.tsx": {
+    "file": "assets/not-found-DvFdxjG7.js",
+    "name": "not-found",
+    "src": "src/pages/not-found.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_book-open-BBnLUgew.js"
+    ]
+  },
+  "src/pages/partnership.tsx": {
+    "file": "assets/partnership-DAjSY1Yz.js",
+    "name": "partnership",
+    "src": "src/pages/partnership.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_badge-DjY1Nr5_.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_lazy-lead-form-2soRTVo6.js",
+      "_partner-logos-marquee-C0jp2yE6.js",
+      "_building-2-qQOP0EJX.js",
+      "_users-qp1isw8i.js",
+      "_globe-CiOUS3vX.js",
+      "_trending-up-CMZSSKqr.js",
+      "_circle-check-D50kJm96.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
+  },
+  "src/pages/privacy.tsx": {
+    "file": "assets/privacy-m0waCIFK.js",
+    "name": "privacy",
+    "src": "src/pages/privacy.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_breadcrumb-cDnnZ50t.js"
+    ]
+  },
+  "src/pages/teachers.tsx": {
+    "file": "assets/teachers-B7Tz_tUa.js",
+    "name": "teachers",
+    "src": "src/pages/teachers.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_layout-kSOZmGw8.js",
+      "_badge-DjY1Nr5_.js",
+      "_breadcrumb-cDnnZ50t.js",
+      "_instructor-photo-DOCtVXv7.js",
+      "_blog-data-CI4PKTAE.js",
+      "_site-data-4V05CjDi.js",
+      "_instructors-C1gFEHRM.js",
+      "_localize-content-CarVk9VF.js",
+      "_award-CHF0JjW_.js",
+      "_users-qp1isw8i.js",
+      "_book-open-BBnLUgew.js",
+      "_star-BjbM4-Mt.js",
+      "_public-media-picture-D4XvOtXf.js",
+      "_partner-logos-P04dHz3J.js"
+    ]
   }
 }

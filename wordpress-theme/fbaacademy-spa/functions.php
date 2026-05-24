@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
-const FBA_THEME_VERSION = '1.3.2';
+const FBA_THEME_VERSION = '1.3.3';
 const FBA_TEXT_DOMAIN = 'fbaacademy-spa';
 
 function fba_after_setup_theme() {
@@ -784,9 +784,9 @@ function fba_get_manifest() {
 
 function fba_find_entry_chunk_key($manifest) {
   $preferred_keys = array(
+    'index.html',
     'client/src/main.tsx',
     'main.tsx',
-    'index.html',
   );
 
   foreach ($preferred_keys as $preferred_key) {
