@@ -1,7 +1,5 @@
 import Header from "./header";
 import Footer from "./footer";
-import GamificationWidget from "@/components/gamification/widget";
-import PopupManager from "@/components/popup-manager";
 import ScrollToTop from "@/components/scroll-to-top";
 
 interface LayoutProps {
@@ -10,13 +8,13 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 min-w-0 pt-14 lg:pt-16">
+        <div className="page-enter">{children}</div>
+      </main>
       <Footer />
-      <GamificationWidget />
       <ScrollToTop />
-      <PopupManager />
     </div>
   );
 }

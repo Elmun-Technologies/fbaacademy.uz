@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { X, ArrowRight, Flame, Gift, CheckCircle, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { useLocation } from "wouter";
+import { CONTACT_PHONE_DISPLAY, CONTACT_EMAIL } from "@/lib/constants";
 
 type PopupType = "consult" | "discount" | "exit" | null;
 
@@ -28,21 +29,20 @@ const COURSE_OPTIONS = [
   { id: "applied-knowledge", uz: "Applied Knowledge (F1–F3)", ru: "Applied Knowledge (F1–F3)", en: "Applied Knowledge (F1–F3)" },
   { id: "applied-skills",    uz: "Applied Skills (F4–F9)",   ru: "Applied Skills (F4–F9)",   en: "Applied Skills (F4–F9)" },
   { id: "strategic-professional", uz: "Strategic Professional", ru: "Strategic Professional", en: "Strategic Professional" },
-  { id: "dipifr",            uz: "DipIFR (Rus tili)",        ru: "DipIFR (на русском)",      en: "DipIFR" },
-  { id: "financial-modeling", uz: "Financial Modeling",      ru: "Финансовое моделирование", en: "Financial Modeling" },
-  { id: "jurisprudence",     uz: "Yuridik Savodxonlik",      ru: "Юридическая грамотность",  en: "Business Jurisprudence" },
-  { id: "one-c",             uz: "1C: Buxgalteriya",         ru: "1С: Бухгалтерия",          en: "1C: Accounting" },
+  { id: "dipifr",            uz: "DipIFR",                   ru: "DipIFR",                   en: "DipIFR" },
+  { id: "msfo",              uz: "МСФО",                     ru: "МСФО",                     en: "IFRS Course" },
+  { id: "financial-analyst", uz: "Financial Analyst",        ru: "Financial Analyst",         en: "Financial Analyst" },
 ];
 
 const COURSE_STYLES: Record<string, { gradient: string; accent: string; border: string }> = {
   "applied-knowledge":   { gradient: "from-sky-700 to-blue-800",      accent: "text-sky-300",    border: "border-sky-500/40" },
   "applied-skills":      { gradient: "from-teal-700 to-emerald-800",  accent: "text-emerald-300", border: "border-emerald-500/40" },
-  "strategic-professional": { gradient: "from-purple-700 to-violet-800", accent: "text-purple-300", border: "border-purple-500/40" },
+  "strategic-professional": { gradient: "from-brand-dark to-violet-800", accent: "text-brand-accent-light", border: "border-brand-accent/40" },
   "dipifr":              { gradient: "from-indigo-700 to-violet-800", accent: "text-indigo-300",  border: "border-indigo-500/40" },
   "financial-modeling":  { gradient: "from-amber-700 to-orange-800",  accent: "text-amber-300",   border: "border-amber-500/40" },
-  "jurisprudence":       { gradient: "from-rose-700 to-pink-800",     accent: "text-rose-300",    border: "border-rose-500/40" },
+  "jurisprudence":       { gradient: "from-rose-700 to-brand-dark",    accent: "text-rose-300",    border: "border-rose-500/40" },
   "one-c":               { gradient: "from-green-700 to-teal-800",    accent: "text-green-300",   border: "border-green-500/40" },
-  "default":             { gradient: "from-purple-700 to-pink-800",   accent: "text-purple-300",  border: "border-purple-500/40" },
+  "default":             { gradient: "from-brand-dark to-brand-dark",  accent: "text-brand-accent-light",  border: "border-brand-accent/40" },
 };
 
 function detectCourse(location: string): string {
@@ -165,7 +165,7 @@ function ConsultPopup({ onClose, detectedCourse }: PopupInnerProps) {
               <button type="submit" className={`w-full rounded-xl bg-gradient-to-r ${style.gradient} py-3.5 text-sm font-bold text-white hover:opacity-90 transition-all shadow-lg mt-1`} data-testid="button-popup-consult-submit">
                 {t.cta} <ArrowRight className="inline h-4 w-4 ml-1" />
               </button>
-              <p className="text-center text-xs text-zinc-600">+998 78 113 80 90 · fbaacademy@gmail.com</p>
+              <p className="text-center text-xs text-zinc-600">{CONTACT_PHONE_DISPLAY} · {CONTACT_EMAIL}</p>
             </form>
           )}
         </div>
@@ -183,10 +183,10 @@ function DiscountPopup({ onClose, detectedCourse }: PopupInnerProps) {
   const [spots] = useState(() => Math.floor(Math.random() * 5) + 3);
 
   const t = {
-    uz: { badge: "Maxsus taklif", title: "-25%", titleSub: "chegirma — faqat bugun", sub: "Joylar cheklangan, bugunga qadar amal qiladi", spots: "Qolgan joy", cta: "Chegirma bilan yozilish", success: "Tabriklaymiz!", namePh: "Ismingiz", phonePh: "Telefon raqamingiz" },
-    ru: { badge: "Спецпредложение", title: "-25%", titleSub: "скидка — только сегодня", sub: "Мест ограничено, акция до конца дня", spots: "Осталось мест", cta: "Записаться со скидкой", success: "Поздравляем!", namePh: "Ваше имя", phonePh: "Номер телефона" },
-    en: { badge: "Special offer", title: "-25%", titleSub: "discount — today only", sub: "Limited spots, offer valid today only", spots: "Spots left", cta: "Enroll with discount", success: "Congratulations!", namePh: "Your name", phonePh: "Phone number" },
-  }[lang as "uz" | "ru" | "en"] ?? { badge: "Maxsus taklif", title: "-25%", titleSub: "chegirma", sub: "", spots: "Joy", cta: "Yozilish", success: "Tabriklaymiz!", namePh: "Ism", phonePh: "Telefon" };
+    uz: { badge: "Joylar cheklangan", spots: "Qolgan joy", cta: "Bepul konsultatsiya olish", success: "Tabriklaymiz! Tez orada bog'lanamiz.", namePh: "Ismingiz", phonePh: "Telefon raqamingiz" },
+    ru: { badge: "Мест ограничено", spots: "Осталось мест", cta: "Получить консультацию", success: "Поздравляем! Скоро свяжемся.", namePh: "Ваше имя", phonePh: "Номер телефона" },
+    en: { badge: "Limited spots", spots: "Spots left", cta: "Get free consultation", success: "We'll contact you soon!", namePh: "Your name", phonePh: "Phone number" },
+  }[lang as "uz" | "ru" | "en"] ?? { badge: "Joylar cheklangan", spots: "Joy", cta: "Konsultatsiya", success: "Tabriklaymiz!", namePh: "Ism", phonePh: "Telefon" };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -202,10 +202,7 @@ function DiscountPopup({ onClose, detectedCourse }: PopupInnerProps) {
       </button>
       <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-zinc-950">
         <div className="px-7 pt-7 pb-4 text-center">
-          <span className="inline-block rounded-full bg-amber-400/15 border border-amber-400/30 px-3 py-1 text-xs font-bold text-amber-400 uppercase tracking-wider mb-4">{t.badge}</span>
-          <div className="text-6xl font-extrabold text-white leading-none mb-0.5">{t.title}</div>
-          <div className="text-base font-semibold text-amber-400 mb-3">{t.titleSub}</div>
-          <p className="text-xs text-zinc-500 mb-4">{t.sub}</p>
+          <span className="inline-block rounded-full bg-amber-400/15 border border-amber-400/30 px-3 py-1 text-xs font-bold text-amber-400 uppercase tracking-wider mb-5">{t.badge}</span>
           <div className="inline-flex items-center gap-2 rounded-lg bg-red-500/15 border border-red-500/25 px-4 py-2">
             <Flame className="h-4 w-4 text-red-400" />
             <span className="text-sm font-bold text-red-400">{t.spots}: {spots}</span>
@@ -224,7 +221,7 @@ function DiscountPopup({ onClose, detectedCourse }: PopupInnerProps) {
               <CourseField lang={lang} value={course} onChange={setCourse} detectedCourse={detectedCourse} testId="field-popup-discount-course" />
               <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder={t.namePh} className={INPUT_CLASS} data-testid="input-popup-discount-name" />
               <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={t.phonePh} className={INPUT_CLASS} data-testid="input-popup-discount-phone" />
-              <button type="submit" className="w-full rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 py-4 text-sm font-extrabold text-black hover:from-amber-500 hover:to-orange-600 transition-all shadow-lg" data-testid="button-popup-discount-submit">
+              <button type="submit" className="w-full rounded-xl bg-brand py-4 text-sm font-extrabold text-white hover:bg-brand-dark transition-all shadow-lg" data-testid="button-popup-discount-submit">
                 {t.cta}
               </button>
             </form>

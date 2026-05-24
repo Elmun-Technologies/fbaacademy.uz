@@ -9,14 +9,16 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Send } from "lucide-react";
 import { insertLeadSchema } from "@shared/schema";
-import { loadState, saveState, processEvent } from "@/lib/gamification";
+import { useLanguage } from "@/contexts/language-context";
 
-const leadFormSchema = insertLeadSchema.pick({ name: true, phone: true }).extend({
-  name: z.string().min(2, "Ism kamida 2 ta belgidan iborat bo'lishi kerak"),
-  phone: z.string().min(9, "Telefon raqamni kiriting"),
-});
+type LeadFormValues = z.infer<ReturnType<typeof createSchema>>;
 
-type LeadFormValues = z.infer<typeof leadFormSchema>;
+function createSchema(t: { nameValidation: string; phoneValidation: string }) {
+  return insertLeadSchema.pick({ name: true, phone: true }).extend({
+    name: z.string().min(2, t.nameValidation),
+    phone: z.string().min(9, t.phoneValidation),
+  });
+}
 
 interface LeadFormProps {
   source?: string;
@@ -26,11 +28,17 @@ interface LeadFormProps {
   className?: string;
 }
 
-export default function LeadForm({ source = "website", buttonText = "Konsultatsiya olish", compact = false, onSuccess, className }: LeadFormProps) {
+export default function LeadForm({ source = "website", buttonText, compact = false, onSuccess, className }: LeadFormProps) {
   const { toast } = useToast();
+  const { t } = useLanguage();
+
+  const schema = createSchema({
+    nameValidation: t.form.nameValidation,
+    phoneValidation: t.form.phoneValidation,
+  });
 
   const form = useForm<LeadFormValues>({
-    resolver: zodResolver(leadFormSchema),
+    resolver: zodResolver(schema),
     defaultValues: { name: "", phone: "" },
   });
 
@@ -40,24 +48,22 @@ export default function LeadForm({ source = "website", buttonText = "Konsultatsi
     },
     onSuccess: () => {
       toast({
-        title: "Muvaffaqiyatli!",
-        description: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz.",
+        title: t.form.successTitle,
+        description: t.form.successMessage,
       });
       form.reset();
-      const result = processEvent(loadState(), "form_submit");
-      if (result.pointsGained > 0) {
-        saveState(result.newState);
-      }
       onSuccess?.();
     },
     onError: () => {
       toast({
-        title: "Xatolik",
-        description: "Iltimos, qaytadan urinib ko'ring.",
+        title: t.form.errorTitle,
+        description: t.form.errorMessage,
         variant: "destructive",
       });
     },
   });
+
+  const resolvedButtonText = buttonText || t.common.freeConsultation;
 
   return (
     <Form {...form}>
@@ -69,7 +75,12 @@ export default function LeadForm({ source = "website", buttonText = "Konsultatsi
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Ismingiz" className="rounded-full" {...field} data-testid="input-lead-name" />
+                  <Input
+                    placeholder={t.form.name}
+                    className="h-11 rounded-xl border-white/15 bg-zinc-950/70 px-4 text-white placeholder:text-zinc-500 focus-visible:ring-brand focus-visible:ring-offset-0"
+                    {...field}
+                    data-testid="input-lead-name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -81,14 +92,25 @@ export default function LeadForm({ source = "website", buttonText = "Konsultatsi
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="+998 90 123 45 67" className="rounded-full" {...field} data-testid="input-lead-phone" />
+                  <Input
+                    type="tel"
+                    placeholder="+998 90 123 45 67"
+                    className="h-11 rounded-xl border-white/15 bg-zinc-950/70 px-4 text-white placeholder:text-zinc-500 focus-visible:ring-brand focus-visible:ring-offset-0"
+                    {...field}
+                    data-testid="input-lead-phone"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={mutation.isPending} className="w-full gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 font-semibold text-white shadow-md hover:from-purple-700 hover:to-pink-700" data-testid="button-submit-lead">
-            {mutation.isPending ? "Yuborilmoqda..." : buttonText}
+          <Button
+            type="submit"
+            disabled={mutation.isPending}
+            className="h-11 w-full gap-2 rounded-xl bg-gradient-to-r from-brand to-brand-dark font-semibold text-white shadow-md hover:from-brand-dark hover:to-brand-dark"
+            data-testid="button-submit-lead"
+          >
+            {mutation.isPending ? t.form.sending : resolvedButtonText}
             {!mutation.isPending && <Send className="h-4 w-4" />}
           </Button>
         </div>

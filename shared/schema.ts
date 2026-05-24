@@ -28,7 +28,12 @@ export const insertLeadSchema = createInsertSchema(leads).pick({
   source: true,
 });
 
+export const newsletterSubscribeSchema = z.object({
+  email: z.string().email(),
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertLead = z.infer<typeof insertLeadSchema>;
+export type NewsletterSubscribeInput = z.infer<typeof newsletterSubscribeSchema>;
 export type Lead = typeof leads.$inferSelect;

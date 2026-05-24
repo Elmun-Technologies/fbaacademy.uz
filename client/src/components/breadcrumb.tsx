@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ChevronRight, Home } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export interface BreadcrumbItem {
   label: string;
@@ -12,7 +13,8 @@ interface BreadcrumbProps {
 }
 
 export default function Breadcrumb({ items, light = false }: BreadcrumbProps) {
-  const all = [{ label: "Bosh sahifa", href: "/" }, ...items];
+  const { t } = useLanguage();
+  const all = [{ label: t.nav.home, href: "/" }, ...items];
   const textColor = light ? "text-zinc-400 hover:text-white" : "text-zinc-500 hover:text-zinc-300";
   const sepColor = light ? "text-zinc-600" : "text-zinc-600";
   const currentColor = light ? "text-slate-200" : "text-foreground";

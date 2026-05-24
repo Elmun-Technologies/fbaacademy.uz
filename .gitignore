@@ -1,6 +1,9 @@
 node_modules
+node_modules_icloud_bak
 dist
 .DS_Store
 server/public
 vite.config.ts.*
 *.tar.gz
+.env
+.env.*

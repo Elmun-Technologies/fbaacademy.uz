@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertLeadSchema } from "@shared/schema";
+import { insertLeadSchema, newsletterSubscribeSchema } from "@shared/schema";
 
 const BASE_URL = "https://fbaacademy.uz";
 
@@ -13,6 +13,8 @@ const STATIC_ROUTES = [
   { path: "/course/applied-skills", priority: "0.8", changefreq: "weekly" },
   { path: "/course/strategic-professional", priority: "0.8", changefreq: "weekly" },
   { path: "/course/dipifr", priority: "0.9", changefreq: "weekly" },
+  { path: "/course/f3-financial-accounting", priority: "0.9", changefreq: "weekly" },
+  { path: "/course/msfo", priority: "0.9", changefreq: "weekly" },
   { path: "/course/financial-modeling", priority: "0.9", changefreq: "weekly" },
   { path: "/course/jurisprudence", priority: "0.8", changefreq: "weekly" },
   { path: "/course/1c-course", priority: "0.8", changefreq: "weekly" },
@@ -26,7 +28,7 @@ const STATIC_ROUTES = [
   { path: "/corporate", priority: "0.7", changefreq: "monthly" },
   { path: "/partnership", priority: "0.6", changefreq: "monthly" },
   { path: "/grants", priority: "0.6", changefreq: "weekly" },
-  { path: "/achievements", priority: "0.5", changefreq: "monthly" },
+  { path: "/privacy", priority: "0.4", changefreq: "yearly" },
 ];
 
 const BLOG_POSTS = [
@@ -42,6 +44,30 @@ const BLOG_POSTS = [
 ];
 
 const TODAY = new Date().toISOString().split("T")[0];
+
+/** Matches SPA: English = clean URL; uz/ru = ?lang= (root uses `/?lang=`). */
+function alternateHref(path: string, lang: "en" | "uz" | "ru"): string {
+  const loc = `${BASE_URL}${path}`;
+  if (lang === "en") {
+    return loc;
+  }
+  const joiner = loc.includes("?") ? "&" : "?";
+  return `${loc}${joiner}lang=${lang}`;
+}
+
+const CERT_PDF_MAX_BYTES = 18 * 1024 * 1024;
+
+function isAllowedPdflinkCertificateUrl(raw: string): boolean {
+  try {
+    const u = new URL(raw.trim());
+    if (u.protocol !== "https:" || u.hostname !== "pdflink.to") return false;
+    return /^\/_\/pdf\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/?$/i.test(
+      u.pathname,
+    );
+  } catch {
+    return false;
+  }
+}
 
 export async function registerRoutes(
   httpServer: Server,
@@ -73,10 +99,93 @@ export async function registerRoutes(
     }
   });
 
+  app.post("/api/newsletter", async (req, res) => {
+    try {
+      const parsed = newsletterSubscribeSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Invalid email" });
+      }
+      await storage.subscribeNewsletter(parsed.data.email);
+      res.status(201).json({ ok: true });
+    } catch {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  /** Same-origin PDF stream for certificate iframe previews (pdflink.to uses X-Frame-Options: DENY). */
+  app.get("/api/certificate-pdf", async (req, res) => {
+    const q = req.query.url;
+    const target = typeof q === "string" ? q.trim() : "";
+    if (!target || !isAllowedPdflinkCertificateUrl(target)) {
+      return res.status(400).type("text/plain").send("Invalid URL");
+    }
+    try {
+      const upstream = await fetch(target, {
+        headers: { Accept: "application/pdf,*/*" },
+        redirect: "follow",
+      });
+      if (!upstream.ok) {
+        return res.status(502).type("text/plain").send("Upstream error");
+      }
+      const len = upstream.headers.get("content-length");
+      if (len && Number.parseInt(len, 10) > CERT_PDF_MAX_BYTES) {
+        return res.status(413).type("text/plain").send("Too large");
+      }
+      const buf = Buffer.from(await upstream.arrayBuffer());
+      if (buf.length > CERT_PDF_MAX_BYTES) {
+        return res.status(413).type("text/plain").send("Too large");
+      }
+      const ct = upstream.headers.get("content-type") || "application/pdf";
+      res.setHeader("Content-Type", ct.split(";")[0].trim());
+      res.setHeader("Content-Disposition", "inline");
+      res.setHeader("Cache-Control", "public, max-age=3600");
+      res.send(buf);
+    } catch {
+      res.status(502).type("text/plain").send("Fetch failed");
+    }
+  });
+
   app.get("/robots.txt", (_req, res) => {
-    res.type("text/plain").send(`User-agent: *
+    res.type("text/plain").send(
+`User-agent: GPTBot
 Allow: /
 Disallow: /api/
+Disallow: /cabinet
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /cabinet
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /cabinet
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /cabinet
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /cabinet
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /api/
+Disallow: /cabinet
+
+User-agent: Bytespider
+Allow: /
+Disallow: /api/
+Disallow: /cabinet
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 Sitemap: ${BASE_URL}/sitemap.xml
 `);
@@ -86,26 +195,28 @@ Sitemap: ${BASE_URL}/sitemap.xml
     const staticUrls = STATIC_ROUTES.map(
       (r) => `
   <url>
-    <loc>${BASE_URL}${r.path}</loc>
+    <loc>${alternateHref(r.path, "en")}</loc>
     <lastmod>${TODAY}</lastmod>
     <changefreq>${r.changefreq}</changefreq>
     <priority>${r.priority}</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="${BASE_URL}${r.path}"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="${BASE_URL}${r.path}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${BASE_URL}${r.path}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${r.path}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${alternateHref(r.path, "en")}"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="${alternateHref(r.path, "uz")}"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="${alternateHref(r.path, "ru")}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${alternateHref(r.path, "en")}"/>
   </url>`
     ).join("");
 
     const blogUrls = BLOG_POSTS.map(
       (id) => `
   <url>
-    <loc>${BASE_URL}/blog/${id}</loc>
+    <loc>${alternateHref(`/blog/${id}`, "en")}</loc>
     <lastmod>${TODAY}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="${BASE_URL}/blog/${id}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}/blog/${id}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${alternateHref(`/blog/${id}`, "en")}"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="${alternateHref(`/blog/${id}`, "uz")}"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="${alternateHref(`/blog/${id}`, "ru")}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${alternateHref(`/blog/${id}`, "en")}"/>
   </url>`
     ).join("");
 
@@ -117,6 +228,10 @@ ${blogUrls}
 </urlset>`;
 
     res.type("application/xml").send(xml);
+  });
+
+  app.get("/achievements", (_req, res) => {
+    res.redirect(301, "/case-studies");
   });
 
   return httpServer;

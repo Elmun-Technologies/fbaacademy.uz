@@ -1,0 +1,150 @@
+{
+  "client/src/pages/dynamic-course-page.tsx": {
+    "file": "chunks/dynamic-course-page-IDXGAJEI.js",
+    "isEntry": true,
+    "src": "client/src/pages/dynamic-course-page.tsx"
+  },
+  "client/src/pages/blog-detail.tsx": {
+    "file": "chunks/blog-detail-LIFTWA3V.js",
+    "isEntry": true,
+    "src": "client/src/pages/blog-detail.tsx"
+  },
+  "client/src/pages/cabinet.tsx": {
+    "file": "chunks/cabinet-2HNQCHUX.js",
+    "isEntry": true,
+    "src": "client/src/pages/cabinet.tsx"
+  },
+  "client/src/pages/privacy.tsx": {
+    "file": "chunks/privacy-YGTC6OVH.js",
+    "isEntry": true,
+    "src": "client/src/pages/privacy.tsx"
+  },
+  "client/src/pages/not-found.tsx": {
+    "file": "chunks/not-found-ZV7DR2F6.js",
+    "isEntry": true,
+    "src": "client/src/pages/not-found.tsx"
+  },
+  "client/src/pages/blog.tsx": {
+    "file": "chunks/blog-CQF6MZZ2.js",
+    "isEntry": true,
+    "src": "client/src/pages/blog.tsx"
+  },
+  "client/src/pages/contacts.tsx": {
+    "file": "chunks/contacts-RPIDWHTP.js",
+    "isEntry": true,
+    "src": "client/src/pages/contacts.tsx"
+  },
+  "client/src/pages/career-center.tsx": {
+    "file": "chunks/career-center-IEDSLWNF.js",
+    "isEntry": true,
+    "src": "client/src/pages/career-center.tsx"
+  },
+  "client/src/pages/case-studies.tsx": {
+    "file": "chunks/case-studies-HQ23EPZY.js",
+    "isEntry": true,
+    "src": "client/src/pages/case-studies.tsx"
+  },
+  "client/src/pages/faq.tsx": {
+    "file": "chunks/faq-EPY4WDZM.js",
+    "isEntry": true,
+    "src": "client/src/pages/faq.tsx"
+  },
+  "client/src/pages/corporate-training.tsx": {
+    "file": "chunks/corporate-training-4CYD3L4K.js",
+    "isEntry": true,
+    "src": "client/src/pages/corporate-training.tsx"
+  },
+  "client/src/pages/partnership.tsx": {
+    "file": "chunks/partnership-TGTNRHZT.js",
+    "isEntry": true,
+    "src": "client/src/pages/partnership.tsx"
+  },
+  "client/src/pages/home.tsx": {
+    "file": "chunks/home-2UVVMJY3.js",
+    "isEntry": true,
+    "src": "client/src/pages/home.tsx"
+  },
+  "client/src/pages/courses/dipifr.tsx": {
+    "file": "chunks/dipifr-YJFJN5FR.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/dipifr.tsx"
+  },
+  "client/src/pages/courses/financial-modeling.tsx": {
+    "file": "chunks/financial-modeling-XV7BARZO.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/financial-modeling.tsx"
+  },
+  "client/src/pages/courses/jurisprudence.tsx": {
+    "file": "chunks/jurisprudence-6O5TXQCP.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/jurisprudence.tsx"
+  },
+  "client/src/pages/courses/one-c.tsx": {
+    "file": "chunks/one-c-F7UCPY7F.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/one-c.tsx"
+  },
+  "client/src/pages/courses/msfo.tsx": {
+    "file": "chunks/msfo-4RIDBQ3R.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/msfo.tsx"
+  },
+  "client/src/pages/courses/f3-financial-accounting.tsx": {
+    "file": "chunks/f3-financial-accounting-75DLINOP.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/f3-financial-accounting.tsx"
+  },
+  "client/src/pages/teachers.tsx": {
+    "file": "chunks/teachers-W3KY2XIH.js",
+    "isEntry": true,
+    "src": "client/src/pages/teachers.tsx"
+  },
+  "client/src/pages/about.tsx": {
+    "file": "chunks/about-5AB6OROP.js",
+    "isEntry": true,
+    "src": "client/src/pages/about.tsx"
+  },
+  "client/src/main.tsx": {
+    "file": "main.js",
+    "isEntry": true,
+    "src": "client/src/main.tsx",
+    "css": [
+      "main.css"
+    ]
+  },
+  "client/src/pages/catalog.tsx": {
+    "file": "chunks/catalog-7BJJEUTL.js",
+    "isEntry": true,
+    "src": "client/src/pages/catalog.tsx"
+  },
+  "client/src/components/lead-form.tsx": {
+    "file": "chunks/lead-form-C736LV3B.js",
+    "isEntry": true,
+    "src": "client/src/components/lead-form.tsx"
+  },
+  "client/src/components/lead-form-extended.tsx": {
+    "file": "chunks/lead-form-extended-2JELG3Y7.js",
+    "isEntry": true,
+    "src": "client/src/components/lead-form-extended.tsx"
+  },
+  "client/src/pages/courses/acca.tsx": {
+    "file": "chunks/acca-7H3L7P7P.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/acca.tsx"
+  },
+  "client/src/pages/courses/applied-knowledge.tsx": {
+    "file": "chunks/applied-knowledge-HLLCGT5M.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/applied-knowledge.tsx"
+  },
+  "client/src/pages/courses/applied-skills.tsx": {
+    "file": "chunks/applied-skills-LAPIJUOL.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/applied-skills.tsx"
+  },
+  "client/src/pages/courses/strategic-professional.tsx": {
+    "file": "chunks/strategic-professional-TZKSM6IM.js",
+    "isEntry": true,
+    "src": "client/src/pages/courses/strategic-professional.tsx"
+  }
+}

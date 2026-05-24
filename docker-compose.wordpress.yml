@@ -1,0 +1,34 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: fba_wp_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wp
+      MYSQL_PASSWORD: wp
+      MYSQL_ROOT_PASSWORD: root
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - wp_db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:6.5-php8.2-apache
+    container_name: fba_wp_app
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wp_app_data:/var/www/html
+      - ./wordpress-theme/fbaacademy-spa:/var/www/html/wp-content/themes/fbaacademy-spa
+
+volumes:
+  wp_db_data:
+  wp_app_data:

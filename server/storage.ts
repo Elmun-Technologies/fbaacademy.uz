@@ -7,15 +7,18 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   createLead(lead: InsertLead): Promise<Lead>;
   getLeads(): Promise<Lead[]>;
+  subscribeNewsletter(email: string): Promise<{ duplicate: boolean }>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
   private leads: Map<string, Lead>;
+  private newsletterEmails: Set<string>;
 
   constructor() {
     this.users = new Map();
     this.leads = new Map();
+    this.newsletterEmails = new Set();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -37,13 +40,25 @@ export class MemStorage implements IStorage {
 
   async createLead(insertLead: InsertLead): Promise<Lead> {
     const id = randomUUID();
-    const lead: Lead = { ...insertLead, id, createdAt: new Date() };
+    const lead: Lead = {
+      ...insertLead,
+      id,
+      source: insertLead.source ?? "website",
+      createdAt: new Date(),
+    };
     this.leads.set(id, lead);
     return lead;
   }
 
   async getLeads(): Promise<Lead[]> {
     return Array.from(this.leads.values());
+  }
+
+  async subscribeNewsletter(email: string): Promise<{ duplicate: boolean }> {
+    const key = email.trim().toLowerCase();
+    const duplicate = this.newsletterEmails.has(key);
+    this.newsletterEmails.add(key);
+    return { duplicate };
   }
 }
 

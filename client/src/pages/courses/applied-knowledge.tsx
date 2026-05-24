@@ -1,470 +1,194 @@
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
-import LeadForm from "@/components/lead-form";
-import YouTubeEmbed from "@/components/youtube-embed";
-import { courses, teachers, faqItems } from "@/lib/data";
-import { CheckCircle2, ArrowRight, Star, Flame, BookOpen, Target, Award, Lightbulb, Clock, Calendar, Wrench, GraduationCap } from "lucide-react";
-import CourseFormatSection from "@/components/course-format-section";
-import CourseBonusesSection from "@/components/course-bonuses-section";
+import { LazyLeadForm, DeferredLeadForm } from "@/components/lazy-lead-form";
+import { CheckCircle2, ArrowRight, BookOpen, Users, Award, GraduationCap, Clock, TrendingUp } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
+import { APPLIED_KNOWLEDGE_PAGE, appliedKnowledgeJsonLd } from "@/lib/i18n/applied-knowledge-page";
 
-const course = courses.find((c) => c.id === "applied-knowledge")!;
-const mentor = teachers.find((t) => t.id === "teacher-1")!;
+const BASE_URL = "https://fbaacademy.uz";
 
-const PAPERS = [
-  {
-    code: "BT / FBT",
-    name: "Business & Technology",
-    desc: "Biznes tashkiliy tuzilmalari, IT tizimlari, boshqaruv va professional etika asoslari.",
-    color: "from-sky-500 to-blue-600",
-    topics: 4,
-    difficulty: "Boshlang'ich",
-  },
-  {
-    code: "MA / FMA",
-    name: "Management Accounting",
-    desc: "Xarajatlar hisobi, byudjetlashtirish, standart xarajatlar va qaror qabul qilish tahlili.",
-    color: "from-violet-500 to-purple-600",
-    topics: 5,
-    difficulty: "O'rta",
-  },
-  {
-    code: "FA / FFA",
-    name: "Financial Accounting",
-    desc: "Moliyaviy hisobotlar tayyorlash, aktivlar va majburiyatlar, buxgalteriya standartlari.",
-    color: "from-emerald-500 to-teal-600",
-    topics: 5,
-    difficulty: "O'rta",
-  },
-];
-
-const JOURNEY = [
-  { step: "1", label: "Applied Knowledge", active: true, desc: "Hozir shu yerdasiz" },
-  { step: "2", label: "Applied Skills", active: false, desc: "Keyingi bosqich" },
-  { step: "3", label: "Strategic Professional", active: false, desc: "Yakuniy bosqich" },
-];
+const FORMAT_ICONS = [BookOpen, Clock, Award, Users] as const;
+const FOR_WHOM_ICONS = [GraduationCap, BookOpen, Users, TrendingUp] as const;
 
 export default function AppliedKnowledgePage() {
-  useSEO({
-    title: "ACCA Applied Knowledge — 1-Bosqich Kursi | FBA Academy",
-    description: "ACCA Applied Knowledge — ACCA sertifikatsiyasining birinchi bosqichi. BT, MA, FA imtihonlari. FBA Academy'da Toshkentda o'qing yoki onlayn. 4 oylik intensiv kurs.",
-    keywords: "ACCA Applied Knowledge, ACCA 1 bosqich, BT imtihon, MA imtihon, FA imtihon, ACCA kurs O'zbekiston, FBA Academy",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "ACCA Applied Knowledge — 1-Bosqich",
-      "description": "ACCA sertifikatsiyasining birinchi bosqichi: BT, MA, FA imtihonlari.",
-      "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
-      "educationalLevel": "Beginner",
-      "timeRequired": "P4M",
-        "coursePrerequisites": "Maxsus talablar yoq. Har kim boshlashi mumkin.",
-        "hasCourseInstance": {
-          "@type": "CourseInstance",
-          "courseMode": "blended",
-          "duration": "P4M",
-          "startDate": "2026-04-01",
-          "location": {
-            "@type": "Place",
-            "name": "FBA Academy",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Yunusabad tumani",
-              "addressLocality": "Toshkent",
-              "addressCountry": "UZ"
-            }
-          },
-          "instructor": { "@type": "Person", "name": "Sardor Toshmatov", "jobTitle": "ACCA Fellow" },
-          "offers": {
-            "@type": "Offer",
-            "price": "3000000",
-            "priceCurrency": "UZS",
-            "availability": "https://schema.org/InStock",
-          },
-        },
-        "educationalCredentialAwarded": {
-          "@type": "EducationalOccupationalCredential",
-          "credentialCategory": "certificate",
-          "name": "ACCA Applied Knowledge Certificate",
-          "recognizedBy": { "@type": "Organization", "name": "Association of Chartered Certified Accountants (ACCA)" }
-        },
-        "totalHistoricalEnrollment": 800,
-        "courseCode": "ACCA-AK-001",
-    },
-  });
+  const { lang } = useLanguage();
+  const tx = APPLIED_KNOWLEDGE_PAGE[lang];
+  const learnIcons = [BookOpen, TrendingUp, Award] as const;
 
-  const faqs = faqItems.filter((f) => f.category === "ACCA" || f.category === "Umumiy").slice(0, 5);
+  useSEO({
+    title: tx.seoTitle,
+    description: tx.seoDescription,
+    keywords: tx.seoKeywords,
+    speakable: ["[data-speakable='hero-title']", "[data-speakable='hero-desc']"],
+    breadcrumb: [
+      { name: tx.breadcrumbCourses, url: `${BASE_URL}/courses` },
+      { name: "ACCA", url: `${BASE_URL}/course/acca` },
+      { name: "Applied Knowledge", url: `${BASE_URL}/course/applied-knowledge` },
+    ],
+    hreflang: [
+      { lang: "en", url: `${BASE_URL}/course/applied-knowledge` },
+      { lang: "uz", url: `${BASE_URL}/course/applied-knowledge?lang=uz` },
+      { lang: "ru", url: `${BASE_URL}/course/applied-knowledge?lang=ru` },
+      { lang: "x-default", url: `${BASE_URL}/course/applied-knowledge` },
+    ],
+    jsonLd: appliedKnowledgeJsonLd(lang, BASE_URL),
+  });
 
   return (
     <Layout>
-      {/* Hero — sky blue */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-sky-950 via-blue-950 to-slate-900 pb-16 pt-10 sm:pb-20 sm:pt-14" data-testid="section-ak-hero">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-sky-400/20 via-transparent to-transparent" />
+      <nav className="mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-zinc-500">
+          <li><Link href="/" className="hover:text-white transition-colors">{tx.breadcrumbHome}</Link></li>
+          <li>/</li>
+          <li><Link href="/courses" className="hover:text-white transition-colors">{tx.breadcrumbCourses}</Link></li>
+          <li>/</li>
+          <li><Link href="/course/acca" className="hover:text-white transition-colors">ACCA</Link></li>
+          <li>/</li>
+          <li className="text-white font-medium">Applied Knowledge</li>
+        </ol>
+      </nav>
+
+      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-950 via-slate-800 to-slate-900 pb-16 pt-10 sm:pb-20 sm:pt-14">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-500/10 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link href="/course/acca">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-zinc-500 cursor-pointer hover:text-white transition-colors">← ACCA To'liq dastur</span>
-          </Link>
           <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
-            <div className="lg:col-span-3 animate-fade-in-up">
-              <div className="mb-4 flex flex-wrap gap-2">
-                <Badge className="rounded-full bg-sky-500/20 text-sky-300 border-sky-400/30 px-3">📘 ACCA 1-Bosqich</Badge>
-                <Badge className="rounded-full bg-green-500/20 text-green-300 border-green-400/30 px-3">✅ Boshlang'ich daraja</Badge>
-              </div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-ak-title">
-                ACCA Applied<br />
-                <span className="bg-gradient-to-r from-sky-300 to-blue-300 bg-clip-text text-transparent">Knowledge</span>
+            <div className="lg:col-span-3">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-300"><GraduationCap className="h-3.5 w-3.5" /> {tx.badge}</div>
+              <h1 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl lg:text-5xl leading-tight" data-speakable="hero-title">
+                {tx.heroTitle}
               </h1>
-              <p className="mt-4 max-w-xl text-slate-300 leading-relaxed text-lg">ACCA yo'lining birinchi va eng muhim bosqichi. 3 ta imtihon: BT, MA, FA — moliya va buxgalteriya dunyosiga kirish.</p>
-              <div className="mt-5 flex items-center gap-4">
-                <div className="flex items-center gap-1.5">
-                  {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
-                  <span className="text-sm font-bold text-white ml-1">{course.rating}</span>
-                </div>
-                <span className="text-sm text-zinc-500">{course.studentsCount} talaba</span>
-              </div>
-              <div className="mt-8 grid grid-cols-3 gap-3">
-                {[
-                  { icon: BookOpen, label: "3 imtihon", sub: "BT, MA, FA" },
-                  { icon: Clock, label: course.duration, sub: "Intensiv" },
-                  { icon: Target, label: "100%", sub: "O'tish kafolati" },
-                ].map((item, i) => (
-                  <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 backdrop-blur-sm" data-testid={`feature-ak-${i}`}>
-                    <item.icon className="mb-2 h-5 w-5 text-sky-300" />
-                    <div className="text-xs font-bold text-white sm:text-sm">{item.label}</div>
-                    <div className="text-xs text-zinc-500">{item.sub}</div>
-                  </div>
-                ))}
+              <p className="mt-4 max-w-xl text-lg text-slate-300 leading-relaxed" data-speakable="hero-desc">
+                {tx.heroDesc}
+              </p>
+              <div className="mt-8">
+                <a href="#enroll">
+                  <Button size="lg" className="gap-2 rounded-full bg-white px-8 font-bold text-brand-dark hover:bg-zinc-100">
+                    {tx.heroCta} <ArrowRight className="h-5 w-5" />
+                  </Button>
+                </a>
               </div>
             </div>
             <div className="lg:col-span-2">
-              <div className="course-card rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl animate-scale-in delay-200" data-testid="card-ak-enroll">
-                <div className="mb-2 flex items-center justify-between">
-                  <h3 className="text-lg font-bold">So'rov qoldiring</h3>
-                  <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
-                </div>
-                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-400">
-                  <Flame className="h-4 w-4" /> Joylar cheklangan
-                </div>
-                <div className="mb-4 flex items-baseline gap-2">
-                  <span className="text-3xl font-extrabold" data-testid="text-ak-price">{course.price} UZS</span>
-                  <span className="text-sm text-zinc-400 line-through">{course.oldPrice} UZS</span>
-                </div>
-                <LeadForm source="course-applied-knowledge" buttonText="Chegirma bilan yozilish" />
+              <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl">
+                <h3 className="mb-4 text-lg font-bold text-white">{tx.formTitle}</h3>
+                <LazyLeadForm source="course-applied-knowledge" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ACCA Journey Progress */}
-      <section className="bg-gradient-to-r from-sky-50 to-blue-50 py-10 dark:from-sky-950/20 dark:to-blue-950/20" data-testid="section-journey">
+      <section className="bg-[#111] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-6 text-center text-sm font-semibold uppercase tracking-wider text-sky-400">ACCA sertifikatlanish yo'li</p>
-          <div className="relative flex items-start justify-between">
-            <div className="absolute left-0 right-0 top-5 h-0.5 bg-gradient-to-r from-sky-400 via-slate-300 to-slate-200 sm:mx-[8%]" />
-            {JOURNEY.map((step, i) => (
-              <div key={i} className="relative flex flex-1 flex-col items-center text-center" data-testid={`journey-step-${i}`}>
-                <div className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full text-sm font-extrabold shadow-md ${step.active ? "bg-sky-500 text-white ring-4 ring-sky-200" : "bg-zinc-900 text-zinc-500 border-2 border-slate-200"}`}>{step.step}</div>
-                <div className={`mt-2 text-xs font-bold sm:text-sm ${step.active ? "text-sky-300" : "text-zinc-500"}`}>{step.label}</div>
-                <div className={`mt-0.5 text-xs ${step.active ? "text-sky-400" : "text-zinc-400"}`}>{step.desc}</div>
+          <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionWhatTitle}</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {tx.whatIs.map((item, i) => (
+              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
+                <span className="text-sm font-medium text-zinc-200">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3 Paper Cards */}
-      <section className="py-16 sm:py-24" data-testid="section-papers">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-papers-title">3 ta ACCA imtihon qog'ozi</h2>
-          <p className="mb-10 text-zinc-400">Har birini ketma-ket yoki bir vaqtda topshirishingiz mumkin</p>
+          <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionLearnTitle}</h2>
           <div className="grid gap-6 sm:grid-cols-3">
-            {PAPERS.map((paper, i) => (
-              <div key={i} className="group rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" data-testid={`paper-card-${i}`}>
-                <div className={`mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-br ${paper.color} px-4 py-2 text-lg font-extrabold text-white shadow-md`}>{paper.code}</div>
-                <h3 className="mb-2 text-lg font-extrabold text-white">{paper.name}</h3>
-                <p className="mb-4 text-sm text-zinc-400 leading-relaxed">{paper.desc}</p>
-                <div className="flex items-center justify-between">
-                  <Badge variant="outline" className="rounded-full text-xs">{paper.difficulty}</Badge>
-                  <span className="text-xs text-zinc-400">{paper.topics} asosiy mavzu</span>
+            {tx.learn.map((item, i) => {
+              const Icon = learnIcons[i] ?? BookOpen;
+              return (
+                <div key={i} className="rounded-xl border border-white/10 bg-zinc-900 p-5">
+                  <Icon className="mb-3 h-6 w-6 text-emerald-400" />
+                  <h3 className="mb-2 text-base font-bold text-white">{item.title}</h3>
+                  <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* YouTube */}
-      <section className="bg-[#111] py-14" data-testid="section-ak-video">
+      <section className="bg-[#111] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <h2 className="mb-4 text-4xl font-extrabold uppercase tracking-tight text-white">Applied Knowledge haqida ko'proq</h2>
-            <p className="mb-6 text-zinc-400">ACCA Applied Knowledge bosqichida nima o'rganasiz va qanday imtihon topshirasiz?</p>
-            <YouTubeEmbed videoId={course.videoId!} title="ACCA Applied Knowledge — kurs haqida" />
-          </div>
-        </div>
-      </section>
-
-      {/* Salary */}
-      <section className="py-16 sm:py-24" data-testid="section-ak-salary">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-zinc-900 p-8 shadow-2xl sm:p-12">
-            <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">Maoshingiz tajriba bilan o'sadi</h2>
-            <div className="space-y-3">
-              {course.salaryLevels.map((level, i) => (
-                <div key={i} className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-800/80 p-5 transition-all hover:border-sky-500/30 hover:bg-zinc-800" style={{ maxWidth: `${50 + i * 25}%`, minWidth: "240px" }} data-testid={`ak-salary-${i}`}>
-                  <div className="absolute left-0 top-0 h-full w-1 rounded-l-2xl bg-gradient-to-b from-sky-400 to-blue-600" />
-                  <div className="pl-3">
-                    <div className="text-xl font-extrabold text-sky-300 sm:text-2xl">{level.salary} so'm dan</div>
-                    <div className="mt-0.5 text-sm text-zinc-400">{level.level} — {level.description}</div>
-                  </div>
+          <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionForWhomTitle}</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {tx.forWhom.map((text, i) => {
+              const Icon = FOR_WHOM_ICONS[i] ?? Users;
+              return (
+                <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 border-l-4 border-l-emerald-500 bg-zinc-900 p-5">
+                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
+                  <span className="text-sm font-medium text-zinc-200">{text}</span>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Tools */}
-      <section className="bg-[#111] py-12" data-testid="section-ak-tools">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Instrumentlar va dasturlar</h2>
-          <div className="flex flex-wrap gap-3">
-            {course.tools.map((tool, i) => (
-              <div key={i} className="rounded-full border-2 border-sky-200 bg-sky-50 px-5 py-2.5 text-sm font-semibold text-sky-800 shadow-sm dark:border-sky-800 dark:bg-sky-900/20 dark:text-sky-300" data-testid={`tool-ak-${i}`}>
-                {tool}
+          <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionWhyTitle}</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {tx.why.map((item, i) => (
+              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-xs font-bold text-emerald-300">{i + 1}</span>
+                <span className="text-sm font-medium text-zinc-200">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Skills */}
-      <section className="py-16 sm:py-20" data-testid="section-ak-skills">
+      <section className="bg-[#111] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Siz o'rganasiz</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {course.skills.map((skill, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 p-4" data-testid={`ak-skill-${i}`}>
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-sky-500" />
-                <span className="font-medium text-sm">{skill}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Modules */}
-      <section className="bg-[#111] py-14" data-testid="section-ak-modules">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">Kurs dasturi</h2>
-          <div className="mb-6 flex flex-wrap gap-2">
-            {[{ icon: Calendar, text: course.duration }, { icon: BookOpen, text: `${course.projects} loyiha` }, { icon: Clock, text: `${course.theoryHours} soat nazariya` }, { icon: Wrench, text: `${course.practiceHours} soat amaliyot` }].map((item, i) => (
-              <Badge key={i} variant="outline" className="rounded-full gap-1.5 border-2 px-3 py-1.5 text-xs font-semibold">
-                <item.icon className="h-3.5 w-3.5" /> {item.text}
-              </Badge>
-            ))}
-          </div>
-          <div className="mx-auto max-w-3xl">
-            <Accordion type="multiple" className="space-y-3">
-              {course.modules.map((mod, i) => (
-                <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`ak-module-${i}`}>
-                  <AccordionTrigger className="text-left py-4 text-white">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 text-sm font-bold text-white shadow-md">{i + 1}</span>
-                      <div>
-                        <span className="text-sm font-bold sm:text-base">{mod.title}</span>
-                        <div className="text-xs text-zinc-400">{mod.topics.length} mavzu</div>
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="ml-12 space-y-2.5 pb-3">
-                      {mod.topics.map((topic, j) => (
-                        <li key={j} className="flex items-center gap-2 text-sm text-zinc-400">
-                          <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> {topic}
-                        </li>
-                      ))}
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
-      {/* Who it's for */}
-      <section className="py-16 sm:py-20" data-testid="section-ak-for-whom">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Kurs kimlar uchun?</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {course.forWhom.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5" data-testid={`ak-for-whom-${i}`}>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-100">
-                  <GraduationCap className="h-4 w-4 text-sky-400" />
+          <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionFormatTitle}</h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {tx.format.map((item, i) => {
+              const Icon = FORMAT_ICONS[i] ?? BookOpen;
+              return (
+                <div key={i} className="rounded-xl border border-white/10 bg-zinc-900 p-5">
+                  <Icon className="mb-3 h-6 w-6 text-emerald-400" />
+                  <h3 className="mb-2 text-base font-bold text-white">{item.title}</h3>
+                  <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
                 </div>
-                <span className="font-medium text-sm leading-relaxed">{item}</span>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionResultsTitle}</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {tx.results.map((item, i) => (
+              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
+                <span className="text-sm font-medium text-zinc-200">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Support team */}
-      <section className="bg-[#111] py-14" data-testid="section-ak-support">
+      <section id="enroll" className="bg-gradient-to-br from-emerald-950 via-emerald-800 to-slate-900 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">O'quv jarayonida siz bilan birga</h2>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {course.supportTeam.map((person, i) => (
-              <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`ak-support-${i}`}>
-                <div className="h-48 overflow-hidden">
-                  <img src={person.avatar} alt={person.role} className="h-full w-full object-cover object-top" loading="lazy" />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold">{person.role}</h3>
-                  <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{person.description}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Keyingi bosqich CTA */}
-      <section className="py-12" data-testid="section-next-step">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border-2 border-sky-200 bg-sky-50 p-8 dark:border-sky-800 dark:bg-sky-950/20">
-            <div className="grid gap-6 md:grid-cols-2 md:items-center">
-              <div>
-                <Badge className="mb-3 rounded-full bg-sky-500/20 text-sky-300 border-sky-500/30 text-xs font-bold">Keyingi qadam</Badge>
-                <h3 className="text-xl font-extrabold">Applied Knowledge'dan so'ng</h3>
-                <p className="mt-2 text-zinc-400 text-sm">Applied Knowledge'ni muvaffaqiyatli tugatgach, ACCA Applied Skills bosqichiga o'ting va 6 ta yangi imtihon topshiring.</p>
-              </div>
-              <div className="flex gap-3">
-                <Link href="/course/applied-skills" className="flex-1">
-                  <Button className="w-full rounded-full bg-gradient-to-r from-sky-500 to-blue-600 font-bold text-white" data-testid="button-next-step">
-                    Applied Skills → <ArrowRight className="h-4 w-4 ml-1" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-gradient-to-r from-sky-600 to-blue-700 py-12" data-testid="section-ak-cta">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div>
-              <h2 className="text-2xl font-extrabold text-white sm:text-3xl">Bepul konsultatsiya olish</h2>
-              <p className="mt-3 text-sky-100">Applied Knowledge haqida barcha savollaringizga 10 daqiqada javob oling</p>
-              <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-sky-600 px-8 font-bold text-white hover:bg-sky-700 animate-glow-pulse" data-testid="button-ak-cta">
-                  Konsultatsiya olish <ArrowRight className="h-5 w-5" />
-                </Button>
-              </Link>
+              <h2 className="text-2xl font-extrabold text-white sm:text-4xl">{tx.finalTitle}</h2>
+              <p className="mt-4 text-lg text-slate-300 leading-relaxed">{tx.finalDesc}</p>
             </div>
-            <div className="flex items-center gap-5">
-              <img src={mentor.avatar} alt={mentor.name} className="h-20 w-20 shrink-0 rounded-2xl object-cover object-top ring-4 ring-white/20 shadow-xl" loading="lazy" />
-              <div>
-                <h3 className="text-xl font-bold text-white">{mentor.name}</h3>
-                <p className="text-sm text-sky-200">{mentor.role}</p>
-                <p className="text-sm text-sky-200">{mentor.experience}</p>
-              </div>
+            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl">
+              <h3 className="mb-4 text-lg font-bold text-white">{tx.finalFormTitle}</h3>
+              <DeferredLeadForm source="course-applied-knowledge-cta" />
             </div>
           </div>
         </div>
       </section>
-
-      {/* FAQ */}
-      <section className="py-16 sm:py-20" data-testid="section-ak-faq">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">Ko'p beriladigan savollar</h2>
-          <div className="mx-auto max-w-3xl">
-            <Accordion type="multiple" className="space-y-3">
-              {faqs.map((faq) => (
-                <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`ak-faq-${faq.id}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base text-white hover:no-underline hover:text-purple-300">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-      <CourseFormatSection />
-      <CourseBonusesSection
-        totalUz="2,500,000+ so'm qiymatida"
-        totalRu="Более 9,000 RUB стоимостью"
-        totalEn="Worth $110+ — yours for free"
-        bonuses={[
-          {
-            logo: "📝",
-            nameUz: "FA Past Papers Bank 2015–2024",
-            nameRu: "База FA Past Papers 2015–2024",
-            nameEn: "FA Past Papers Bank 2015–2024",
-            descUz: "Financial Accounting bo'yicha 10 yillik imtihon savollari va rasmiy javoblari",
-            descRu: "10 лет экзаменационных вопросов по Financial Accounting с официальными ответами",
-            descEn: "10 years of Financial Accounting exam questions with official answers",
-            durationUz: "Doimiy kirish",
-            durationRu: "Постоянный доступ",
-            durationEn: "Lifetime access",
-            priceUz: "700,000 so'm",
-            priceRu: "2,500 RUB",
-            priceEn: "$30",
-          },
-          {
-            logo: "🔢",
-            nameUz: "Management Accounting Formula Pack",
-            nameRu: "Формульный пакет Management Accounting",
-            nameEn: "Management Accounting Formula Pack",
-            descUz: "MA bo'yicha barcha formulalar, graflar va misollar — chop etish uchun tayyor",
-            descRu: "Все формулы, графики и примеры по MA — готово к печати",
-            descEn: "All formulas, graphs and examples for MA — print-ready",
-            durationUz: "Doimiy kirish",
-            durationRu: "Постоянный доступ",
-            durationEn: "Lifetime access",
-            priceUz: "500,000 so'm",
-            priceRu: "1,800 RUB",
-            priceEn: "$22",
-          },
-          {
-            logo: "📖",
-            nameUz: "Business Accounting Terminologiya Lug'ati",
-            nameRu: "Глоссарий Business Accounting",
-            nameEn: "Business Accounting Terminology Guide",
-            descUz: "600+ atama, ta'rif va tarjimalar — AB fani uchun to'liq lug'at",
-            descRu: "600+ терминов, определений и переводов — полный глоссарий для AB",
-            descEn: "600+ terms, definitions and translations — complete glossary for AB",
-            durationUz: "Doimiy kirish",
-            durationRu: "Постоянный доступ",
-            durationEn: "Lifetime access",
-            priceUz: "400,000 so'm",
-            priceRu: "1,500 RUB",
-            priceEn: "$18",
-          },
-          {
-            logo: "🧪",
-            nameUz: "Knowledge Level Mock Exams × 10 to'plam",
-            nameRu: "Knowledge Level Mock Exams × 10 комплектов",
-            nameEn: "Knowledge Level Mock Exams × 10 sets",
-            descUz: "AB, MA, FA uchun 10 ta to'liq mock — vaqt hisoblagich va javoblar bilan",
-            descRu: "10 полных мок-экзаменов для AB, MA, FA с таймером и ключами ответов",
-            descEn: "10 full mock exams for AB, MA, FA with timer and answer keys",
-            durationUz: "6 oylik kirish",
-            durationRu: "Доступ на 6 месяцев",
-            durationEn: "6 months access",
-            priceUz: "900,000 so'm",
-            priceRu: "3,200 RUB",
-            priceEn: "$39",
-          },
-        ]}
-      />
     </Layout>
   );
 }

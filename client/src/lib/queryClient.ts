@@ -1,5 +1,28 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
+declare global {
+  interface Window {
+    FBA_API_BASE?: string;
+  }
+}
+
+function resolveApiUrl(url: string): string {
+  if (typeof window === "undefined") {
+    return url;
+  }
+
+  const base = window.FBA_API_BASE?.replace(/\/$/, "");
+  if (!base) {
+    return url;
+  }
+
+  if (url.startsWith("/api/")) {
+    return `${base}/${url.replace(/^\/api\//, "")}`;
+  }
+
+  return url;
+}
+
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = (await res.text()) || res.statusText;
@@ -12,7 +35,7 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  const res = await fetch(url, {
+  const res = await fetch(resolveApiUrl(url), {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,

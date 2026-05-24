@@ -1,434 +1,241 @@
-import { Link } from "wouter";
 import { useSEO } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Layout from "@/components/layout/layout";
-import LeadForm from "@/components/lead-form";
-import YouTubeEmbed from "@/components/youtube-embed";
-import { courses, teachers, faqItems } from "@/lib/data";
-import { CheckCircle2, ArrowRight, Star, Flame, Crown, TrendingUp, BarChart3, Shield, Clock, Calendar, Wrench, BookOpen, Trophy, GraduationCap } from "lucide-react";
-import CourseFormatSection from "@/components/course-format-section";
-import CourseBonusesSection from "@/components/course-bonuses-section";
+import { LazyLeadForm, DeferredLeadForm } from "@/components/lazy-lead-form";
+import { CheckCircle2, ArrowRight, BookOpen, Users, Award, GraduationCap, Clock, TrendingUp } from "lucide-react";
+import { Link } from "wouter";
+import { useLanguage } from "@/contexts/language-context";
+import { STRATEGIC_PROFESSIONAL_PAGE, strategicProfessionalJsonLd } from "@/lib/i18n/strategic-professional-page";
 
-const course = courses.find((c) => c.id === "strategic-professional")!;
-const mentor = teachers.find((t) => t.id === "teacher-2")!;
-
-const PAPERS = [
-  {
-    code: "SBL",
-    type: "Majburiy",
-    name: "Strategic Business Leader",
-    desc: "Strategik yetakchilik, korporativ boshqaruv, risk va etika. Case study asosida baholanadi.",
-    badge: "bg-amber-500",
-  },
-  {
-    code: "SBR",
-    type: "Majburiy",
-    name: "Strategic Business Reporting",
-    desc: "Murakkab IFRS hisoboti, konsolidatsiya, moliyaviy instrumentlar, ijtimoiy hisobot.",
-    badge: "bg-amber-500",
-  },
-  {
-    code: "AFM",
-    type: "Ixtiyoriy",
-    name: "Advanced Financial Management",
-    desc: "M&A, derivativlar, hedjirlash, xalqaro moliya, kompaniya baholash.",
-    badge: "bg-slate-500",
-  },
-  {
-    code: "AAA",
-    type: "Ixtiyoriy",
-    name: "Advanced Audit & Assurance",
-    desc: "Murakkab audit, IT audit, professional etika, maxsus topshiriqlar.",
-    badge: "bg-slate-500",
-  },
-];
-
-const CAREER_PATH = [
-  { title: "ACCA Qualified", salary: "15 000 000+", desc: "Sertifikat olgach darhol", color: "from-amber-400 to-yellow-500" },
-  { title: "Finance Manager", salary: "25 000 000+", desc: "3-5 yillik tajriba bilan", color: "from-orange-500 to-amber-500" },
-  { title: "CFO / Director", salary: "50 000 000+", desc: "7+ yillik karyera", color: "from-amber-600 to-orange-700" },
-];
-
-const ELITE_STATS = [
-  { value: "1 000+", label: "FBA Academy bitiruvchilari" },
-  { value: "Big Four", label: "Hamkor kompaniyalar" },
-  { value: "92%", label: "Ishga joylashish darajasi" },
-  { value: "ACCA Fellow", label: "Yuqori malaka unvoni" },
-];
+const BASE_URL = "https://fbaacademy.uz";
 
 export default function StrategicProfessionalPage() {
-  useSEO({
-    title: "ACCA Strategic Professional — 3-Bosqich, CFO Yo'li | FBA Academy",
-    description: "ACCA Strategic Professional — eng yuqori bosqich. SBL, SBR + ixtiyoriy qog'ozlar. To'liq ACCA malakasi. CFO va Finance Director bo'lish yo'li. FBA Academy Toshkent.",
-    keywords: "ACCA Strategic Professional, ACCA 3 bosqich, SBL imtihon, SBR imtihon, ACCA Fellow, CFO kurs, moliyaviy direktor",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "ACCA Strategic Professional — 3-Bosqich",
-      "description": "ACCA sertifikatsiyasining yakuniy bosqichi. SBL, SBR va ixtiyoriy qog'ozlar.",
-      "provider": { "@type": "Organization", "name": "FBA Academy", "url": "https://fbaacademy.uz" },
-      "educationalLevel": "Advanced",
-      "timeRequired": "P8M",
-        "coursePrerequisites": "ACCA Applied Skills bosqichini tugatgan bolish shart.",
-        "hasCourseInstance": {
-          "@type": "CourseInstance",
-          "courseMode": "blended",
-          "duration": "P8M",
-          "startDate": "2026-04-01",
-          "location": {
-            "@type": "Place",
-            "name": "FBA Academy",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Yunusabad tumani",
-              "addressLocality": "Toshkent",
-              "addressCountry": "UZ"
-            }
-          },
-          "instructor": { "@type": "Person", "name": "Sardor Toshmatov", "jobTitle": "ACCA Fellow" },
-          "offers": {
-            "@type": "Offer",
-            "price": "4000000",
-            "priceCurrency": "UZS",
-            "availability": "https://schema.org/InStock",
-          },
-        },
-        "educationalCredentialAwarded": {
-          "@type": "EducationalOccupationalCredential",
-          "credentialCategory": "certificate",
-          "name": "ACCA Strategic Professional Certificate",
-          "recognizedBy": { "@type": "Organization", "name": "Association of Chartered Certified Accountants (ACCA)" }
-        },
-        "totalHistoricalEnrollment": 400,
-        "courseCode": "ACCA-SP-001",
-    },
-  });
+  const { lang } = useLanguage();
+  const tx = STRATEGIC_PROFESSIONAL_PAGE[lang];
 
-  const faqs = faqItems.filter((f) => f.category === "ACCA" || f.category === "Sertifikat" || f.category === "Ishga joylashish").slice(0, 6);
+  useSEO({
+    title: tx.seoTitle,
+    description: tx.seoDescription,
+    keywords: tx.seoKeywords,
+    speakable: ["[data-speakable='course-title']", "[data-speakable='course-desc']"],
+    breadcrumb: [
+      { name: tx.breadcrumbCourses, url: `${BASE_URL}/courses` },
+      { name: "ACCA", url: `${BASE_URL}/course/acca` },
+      { name: "Strategic Professional", url: `${BASE_URL}/course/strategic-professional` },
+    ],
+    hreflang: [
+      { lang: "en", url: `${BASE_URL}/course/strategic-professional` },
+      { lang: "uz", url: `${BASE_URL}/course/strategic-professional?lang=uz` },
+      { lang: "ru", url: `${BASE_URL}/course/strategic-professional?lang=ru` },
+      { lang: "x-default", url: `${BASE_URL}/course/strategic-professional` },
+    ],
+    jsonLd: strategicProfessionalJsonLd(lang, BASE_URL),
+  });
 
   return (
     <Layout>
-      {/* Hero — dark gold/amber — premium elite feel */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-amber-950 via-[#1a0a00] to-slate-900 pb-16 pt-10 sm:pb-20 sm:pt-14" data-testid="section-sp-hero">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-600/10 via-transparent to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1a1035] via-[#11133c] to-slate-900 pb-16 pt-5 sm:pb-20 lg:pt-24">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-amber-500/8 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link href="/course/acca">
-            <span className="mb-6 inline-flex items-center gap-1 text-sm text-zinc-500 cursor-pointer hover:text-amber-300 transition-colors">← ACCA To'liq dastur</span>
-          </Link>
-          <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
-            <div className="lg:col-span-3 animate-fade-in-up">
-              <div className="mb-4 flex flex-wrap gap-2">
-                <Badge className="rounded-full bg-amber-500/20 text-amber-300 border-amber-400/30 px-3">👑 ACCA 3-Bosqich — Yakuniy</Badge>
-                <Badge className="rounded-full bg-yellow-500/20 text-yellow-200 border-yellow-400/20 px-3">💼 CFO yo'li</Badge>
+          <nav className="mb-6 flex items-center gap-1.5 text-xs text-zinc-400">
+            <Link href="/" className="hover:text-white">{tx.breadcrumbHome}</Link>
+            <span>/</span>
+            <Link href="/courses" className="hover:text-white">{tx.breadcrumbCourses}</Link>
+            <span>/</span>
+            <Link href="/course/acca" className="hover:text-white">ACCA</Link>
+            <span>/</span>
+            <span className="font-semibold text-white">Strategic Professional</span>
+          </nav>
+
+          <div className="grid gap-10 lg:grid-cols-[1fr_400px] lg:gap-14 lg:items-start">
+            <div>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1.5 text-xs font-semibold text-amber-300">
+                <Award className="h-3.5 w-3.5" /> {tx.badge}
               </div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight" data-testid="text-sp-title">
-                ACCA Strategic<br />
-                <span className="bg-gradient-to-r from-amber-300 to-yellow-300 bg-clip-text text-transparent">Professional</span>
+              <h1 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl lg:text-5xl leading-tight" data-speakable="course-title">
+                {tx.heroTitleLine1}{" "}
+                <span className="bg-gradient-to-r from-amber-200 to-yellow-300 bg-clip-text text-transparent">
+                  {tx.heroTitleHighlight}
+                </span>
               </h1>
-              <p className="mt-4 max-w-xl text-slate-300 leading-relaxed text-lg">{course.description}</p>
-              <div className="mt-5 flex items-center gap-4">
-                <div className="flex items-center gap-1.5">
-                  {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
-                  <span className="text-sm font-bold text-white ml-1">{course.rating}</span>
-                </div>
-                <span className="text-sm text-zinc-500">{course.studentsCount} talaba</span>
-              </div>
-              <div className="mt-8 grid grid-cols-3 gap-3">
-                {[
-                  { icon: Crown, label: "ACCA Qualified", sub: "Yakuniy unvon" },
-                  { icon: Trophy, label: course.rating + " reyting", sub: "Eng yuqori" },
-                  { icon: TrendingUp, label: "50M+", sub: "CFO daromad" },
-                ].map((item, i) => (
-                  <div key={i} className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-3 sm:p-4 backdrop-blur-sm" data-testid={`sp-feature-${i}`}>
-                    <item.icon className="mb-2 h-5 w-5 text-amber-300" />
-                    <div className="text-xs font-bold text-white sm:text-sm">{item.label}</div>
-                    <div className="text-xs text-zinc-500">{item.sub}</div>
-                  </div>
-                ))}
+              <p className="mt-4 max-w-xl text-zinc-300 leading-relaxed text-lg" data-speakable="course-desc">
+                {tx.heroDesc}
+              </p>
+              <div className="mt-8">
+                <a href="#cta">
+                  <Button className="gap-2 rounded-full bg-amber-600 px-8 font-bold text-white hover:bg-amber-700">
+                    {tx.heroCta} <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </a>
               </div>
             </div>
-            <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-amber-500/20 bg-zinc-900 p-6 shadow-2xl" data-testid="card-sp-enroll">
-                <div className="mb-2 flex items-center justify-between">
-                  <h3 className="text-lg font-bold">So'rov qoldiring</h3>
-                  <Badge className="rounded-full bg-rose-500 text-white font-bold">-{course.discount}</Badge>
-                </div>
-                <div className="mb-2 flex items-center gap-1.5 text-sm font-medium text-amber-400">
-                  <Flame className="h-4 w-4" /> Joylar cheklangan
-                </div>
-                <div className="mb-4 flex items-baseline gap-2">
-                  <span className="text-3xl font-extrabold" data-testid="text-sp-price">{course.price} UZS</span>
-                  <span className="text-sm text-zinc-400 line-through">{course.oldPrice} UZS</span>
-                </div>
-                <LeadForm source="course-strategic-professional" buttonText="Chegirma bilan yozilish" />
-              </div>
+
+            <div className="rounded-xl border border-white/10 bg-zinc-900 p-6 shadow-2xl">
+              <h3 className="mb-4 text-lg font-bold text-white">{tx.formTitle}</h3>
+              <LazyLeadForm source="course-strategic-professional" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Elite Stats */}
-      <section className="bg-gradient-to-r from-amber-50 to-yellow-50 py-10 dark:from-amber-950/20 dark:to-yellow-950/20" data-testid="section-elite-stats">
+      <section className="bg-[#111] py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {ELITE_STATS.map((s, i) => (
-              <div key={i} className="course-card rounded-2xl border border-amber-500/25 bg-zinc-900 p-5 text-center animate-fade-in-up" style={{ animationDelay: `${i * 100}ms` }} data-testid={`sp-stat-${i}`}>
-                <div className="text-2xl font-extrabold text-amber-300 sm:text-3xl animate-float" style={{ animationDelay: `${i * 200}ms` }}>{s.value}</div>
-                <div className="mt-1 text-xs text-zinc-400 sm:text-sm">{s.label}</div>
+          <h2 className="text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionWhatTitle}</h2>
+          <p className="mt-3 mb-8 max-w-3xl text-zinc-400 leading-relaxed">{tx.sectionWhatLead}</p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {tx.whatIs.map((item, i) => (
+              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" />
+                <span className="text-sm font-medium text-zinc-200">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4 Papers — 2+2 layout */}
-      <section className="py-16 sm:py-24" data-testid="section-sp-papers">
+      <section className="py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white" data-testid="text-sp-papers-title">Imtihon qog'ozlari</h2>
-          <p className="mb-10 text-zinc-400">2 ta majburiy + 2 ta ixtiyoriy qog'ozdan birini tanlaysiz</p>
-          <div className="grid gap-6 sm:grid-cols-2">
-            {PAPERS.map((paper, i) => (
-              <div key={i} className={`course-card rounded-2xl border-2 p-6 ${paper.type === "Majburiy" ? "border-amber-500/30 bg-amber-900/10" : "border-white/10 bg-zinc-900"} animate-fade-in-up`} style={{ animationDelay: `${i * 150}ms` }} data-testid={`sp-paper-${i}`}>
-                <div className="mb-4 flex items-center justify-between">
-                  <span className={`inline-flex rounded-full px-4 py-1.5 text-sm font-extrabold text-white shadow-md ${paper.badge}`}>{paper.code}</span>
-                  <Badge variant="outline" className={`rounded-full text-xs font-bold ${paper.type === "Majburiy" ? "border-amber-400 text-amber-400" : "border-slate-400 text-zinc-400"}`}>{paper.type}</Badge>
-                </div>
-                <h3 className="mb-2 text-lg font-extrabold text-white">{paper.name}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{paper.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Career Path Timeline */}
-      <section className="bg-[#0d0d0d] py-16 sm:py-24" data-testid="section-career-path">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-extrabold text-white sm:text-3xl">CFO bo'lish yo'li</h2>
-          <p className="mb-10 text-zinc-500">ACCA Strategic Professional sertifikati bilan karyerangiz qanday o'sadi</p>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {CAREER_PATH.map((path, i) => (
-              <div key={i} className={`rounded-2xl bg-gradient-to-br ${path.color} p-6 shadow-xl`} data-testid={`career-path-${i}`}>
-                <div className="text-2xl font-extrabold text-white sm:text-3xl">{path.salary}</div>
-                <div className="mt-1 text-lg font-bold text-zinc-200">{path.title}</div>
-                <div className="mt-1 text-sm text-zinc-300">{path.desc}</div>
-              </div>
-            ))}
-          </div>
-          <p className="mt-6 text-xs text-zinc-500">*Manba: hh.uz, HeadHunter O'zbekiston</p>
-        </div>
-      </section>
-
-      {/* YouTube */}
-      <section className="py-16 sm:py-20" data-testid="section-sp-video">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div>
-              <h2 className="text-4xl font-extrabold uppercase tracking-tight text-white">Strategic Professional nima beradi?</h2>
-              <p className="mt-4 text-zinc-400 leading-relaxed">Mentorlarimiz ACCA sertifikatsiyasining yakuniy bosqichi, imtihon formati va karyera imkoniyatlari haqida batafsil tushuntiradi.</p>
-              <div className="mt-6 space-y-3">
-                {["Case study asosida imtihon (SBL)", "Real kompaniyalar tahlili", "CFO lavozimiga to'g'ridan-to'g'ri tayyorgarlik", "ACCA Fellow unvoni yo'li"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm font-medium">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-500" /> {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <YouTubeEmbed videoId={course.videoId!} title="ACCA Strategic Professional" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills */}
-      <section className="bg-[#111] py-14" data-testid="section-sp-skills">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight text-white">Siz o'rganasiz</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {course.skills.map((skill, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 p-4" data-testid={`sp-skill-${i}`}>
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-amber-500" />
-                <span className="font-medium text-sm">{skill}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Modules */}
-      <section className="py-16 sm:py-20" data-testid="section-sp-modules">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-4xl font-extrabold uppercase tracking-tight text-white">Kurs dasturi</h2>
-          <div className="mb-6 flex flex-wrap gap-2">
-            {[{ icon: Calendar, text: course.duration }, { icon: BookOpen, text: `${course.projects} loyiha` }, { icon: Clock, text: `${course.theoryHours} soat nazariya` }, { icon: Wrench, text: `${course.practiceHours} soat amaliyot` }].map((item, i) => (
-              <Badge key={i} variant="outline" className="rounded-full gap-1.5 border-2 px-3 py-1.5 text-xs font-semibold">
-                <item.icon className="h-3.5 w-3.5" /> {item.text}
-              </Badge>
-            ))}
-          </div>
-          <div className="mx-auto max-w-3xl">
-            <Accordion type="multiple" className="space-y-3">
-              {course.modules.map((mod, i) => (
-                <AccordionItem key={i} value={`m-${i}`} className="rounded-2xl border border-white/10 bg-zinc-900 px-5" data-testid={`sp-module-${i}`}>
-                  <AccordionTrigger className="text-left py-4 text-white">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-sm font-bold text-white shadow-md">{i + 1}</span>
-                      <div>
-                        <span className="text-sm font-bold sm:text-base">{mod.title}</span>
-                        <div className="text-xs text-zinc-400">{mod.topics.length} mavzu</div>
-                      </div>
+          <h2 className="text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionLearnTitle}</h2>
+          <p className="mt-3 mb-8 text-zinc-400">{tx.sectionLearnLead}</p>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {tx.learn.map((item, i) => {
+              const card = (
+                <div className="overflow-hidden rounded-xl border border-white/10 bg-zinc-900 transition-colors hover:border-amber-400/30">
+                  <div className="h-1.5 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600" />
+                  <div className="p-5">
+                    <div className="mb-2 flex items-center gap-2">
+                      <BookOpen className="h-5 w-5 text-amber-300" />
+                      <h3 className="text-base font-extrabold text-white">{item.title}</h3>
                     </div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="ml-12 space-y-2.5 pb-3">
-                      {mod.topics.map((topic, j) => (
-                        <li key={j} className="flex items-center gap-2 text-sm text-zinc-400">
-                          <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" /> {topic}
-                        </li>
-                      ))}
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+                    <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
+                    {item.href ? (
+                      <p className="mt-3 text-xs font-semibold text-amber-300">
+                        {lang === "ru" ? "Открыть страницу курса →" : lang === "en" ? "Open course page →" : "Kurs sahifasini ochish →"}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              );
+
+              return item.href ? (
+                <Link key={i} href={item.href}>
+                  {card}
+                </Link>
+              ) : (
+                <div key={i}>{card}</div>
+              );
+            })}
+          </div>
+          <div className="mt-10 flex justify-center">
+            <Link href="/course/sbr-strategic-business-reporting">
+              <Button variant="outline" className="gap-2 rounded-full border-amber-400/40 text-amber-200 hover:bg-amber-400/10">
+                {lang === "ru" ? "SBR — полная страница курса" : lang === "en" ? "SBR — full course page" : "SBR — to'liq kurs sahifasi"}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Support */}
-      <section className="bg-[#111] py-14" data-testid="section-sp-support">
+      <section className="bg-[#111] py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">O'quv jarayonida siz bilan birga</h2>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {course.supportTeam.map((person, i) => (
-              <Card key={i} className="border shadow-md overflow-hidden text-center" data-testid={`sp-support-${i}`}>
-                <div className="h-48 overflow-hidden">
-                  <img src={person.avatar} alt={person.role} className="h-full w-full object-cover object-top" loading="lazy" />
+          <h2 className="text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionForWhomTitle}</h2>
+          <p className="mt-3 mb-8 text-zinc-400">{tx.sectionForWhomLead}</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {tx.forWhom.map((item, i) => (
+              <div key={i} className="flex items-start gap-4 rounded-xl border border-white/10 bg-zinc-900 p-5">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-900/20 text-2xl border border-amber-500/20">
+                  {item.emoji}
                 </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold">{person.role}</h3>
-                  <p className="mt-2 text-sm text-zinc-400">{person.description}</p>
+                <div>
+                  <h3 className="text-sm font-extrabold text-white">{item.title}</h3>
+                  <p className="mt-1 text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-gradient-to-r from-amber-600 to-orange-700 py-12" data-testid="section-sp-cta">
+      <section className="py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h2 className="text-2xl font-extrabold text-white sm:text-3xl">ACCA yo'lingizni boshlaymizmi?</h2>
-              <p className="mt-3 text-amber-100">Bepul konsultatsiyada Strategic Professional haqida barcha savollarga javob oling</p>
-              <Link href="/contacts">
-                <Button size="lg" className="mt-6 gap-2 rounded-full bg-amber-600 px-8 font-bold text-white hover:bg-amber-700 animate-glow-pulse" data-testid="button-sp-cta">
-                  Konsultatsiya olish <ArrowRight className="h-5 w-5" />
-                </Button>
-              </Link>
-            </div>
-            <div className="flex items-center gap-5">
-              <img src={mentor.avatar} alt={mentor.name} className="h-20 w-20 shrink-0 rounded-2xl object-cover object-top ring-4 ring-white/20 shadow-xl" loading="lazy" />
+          <h2 className="text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionWhyTitle}</h2>
+          <p className="mt-3 mb-8 text-zinc-400">{tx.sectionWhyLead}</p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {tx.why.map((item, i) => (
+              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5">
+                <TrendingUp className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" />
+                <span className="text-sm font-medium text-zinc-200">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#111] py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionFormatTitle}</h2>
+          <p className="mt-3 mb-8 text-zinc-400">{tx.sectionFormatLead}</p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {tx.format.map((item, i) => (
+              <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 p-5">
+                <Clock className="h-5 w-5 shrink-0 text-amber-300" />
+                <span className="text-sm font-medium text-zinc-200">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-extrabold text-white sm:text-4xl">{tx.sectionOutcomesTitle}</h2>
+          <p className="mt-3 mb-8 text-zinc-400">{tx.sectionOutcomesLead}</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {tx.outcomes.map((item, i) => (
+              <div key={i} className="flex items-start gap-3 rounded-xl border border-white/10 border-l-4 border-l-amber-400 bg-zinc-900 p-5">
+                <Award className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" />
+                <span className="text-sm font-medium text-zinc-200">{item}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 rounded-xl border border-amber-500/30 bg-amber-900/20 p-6">
+            <div className="flex items-center gap-3">
+              <GraduationCap className="h-8 w-8 text-amber-400" />
               <div>
-                <h3 className="text-xl font-bold text-white">{mentor.name}</h3>
-                <p className="text-sm text-amber-200">{mentor.role}</p>
-                <p className="text-sm text-amber-200">{mentor.experience}</p>
+                <h3 className="text-base font-extrabold text-white">{tx.fellowTitle}</h3>
+                <p className="mt-1 text-sm text-zinc-400">{tx.fellowDesc}</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-16 sm:py-20" data-testid="section-sp-faq">
+      <section id="cta" className="scroll-mt-20 bg-gradient-to-br from-[#1a1035] via-amber-900/40 to-slate-900 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-4xl font-extrabold uppercase tracking-tight text-white">Ko'p beriladigan savollar</h2>
-          <div className="mx-auto max-w-3xl">
-            <Accordion type="multiple" className="space-y-3">
-              {faqs.map((faq) => (
-                <AccordionItem key={faq.id} value={faq.id} className="rounded-2xl border border-white/10 bg-zinc-900 px-6" data-testid={`sp-faq-${faq.id}`}>
-                  <AccordionTrigger className="text-left font-semibold py-5 text-sm sm:text-base text-white hover:no-underline hover:text-purple-300">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-zinc-400 pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div>
+              <h2 className="text-2xl font-extrabold text-white sm:text-4xl">{tx.finalTitle}</h2>
+              <p className="mt-4 text-amber-100 leading-relaxed">{tx.finalDesc}</p>
+              <div className="mt-6 flex flex-wrap gap-4 text-sm text-amber-100">
+                <div className="flex items-center gap-2">
+                  <Users className="h-4 w-4" /> {tx.stat1}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Award className="h-4 w-4" /> {tx.stat2}
+                </div>
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4" /> {tx.stat3}
+                </div>
+              </div>
+            </div>
+            <div className="rounded-xl bg-white/10 p-6 backdrop-blur-sm ring-1 ring-amber-500/20">
+              <h3 className="mb-4 text-lg font-bold text-white">{tx.finalFormTitle}</h3>
+              <DeferredLeadForm source="course-strategic-professional-cta" />
+            </div>
           </div>
         </div>
       </section>
-      <CourseFormatSection />
-      <CourseBonusesSection
-        totalUz="6,500,000+ so'm qiymatida"
-        totalRu="Более 23,000 RUB стоимостью"
-        totalEn="Worth $280+ — yours for free"
-        bonuses={[
-          {
-            logo: "🏛️",
-            nameUz: "SBL Pre-seen Case Study Arxivi (2015–2024)",
-            nameRu: "Архив SBL Pre-seen Case Studies (2015–2024)",
-            nameEn: "SBL Pre-seen Case Study Vault (2015–2024)",
-            descUz: "Strategic Business Leader uchun 10 yillik pre-seen materiallar va tahlil namunalari",
-            descRu: "10 лет pre-seen материалов и образцов анализа для Strategic Business Leader",
-            descEn: "10 years of pre-seen materials and analysis examples for Strategic Business Leader",
-            durationUz: "Doimiy kirish",
-            durationRu: "Постоянный доступ",
-            durationEn: "Lifetime access",
-            priceUz: "2,000,000 so'm",
-            priceRu: "7,200 RUB",
-            priceEn: "$88",
-          },
-          {
-            logo: "📋",
-            nameUz: "SBL Full Mock Pack × 8 to'liq variant",
-            nameRu: "SBL Full Mock Pack × 8 полных вариантов",
-            nameEn: "SBL Full Mock Pack × 8 full variants",
-            descUz: "Murakkab strategik ish vazifalari — professional daraja tayyorgarlik uchun",
-            descRu: "Сложные стратегические кейсы — для профессиональной подготовки",
-            descEn: "Complex strategic case tasks for professional-level exam preparation",
-            durationUz: "4 oylik kirish",
-            durationRu: "Доступ на 4 месяца",
-            durationEn: "4 months access",
-            priceUz: "1,500,000 so'm",
-            priceRu: "5,400 RUB",
-            priceEn: "$66",
-          },
-          {
-            logo: "💹",
-            nameUz: "AFM Financial Modeling Masterpack",
-            nameRu: "AFM Financial Modeling Masterpack",
-            nameEn: "AFM Financial Modeling Masterpack",
-            descUz: "Advanced Financial Management uchun DCF, NPV, kapital tuzilmasi modellari va Excel shablonlari",
-            descRu: "Модели DCF, NPV, структуры капитала и Excel-шаблоны для Advanced Financial Management",
-            descEn: "DCF, NPV, capital structure models and Excel templates for Advanced Financial Management",
-            durationUz: "Doimiy kirish",
-            durationRu: "Постоянный доступ",
-            durationEn: "Lifetime access",
-            priceUz: "1,800,000 so'm",
-            priceRu: "6,500 RUB",
-            priceEn: "$80",
-          },
-          {
-            logo: "🎙️",
-            nameUz: "Live Q&A Sessiyalar Arxivi (6 yillik)",
-            nameRu: "Архив Live Q&A сессий (6 лет)",
-            nameEn: "Live Q&A Session Recording Archive (6 years)",
-            descUz: "Ekspertlar bilan 6 yillik Q&A sessiyalar yozuvlari — eng qiyin savollar va javoblar",
-            descRu: "Записи Q&A-сессий с экспертами за 6 лет — самые сложные вопросы и ответы",
-            descEn: "6 years of expert Q&A session recordings — the hardest questions answered",
-            durationUz: "1 yillik kirish",
-            durationRu: "Доступ на 1 год",
-            durationEn: "1 year access",
-            priceUz: "1,200,000 so'm",
-            priceRu: "4,300 RUB",
-            priceEn: "$52",
-          },
-        ]}
-      />
     </Layout>
   );
 }

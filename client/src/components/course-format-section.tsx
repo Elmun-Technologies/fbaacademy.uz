@@ -8,7 +8,7 @@ const FORMAT_ITEMS = [
     uz: { title: "LEKSIYALAR", desc: "Har hafta yangi bilim bloklariga kirish — nazariya va amaliyot birgalikda." },
     ru: { title: "ЛЕКЦИИ", desc: "Каждую неделю открываем доступ к новым блокам с теорией и практикой." },
     en: { title: "LECTURES", desc: "Weekly access to new knowledge blocks — theory and practice together." },
-    accent: "from-purple-500 to-indigo-600",
+    accent: "from-brand to-indigo-600",
   },
   {
     num: "2",
@@ -57,7 +57,7 @@ const FORMAT_ITEMS = [
     uz: { title: "Q&A SESSIYALAR", desc: "Har 2 haftada Zoom'da uchrashuv — spiker bilan amaliy savollarni muhokama qiling." },
     ru: { title: "Q&A СЕССИИ", desc: "Раз в 2 недели встречи в Zoom для обсуждения практических вопросов." },
     en: { title: "Q&A SESSIONS", desc: "Bi-weekly Zoom meetings to discuss practical questions with mentors." },
-    accent: "from-violet-500 to-purple-600",
+    accent: "from-violet-500 to-brand",
   },
   {
     num: "8",
@@ -65,7 +65,7 @@ const FORMAT_ITEMS = [
     uz: { title: "YANGILANISHLARGA KIRISH", desc: "Barcha yangilanishlar — texnologiyalar o'zgarganda kurs ham yangilanadi. Doimiy kirish." },
     ru: { title: "ДОСТУП К ОБНОВЛЕНИЯМ", desc: "Все обновления бесплатно — курс обновляется по мере изменений в отрасли." },
     en: { title: "UPDATES ACCESS", desc: "Free updates forever — the course is updated as the industry evolves." },
-    accent: "from-rose-500 to-pink-600",
+    accent: "from-rose-500 to-brand-dark",
   },
 ];
 

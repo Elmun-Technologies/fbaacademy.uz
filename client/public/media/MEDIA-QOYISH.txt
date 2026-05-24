@@ -1,0 +1,46 @@
+FBA Academy — statik rasmlar
+=============================
+
+Papka: client/public/media/
+URL:     /media/certificates/...  va  /media/teachers/...
+
+
+1) SERTIFIKATLAR (jpg)
+   client/public/media/certificates/
+
+   pdflink slug → fayl nomi kodda bog‘langan (client/src/lib/public-media.ts,
+   CERTIFICATE_COVER_BY_PDPLINK_SLUG). Hozirgi nomlar misol:
+   Shokhrukh Yangiboev.jpg, Temur Uralov.jpg, Jakhongir Matchanov.jpg,
+   Irodakhon Talatkhon.jpg, Diyara Nazarova.jpg, Bakhromjon Musaev.jpg,
+   Atxamjon Yusupov.jpg, Mirjamol Sidikov.jpg, Shokhista Suvonova.jpg,
+   Dilmurod Almatov.jpg, Nigora Muminova.jpg
+
+   Yangi sertifikat qo‘shsangiz: slug va fayl nomini public-media.ts ga
+   qo‘shing. "nigora" uchun alohida rasm bo‘lsa — xuddi shu yerga.
+
+   Yangi bitiruvchi rasmlari (masalan Lazizbek, Javohir Xalilov) — hozircha
+   sayt ro‘yxatida yo‘q; kerak bo‘lsa course-proof-data.ts ga qo‘shiladi.
+
+
+2) USTOZLAR / DipIFR ekspertlari (jpg)
+   client/public/media/teachers/
+
+   DipIFR sahifasi ekspertlari: Firdavs Mukhammadkulov.jpg,
+   Dilnoza Zaripova.jpg, Javohirbek Mo'minov.jpg
+
+   Bosh sahifa mentorlari (data.ts): teacher-1.jpg … teacher-4.jpg
+   (yoki shu nomlarni WP bootstrap beradi).
+
+
+3) Optimizatsiya (WebP)
+   Yangi yoki o‘zgartirilgan jpg dan keyin terminalda:
+
+     npm run optimize:media
+
+   Har bir jpg yonida .webp yaratiladi; sayt <picture> orqali WebP ni
+   ustun qiladi. Keyin: npm run build
+
+
+4) Tekshirish
+   npm run dev
+   http://localhost:5050/media/certificates/Shokhrukh%20Yangiboev.jpg

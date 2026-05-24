@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="230" viewBox="0 0 720 230" role="img" aria-label="Payme logo">
+  <rect width="720" height="230" fill="#ffffff"/>
+  <text x="42" y="144" font-family="Arial, Helvetica, sans-serif" font-size="124" font-weight="800" fill="#111111">Pay</text>
+  <g transform="translate(360 52)">
+    <rect x="0" y="0" width="300" height="128" rx="30" fill="#44c8cc"/>
+    <polygon points="300,0 300,128 338,64" fill="#44c8cc"/>
+    <text x="38" y="90" font-family="Arial, Helvetica, sans-serif" font-size="108" font-weight="800" fill="#ffffff">me</text>
+  </g>
+</svg>

@@ -18,31 +18,31 @@
   --sidebar: 0 0% 96%;
   --sidebar-foreground: 0 0% 9%;
   --sidebar-border: 0 0% 92%;
-  --sidebar-primary: 262 83% 58%;
+  --sidebar-primary: 218 45% 31%;
   --sidebar-primary-foreground: 0 0% 98%;
   --sidebar-accent: 0 0% 92%;
   --sidebar-accent-foreground: 0 0% 9%;
-  --sidebar-ring: 262 83% 58%;
+  --sidebar-ring: 218 45% 31%;
   --popover: 0 0% 94%;
   --popover-foreground: 0 0% 9%;
   --popover-border: 0 0% 90%;
-  --primary: 262 83% 58%;
+  --primary: 218 45% 31%;
   --primary-foreground: 0 0% 98%;
   --secondary: 0 0% 91%;
   --secondary-foreground: 0 0% 9%;
   --muted: 0 3% 93%;
   --muted-foreground: 0 0% 40%;
-  --accent: 262 15% 94%;
+  --accent: 218 15% 94%;
   --accent-foreground: 0 0% 9%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
   --input: 0 0% 70%;
-  --ring: 262 83% 58%;
-  --chart-1: 262 83% 45%;
+  --ring: 218 45% 31%;
+  --chart-1: 218 45% 28%;
   --chart-2: 142 76% 36%;
   --chart-3: 43 96% 56%;
   --chart-4: 217 91% 60%;
-  --chart-5: 340 82% 52%;
+  --chart-5: 230 54% 15%;
   --font-sans: Inter, sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Menlo, monospace;
@@ -102,31 +102,31 @@
   --sidebar: 0 0% 11%;
   --sidebar-foreground: 0 0% 98%;
   --sidebar-border: 0 0% 14%;
-  --sidebar-primary: 262 83% 58%;
+  --sidebar-primary: 218 45% 41%;
   --sidebar-primary-foreground: 0 0% 98%;
   --sidebar-accent: 0 0% 14%;
   --sidebar-accent-foreground: 0 0% 98%;
-  --sidebar-ring: 262 83% 58%;
+  --sidebar-ring: 218 45% 41%;
   --popover: 0 0% 13%;
   --popover-foreground: 0 0% 98%;
   --popover-border: 0 0% 16%;
-  --primary: 262 83% 58%;
+  --primary: 218 45% 41%;
   --primary-foreground: 0 0% 98%;
   --secondary: 0 0% 16%;
   --secondary-foreground: 0 0% 98%;
   --muted: 0 3% 15%;
   --muted-foreground: 0 0% 65%;
-  --accent: 262 15% 14%;
+  --accent: 218 15% 14%;
   --accent-foreground: 0 0% 98%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
   --input: 0 0% 30%;
-  --ring: 262 83% 58%;
-  --chart-1: 262 83% 70%;
+  --ring: 218 45% 41%;
+  --chart-1: 218 45% 55%;
   --chart-2: 142 76% 65%;
   --chart-3: 43 96% 65%;
   --chart-4: 217 91% 70%;
-  --chart-5: 340 82% 65%;
+  --chart-5: 230 54% 30%;
   --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.20);
   --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.25);
   --shadow-sm: 0px 1px 2px 0px hsl(0 0% 0% / 0.25), 0px 1px 3px -1px hsl(0 0% 0% / 0.30);
@@ -171,13 +171,20 @@
   }
 
   html {
-    overflow-x: hidden;
+    overflow-x: clip;
     scroll-behavior: smooth;
   }
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  img,
+  video,
+  iframe {
+    max-width: 100%;
   }
 }
 
@@ -322,8 +329,19 @@
   from { opacity: 0; transform: scale(0.92); }
   to   { opacity: 1; transform: scale(1); }
 }
+@keyframes logoMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 
 @layer utilities {
+  .animate-marquee {
+    animation: logoMarquee 40s linear infinite;
+    will-change: transform;
+  }
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
   .animate-fade-in-up  { animation: fadeInUp 0.55s ease-out both; }
   .animate-fade-in     { animation: fadeIn 0.4s ease-out both; }
   .animate-float       { animation: floatY 3.5s ease-in-out infinite; }
@@ -351,7 +369,7 @@
   }
 
   /* Icon container with subtle inner glow */
-  .icon-glow-purple { box-shadow: 0 0 16px rgba(168,85,247,0.35); }
+  .icon-glow-purple, .icon-glow-brand { box-shadow: 0 0 16px rgba(43,73,113,0.45); }
   .icon-glow-amber  { box-shadow: 0 0 16px rgba(251,191,36,0.30); }
   .icon-glow-emerald{ box-shadow: 0 0 16px rgba(52,211,153,0.30); }
   .icon-glow-indigo { box-shadow: 0 0 16px rgba(99,102,241,0.35); }
@@ -384,5 +402,133 @@
   }
   .step-badge:hover {
     transform: scale(1.08);
+  }
+
+  .fba-logo-marquee {
+    display: flex;
+    width: max-content;
+    gap: 1rem;
+    animation: logoMarquee 36s linear infinite;
+    will-change: transform;
+  }
+  .fba-logo-marquee:hover {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fba-logo-marquee,
+  .animate-marquee,
+  .animate-float,
+  .animate-glow-pulse {
+    animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-enter {
+    animation: none;
+  }
+
+  .ix-card:hover,
+  .ix-card-strong:hover,
+  .ix-card-border:hover,
+  .ix-tile:hover,
+  .course-card:hover,
+  .ix-icon-btn:hover,
+  .ix-logo:hover,
+  .ix-media,
+  .ix-media-strong {
+    transform: none !important;
+  }
+}
+
+/* ── INTERACTIVE HOVER / MOTION (project-wide) ──────────── */
+@layer components {
+  .ix-card {
+    @apply overflow-hidden transition-all duration-300 ease-out;
+  }
+  .ix-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .ix-card-strong {
+    @apply overflow-hidden transition-all duration-300 ease-out;
+  }
+  .ix-card-strong:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+  }
+
+  .ix-card-border {
+    @apply transition-all duration-300 ease-out;
+  }
+  .ix-card-border:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  .group:hover .ix-media,
+  .ix-card:hover .ix-media,
+  .ix-card-strong:hover .ix-media {
+    transform: scale(1.05);
+  }
+  .ix-media {
+    @apply transition-transform duration-500 ease-out;
+  }
+
+  .group:hover .ix-media-strong,
+  .ix-tile:hover .ix-media-strong {
+    transform: scale(1.1);
+  }
+  .ix-media-strong {
+    @apply transition-transform duration-300 ease-out;
+  }
+
+  .ix-link {
+    @apply transition-colors duration-200 hover:text-white;
+  }
+
+  .ix-link-accent {
+    @apply transition-colors duration-200 hover:text-brand-accent-light;
+  }
+
+  .ix-tile {
+    @apply transition-all duration-300 ease-out;
+  }
+  .ix-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .ix-icon-btn {
+    @apply transition-all duration-200 hover:scale-110 active:scale-95;
+  }
+
+  .ix-logo {
+    @apply transition-transform duration-200 hover:scale-[1.03];
+  }
+
+  .group:hover .ix-pill-amber,
+  .ix-pill-amber:hover {
+    @apply border-amber-400 bg-amber-400 text-black;
+  }
+  .ix-pill-amber {
+    @apply transition-all duration-200;
+  }
+
+  .group:hover .ix-arrow {
+    transform: translateX(4px);
+  }
+  .ix-arrow {
+    @apply transition-transform duration-200;
+  }
+
+  .page-enter {
+    animation: fadeInUp 0.45s ease-out both;
   }
 }

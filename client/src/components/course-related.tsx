@@ -1,5 +1,7 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import { InteractiveCardMedia, InteractivePillCta } from "@/components/interactive-card";
+import { ix } from "@/lib/interactive-styles";
 import { useLanguage } from "@/contexts/language-context";
 import type { Language } from "@/lib/translations";
 
@@ -25,7 +27,7 @@ const ALL_COURSES: RelatedCourseItem[] = [
       ru: "Самая престижная бухгалтерская квалификация мира. Признана в 180+ странах. Требование Big Four.",
       en: "World's most prestigious accounting qualification. Recognized in 180+ countries. Big Four requirement.",
     },
-    accentColor: "bg-purple-600",
+    accentColor: "bg-brand",
   },
   {
     id: "dipifr",
@@ -101,14 +103,14 @@ export default function CourseRelated({ excludeId }: CourseRelatedProps) {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {courses.map((course) => (
             <Link key={course.id} href={course.href} data-testid={`card-related-${course.id}`}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-zinc-900 transition-transform duration-300 hover:-translate-y-1.5">
+              <article className="group ix-card flex h-full flex-col rounded-2xl bg-zinc-900">
                 <div className="relative overflow-hidden">
-                  <img
+                  <InteractiveCardMedia
                     src={course.image}
                     alt={course.title[lang]}
                     width={600}
                     height={380}
-                    className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-48 w-full object-cover"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent" />
@@ -126,9 +128,9 @@ export default function CourseRelated({ excludeId }: CourseRelatedProps) {
                     {course.desc[lang]}
                   </p>
                   <div className="mt-5">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/70 px-4 py-2 text-xs font-bold text-amber-400 transition-all group-hover:border-amber-400 group-hover:bg-amber-400 group-hover:text-black">
-                      {t.page.relatedBtn} <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
+                    <InteractivePillCta>
+                      {t.page.relatedBtn} <ArrowRight className={`h-3.5 w-3.5 ${ix.arrow}`} />
+                    </InteractivePillCta>
                   </div>
                 </div>
               </article>
